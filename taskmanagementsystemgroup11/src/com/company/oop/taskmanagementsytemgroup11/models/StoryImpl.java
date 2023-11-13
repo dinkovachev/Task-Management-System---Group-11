@@ -1,10 +1,14 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -73,6 +77,20 @@ public class StoryImpl extends TaskImpl implements Story {
         } else {
             System.out.println("Current story status is already Done.");
         }
+    }
+
+    //ToDo
+    // Finish the override methods from the interfaces
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
+    }
+
+    //ToDo
+    // Finish the override methods from the interfaces
+    @Override
+    public void addComment(Comment comment) {
+
     }
 
     public void revertStatus() {
