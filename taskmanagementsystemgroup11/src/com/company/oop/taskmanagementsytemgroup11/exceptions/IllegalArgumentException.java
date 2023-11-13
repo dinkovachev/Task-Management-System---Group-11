@@ -1,4 +1,4 @@
 package com.company.oop.taskmanagementsytemgroup11.exceptions;
 
-public class IllegalArgumentException {
+public class IllegalArgumentException extends RuntimeException{
 }
