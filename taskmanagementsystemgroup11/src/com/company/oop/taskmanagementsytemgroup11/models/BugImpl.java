@@ -11,7 +11,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
-    private Members members; // TODO Georgi Q: Is it a name, name from a list or username?
+    private Members members; // TODO Georgi Q: Should be String username?
     private Status status;
 
     // TODO Georgi Q: Assignee to be added.
@@ -71,7 +71,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     public void advanceStatus() {
-        // TODO Georgi Q: Are we going to record this?
+        // TODO Georgi Q: Should be added in a ActivityLog.
         if (getStatus() != Status.DONE) {
             setStatus(Status.DONE);
             System.out.println("Bug status set to Done.");
