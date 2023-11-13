@@ -1,4 +1,89 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-public class StoryImpl {
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+import static java.lang.String.format;
+
+public class StoryImpl extends TaskImpl implements Story {
+    private Priority priority;
+    private Size size;
+    private Status status;
+    private Members members;
+
+    // TODO Georgi Q: Assignee to be added.
+
+    public StoryImpl(int id, String title, String description, Priority priority, Size size, Members members)
+    // TODO: How do we get the members?
+    {
+        super(id, title, description);
+        setPriority(priority);
+        setSize(size);
+        setMembers(members);
+        this.status = Status.NOT_DONE;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Size getSize() {
+        return size;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
+    }
+
+    @Override
+    public Members getMembers() {
+        return members;
+    }
+
+
+    private void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    private void setSize(Size size) {
+        this.size = size;
+    }
+
+    private void setStatus(Status status) {
+        this.status = status;
+    }
+
+    private void setMembers(Members members) {
+        this.members = members;
+    }
+
+    public void advanceStatus() {
+        if (getStatus() == Status.NOT_DONE) {
+            setStatus(Status.IN_PROGRESS);
+            System.out.println("Story status set to InProgress.");
+        } else if (getStatus() == Status.IN_PROGRESS) {
+            setStatus(Status.DONE);
+            System.out.println("Story status set to Done.");
+        } else {
+            System.out.println("Current story status is already Done.");
+        }
+    }
+
+    public void revertStatus() {
+        if (getStatus() == Status.DONE) {
+            setStatus(Status.IN_PROGRESS);
+            System.out.println("Story status set to InProgress.");
+        } else if (getStatus() == Status.IN_PROGRESS) {
+            setStatus(Status.NOT_DONE);
+            System.out.println("Story status set to Not Done.");
+        } else {
+            System.out.println("Current story status is already Not Done.");
+        }
+    }
 }

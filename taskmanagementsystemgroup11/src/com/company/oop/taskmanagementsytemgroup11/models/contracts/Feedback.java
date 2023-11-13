@@ -1,4 +1,11 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-public interface Feedback extends Task{
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+public interface Feedback extends Task {
+    public Status getStatus();
+
+    public int getRating();
+
+
 }
