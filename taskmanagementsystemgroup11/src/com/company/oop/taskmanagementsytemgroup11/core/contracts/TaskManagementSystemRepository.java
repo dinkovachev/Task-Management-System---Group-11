@@ -14,6 +14,8 @@ public interface TaskManagementSystemRepository {
 
     List<Team> getAllTeamMembers();
 
+    Members getMemberById();
+
     Members createMember(String username, String firstName, String lastName);
 
     Team createTeam(String name);
@@ -27,6 +29,7 @@ public interface TaskManagementSystemRepository {
     //2. ToDo Status status double check if we need to give Status to the bugs
     Bug createBug(int id, String title, String description, String stepsToReproduce,
                   Priority priority, Severity severity, Members members);
+
     //3. ToDo Status status double check if we need to give Status to the Stories
     Story createStory(int id, String title, String description, Priority priority, Size size, Members members);
 
@@ -35,9 +38,8 @@ public interface TaskManagementSystemRepository {
 
     // 5. ToDo maybe need to add function to find user by Username
 
-
-
-
+    //6. ToDo added function to find task by ID
+    Task findTaskByID(int id);
 
 
 }

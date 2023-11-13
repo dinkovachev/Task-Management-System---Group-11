@@ -23,6 +23,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public Members getMemberById() {
+        return null;
+    }
+
+    @Override
     public Members createMember(String username, String firstName, String lastName) {
         return new MembersImpl(username, firstName, lastName);
     }
@@ -55,5 +60,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Feedback createFeedback(int id, String title, String description, int rating) {
         return new FeedbackImpl(id, title, description, rating);
+    }
+
+    @Override
+    public Task findTaskByID(int id) {
+        return null;
     }
 }

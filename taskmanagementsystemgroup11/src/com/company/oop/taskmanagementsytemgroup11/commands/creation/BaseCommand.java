@@ -7,13 +7,16 @@ import java.util.List;
 
 public abstract class BaseCommand implements Command {
 
+    //ToDo - Dinko
+    // Double check if it is ok
+
     private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     protected BaseCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         this.taskManagementSystemRepository = taskManagementSystemRepository;
     }
 
-    protected TaskManagementSystemRepository taskManagementSystemRepository() {
+    protected TaskManagementSystemRepository getTaskManagementSystemRepository() {
 
         return taskManagementSystemRepository;
     }
