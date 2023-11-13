@@ -11,17 +11,17 @@ public class BugImpl extends TaskImpl implements Bug {
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
-    private Members members; // TODO Georgi Q: Should be String username?
+    String assignee;
     private Status status;
 
     // TODO Georgi Q: Assignee to be added.
     public BugImpl(int id, String title, String description,
-                   String stepsToReproduce, Priority priority, Severity severity, Members members) {
+                   String stepsToReproduce, Priority priority, Severity severity, String assignee) {
         super(id, title, description);
         setStepsToReproduce(stepsToReproduce);
         setPriority(priority);
         setSeverity(severity);
-        setMembers(members);
+        setAssignee(assignee);
         this.status = Status.ACTIVE;
     }
 
@@ -41,8 +41,8 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public Members getMembers() {
-        return members;
+    public String getAssignee() {
+        return assignee;
     }
 
     @Override
@@ -62,8 +62,8 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severity = severity;
     }
 
-    private void setMembers(Members members) {
-        this.members = members;
+    private void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     private void setStatus(Status status) {

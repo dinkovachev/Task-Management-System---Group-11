@@ -29,7 +29,7 @@ public interface TaskManagementSystemRepository {
 
     //2. ToDo Status status double check if we need to give Status to the bugs
     Bug createBug(int id, String title, String description, String stepsToReproduce,
-                  Priority priority, Severity severity, Members members);
+                  Priority priority, Severity severity, String assignee); // TODO Georgi take a look!
 
     //3. ToDo Status status double check if we need to give Status to the Stories
     Story createStory(int id, String title, String description, Priority priority, Size size, Members members);
