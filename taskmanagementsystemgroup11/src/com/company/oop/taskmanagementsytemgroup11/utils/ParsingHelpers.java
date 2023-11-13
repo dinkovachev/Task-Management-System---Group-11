@@ -7,6 +7,7 @@ import java.util.List;
 public class ParsingHelpers {
     private static final String INVALID_NUMBER_FIELD_MESSAGE = "Invalid value for %s. Should be a number.";
     private static final String INVALID_BOOLEAN_FIELD_MESSAGE = "Invalid value for %s. Should be one of 'true' or 'false'.";
+    private static final String NO_SUCH_ENUM = "There is no %s in %ss.";
 
     public static double tryParseDouble(String valueToParse, String parameterName) {
         try {
