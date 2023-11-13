@@ -16,7 +16,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         nextId = 0;
     }
 
-    //ToDo finish the remaining methods
+
+    //ToDo - Dinko
+    // finish the remaining methods
     @Override
     public List<Members> getAllMembers() {
         return null;
@@ -24,6 +26,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public List<Team> getAllTeamMembers() {
+        return null;
+    }
+
+    @Override
+    public Members getMemberById() {
+        return null;
+    }
+    @Override
+    public Task findTaskByID(int id) {
         return null;
     }
 
@@ -61,4 +72,5 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Feedback createFeedback(String title, String description, int rating) {
         return new FeedbackImpl(++nextId, title, description, rating);
     }
+
 }
