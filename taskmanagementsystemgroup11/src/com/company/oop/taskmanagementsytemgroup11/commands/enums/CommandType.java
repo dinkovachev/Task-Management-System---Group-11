@@ -3,7 +3,6 @@ package com.company.oop.taskmanagementsytemgroup11.commands.enums;
 public enum CommandType {
     CREATEMEMBER,
     SHOWPEOPLE,
-    SHOWACTIVITY,
     CREATETEAM,
     SHOWTEAMS,
     SHOWPERSONACTIVITY,

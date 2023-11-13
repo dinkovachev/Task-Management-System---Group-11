@@ -19,11 +19,9 @@ public class CommandFactoryImpl implements CommandFactory {
 
         switch (commandType) {
             case CREATEMEMBER:
-                return new AddComment(taskManagementSystemRepository);
+                return new CreateMember(taskManagementSystemRepository);
             case SHOWPEOPLE:
                 return new ShowPeople(taskManagementSystemRepository);
-            case SHOWACTIVITY:
-                return new ShowPersonActivity(taskManagementSystemRepository);
             case CREATETEAM:
                 return new CreateTeam(taskManagementSystemRepository);
             case SHOWTEAMS:
@@ -35,7 +33,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDMEMBER:
                 return new AddMember(taskManagementSystemRepository);
             case SHOWTEAMEMBERS:
-                return new ShowPeople(taskManagementSystemRepository);
+                return new ShowTeamMembers(taskManagementSystemRepository);
             case CREATEBOARD:
                 return new CreateBoard(taskManagementSystemRepository);
             case SHOWALLBOARDS:
@@ -63,7 +61,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case CHANGEFEEDBACKRATING:
                 return new ChangeFeedbackRating(taskManagementSystemRepository);
             case CHANGEFEEDBACKSTATUS:
-                return new ChangeStoryStatus(taskManagementSystemRepository);
+                return new ChangeFeedbackStatus(taskManagementSystemRepository);
             case ASSIGNTASK:
                 return new AssignTask(taskManagementSystemRepository);
             case UNASSIGNTASK:
@@ -71,7 +69,6 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDCOMMENT:
                 return new AddComment(taskManagementSystemRepository);
 
-            //ToDo finish all commands
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }
