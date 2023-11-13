@@ -1,4 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.core;
 
-public class CommandFactoryImpl {
+import com.company.oop.taskmanagementsytemgroup11.core.contracts.CommandFactory;
+
+public class CommandFactoryImpl implements CommandFactory {
 }
