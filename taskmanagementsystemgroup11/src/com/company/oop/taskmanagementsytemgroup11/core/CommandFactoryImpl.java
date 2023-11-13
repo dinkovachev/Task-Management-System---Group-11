@@ -67,7 +67,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case UNASSIGNTASK:
                 return new UnassignedTask(taskManagementSystemRepository);
             case ADDCOMMENT:
-                return new AddComment(taskManagementSystemRepository);
+                return new AddCommentCommand(taskManagementSystemRepository);
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));

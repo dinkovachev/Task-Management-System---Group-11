@@ -11,7 +11,9 @@ import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
 
-    //ToDo finish the remaining methods
+
+    //ToDo - Dinko
+    // finish the remaining methods
     @Override
     public List<Members> getAllMembers() {
         return null;
@@ -24,6 +26,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Members getMemberById() {
+        return null;
+    }
+    @Override
+    public Task findTaskByID(int id) {
         return null;
     }
 
@@ -62,8 +68,4 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new FeedbackImpl(id, title, description, rating);
     }
 
-    @Override
-    public Task findTaskByID(int id) {
-        return null;
-    }
 }

@@ -15,6 +15,7 @@ public interface TaskManagementSystemRepository {
     List<Team> getAllTeamMembers();
 
     Members getMemberById();
+    Task findTaskByID(int id);
 
     Members createMember(String username, String firstName, String lastName);
 
@@ -38,8 +39,6 @@ public interface TaskManagementSystemRepository {
 
     // 5. ToDo maybe need to add function to find user by Username
 
-    //6. ToDo added function to find task by ID
-    Task findTaskByID(int id);
 
 
 }

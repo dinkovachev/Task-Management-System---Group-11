@@ -1,4 +1,4 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-public interface Story {
+public interface Story extends Task{
 }

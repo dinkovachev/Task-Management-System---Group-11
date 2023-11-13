@@ -2,22 +2,21 @@ package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class AddComment extends BaseCommand {
+public class AddCommentCommand extends BaseCommand {
 
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private final static String COMMENT_ADDED_SUCCESSFULLY = "%s added comment successfully!";
     private static final String INVALID_INPUT_MESSAGE = "Invalid input. Expected a number.";
     private static final String TASK_DOES_NOT_EXIST = "Task doesn't exist";
 
 
-    public AddComment(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public AddCommentCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
