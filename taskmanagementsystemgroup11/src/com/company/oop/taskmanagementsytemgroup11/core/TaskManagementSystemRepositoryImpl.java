@@ -10,6 +10,11 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
+    private int nextId;
+
+    public TaskManagementSystemRepositoryImpl() {
+        nextId = 0;
+    }
 
     //ToDo finish the remaining methods
     @Override
@@ -39,21 +44,21 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Comment createComment(String content, String author) {
-        return new CommentImpl(content,author);
+        return new CommentImpl(content, author);
     }
 
     @Override
-    public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, Members members) {
-        return new BugImpl(id, title, description, stepsToReproduce, priority, severity, members);
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, Members members) {
+        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, members);
     }
 
     @Override
-    public Story createStory(int id, String title, String description, Priority priority, Size size, Members members) {
-        return new StoryImpl(id, title, description, priority, size, members);
+    public Story createStory(String title, String description, Priority priority, Size size, Members members) {
+        return new StoryImpl(++nextId, title, description, priority, size, members);
     }
 
     @Override
-    public Feedback createFeedback(int id, String title, String description, int rating) {
-        return new FeedbackImpl(id, title, description, rating);
+    public Feedback createFeedback(String title, String description, int rating) {
+        return new FeedbackImpl(++nextId, title, description, rating);
     }
 }
