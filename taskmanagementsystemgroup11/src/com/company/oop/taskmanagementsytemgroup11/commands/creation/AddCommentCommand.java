@@ -22,7 +22,8 @@ public class AddCommentCommand extends BaseCommand {
 
 
     @Override
-    protected String executeCommand(List<String> parameters) {
+//    protected String executeCommand(List<String> parameters) {
+    public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String content = parameters.get(0);
         String author = parameters.get(1);

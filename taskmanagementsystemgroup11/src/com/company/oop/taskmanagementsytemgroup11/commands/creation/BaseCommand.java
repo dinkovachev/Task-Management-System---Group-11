@@ -17,7 +17,6 @@ public abstract class BaseCommand implements Command {
     }
 
     protected TaskManagementSystemRepository getTaskManagementSystemRepository() {
-
         return taskManagementSystemRepository;
     }
 
