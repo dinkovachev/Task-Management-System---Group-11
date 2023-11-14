@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-public interface Team {
+public interface Team extends Printable{
 
     String getName();
 
