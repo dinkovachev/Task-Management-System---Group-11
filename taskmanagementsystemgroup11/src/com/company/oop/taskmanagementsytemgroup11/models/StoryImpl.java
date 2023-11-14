@@ -16,17 +16,17 @@ public class StoryImpl extends TaskImpl implements Story {
     private Priority priority;
     private Size size;
     private Status status;
-    private Members members;
+    private String assignee;
 
     // TODO Georgi Q: Assignee to be added.
 
-    public StoryImpl(int id, String title, String description, Priority priority, Size size, Members members)
+    public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee)
     // TODO: How do we get the members?
     {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
-        setMembers(members);
+        setAssignee(assignee);
         this.status = Status.NOT_DONE;
     }
 

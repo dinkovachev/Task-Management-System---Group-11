@@ -7,10 +7,13 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private int nextId;
+    private final List<Members> members = new ArrayList<>();
+    private final List<Team> teams = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
@@ -21,6 +24,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // finish the remaining methods
     @Override
     public List<Members> getAllMembers() {
+        return null;
+    }
+
+    @Override
+    public List<Team> getAllTeams() {
         return null;
     }
 
@@ -39,13 +47,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Members createMember(String username, String firstName, String lastName) {
-        return new MembersImpl(username, firstName, lastName);
+    public Members createMember(String firstName, String lastName) {
+        Members member = new MembersImpl(firstName, lastName);
+        this.members.add(member);
+        return member;
     }
 
     @Override
     public Team createTeam(String name) {
-        return new TeamImpl(name);
+        Team team = new TeamImpl(name);
+        this.teams.add(team);
+        return team;
     }
 
     @Override
@@ -75,14 +87,51 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, Members members) {
+        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, members);
     }
 
     @Override
     public Story createStory(String title, String description, Priority priority, Size size, Members members) {
+        return new StoryImpl(++nextId, title, description, priority, size, members);
     }
 
     @Override
     public Feedback createFeedback(String title, String description, int rating) {
+        return new FeedbackImpl(++nextId, title, description, rating);
     }
 
+    @Override
+    public boolean memberExist(String memberName) {
+        boolean exists = false;
+        for (Members members : getAllMembers()) {
+            if (members.getUsername().equalsIgnoreCase(memberName)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
+    @Override
+    public boolean teamExist(String name) {
+        boolean exists = false;
+        for (Team teams : getAllTeams()) {
+            if (teams.getName().equalsIgnoreCase(name)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
+    public boolean boardExist(String name) {
+        boolean exists = false;
+        for (Board boards : getAllTeamsBoards()) {
+            if (boards.getName().equalsIgnoreCase(name)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
 }

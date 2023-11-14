@@ -2,11 +2,20 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
+import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamImpl {
+public class TeamImpl implements Team {
+
+    private static final int MINIMUM_SYMBOLS = 5;
+    private static final int MAXIMUM_SYMBOLS = 15;
+    public static final String TEAM_NAME_ERR_MSG = String.format(
+            "The Team name's length cannot be less than %d or more than %d symbols long.",
+            MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
+
 
     private String name;
 
@@ -23,19 +32,27 @@ public class TeamImpl {
     public String getName() {
         return name;
     }
+
     public List<Members> getMembers() {
         return new ArrayList<>(members);
     }
+
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
+
     private void setName(String name) {
+        ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, TEAM_NAME_ERR_MSG);
         this.name = name;
     }
+
     private void setMembers(List<Members> members) {
         this.members = members;
     }
+
     private void setBoards(List<Board> boards) {
         this.boards = boards;
     }
+
 }
+

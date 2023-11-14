@@ -24,11 +24,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         return status;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating; // TODO Georgi Q: Nothing is mentioned about the rating. Any checks?
+    private void setRating(int rating) {
+        this.rating = rating; // TODO Georgi Q: Rating should be from 1 to 10?
     }
 
-    public void setStatus(Status status) {
+    private void setStatus(Status status) {
         this.status = status;
     }
 
@@ -46,7 +46,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
             System.out.println("Current feedback status is already Done.");
         }
     }
-
+    // TODO Georgi Q: set to private
     public void revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.SCHEDULED);

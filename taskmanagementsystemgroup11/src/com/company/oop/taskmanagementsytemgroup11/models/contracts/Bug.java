@@ -13,5 +13,5 @@ public interface Bug extends Task {
 
     public Status getStatus();
 
-    public Members getMembers();
+    public String getAssignee();
 }
