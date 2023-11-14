@@ -21,11 +21,11 @@ public class CommandFactoryImpl implements CommandFactory {
             case CREATEMEMBER:
                 return new CreateMemberCommand(taskManagementSystemRepository);
             case SHOWPEOPLE:
-                return new ShowPeopleCommand(taskManagementSystemRepository);
+                return new ShowAllPeopleCommand(taskManagementSystemRepository);
             case CREATETEAM:
                 return new CreateTeamCommand(taskManagementSystemRepository);
             case SHOWTEAMS:
-                return new ShowTeamsCommand(taskManagementSystemRepository);
+                return new ShowAllTeamsCommand(taskManagementSystemRepository);
             case SHOWPERSONACTIVITY:
                 return new ShowPersonActivityCommand(taskManagementSystemRepository);
             case SOHWTEAMACTIVITY:
@@ -33,13 +33,13 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDMEMBER:
                 return new AddMemberCommand(taskManagementSystemRepository);
             case SHOWTEAMEMBERS:
-                return new ShowTeamMembersCommand(taskManagementSystemRepository);
+                return new ShowAllTeamMembersCommand(taskManagementSystemRepository);
             case CREATEBOARD:
                 return new CreateBoardCommand(taskManagementSystemRepository);
             case SHOWALLBOARDS:
                 return new ShowAllBoardsCommand(taskManagementSystemRepository);
             case SHOWBOARD:
-                return new ShowBoardCommand(taskManagementSystemRepository);
+                return new ShowBoardsActivityCommand(taskManagementSystemRepository);
             case CREATINGNEWBUG:
                 return new CreateNewBugCommand(taskManagementSystemRepository);
             case CREATENEWSTORY:
@@ -65,7 +65,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ASSIGNTASK:
                 return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
-                return new UnassignedTaskCommand(taskManagementSystemRepository);
+                return new UnassignTaskCommand(taskManagementSystemRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskManagementSystemRepository);
 
