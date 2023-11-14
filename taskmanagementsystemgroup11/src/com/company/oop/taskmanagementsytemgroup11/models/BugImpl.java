@@ -1,10 +1,12 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
 
@@ -13,6 +15,8 @@ public class BugImpl extends TaskImpl implements Bug {
     private Severity severity;
     String assignee;
     private Status status;
+
+    private final List<Bug> bugs;
 
     // TODO Georgi Q: Assignee to be added.
     public BugImpl(int id, String title, String description,
@@ -23,6 +27,11 @@ public class BugImpl extends TaskImpl implements Bug {
         setSeverity(severity);
         setAssignee(assignee);
         this.status = Status.ACTIVE;
+        this.bugs = new ArrayList<>();
+    }
+
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugs);
     }
 
     @Override
@@ -87,5 +96,15 @@ public class BugImpl extends TaskImpl implements Bug {
         } else {
             System.out.println("Current bug status is already Active.");
         }
+    }
+
+    @Override
+    public void changePriority(Priority newPriority) {
+        setPriority(newPriority);
+    }
+
+    @Override
+    public void changeSeverity(Severity newSeverity) {
+        setSeverity(newSeverity);
     }
 }

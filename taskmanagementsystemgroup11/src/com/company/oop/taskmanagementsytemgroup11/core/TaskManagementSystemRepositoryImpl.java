@@ -15,11 +15,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
+    private final List<Bug> bugs = new ArrayList<>();
+    private final List<Story> stories = new ArrayList<>();
+    private final List<Feedback> feedbacks = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
     }
-
 
     //ToDo - Dinko
     // finish the remaining methods
@@ -48,6 +50,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Members getMemberById() {
         return null;
     }
+
     @Override
     public Task findTaskByID(int id) {
         return null;
@@ -86,10 +89,29 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public Bug findBugByIndex(int bugIndex) {
+        Bug bug = bugs
+                .stream()
+                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
+        return bug;
+    }
+
+    @Override
     public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
         return new StoryImpl(++nextId, title, description, priority, size, assignee);
     }
 
+    @Override
+    public Story findStoryByIndex(int storyIndex) {
+        Story story = stories
+                .stream()
+                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
+        return story;
+    }
     @Override
     public Feedback createFeedback(int id, String title, String description, int rating) {
         return new FeedbackImpl(++nextId, title, description, rating);
