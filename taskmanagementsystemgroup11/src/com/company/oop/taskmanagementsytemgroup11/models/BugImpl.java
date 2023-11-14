@@ -1,10 +1,14 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
 
@@ -80,6 +84,16 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
+    }
+
+    @Override
+    public void addComment(Comment comment) {
+
+    }
+
     public void revertStatus() {
         if (getStatus() != Status.ACTIVE) {
             setStatus(Status.ACTIVE);
@@ -87,5 +101,10 @@ public class BugImpl extends TaskImpl implements Bug {
         } else {
             System.out.println("Current bug status is already Active.");
         }
+    }
+
+    @Override
+    public String getAsString() {
+        return null;
     }
 }

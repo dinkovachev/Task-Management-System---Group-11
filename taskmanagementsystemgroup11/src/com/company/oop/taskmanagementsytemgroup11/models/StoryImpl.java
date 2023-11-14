@@ -103,4 +103,9 @@ public class StoryImpl extends TaskImpl implements Story {
             System.out.println("Current story status is already Not Done.");
         }
     }
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }

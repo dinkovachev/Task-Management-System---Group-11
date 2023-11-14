@@ -54,5 +54,9 @@ public class TeamImpl implements Team {
         this.boards = boards;
     }
 
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
 

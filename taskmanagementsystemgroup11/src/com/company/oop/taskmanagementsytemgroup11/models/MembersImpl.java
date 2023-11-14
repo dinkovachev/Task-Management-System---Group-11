@@ -58,4 +58,9 @@ public class MembersImpl implements Members {
     private String generateUsername(String firstName, String lastName) {
         return firstName + lastName;
     }  //todo ID
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
