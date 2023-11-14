@@ -5,14 +5,14 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateMember extends BaseCommand {
+public class CreateMemberCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String NAME_ALREADY_EXISTS = "Name %s, already exists";
 
     private String firstName;
     private String lastName;
 
-    public CreateMember(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateMemberCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
        super(taskManagementSystemRepository);
         // this.taskManagementSystemRepository = taskManagementSystemRepository;
     }

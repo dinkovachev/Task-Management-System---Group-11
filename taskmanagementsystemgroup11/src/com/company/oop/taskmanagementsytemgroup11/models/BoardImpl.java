@@ -54,7 +54,7 @@ public class BoardImpl implements Board, ActivityLog {
     public String showBoardActivity() {
         return null;
     }
-
+    //ToDo double check this issue
     public void addBoard(Board boards) {
         this.boards.add(board);
     }

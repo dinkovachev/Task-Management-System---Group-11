@@ -6,7 +6,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateBoard extends BaseCommand {
+public class CreateBoardCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String BOARD_ALREADY_EXISTS = "Board %s, already exists";
 
@@ -14,7 +14,7 @@ public class CreateBoard extends BaseCommand {
 //    private final TaskManagementSystemRepository taskManagementSystemRepository;
 
 
-    public CreateBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
        super(taskManagementSystemRepository);
  //       this.taskManagementSystemRepository = taskManagementSystemRepository;
     }

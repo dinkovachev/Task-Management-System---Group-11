@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-public class ShowPersonActivity extends BaseCommand {
+
+public class ShowBoardCommand extends BaseCommand {
 }

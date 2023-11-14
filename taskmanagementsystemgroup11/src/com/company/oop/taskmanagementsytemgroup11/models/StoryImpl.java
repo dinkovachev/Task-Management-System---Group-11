@@ -46,10 +46,9 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public Members getMembers() {
-        return members;
+    public String getMembers() {
+        return assignee;
     }
-
 
     private void setPriority(Priority priority) {
         this.priority = priority;
@@ -63,8 +62,8 @@ public class StoryImpl extends TaskImpl implements Story {
         this.status = status;
     }
 
-    private void setMembers(Members members) {
-        this.members = members;
+    private void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     public void advanceStatus() {

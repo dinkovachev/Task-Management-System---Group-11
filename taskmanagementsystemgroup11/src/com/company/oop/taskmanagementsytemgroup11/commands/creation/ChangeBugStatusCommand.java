@@ -1,5 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
 
-public class ShowBoard extends BaseCommand {
+public class ChangeBugStatusCommand extends BaseCommand {
 }

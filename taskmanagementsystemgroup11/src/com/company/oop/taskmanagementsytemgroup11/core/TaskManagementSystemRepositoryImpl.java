@@ -14,6 +14,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private int nextId;
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
+    private final List<Board> boards = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
@@ -24,17 +25,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // finish the remaining methods
     @Override
     public List<Members> getAllMembers() {
-        return null;
+        return new ArrayList<>(members);
     }
 
     @Override
     public List<Team> getAllTeams() {
-        return null;
+        return new ArrayList<>(teams);
     }
 
+    //ToDo double check how to display the teamBoards only not all boards
     @Override
     public List<Board> getAllTeamsBoards() {
-        return null;
+        return new ArrayList<>(boards);
     }
 
     @Override
@@ -65,9 +67,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return team;
     }
 
+
     @Override
     public Board createBoard(String name) {
-        return new BoardImpl(name);
+        Board board = new BoardImpl(name);
+        this.boards.add(board);
+        return board;
     }
 
     @Override

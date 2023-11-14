@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-public class UnassignedTask extends BaseCommand {
+
+public class CreateTeamCommand extends BaseCommand {
 }

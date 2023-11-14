@@ -19,53 +19,53 @@ public class CommandFactoryImpl implements CommandFactory {
 
         switch (commandType) {
             case CREATEMEMBER:
-                return new CreateMember(taskManagementSystemRepository);
+                return new CreateMemberCommand(taskManagementSystemRepository);
             case SHOWPEOPLE:
-                return new ShowPeople(taskManagementSystemRepository);
+                return new ShowPeopleCommand(taskManagementSystemRepository);
             case CREATETEAM:
-                return new CreateTeam(taskManagementSystemRepository);
+                return new CreateTeamCommand(taskManagementSystemRepository);
             case SHOWTEAMS:
-                return new ShowTeams(taskManagementSystemRepository);
+                return new ShowTeamsCommand(taskManagementSystemRepository);
             case SHOWPERSONACTIVITY:
-                return new ShowPersonActivity(taskManagementSystemRepository);
+                return new ShowPersonActivityCommand(taskManagementSystemRepository);
             case SOHWTEAMACTIVITY:
-                return new ShowTeamActivity(taskManagementSystemRepository);
+                return new ShowTeamActivityCommand(taskManagementSystemRepository);
             case ADDMEMBER:
-                return new AddMember(taskManagementSystemRepository);
+                return new AddMemberCommand(taskManagementSystemRepository);
             case SHOWTEAMEMBERS:
-                return new ShowTeamMembers(taskManagementSystemRepository);
+                return new ShowTeamMembersCommand(taskManagementSystemRepository);
             case CREATEBOARD:
-                return new CreateBoard(taskManagementSystemRepository);
+                return new CreateBoardCommand(taskManagementSystemRepository);
             case SHOWALLBOARDS:
-                return new ShowAllBoards(taskManagementSystemRepository);
+                return new ShowAllBoardsCommand(taskManagementSystemRepository);
             case SHOWBOARD:
-                return new ShowBoard(taskManagementSystemRepository);
+                return new ShowBoardCommand(taskManagementSystemRepository);
             case CREATINGNEWBUG:
                 return new CreateNewBugCommand(taskManagementSystemRepository);
             case CREATENEWSTORY:
-                return new CreateNewStory(taskManagementSystemRepository);
+                return new CreateNewStoryCommand(taskManagementSystemRepository);
             case CREATENEWFEEDBACK:
-                return new CreateNewFeedback(taskManagementSystemRepository);
+                return new CreateNewFeedbackCommand(taskManagementSystemRepository);
             case CHANGEBUGPRIORITY:
-                return new ChangeBugPriority(taskManagementSystemRepository);
+                return new ChangeBugPriorityCommand(taskManagementSystemRepository);
             case CHANGEBUGSEVERITY:
-                return new ChangeBugSeverity(taskManagementSystemRepository);
+                return new ChangeBugSeverityCommand(taskManagementSystemRepository);
             case CHANGEBUGSTATUS:
-                return new ChangeBugStatus(taskManagementSystemRepository);
+                return new ChangeBugStatusCommand(taskManagementSystemRepository);
             case CHANGESTORYPRIORITY:
-                return new ChangeStoryPriority(taskManagementSystemRepository);
+                return new ChangeStoryPriorityCommand(taskManagementSystemRepository);
             case CHANGESTORYSIZE:
-                return new ChangeStorySize(taskManagementSystemRepository);
+                return new ChangeStorySizeCommand(taskManagementSystemRepository);
             case CHANGESTORYSTATUS:
-                return new ChangeStoryStatus(taskManagementSystemRepository);
+                return new ChangeStoryStatusCommand(taskManagementSystemRepository);
             case CHANGEFEEDBACKRATING:
-                return new ChangeFeedbackRating(taskManagementSystemRepository);
+                return new ChangeFeedbackRatingCommand(taskManagementSystemRepository);
             case CHANGEFEEDBACKSTATUS:
-                return new ChangeFeedbackStatus(taskManagementSystemRepository);
+                return new ChangeFeedbackStatusCommand(taskManagementSystemRepository);
             case ASSIGNTASK:
-                return new AssignTask(taskManagementSystemRepository);
+                return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
-                return new UnassignedTask(taskManagementSystemRepository);
+                return new UnassignedTaskCommand(taskManagementSystemRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskManagementSystemRepository);
 

@@ -20,7 +20,7 @@ public class TeamImpl implements Team {
     private String name;
 
     private List<Members> members;
-
+    //ToDo double check how to add a Board to a team
     private List<Board> boards;
 
     public TeamImpl(String name) {

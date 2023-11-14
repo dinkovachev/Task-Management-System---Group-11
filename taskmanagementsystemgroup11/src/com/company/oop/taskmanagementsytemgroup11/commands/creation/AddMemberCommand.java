@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-public class ChangeFeedbackStatus extends BaseCommand {
+
+public class AddMemberCommand extends BaseCommand {
 }

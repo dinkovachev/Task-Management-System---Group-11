@@ -8,13 +8,13 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateNewStory extends BaseCommand  {
+public class CreateNewStoryCommand extends BaseCommand  {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
     public static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
 
 
 
-    public CreateNewStory(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateNewStoryCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
 
         super(taskManagementSystemRepository);
     }
