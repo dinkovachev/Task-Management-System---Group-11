@@ -1,18 +1,28 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
     private Status status;
+    private final List<Feedback> feedbacks;
 
     public FeedbackImpl(int id, String title, String description, int rating) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;
+        this.feedbacks = new ArrayList<>();
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
     }
 
     public int getRating() {
@@ -46,6 +56,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
             System.out.println("Current feedback status is already Done.");
         }
     }
+
     // TODO Georgi Q: set to private
     public void revertStatus() {
         if (getStatus() == Status.DONE) {
