@@ -16,9 +16,7 @@ public class TeamImpl implements Team {
             "The Team name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
 
-
     private String name;
-
     private List<Members> members;
     //ToDo double check how to add a Board to a team
     private List<Board> boards;
@@ -33,11 +31,12 @@ public class TeamImpl implements Team {
         return name;
     }
 
+    @Override
     public List<Members> getMembers() {
         return new ArrayList<>(members);
     }
-
     public List<Board> getBoards() {
+
         return new ArrayList<>(boards);
     }
 
@@ -46,13 +45,25 @@ public class TeamImpl implements Team {
         this.name = name;
     }
 
+     @Override
+    public void addMember(Members member) {
+
+        members.add(member);
+    }
+
     private void setMembers(List<Members> members) {
+
         this.members = members;
     }
 
     private void setBoards(List<Board> boards) {
+
         this.boards = boards;
     }
 
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
 

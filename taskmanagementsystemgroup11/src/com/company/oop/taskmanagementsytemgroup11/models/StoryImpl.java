@@ -109,4 +109,9 @@ public class StoryImpl extends TaskImpl implements Story {
         setPriority(newPriority);
     }
 
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }

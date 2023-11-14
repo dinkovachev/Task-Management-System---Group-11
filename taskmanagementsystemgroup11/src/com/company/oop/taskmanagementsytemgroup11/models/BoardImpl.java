@@ -61,6 +61,11 @@ public class BoardImpl implements Board, ActivityLog {
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
 
 

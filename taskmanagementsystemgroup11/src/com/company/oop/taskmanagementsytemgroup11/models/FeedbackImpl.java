@@ -1,6 +1,8 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 
@@ -57,6 +59,17 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
+    }
+
+    @Override
+    public void addComment(Comment comment) {
+
+    }
+
+
     // TODO Georgi Q: set to private
     public void revertStatus() {
         if (getStatus() == Status.DONE) {
@@ -71,5 +84,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         } else {
             System.out.println("Current feedback status is already New.");
         }
+    }
+
+    @Override
+    public String getAsString() {
+        return null;
     }
 }
