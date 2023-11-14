@@ -33,6 +33,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Board> getAllTeamsBoards() {
+        return null;
+    }
+
+    @Override
     public List<Team> getAllTeamMembers() {
         return null;
     }
@@ -71,32 +76,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, Members members) {
-        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, members);
+    public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
+        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee);
     }
 
     @Override
-    public Story createStory(int id, String title, String description, Priority priority, Size size, Members members) {
-        return new StoryImpl(++nextId, title, description, priority, size, members);
+    public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
+        return new StoryImpl(++nextId, title, description, priority, size, assignee);
     }
 
     @Override
     public Feedback createFeedback(int id, String title, String description, int rating) {
-        return new FeedbackImpl(++nextId, title, description, rating);
-    }
-
-    @Override
-    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, Members members) {
-        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, members);
-    }
-
-    @Override
-    public Story createStory(String title, String description, Priority priority, Size size, Members members) {
-        return new StoryImpl(++nextId, title, description, priority, size, members);
-    }
-
-    @Override
-    public Feedback createFeedback(String title, String description, int rating) {
         return new FeedbackImpl(++nextId, title, description, rating);
     }
 
