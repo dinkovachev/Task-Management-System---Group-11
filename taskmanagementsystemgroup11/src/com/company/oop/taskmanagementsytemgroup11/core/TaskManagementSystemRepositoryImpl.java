@@ -17,9 +17,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Board> boards = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
+
         nextId = 0;
     }
-
 
     //ToDo - Dinko
     // finish the remaining methods
@@ -48,8 +48,20 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Members getMemberById() {
         return null;
     }
+
+    @Override
+    public Members getMemberByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public Team getTeamByUsername(String username) {
+        return null;
+    }
+
     @Override
     public Task findTaskByID(int id) {
+
         return null;
     }
 
