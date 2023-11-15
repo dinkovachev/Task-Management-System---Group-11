@@ -18,7 +18,6 @@ public class BugImpl extends TaskImpl implements Bug {
     private Severity severity;
     String assignee;
     private Status status;
-
     private final List<Bug> bugs;
 
     // TODO Georgi Q: Assignee to be added.
