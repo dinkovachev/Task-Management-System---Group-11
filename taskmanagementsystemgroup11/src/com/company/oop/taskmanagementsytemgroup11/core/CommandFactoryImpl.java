@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.core;
 
+import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.enums.CommandType;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.CommandFactory;
@@ -11,10 +12,9 @@ public class CommandFactoryImpl implements CommandFactory {
     private static final String INVALID_COMMAND = "Invalid command name: %s!";
 
     @Override
-    public ChangeCommand createCommandFromCommandName(String commandTypeAsString,
-                                                      TaskManagementSystemRepository taskManagementSystemRepository) {
-        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class,
-                String.format(INVALID_COMMAND, commandTypeAsString));
+    public Command createCommandFromCommandName(String commandTypeAsString,
+                                                TaskManagementSystemRepository taskManagementSystemRepository) {
+        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
 
         switch (commandType) {
             case CREATEMEMBER:
