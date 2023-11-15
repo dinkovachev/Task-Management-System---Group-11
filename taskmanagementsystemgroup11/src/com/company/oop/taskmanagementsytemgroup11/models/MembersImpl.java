@@ -37,7 +37,7 @@ public class MembersImpl implements Members {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    private void setPersonId(int personId) {
         this.personId = personId;
     }
 
@@ -67,5 +67,10 @@ public class MembersImpl implements Members {
 
     private String generateUsername(int personId, String firstName, String lastName) {
         return firstName + lastName +personId;
+    }
+
+    @Override
+    public String getAsString() {
+        return  "member"; //todo print;
     }
 }

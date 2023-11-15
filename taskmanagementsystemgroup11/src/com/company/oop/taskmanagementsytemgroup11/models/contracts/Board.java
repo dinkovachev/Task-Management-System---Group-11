@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-public interface Board {
+public interface Board extends Printable{
 
      void addTask(Task task);
 
