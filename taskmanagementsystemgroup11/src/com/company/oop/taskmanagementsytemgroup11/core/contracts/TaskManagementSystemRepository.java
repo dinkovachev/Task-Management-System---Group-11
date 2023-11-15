@@ -24,7 +24,9 @@ public interface TaskManagementSystemRepository {
 
     Task findTaskByID(int id);
 
-    Members createMember(String firstName, String lastName);
+  //  Members createMember(String firstName, String lastName);
+
+    Members createMember(int nextPersonId, String firstName, String lastName);
 
     Team createTeam(String name);
 

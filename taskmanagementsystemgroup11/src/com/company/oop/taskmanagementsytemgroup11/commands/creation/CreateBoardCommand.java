@@ -11,29 +11,15 @@ public class CreateBoardCommand extends BaseCommand {
     private static final String BOARD_ALREADY_EXISTS = "Board %s, already exists";
 
 
-//    private final TaskManagementSystemRepository taskManagementSystemRepository;
-
-
     public CreateBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
        super(taskManagementSystemRepository);
- //       this.taskManagementSystemRepository = taskManagementSystemRepository;
     }
-
-//    @Override
-//    public String execute(List<String> parameters) {
-//        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-//        String name = parameters.get(0);
-//        if (getTaskManagementSystemRepository().memberExist(name)){
-//            throw new IllegalArgumentException(String.format(BOARD_ALREADY_EXISTS, name));
-//        }
-//        return createBoard(name);
-//    }
 
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String name = parameters.get(0);
-        if (getTaskManagementSystemRepository().memberExist(name)){   //todo check board exist not member
+        if (getTaskManagementSystemRepository().boardExist(name)){   //todo all boards or team boards
             throw new IllegalArgumentException(String.format(BOARD_ALREADY_EXISTS, name));
         }
         return createBoard(name);
@@ -41,10 +27,7 @@ public class CreateBoardCommand extends BaseCommand {
 
     private String createBoard(String name) {
             Board board = getTaskManagementSystemRepository().createBoard(name);
-
             return String.format("New board with name %s  created.", board);
 
-//        Board createdBoard = taskManagementSystemRepository.createBoard(name);
-//        return String.format(CommandConstants.BOARD_CREATED_MESSAGE, createdBoard);
     }
 }
