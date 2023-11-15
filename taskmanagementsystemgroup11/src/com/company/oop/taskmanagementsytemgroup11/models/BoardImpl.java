@@ -70,10 +70,6 @@ public class BoardImpl implements Board, ActivityLog {
         return "board";   //todo print;
     }
 
-    @Override
-    public String getAsString() {
-        return null;
-    }
 }
 
 

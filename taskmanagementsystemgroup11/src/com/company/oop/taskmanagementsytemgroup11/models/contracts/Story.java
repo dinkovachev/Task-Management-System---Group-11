@@ -18,5 +18,9 @@ public interface Story extends Task {
 
     public List<Story> getStories();
 
+    public List<Feedback> getFeedbacks();
+
     void changePriority(Priority priority);
+
+    void changeSize(Size size);
 }

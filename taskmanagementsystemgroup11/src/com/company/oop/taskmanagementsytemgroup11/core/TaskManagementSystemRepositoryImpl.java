@@ -74,10 +74,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Members createMember(int personId, String firstName, String lastName) {
+    public Members createMember(String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
         this.members.add(member);
-
         return member;
     }
 
@@ -93,7 +92,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         this.boards.add(board);
-
         return board;
     }
 
@@ -144,6 +142,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public Feedback findFeedbackByIndex(int feedbackIndex) {
+        Feedback feedback = feedbacks
+                .stream()
+                .filter((f -> f.getFeedbacks().get(feedbackIndex).equals(feedbackIndex)))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such feedback with index %d", feedbackIndex)));
+
+        return feedback;
+    }
+
+    @Override
     public boolean memberExist(String memberName) {
         boolean exists = false;
         for (Members members : getAllMembers()) {
@@ -178,4 +187,3 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return exists;
     }
 }
-

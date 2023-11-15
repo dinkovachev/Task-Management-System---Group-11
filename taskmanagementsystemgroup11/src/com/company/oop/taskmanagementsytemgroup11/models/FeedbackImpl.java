@@ -1,6 +1,9 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
@@ -87,6 +90,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         } else {
             System.out.println("Current feedback status is already New.");
         }
+    }
+
+    @Override
+    public void changeRating(int rating) {
+        setRating(rating);
     }
 
     @Override
