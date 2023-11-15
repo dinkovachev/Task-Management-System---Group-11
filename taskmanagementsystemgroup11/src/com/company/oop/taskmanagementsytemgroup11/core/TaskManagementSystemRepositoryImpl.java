@@ -19,6 +19,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Bug> bugs = new ArrayList<>();
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
+    private final List<ActivityLog> activityLogList = new ArrayList<>();
+
 
     public TaskManagementSystemRepositoryImpl() {
 
@@ -75,6 +77,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Members createMember(int personId, String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
         this.members.add(member);
+
         return member;
     }
 
@@ -90,6 +93,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         this.boards.add(board);
+
         return board;
     }
 
@@ -174,3 +178,4 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return exists;
     }
 }
+

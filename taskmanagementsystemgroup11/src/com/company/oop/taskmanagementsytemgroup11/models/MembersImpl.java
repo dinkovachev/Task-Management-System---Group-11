@@ -41,6 +41,16 @@ public class MembersImpl implements Members {
     }
 
     @Override
+    public void assignTask(Members memberToAssignTask, Task taskToBeAssigned) {
+        taskToBeAssigned.assignTask(memberToAssignTask);
+    }
+
+    @Override
+    public void unassignTask(Members memberToUnassignTask, Task taskToBeUnassigned) {
+        taskToBeUnassigned.unassignTask(memberToUnassignTask);
+    }
+
+    @Override
     public int getPersonId() {
         return personId;
     }

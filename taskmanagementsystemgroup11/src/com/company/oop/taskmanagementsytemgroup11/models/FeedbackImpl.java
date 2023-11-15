@@ -1,9 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
@@ -71,17 +68,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    public void addComment(Comment comment) {
-
-    }
-
-    @Override
-    public void assignTask(Task task) {
-
-    }
-
-    @Override
-    public void unassignTask(Task task) {
+    public void unassignTask(Members member) {
 
     }
 

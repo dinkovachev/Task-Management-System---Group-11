@@ -15,7 +15,7 @@ public class UnassignTaskCommand extends BaseCommand {
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
     private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s assigned successfully to %s";
 
-    protected UnassignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public UnassignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
