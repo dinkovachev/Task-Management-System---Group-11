@@ -71,6 +71,16 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
+    public void addComment(Comment comment) {
+
+    }
+
+    @Override
+    public void assignTask(Members member) {
+
+    }
+
+    @Override
     public void unassignTask(Members member) {
 
     }

@@ -103,12 +103,12 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public void assignTask(Task task) {
+    public void assignTask(Members member) {
 
     }
 
     @Override
-    public void unassignTask(Task task) {
+    public void unassignTask(Members member) {
 
     }
 

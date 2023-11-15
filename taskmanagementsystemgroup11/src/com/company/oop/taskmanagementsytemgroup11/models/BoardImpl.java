@@ -8,7 +8,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardImpl implements Board, ActivityLog {
+public class BoardImpl implements Board {
 
     private static final int MINIMUM_SYMBOLS = 5;
     private static final int MAXIMUM_SYMBOLS = 15;
@@ -41,21 +41,6 @@ public class BoardImpl implements Board, ActivityLog {
     public void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
-    }
-
-    @Override
-    public String showTeamActivity() {
-        return null;
-    }
-
-    @Override
-    public String showMemberActivity() {
-        return null;
-    }
-
-    @Override
-    public String showBoardActivity() {
-        return null;
     }
     //ToDo double check this issue
 

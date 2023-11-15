@@ -16,11 +16,14 @@ public class ActivityLogImpl implements ActivityLog {
     private final List<Board> boardActivity;
     private final List<Members> membersActivity;
 
-    private String activityLog;
+    // private String activityLog;
 
-    public ActivityLogImpl(List<Comment> activityLogList, List<History> historyChanges, String activityLog) {
+    public ActivityLogImpl(List<Comment> activityLogList, List<History> historyChanges) {
         this.activityLogList = new ArrayList<>();
         this.historyChanges = new ArrayList<>();
+        this.teamActivity = new ArrayList<>();
+        this.boardActivity = new ArrayList<>();
+        this.membersActivity = new ArrayList<>();
         setActivityLog(activityLog);
 
     }
