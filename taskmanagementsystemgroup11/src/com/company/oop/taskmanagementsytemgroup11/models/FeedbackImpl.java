@@ -75,6 +75,16 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     }
 
+    @Override
+    public void assignTask(Task task) {
+
+    }
+
+    @Override
+    public void unassignTask(Task task) {
+
+    }
+
 
     // TODO Georgi Q: set to private
     public void revertStatus() {

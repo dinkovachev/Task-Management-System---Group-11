@@ -102,6 +102,16 @@ public class BugImpl extends TaskImpl implements Bug {
 
     }
 
+    @Override
+    public void assignTask(Task task) {
+
+    }
+
+    @Override
+    public void unassignTask(Task task) {
+
+    }
+
     public void revertStatus() {
         if (getStatus() != Status.ACTIVE) {
             setStatus(Status.ACTIVE);

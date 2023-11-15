@@ -98,6 +98,16 @@ public class StoryImpl extends TaskImpl implements Story {
 
     }
 
+    @Override
+    public void assignTask(Task task) {
+
+    }
+
+    @Override
+    public void unassignTask(Task task) {
+
+    }
+
     public void revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.IN_PROGRESS);

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class ChangeCommand {
+public class ChangeCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
     private static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
 

@@ -38,11 +38,13 @@ public class ActivityLogImpl implements ActivityLog{
 
     @Override
     public String showMemberActivity() {
+
         return null;
     }
 
     @Override
     public String showBoardActivity() {
+
         return null;
     }
 }
