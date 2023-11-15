@@ -16,7 +16,9 @@ public class TeamImpl implements Team {
             "The Team name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
 
+
     private String name;
+
     private List<Members> members;
     //ToDo double check how to add a Board to a team
     private List<Board> boards;
@@ -32,9 +34,14 @@ public class TeamImpl implements Team {
     }
 
     @Override
+    public void addBoardToTeam(Board board) {
+    }
+
+    @Override
     public List<Members> getMembers() {
         return new ArrayList<>(members);
     }
+
     public List<Board> getBoards() {
 
         return new ArrayList<>(boards);
@@ -63,7 +70,7 @@ public class TeamImpl implements Team {
 
     @Override
     public String getAsString() {
-        return null;
+        return "team";//todo print;
     }
 }
 

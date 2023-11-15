@@ -1,8 +1,14 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-public interface Board extends Printable{
+import java.util.List;
 
-     void addTask(Task task);
+public interface Board extends Printable {
 
-     String getName();
+    void addTask(Task task);
+
+    String getName();
+
+    void addBoard(Board board);
+
+    List<Board> getBoards();
 }

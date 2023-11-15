@@ -6,6 +6,8 @@ public interface Team extends Printable {
 
     String getName();
 
+    void addBoardToTeam(Board board);
+
     List<Members> getMembers();
 
     void addMember(Members member);

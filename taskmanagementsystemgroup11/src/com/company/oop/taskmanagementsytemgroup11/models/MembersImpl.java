@@ -15,18 +15,20 @@ public class MembersImpl implements Members {
     private String username;
     private String firstName;
     private String lastName;
+    private int personId;
 
-    public MembersImpl(String firstName, String lastName) {
-
-        setUsername(generateUsername(firstName, lastName));
+    public MembersImpl(int personId, String firstName, String lastName) {
+        setPersonId(personId);
+        setUsername(generateUsername(personId, firstName, lastName));
         setFirstName(firstName);
         setLastName(lastName);
     }
+
     @Override
     public String getUsername() {
 
         return username;
-       }
+    }
 
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
@@ -38,10 +40,18 @@ public class MembersImpl implements Members {
         teamToAddMember.addMember(memberToAdd);
     }
 
+    @Override
+    public int getPersonId() {
+        return personId;
+    }
+
+
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
@@ -62,12 +72,17 @@ public class MembersImpl implements Members {
         this.lastName = lastName;
     }
 
-    private String generateUsername(String firstName, String lastName) {
-        return firstName + lastName;
-    }  //todo ID
+    private void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
+
+    private String generateUsername(int personId, String firstName, String lastName) {
+        return firstName + lastName + personId;
+    }
 
     @Override
     public String getAsString() {
-        return null;
+        return "member"; //todo print;
     }
 }
