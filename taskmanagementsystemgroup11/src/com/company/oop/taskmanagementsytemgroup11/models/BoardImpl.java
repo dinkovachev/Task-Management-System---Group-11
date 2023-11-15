@@ -19,7 +19,6 @@ public class BoardImpl implements Board, ActivityLog {
     private String name;
 
 
-
     public BoardImpl(String name) {
         setName(name);
         this.boards = new ArrayList<>();
@@ -27,7 +26,6 @@ public class BoardImpl implements Board, ActivityLog {
 
     @Override
     public void addTask(Task task) {
-
     }
 
     @Override
@@ -35,11 +33,16 @@ public class BoardImpl implements Board, ActivityLog {
         return name;
     }
 
+    @Override
+    public List<Board> getBoards() {
+        return new ArrayList<>(boards);
+    }
+
     public void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
     }
-    //todo validate unique board name
+
     @Override
     public String showTeamActivity() {
         return null;
@@ -56,12 +59,11 @@ public class BoardImpl implements Board, ActivityLog {
     }
     //ToDo double check this issue
 
+    @Override
     public void addBoard(Board boards) {
         this.boards.add(boards);
     }
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
-    }
+
 
     @Override
     public String getAsString() {

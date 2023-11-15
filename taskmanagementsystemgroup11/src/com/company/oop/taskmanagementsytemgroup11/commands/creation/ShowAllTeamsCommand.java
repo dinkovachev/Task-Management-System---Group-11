@@ -13,6 +13,7 @@ public class ShowAllTeamsCommand extends BaseCommand {
         super(taskManagementSystemRepository);
         teams = taskManagementSystemRepository.getAllTeams();
     }
+
     @Override
     protected String executeCommand(List<String> parameters) {
         if (teams.isEmpty()) {

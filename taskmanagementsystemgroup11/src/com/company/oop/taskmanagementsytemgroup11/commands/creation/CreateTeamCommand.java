@@ -22,18 +22,19 @@ public class CreateTeamCommand extends BaseCommand {
     public String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         parseParameters(parameters);
-        if (getTaskManagementSystemRepository().teamExist(name)){
+        if (getTaskManagementSystemRepository().teamExist(name)) {
             throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXISTS, name));
         }
         return createTeam(name);
     }
+
     private String createTeam(String name) {
         Team team = getTaskManagementSystemRepository().createTeam(name);
 
         return String.format("New team with name %s  created.", name);
     }
 
-    public void parseParameters (List<String> parameters) {
+    public void parseParameters(List<String> parameters) {
         this.name = parameters.get(0);
 
     }

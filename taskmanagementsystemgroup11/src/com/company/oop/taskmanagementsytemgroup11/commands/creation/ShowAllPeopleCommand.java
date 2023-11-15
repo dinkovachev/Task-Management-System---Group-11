@@ -15,6 +15,7 @@ public class ShowAllPeopleCommand extends BaseCommand {
         super(taskManagementSystemRepository);
         members = taskManagementSystemRepository.getAllMembers();
     }
+
     @Override
     protected String executeCommand(List<String> parameters) {
         if (members.isEmpty()) {

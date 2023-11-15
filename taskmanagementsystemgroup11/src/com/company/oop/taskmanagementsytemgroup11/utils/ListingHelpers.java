@@ -17,6 +17,7 @@ public class ListingHelpers {
 
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
+
     public static String teamsToString(List<Team> teams) {
         List<String> result = new ArrayList<>();
         for (Team team : teams) {
@@ -25,6 +26,7 @@ public class ListingHelpers {
 
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
+
     public static String boardToString(List<Board> boards) {
         List<String> result = new ArrayList<>();
         for (Board board : boards) {
@@ -33,5 +35,14 @@ public class ListingHelpers {
 
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
+    public static String teamMembersToString(List<Board> boards)  {//todo
+        List<String> result = new ArrayList<>();
+        for (Board board : boards) {   //todo
+            result.add(board.getAsString());
+        }
+
+        return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
+    }
+}
 }
 

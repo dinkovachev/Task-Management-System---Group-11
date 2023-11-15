@@ -14,6 +14,7 @@ public class ShowAllTeamsBoardsCommand extends BaseCommand {
         super(taskManagementSystemRepository);
         boards = taskManagementSystemRepository.getAllTeamsBoards();
     }
+
     @Override
     protected String executeCommand(List<String> parameters) {
         if (boards.isEmpty()) {

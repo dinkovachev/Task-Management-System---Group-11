@@ -2,7 +2,6 @@ package com.company.oop.taskmanagementsytemgroup11.utils;
 
 import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
 
-import java.util.List;
 
 public class ParsingHelpers {
     private static final String INVALID_NUMBER_FIELD_MESSAGE = "Invalid value for %s. Should be a number.";
