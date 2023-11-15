@@ -17,6 +17,7 @@ public class StoryImpl extends TaskImpl implements Story {
     private Status status;
     private String assignee;
     private final List<Story> stories;
+    private final List<Feedback> feedbacks;
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee) {
         super(id, title, description);
@@ -34,6 +35,10 @@ public class StoryImpl extends TaskImpl implements Story {
 
     public List<Story> getStories() {
         return new ArrayList<>(stories);
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
     }
 
     @Override
@@ -111,10 +116,14 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public void changePriority(Priority newPriority) {
-        setPriority(newPriority);
+    public void changePriority(Priority priority) {
+        setPriority(priority);
     }
 
+    @Override
+    public void changeSize(Size size) {
+        setSize(size);
+    }
 
     @Override
     public String getAsString() {

@@ -1,10 +1,10 @@
 package com.company.oop.taskmanagementsytemgroup11.core.contracts;
 
-import com.company.oop.taskmanagementsytemgroup11.commands.creation.ChangeCommand;
+import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 
 public interface CommandFactory {
 
-    ChangeCommand createCommandFromCommandName(String commandTypeAsString, TaskManagementSystemRepository vehicleDealershipRepository);
+    Command createCommandFromCommandName(String commandTypeAsString, TaskManagementSystemRepository vehicleDealershipRepository);
 
 }
 
