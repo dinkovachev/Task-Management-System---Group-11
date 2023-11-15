@@ -12,12 +12,14 @@ import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private int nextId;
+    private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
+        nextPersonId = 0;
     }
 
 
@@ -54,8 +56,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Members createMember(String firstName, String lastName) {
-        Members member = new MembersImpl(firstName, lastName);
+    public Members createMember(int personId, String firstName, String lastName) {
+        Members member = new MembersImpl(++nextPersonId, firstName, lastName);
         this.members.add(member);
         return member;
     }

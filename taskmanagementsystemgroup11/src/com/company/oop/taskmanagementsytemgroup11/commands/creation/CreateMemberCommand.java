@@ -14,16 +14,15 @@ public class CreateMemberCommand extends BaseCommand {
 
     public CreateMemberCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
        super(taskManagementSystemRepository);
-        // this.taskManagementSystemRepository = taskManagementSystemRepository;
     }
 
     @Override
     public String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         parseParameters(parameters);
-        if (getTaskManagementSystemRepository().memberExist(firstName+lastName)){   //firstname+lastname ?!?
-            throw new IllegalArgumentException(String.format(NAME_ALREADY_EXISTS, firstName+lastName));
-        }
+ //       if (getTaskManagementSystemRepository().memberExist(firstName+lastName personId)){   //firstname+lastname ?!?
+//            throw new IllegalArgumentException(String.format(NAME_ALREADY_EXISTS, firstName+lastName));
+ //       }
         return createMember(firstName, lastName);
     }
     private String createMember(String firstName, String lastName) {

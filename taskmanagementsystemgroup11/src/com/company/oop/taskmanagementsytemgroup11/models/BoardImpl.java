@@ -55,8 +55,9 @@ public class BoardImpl implements Board, ActivityLog {
         return null;
     }
     //ToDo double check this issue
+
     public void addBoard(Board boards) {
-        this.boards.add(board);
+        this.boards.add(boards);
     }
     public List<Board> getBoards() {
         return new ArrayList<>(boards);

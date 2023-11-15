@@ -21,6 +21,8 @@ public interface TaskManagementSystemRepository {
 
     Members createMember(String firstName, String lastName);
 
+    Members createMember(int nextPersonId, String firstName, String lastName);
+
     Team createTeam(String name);
 
     Board createBoard(String name);

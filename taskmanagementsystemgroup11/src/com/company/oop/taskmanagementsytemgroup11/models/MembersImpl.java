@@ -14,10 +14,11 @@ public class MembersImpl implements Members {
     private String username;
     private String firstName;
     private String lastName;
+    private int personId;
 
-    public MembersImpl(String firstName, String lastName) {
-
-        setUsername(generateUsername(firstName, lastName));
+    public MembersImpl(int personId, String firstName, String lastName) {
+        setPersonId(personId);
+        setUsername(generateUsername(personId, firstName, lastName));
         setFirstName(firstName);
         setLastName(lastName);
     }
@@ -29,6 +30,15 @@ public class MembersImpl implements Members {
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
 
+    }
+
+    @Override
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getFirstName() {
@@ -55,7 +65,7 @@ public class MembersImpl implements Members {
         this.lastName = lastName;
     }
 
-    private String generateUsername(String firstName, String lastName) {
-        return firstName + lastName;
-    }  //todo ID
+    private String generateUsername(int personId, String firstName, String lastName) {
+        return firstName + lastName +personId;
+    }
 }

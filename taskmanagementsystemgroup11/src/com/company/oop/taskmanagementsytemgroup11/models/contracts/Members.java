@@ -5,5 +5,7 @@ public interface Members {
     String getUsername();
     void addComment(Comment commentToAdd, Task taskToAddComment);
 
+    int getPersonId();
+
 
 }
