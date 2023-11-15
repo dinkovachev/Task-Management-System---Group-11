@@ -140,6 +140,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public Feedback findFeedbackByIndex(int feedbackIndex) {
+        Feedback feedback = feedbacks
+                .stream()
+                .filter((f -> f.getFeedbacks().get(feedbackIndex).equals(feedbackIndex)))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such feedback with index %d", feedbackIndex)));
+
+        return feedback;
+    }
+
+    @Override
     public boolean memberExist(String memberName) {
         boolean exists = false;
         for (Members members : getAllMembers()) {

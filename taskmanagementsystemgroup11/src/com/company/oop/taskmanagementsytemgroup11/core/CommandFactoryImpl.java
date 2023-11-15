@@ -39,37 +39,24 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllTeamsBoardsCommand(taskManagementSystemRepository);
             case SHOWBOARD:
                 return new ShowBoardsActivityCommand(taskManagementSystemRepository);
-            case CREATINGNEWBUG:
-                return new CreateNewBugCommand(taskManagementSystemRepository);
-            case CREATENEWSTORY:
-                return new CreateNewStoryCommand(taskManagementSystemRepository);
-            case CREATENEWFEEDBACK:
-                return new CreateNewFeedbackCommand(taskManagementSystemRepository);
-            case CHANGEBUGPRIORITY:
-                return new ChangeBugPriorityCommand(taskManagementSystemRepository);
-            case CHANGEBUGSEVERITY:
-                return new ChangeBugSeverityCommand(taskManagementSystemRepository);
-            case CHANGEBUGSTATUS:
-                return new ChangeBugStatusCommand(taskManagementSystemRepository);
-            case CHANGESTORYPRIORITY:
-                return new ChangeStoryPriorityCommand(taskManagementSystemRepository);
-            case CHANGESTORYSIZE:
-                return new ChangeStorySizeCommand(taskManagementSystemRepository);
-            case CHANGESTORYSTATUS:
-                return new ChangeStoryStatusCommand(taskManagementSystemRepository);
-            case CHANGEFEEDBACKRATING:
-                return new ChangeFeedbackRatingCommand(taskManagementSystemRepository);
-            case CHANGEFEEDBACKSTATUS:
-                return new ChangeFeedbackStatusCommand(taskManagementSystemRepository);
             case ASSIGNTASK:
                 return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
                 return new UnassignTaskCommand(taskManagementSystemRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskManagementSystemRepository);
-            case CHANGE:
-                return new ChangeCommand(taskManagementSystemRepository);
-
+            case CHANGESEVERITY:
+                return new ChangeSeverityCommand(taskManagementSystemRepository);
+            case CHANGESIZE:
+                return new ChangeSizeCommand(taskManagementSystemRepository);
+            case CHANGEPRIORITY:
+                return new ChangePriorityCommand(taskManagementSystemRepository);
+            case CREATE:
+                return new CreateNewTaskCommand(taskManagementSystemRepository);
+            case CHANGERATING:
+                return new ChangeRatingCommand(taskManagementSystemRepository);
+            case CHANGESTATUS:
+                return new ChangeStatusCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

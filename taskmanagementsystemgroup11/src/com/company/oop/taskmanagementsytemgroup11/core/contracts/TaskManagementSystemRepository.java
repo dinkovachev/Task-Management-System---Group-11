@@ -51,13 +51,13 @@ public interface TaskManagementSystemRepository {
 
     Feedback createFeedback(int id, String title, String description, int rating);
 
+    Feedback findFeedbackByIndex(int taskIndex);
     // 5. ToDo maybe need to add function to find user by Username
+
     boolean memberExist(String memberName);
 
     boolean teamExist(String teamName);  //todo
 
     boolean boardExist(String name);  //todo
-
-
 
 }
