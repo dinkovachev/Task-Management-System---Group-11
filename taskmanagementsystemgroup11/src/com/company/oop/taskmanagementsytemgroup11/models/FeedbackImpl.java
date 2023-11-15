@@ -5,6 +5,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     public List<Feedback> getFeedbacks() {
         return new ArrayList<>(feedbacks);
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.FEEDBACK;
     }
 
     public int getRating() {

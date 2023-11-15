@@ -7,6 +7,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,11 @@ public class BugImpl extends TaskImpl implements Bug {
         } else {
             System.out.println("Current bug status is already Active.");
         }
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.BUG;
     }
 
     @Override

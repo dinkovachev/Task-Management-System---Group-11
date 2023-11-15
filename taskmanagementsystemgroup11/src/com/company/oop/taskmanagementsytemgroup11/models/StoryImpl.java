@@ -4,6 +4,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,7 @@ public class StoryImpl extends TaskImpl implements Story {
     private String assignee;
     private final List<Story> stories;
 
-    public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee)
-
-    {
+    public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
@@ -28,9 +27,15 @@ public class StoryImpl extends TaskImpl implements Story {
         this.stories = new ArrayList<>();
     }
 
+    @Override
+    public TaskType getType() {
+        return TaskType.STORY;
+    }
+
     public List<Story> getStories() {
         return new ArrayList<>(stories);
     }
+
     @Override
     public Priority getPriority() {
         return priority;
@@ -104,6 +109,7 @@ public class StoryImpl extends TaskImpl implements Story {
             System.out.println("Current story status is already Not Done.");
         }
     }
+
     @Override
     public void changePriority(Priority newPriority) {
         setPriority(newPriority);
