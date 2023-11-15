@@ -4,6 +4,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -90,8 +91,12 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
+    @Override
     public abstract void revertStatus();
+
+    @Override
     public abstract void advanceStatus();
 
-    // TODO Georgi: To implement toStringMethod.
+    @Override
+    public abstract TaskType getType();
 }

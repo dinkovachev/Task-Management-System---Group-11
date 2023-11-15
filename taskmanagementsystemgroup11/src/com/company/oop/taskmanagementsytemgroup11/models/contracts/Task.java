@@ -1,5 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+
 import java.util.List;
 
 public interface Task extends Commentable, Identifiable, Printable {
@@ -18,4 +20,6 @@ public interface Task extends Commentable, Identifiable, Printable {
     void revertStatus();
 
     void advanceStatus();
+
+    TaskType getType();
 }
