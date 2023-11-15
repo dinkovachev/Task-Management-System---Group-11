@@ -69,6 +69,11 @@ public class BoardImpl implements Board, ActivityLog {
     public String getAsString() {
         return "board";   //todo print;
     }
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
 
 

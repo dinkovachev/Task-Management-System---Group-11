@@ -43,6 +43,7 @@ public class TeamImpl implements Team {
     }
 
     public List<Board> getBoards() {
+
         return new ArrayList<>(boards);
     }
 
@@ -51,11 +52,19 @@ public class TeamImpl implements Team {
         this.name = name;
     }
 
+     @Override
+    public void addMember(Members member) {
+
+        members.add(member);
+    }
+
     private void setMembers(List<Members> members) {
+
         this.members = members;
     }
 
     private void setBoards(List<Board> boards) {
+
         this.boards = boards;
     }
 

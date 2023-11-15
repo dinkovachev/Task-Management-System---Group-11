@@ -9,21 +9,17 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddCommentCommand extends BaseCommand {
-
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private final static String COMMENT_ADDED_SUCCESSFULLY = "%s added comment successfully!";
     private static final String INVALID_INPUT_MESSAGE = "Invalid input. Expected a number.";
     private static final String TASK_DOES_NOT_EXIST = "Task doesn't exist";
 
-
     public AddCommentCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
-
     @Override
-//    protected String executeCommand(List<String> parameters) {
-    public String execute(List<String> parameters) {
+    protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String content = parameters.get(0);
         String author = parameters.get(1);
@@ -42,11 +38,13 @@ public class AddCommentCommand extends BaseCommand {
         // 3. Added method in Task interface to addComments to tasks
         // 4. Added method in Members interface void addComment(Comment commentToAdd, Task taskToAddComment);
         // 5. Added method in Members TaskManagementSystemRepositoryInterface getMemberById();
+        // 6. Ovveride of method public void addComment(Comment commentToAdd, Task taskToAddComment) in MembersImpl
+        //
 
         Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
 
-        ValidationHelpers.validateIntRange(taskIndex, 0,task.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
-        Comment comment = getTaskManagementSystemRepository().createComment(content,author);
+        ValidationHelpers.validateIntRange(taskIndex, 0, task.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
+        Comment comment = getTaskManagementSystemRepository().createComment(content, author);
 
         getTaskManagementSystemRepository().getMemberById().addComment(comment, task);
         //ToDo(Done) - Dinko

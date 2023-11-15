@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
@@ -8,14 +7,15 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
+import static java.lang.String.format;
+
 import java.util.List;
 
 public class CreateNewBugCommand extends BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
-    public static final String INVALID_INPUT_MSG = String.format("Invalid input. Expected a number.");
+    public static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
 
-    public CreateNewBugCommand(TaskManagementSystemRepositoryImpl taskManagementSystemRepository) {
-
+    public CreateNewBugCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

@@ -1,13 +1,11 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -17,19 +15,22 @@ public class StoryImpl extends TaskImpl implements Story {
     private Size size;
     private Status status;
     private String assignee;
-
-    // TODO Georgi Q: Assignee to be added.
+    private final List<Story> stories;
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee)
-    // TODO: How do we get the members?
+
     {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
         setAssignee(assignee);
         this.status = Status.NOT_DONE;
+        this.stories = new ArrayList<>();
     }
 
+    public List<Story> getStories() {
+        return new ArrayList<>(stories);
+    }
     @Override
     public Priority getPriority() {
         return priority;
@@ -102,5 +103,15 @@ public class StoryImpl extends TaskImpl implements Story {
         } else {
             System.out.println("Current story status is already Not Done.");
         }
+    }
+    @Override
+    public void changePriority(Priority newPriority) {
+        setPriority(newPriority);
+    }
+
+
+    @Override
+    public String getAsString() {
+        return null;
     }
 }

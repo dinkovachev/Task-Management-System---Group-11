@@ -12,11 +12,16 @@ public interface TaskManagementSystemRepository {
     List<Members> getAllMembers();
 
     List<Team> getAllTeams();
+
     List<Board> getAllTeamsBoards();
 
     List<Team> getAllTeamMembers();
 
     Members getMemberById();
+    Members getMemberByUsername(String username);
+    Team getTeamByUsername(String username);
+
+
     Task findTaskByID(int id);
 
   //  Members createMember(String firstName, String lastName);
@@ -29,21 +34,28 @@ public interface TaskManagementSystemRepository {
 
     Comment createComment(String content, String author);
 
-    //1. ToDo stepsToReproduce maybe need to be a List if we need to invoke it
+    // ToDo stepsToReproduce maybe need to be a List if we need to invoke it
 
-    //2. ToDo Status status double check if we need to give Status to the bugs
+    // ToDo Status status double check if we need to give Status to the bugs
     Bug createBug(int id, String title, String description, String stepsToReproduce,
                   Priority priority, Severity severity, String assignee); // TODO Georgi take a look!
 
     //3. ToDo Status status double check if we need to give Status to the Stories
-    Story createStory(int id, String title, String description, Priority priority, Size size, String assignee);
+    Bug findBugByIndex(int bugIndex);
 
+
+    Story createStory(int id, String title, String description, Priority priority, Size size, String assignee);
     //4. ToDo Status status double check if we need to give Status to the Stories
+
+    Story findStoryByIndex(int storyIndex);
+
     Feedback createFeedback(int id, String title, String description, int rating);
 
     // 5. ToDo maybe need to add function to find user by Username
     boolean memberExist(String memberName);
+
     boolean teamExist(String teamName);  //todo
+
     boolean boardExist(String name);  //todo
 
 

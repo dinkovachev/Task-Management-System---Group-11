@@ -9,4 +9,8 @@ public interface Team extends Printable {
     void addBoardToTeam(Board board);
 
     List<Members> getMembers();
+
+    void addMember(Members member);
+
+
 }
