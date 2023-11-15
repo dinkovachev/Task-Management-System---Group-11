@@ -19,7 +19,7 @@ public class CreateBoardCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String name = parameters.get(0);
-        if (getTaskManagementSystemRepository().memberExist(name)){   //todo check board exist not member
+        if (getTaskManagementSystemRepository().boardExist(name)){   //todo all boards or team boards
             throw new IllegalArgumentException(String.format(BOARD_ALREADY_EXISTS, name));
         }
         return createBoard(name);
