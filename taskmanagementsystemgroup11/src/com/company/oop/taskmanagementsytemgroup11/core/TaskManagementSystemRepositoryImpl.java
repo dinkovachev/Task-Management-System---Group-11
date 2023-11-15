@@ -72,7 +72,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Members createMember(int personId, String firstName, String lastName) {
+    public Members createMember(String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
         this.members.add(member);
         return member;

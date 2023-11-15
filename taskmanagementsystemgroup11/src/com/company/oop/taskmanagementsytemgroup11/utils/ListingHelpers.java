@@ -44,5 +44,5 @@ public class ListingHelpers {
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
 }
-}
+
 

@@ -28,7 +28,7 @@ public class CreateMemberCommand extends BaseCommand {
     }
 
     private String createMember(String firstName, String lastName) {
-        Members member = getTaskManagementSystemRepository().createMember(firstName, lastName);
+        Members member = getTaskManagementSystemRepository().createMember( firstName, lastName);
 
         return String.format("New member with name %s  created.", member);
     }
