@@ -24,10 +24,11 @@ public class MembersImpl implements Members {
 
     public MembersImpl(int personId, String firstName, String lastName) {
         setPersonId(personId);
-        setUsername(generateUsername(personId, firstName, lastName));
+
         setFirstName(firstName);
         setLastName(lastName);
-//        this.activityHistory = new ArrayList<>();
+        setUsername(generateUsername(personId, firstName, lastName));
+  //      this.activityHistory = new ArrayList<>();
     }
 
     public List<String> getActivityHistory() {
@@ -111,6 +112,7 @@ public class MembersImpl implements Members {
         this.personId = personId;
         activityHistory.add(String.format("New member with id %d was created", personId));
     }
+
     private String generateUsername(int personId, String firstName, String lastName) {
         return firstName + lastName + personId;
     }
@@ -118,8 +120,16 @@ public class MembersImpl implements Members {
     @Override
     public String getAsString() {
         return """
-                Name: %s %s.
-                Username: %s.
+                Name: %s %s
+                Username: %s
                 """.formatted(firstName, lastName, username);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MembersImpl member = (MembersImpl) o;
+        return username.equals(member.username) && firstName.equals(member.firstName)
+                && lastName.equals(member.lastName);
     }
 }

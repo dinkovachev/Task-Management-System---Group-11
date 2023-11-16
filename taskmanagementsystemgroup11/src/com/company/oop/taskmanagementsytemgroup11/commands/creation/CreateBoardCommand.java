@@ -10,7 +10,7 @@ public class CreateBoardCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String BOARD_ALREADY_EXISTS = "Board %s, already exists";
 
-
+//todo second parameter teamname and check for duplication in boards names
     public CreateBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
        super(taskManagementSystemRepository);
     }
@@ -27,7 +27,7 @@ public class CreateBoardCommand extends BaseCommand {
 
     private String createBoard(String name) {
             Board board = getTaskManagementSystemRepository().createBoard(name);
-            return String.format("New board with name %s  created.", board);
+            return String.format("New board with name %s  created.", board.getName());
 
     }
 }
