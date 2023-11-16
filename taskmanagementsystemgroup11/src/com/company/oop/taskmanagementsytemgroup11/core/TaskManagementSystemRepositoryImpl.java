@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
+    private static final String NO_SUCH_TEAM = "No such team with name %s.";
+    private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
+    private static final String NO_SUCH_BOARD = "There is no such board with name";
+
     private int nextId;
     private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
@@ -19,6 +23,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Bug> bugs = new ArrayList<>();
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
     private final List<ActivityLog> activityLogList = new ArrayList<>();
 
 
@@ -50,32 +55,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<ActivityLog> getAllActivities() {
         return new ArrayList<>(activityLogList);
     }
-//private final List<ActivityLog> activityLogList = new ArrayList<>();
-    @Override
-    public List<Team> getAllTeamMembers() {
-        return null;
-    }
+//    @Override
+//    public List<Members> getAllTeamMembers() {
+//        return new ArrayList<>(members);
+//    }
 
-    @Override
-    public Members getMemberById() {
-        return null;
-    }
-
-    @Override
-    public Members getMemberByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public Team getTeamByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public Task findTaskByID(int id) {
-
-        return null;
-    }
 
     @Override
     public Members createMember(String firstName, String lastName) {
@@ -104,11 +88,70 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new CommentImpl(content, author);
     }
 
+
     @Override
     public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee);
         this.bugs.add(bug);
+        this.tasks.add(bug);
         return bug;
+    }
+     @Override
+    public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
+        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
+        this.stories.add(story);
+        this.tasks.add(story);
+        return story;
+    }
+    @Override
+    public Feedback createFeedback(int id, String title, String description, int rating) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+        this.feedbacks.add(feedback);
+        this.tasks.add(feedback);
+        return feedback;
+    }
+
+    @Override
+    public Members getMemberByUsername(String username) {
+        Members member = members.stream().filter(m -> m.getUsername().equalsIgnoreCase(username)).findFirst().
+                orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_MEMBER, username)));
+        return member;
+    }
+
+    @Override
+    public Team getTeamByName(String name) {
+        Team team = teams.stream()
+                .filter(t -> t.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_TEAM, name)));
+        return team;
+    }
+
+    @Override
+    public Board getBoardByName(String name) {
+        Board board = boards.stream().filter(m -> m.getName().equalsIgnoreCase(name)).findFirst().
+                orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_BOARD, name)));
+        return board;
+    }
+
+
+    @Override
+    public Members getMemberById(int id) {
+        Members member = members.stream()
+                .filter(b -> b.getAllTeamMembers().get(id).equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
+        return member;
+    }
+
+    @Override
+    public Task findTaskByID(int id) {
+        Task task = tasks
+                .stream()
+                .filter(b -> b.getAllTasks().get(id).equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
+        return task;
     }
 
     @Override
@@ -120,13 +163,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
         return bug;
     }
+    // find team by name - teamMembers
 
-    @Override
-    public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
-        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
-        this.stories.add(story);
-        return story;
-    }
+
+
 
     @Override
     public Story findStoryByIndex(int storyIndex) {
@@ -138,12 +178,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return story;
     }
 
-    @Override
-    public Feedback createFeedback(int id, String title, String description, int rating) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
-        this.feedbacks.add(feedback);
-        return feedback;
-    }
+
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {

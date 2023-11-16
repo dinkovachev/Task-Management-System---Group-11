@@ -1,5 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
+import java.util.List;
+
 public interface Members extends Printable {
 
     String getUsername();
@@ -12,6 +14,9 @@ public interface Members extends Printable {
 
     void unassignTask(Members memberToUnassignTask, Task taskToBeUnassigned);
 
+    public List<Members> getAllTeamMembers();
+
+    List<String> getActivityHistory();
 
     int getPersonId();
 

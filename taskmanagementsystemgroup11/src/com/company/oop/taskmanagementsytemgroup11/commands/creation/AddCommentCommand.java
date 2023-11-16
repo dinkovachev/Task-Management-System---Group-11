@@ -46,10 +46,10 @@ public class AddCommentCommand extends BaseCommand {
         ValidationHelpers.validateIntRange(taskIndex, 0, task.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
         Comment comment = getTaskManagementSystemRepository().createComment(content, author);
 
-        getTaskManagementSystemRepository().getMemberById().addComment(comment, task);
+        getTaskManagementSystemRepository().getMemberByUsername(author).addComment(comment, task);
         //ToDo(Done) - Dinko
         // 1. Added method String getUsername() in Members Interface
-        return String.format(COMMENT_ADDED_SUCCESSFULLY, getTaskManagementSystemRepository().getMemberById().getUsername());
+        return String.format(COMMENT_ADDED_SUCCESSFULLY, getTaskManagementSystemRepository().getMemberByUsername(author).getUsername());
     }
 }
 

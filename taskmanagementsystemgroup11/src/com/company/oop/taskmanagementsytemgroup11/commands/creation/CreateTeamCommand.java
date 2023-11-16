@@ -30,12 +30,10 @@ public class CreateTeamCommand extends BaseCommand {
 
     private String createTeam(String name) {
         Team team = getTaskManagementSystemRepository().createTeam(name);
-
-        return String.format("New team with name %s  created.", name);
+        return String.format("New team with name %s created.", team.getName());
     }
 
     public void parseParameters(List<String> parameters) {
         this.name = parameters.get(0);
-
     }
 }
