@@ -92,25 +92,24 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
-    @Override
-    public List<Task> getAllTasks() {
-        return null;
-    }
 
     @Override
     public void addComment(Comment comment) {
 
     }
+    @Override
+    public void addTask(Task task) {
 
+    }
+    @Override
+    public void unassignTask(Members member) {
+
+    }
     @Override
     public void assignTask(Members member) {
 
     }
 
-    @Override
-    public void unassignTask(Members member) {
-
-    }
 
     public void revertStatus() {
         if (getStatus() != Status.ACTIVE) {

@@ -12,8 +12,6 @@ public interface Story extends Task {
 
     public Size getSize();
 
-    public Status getStatus();
-
     public String getMembers();
 
     public List<Story> getStories();
