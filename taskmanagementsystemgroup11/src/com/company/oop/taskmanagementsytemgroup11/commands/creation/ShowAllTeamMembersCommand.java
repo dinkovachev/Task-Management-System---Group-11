@@ -8,17 +8,18 @@ import java.util.List;
 
 public class ShowAllTeamMembersCommand extends BaseCommand {
 
-    private final List<Members> teamMembers;  //todo ???
+    private final List<Members> teamMembers;
 
     public ShowAllTeamMembersCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
-        teamMembers = taskManagementSystemRepository.getAllTeamMembers();
+       // teamMembers = taskManagementSystemRepository.getAllTeamMembers();
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
         if (teamMembers.isEmpty()) {
             return "There are no registered  team members.";
+
         }
         return ListingHelpers.teamMembersToString(teamMembers);
     }

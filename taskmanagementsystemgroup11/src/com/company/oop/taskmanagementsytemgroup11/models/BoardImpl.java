@@ -52,9 +52,10 @@ public class BoardImpl implements Board {
 
     @Override
     public String getAsString() {
-        return "board";   //todo print;
+        return """
+                Name: %s;
+                """.formatted(name);
     }
-
 }
 
 

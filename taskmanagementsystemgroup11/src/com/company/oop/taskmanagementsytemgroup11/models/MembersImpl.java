@@ -93,6 +93,9 @@ public class MembersImpl implements Members {
 
     @Override
     public String getAsString() {
-        return "member"; //todo print;
+        return """
+                Name: %s %s.
+                Username: %s.
+                """.formatted(firstName, lastName, username);
     }
 }

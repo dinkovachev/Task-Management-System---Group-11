@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public abstract class TaskImpl implements Task {
+public abstract class TaskImpl implements Task, Printable {
     public static final int TITLE_LEN_MIN = 10;
     public static final int TITLE_LEN_MAX = 100;
     public static final String TITLE_LEN_ERR = format(
