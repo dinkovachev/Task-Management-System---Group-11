@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private int taskId;
+    private static final String NO_SUCH_TEAM = "No such team with name %s.";
+    private int nextTaskId;
     private int personId;
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
@@ -23,7 +24,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
 
     public TaskManagementSystemRepositoryImpl() {
-        taskId = 0;
+        nextTaskId = 0;
         personId = 0;
     }
 
@@ -101,7 +102,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
-        Bug bug = new BugImpl(++taskId, title, description, stepsToReproduce, priority, severity, assignee);
+        Bug bug = new BugImpl(++nextTaskId, title, description, stepsToReproduce, priority, severity, assignee);
         this.bugs.add(bug);
         return bug;
     }
@@ -118,8 +119,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // find team by name - teamMembers
 
     @Override
+    public Team getTeamByName(String name) {
+        Team team = teams.stream()
+                .filter(t -> t.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_TEAM, name)));
+        return team;
+    }
+
+
+    @Override
     public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
-        Story story = new StoryImpl(++taskId, title, description, priority, size, assignee);
+        Story story = new StoryImpl(++nextTaskId, title, description, priority, size, assignee);
         this.stories.add(story);
         return story;
     }
@@ -136,7 +147,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback createFeedback(int id, String title, String description, int rating) {
-        Feedback feedback = new FeedbackImpl(++taskId, title, description, rating);
+        Feedback feedback = new FeedbackImpl(++nextTaskId, title, description, rating);
         this.feedbacks.add(feedback);
         return feedback;
     }

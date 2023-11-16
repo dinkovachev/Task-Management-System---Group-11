@@ -6,6 +6,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +36,10 @@ public class ListingHelpers {
         }
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
-    public static String teamMembersToString(List<Board> boards)  {//todo
+    public static String teamMembersToString(List<Members> teamMembers)  {//todo
         List<String> result = new ArrayList<>();
-        for (Board board : boards) {   //todo
-            result.add(board.getAsString());
+        for (Members member : teamMembers) {   //todo
+            result.add(member.getAsString());
         }
 
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();

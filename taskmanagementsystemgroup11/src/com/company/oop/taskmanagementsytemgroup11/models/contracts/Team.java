@@ -11,6 +11,4 @@ public interface Team extends Printable {
     List<Members> getTeamMembers();
 
     void addMember(Members member);
-
-
 }

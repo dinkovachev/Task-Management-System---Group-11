@@ -44,6 +44,8 @@ public interface TaskManagementSystemRepository {
     Bug findBugByIndex(int bugIndex);
 
 
+    Team    getTeamByName(String name);
+
     Story createStory(int id, String title, String description, Priority priority, Size size, String assignee);
     //4. ToDo Status status double check if we need to give Status to the Stories
 
