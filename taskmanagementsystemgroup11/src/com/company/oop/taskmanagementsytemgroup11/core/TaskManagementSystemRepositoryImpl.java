@@ -1,7 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.core;
 
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
 import com.company.oop.taskmanagementsytemgroup11.models.*;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
@@ -38,10 +37,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     //ToDo - Dinko
     // finish the remaining methods
-    @Override
-    public List<Members> getAllMembers() {
-        return new ArrayList<>(members);
-    }
 
     @Override
     public List<Team> getAllTeams() {
