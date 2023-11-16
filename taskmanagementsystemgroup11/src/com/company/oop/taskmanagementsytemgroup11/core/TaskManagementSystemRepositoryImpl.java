@@ -14,7 +14,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
     private static final String NO_SUCH_BOARD = "There is no such board with name";
-
     private int nextId;
     private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
@@ -38,6 +37,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // finish the remaining methods
 
     @Override
+    public List<Members> getAllMembers() {
+        return new ArrayList<>(members);
+    }
+
+    @Override
     public List<Team> getAllTeams() {
         return new ArrayList<>(teams);
     }
@@ -51,10 +55,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<ActivityLog> getAllActivities() {
         return new ArrayList<>(activityLogList);
     }
-//    @Override
-//    public List<Members> getAllTeamMembers() {
-//        return new ArrayList<>(members);
-//    }
 
 
     @Override
