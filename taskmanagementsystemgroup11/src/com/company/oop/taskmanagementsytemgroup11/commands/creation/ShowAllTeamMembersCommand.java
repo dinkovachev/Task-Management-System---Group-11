@@ -11,7 +11,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand {
 
     //ToDo ShowAllTeam members must display the name of each member
 
-    private final List<Members> teamMembers;  //todo ???
+//    private final List<Members> teamMembers;  //todo ???
 
     public ShowAllTeamMembersCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

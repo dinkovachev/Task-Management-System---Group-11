@@ -15,7 +15,7 @@ public interface TaskManagementSystemRepository {
 
     List<Board> getAllTeamsBoards();
 
-    List<Members> getAllTeamMembers();
+//    List<Members> getAllTeamMembers();
 
     Members getMemberById(int id);
 
@@ -44,8 +44,6 @@ public interface TaskManagementSystemRepository {
     //3. ToDo Status status double check if we need to give Status to the Stories
     Bug findBugByIndex(int bugIndex);
 
-
-    Team    getTeamByName(String name);
 
     Story createStory(int id, String title, String description, Priority priority, Size size, String assignee);
     //4. ToDo Status status double check if we need to give Status to the Stories
