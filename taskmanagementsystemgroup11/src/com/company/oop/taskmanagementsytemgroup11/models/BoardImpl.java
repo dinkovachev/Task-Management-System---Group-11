@@ -17,14 +17,14 @@ public class BoardImpl implements Board {
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private final List<Board> boards;
     private final List<Task> tasksToAddToBoard;
-    private final List<String> activityHistory;
+    private final List<String> activityHistory = new ArrayList<>();
     private String name;
 
 
     public BoardImpl(String name) {
         setName(name);
         this.boards = new ArrayList<>();
-        this.activityHistory = new ArrayList<>();
+  //      this.activityHistory = new ArrayList<>();
         this.tasksToAddToBoard = new ArrayList<>();
     }
 
@@ -69,7 +69,7 @@ public class BoardImpl implements Board {
     @Override
     public String getAsString() {
         return """
-                Name: %s;
+                Name: %s
                 """.formatted(name);
     }
 

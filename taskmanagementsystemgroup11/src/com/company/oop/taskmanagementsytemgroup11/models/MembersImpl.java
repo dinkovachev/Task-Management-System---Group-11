@@ -19,15 +19,16 @@ public class MembersImpl implements Members {
     private String firstName;
     private String lastName;
     private int personId;
-    private List<String> activityHistory;
+    private List<String> activityHistory = new ArrayList<>();
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
         setPersonId(personId);
-        setUsername(generateUsername(personId, firstName, lastName));
+
         setFirstName(firstName);
         setLastName(lastName);
-        this.activityHistory = new ArrayList<>();
+        setUsername(generateUsername(personId, firstName, lastName));
+  //      this.activityHistory = new ArrayList<>();
     }
 
     public List<String> getActivityHistory() {
@@ -84,7 +85,7 @@ public class MembersImpl implements Members {
         return lastName;
     }
 
-      @Override
+    @Override
     public List<Members> getAllTeamMembers() {
         return new ArrayList<>(members);
     }
@@ -111,6 +112,7 @@ public class MembersImpl implements Members {
         this.personId = personId;
         activityHistory.add(String.format("New member with id %d was created", personId));
     }
+
     private String generateUsername(int personId, String firstName, String lastName) {
         return firstName + lastName + personId;
     }
@@ -118,8 +120,16 @@ public class MembersImpl implements Members {
     @Override
     public String getAsString() {
         return """
-                Name: %s %s.
-                Username: %s.
+                Name: %s %s
+                Username: %s
                 """.formatted(firstName, lastName, username);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MembersImpl member = (MembersImpl) o;
+        return username.equals(member.username) && firstName.equals(member.firstName)
+                && lastName.equals(member.lastName);
     }
 }
