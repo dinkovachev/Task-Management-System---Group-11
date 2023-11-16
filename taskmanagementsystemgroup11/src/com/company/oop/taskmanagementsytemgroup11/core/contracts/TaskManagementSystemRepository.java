@@ -15,15 +15,13 @@ public interface TaskManagementSystemRepository {
 
     List<Board> getAllTeamsBoards();
 
-//    List<Members> getAllTeamMembers();
-
     Members getMemberById(int id);
 
     Members getMemberByUsername(String username);
-    Team getTeamByName(String name);
-    Board getBoardByName(String name);
 
-    Team getTeamByUsername(String username);
+    Team getTeamByName(String name);
+
+    Board getBoardByName(String name);
 
     Task findTaskByID(int id);
 
