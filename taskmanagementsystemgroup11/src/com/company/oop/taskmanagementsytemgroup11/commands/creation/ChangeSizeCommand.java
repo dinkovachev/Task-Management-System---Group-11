@@ -14,7 +14,7 @@ import static java.lang.String.format;
 public class ChangeSizeCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-    private static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
+    private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
 
     public ChangeSizeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

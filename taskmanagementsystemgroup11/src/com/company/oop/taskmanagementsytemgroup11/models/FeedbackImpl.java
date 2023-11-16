@@ -44,7 +44,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     private void setRating(int rating) {
-        this.rating = rating; // TODO Georgi Q: Rating should be from 1 to 10?
+        validateRating(rating);
+        this.rating = rating;
     }
 
     private void setStatus(Status status) {
@@ -91,6 +92,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     }
 
+    private void validateRating(int rating) {
+        if (rating <= 1 || rating >= 10) {
+            throw new IllegalArgumentException("Rating should be between 1 and 10.");
+        }
+    }
 
     // TODO Georgi Q: set to private
     public void revertStatus() {

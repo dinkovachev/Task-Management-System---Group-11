@@ -9,11 +9,11 @@ public enum TaskType {
     public String toString() {
         switch (this) {
             case BUG:
-                return "Small";
+                return "Bug";
             case STORY:
-                return "Medium";
+                return "Story";
             case FEEDBACK:
-                return "Large";
+                return "Feedback";
             default:
                 throw new UnsupportedOperationException("Can't convert task type.");
         }
