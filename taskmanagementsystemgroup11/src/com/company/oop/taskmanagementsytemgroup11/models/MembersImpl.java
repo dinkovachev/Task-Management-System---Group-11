@@ -19,7 +19,7 @@ public class MembersImpl implements Members {
     private String firstName;
     private String lastName;
     private int personId;
-    private List<String> activityHistory;
+    private List<String> activityHistory = new ArrayList<>();
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
@@ -27,7 +27,7 @@ public class MembersImpl implements Members {
         setUsername(generateUsername(personId, firstName, lastName));
         setFirstName(firstName);
         setLastName(lastName);
-        this.activityHistory = new ArrayList<>();
+//        this.activityHistory = new ArrayList<>();
     }
 
     public List<String> getActivityHistory() {

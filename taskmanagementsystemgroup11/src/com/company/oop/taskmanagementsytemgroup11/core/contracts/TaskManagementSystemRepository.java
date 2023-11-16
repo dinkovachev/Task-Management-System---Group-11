@@ -4,6 +4,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public interface TaskManagementSystemRepository {
 
     Story findStoryByIndex(int storyIndex);
 
-    Feedback createFeedback(int id, String title, String description, int rating);
+    Feedback createFeedback(TaskType type, String title, String description, int rating);
 
     Feedback findFeedbackByIndex(int taskIndex);
     // 5. ToDo maybe need to add function to find user by Username
