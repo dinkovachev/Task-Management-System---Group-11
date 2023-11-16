@@ -3,6 +3,7 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public abstract class TaskImpl implements Task, Printable {
+public abstract class TaskImpl implements Task {
     public static final int TITLE_LEN_MIN = 10;
     public static final int TITLE_LEN_MAX = 100;
     public static final String TITLE_LEN_ERR = format(
@@ -32,6 +33,17 @@ public abstract class TaskImpl implements Task, Printable {
     private String description;
     private List<Comment> commentList = new ArrayList<>();
     private List<ActivityLog> activityLogList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+    private List<String> assignedMembersToTasks = new ArrayList<>();
+
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
+
+    public List<String> getAssignedMembersToTasks() {
+        return new ArrayList<>(assignedMembersToTasks);
+    }
+
     private Status status;
 
     public TaskImpl(int id, String title, String description) {
@@ -56,8 +68,11 @@ public abstract class TaskImpl implements Task, Printable {
     }
 
 
-    public Status getStatus() {
-        return status;
+    public abstract Status getStatus();
+
+    @Override
+    public List<Task> getAllTasks() {
+        return new ArrayList<>(tasks);
     }
 
     @Override
@@ -90,6 +105,25 @@ public abstract class TaskImpl implements Task, Printable {
                 DESCRIPTION_LEN_MAX,
                 DESCRIPTION_LEN_ERR);
         this.description = description;
+    }
+
+    @Override
+    public void addComment(Comment comment) {
+        commentList.add(comment);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    @Override
+    public void assignTask(Members member) {
+    }
+
+    @Override
+    public void unassignTask(Members member) {
+
     }
 
     @Override

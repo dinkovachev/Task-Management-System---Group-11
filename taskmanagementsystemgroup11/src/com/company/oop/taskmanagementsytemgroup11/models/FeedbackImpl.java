@@ -39,6 +39,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     @Override
     public Status getStatus() {
+
         return status;
     }
 
@@ -72,6 +73,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     @Override
     public void addComment(Comment comment) {
+
+    }
+
+    @Override
+    public void addTask(Task task) {
 
     }
 

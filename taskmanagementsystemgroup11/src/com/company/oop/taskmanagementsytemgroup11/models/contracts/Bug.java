@@ -13,8 +13,6 @@ public interface Bug extends Task {
 
     public Severity getSeverity();
 
-    public Status getStatus();
-
     public String getAssignee();
 
     public List<Bug> getBugs();

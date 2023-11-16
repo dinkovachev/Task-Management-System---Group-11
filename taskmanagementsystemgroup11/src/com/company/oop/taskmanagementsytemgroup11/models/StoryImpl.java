@@ -26,6 +26,7 @@ public class StoryImpl extends TaskImpl implements Story {
         setAssignee(assignee);
         this.status = Status.NOT_DONE;
         this.stories = new ArrayList<>();
+        this.feedbacks = new ArrayList<>();
     }
 
     @Override
@@ -102,14 +103,16 @@ public class StoryImpl extends TaskImpl implements Story {
     public void addComment(Comment comment) {
 
     }
-
     @Override
-    public void assignTask(Task task) {
+    public void addTask(Task task) {
 
     }
-
     @Override
-    public void unassignTask(Task task) {
+    public void assignTask(Members member) {
+
+    }
+    @Override
+    public void unassignTask(Members member) {
 
     }
 
