@@ -13,21 +13,22 @@ public class MembersImpl implements Members {
     private static final int MINIMUM_SYMBOLS = 5;
     private static final int MAXIMUM_SYMBOLS = 15;
     public static final String MEMBER_NAME_ERR_MSG = String.format(
-            "The Team name's length cannot be less than %d or more than %d symbols long.",
+            "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private String username;
     private String firstName;
     private String lastName;
     private int personId;
-    private List<String> activityHistory;
+    private List<String> activityHistory = new ArrayList<>();
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
+        //this.activityHistory = new ArrayList<>();
         setPersonId(personId);
         setUsername(generateUsername(personId, firstName, lastName));
         setFirstName(firstName);
         setLastName(lastName);
-        this.activityHistory = new ArrayList<>();
+
     }
 
     public List<String> getActivityHistory() {
@@ -121,5 +122,14 @@ public class MembersImpl implements Members {
                 Name: %s %s.
                 Username: %s.
                 """.formatted(firstName, lastName, username);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MembersImpl member = (MembersImpl) o;
+        return username.equals(member.username) && firstName.equals(member.firstName)
+                && lastName.equals(member.lastName);
     }
 }
