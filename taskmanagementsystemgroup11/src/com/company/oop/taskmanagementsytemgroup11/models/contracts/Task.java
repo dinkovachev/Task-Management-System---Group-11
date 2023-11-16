@@ -15,9 +15,7 @@ public interface Task extends Commentable, Identifiable, Printable {
     void addTask(Task task);
 
     void assignTask(Members member);
-
     void unassignTask(Members member);
-
     String getTitle();
 
     String getDescription();

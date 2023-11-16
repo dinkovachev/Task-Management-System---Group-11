@@ -34,6 +34,12 @@ public class BoardImpl implements Board {
 
         activityHistory.add(String.format("Task with name %s added to board %s", task.getTitle(), name));
 
+        activityHistory.add(String.format("Task with %s added to board %s.", task.getTitle(), name));
+    }
+
+    @Override
+    public List<String> getActivityHistory() {
+        return new ArrayList<>(activityHistory);
     }
 
     @Override
@@ -59,9 +65,12 @@ public class BoardImpl implements Board {
         activityHistory.add(String.format("Board with name %s added", boards));
     }
 
+
     @Override
     public String getAsString() {
-        return "board";   //todo print;
+        return """
+                Name: %s;
+                """.formatted(name);
     }
 
 }

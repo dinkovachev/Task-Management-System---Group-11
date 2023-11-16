@@ -47,7 +47,7 @@ public class AddMemberCommand extends BaseCommand {
         //ToDo double check if the Member exist
 //        ValidationHelpers.validateIntRange(getTaskManagementSystemRepository().getMemberById(), 0,
 //                getTaskManagementSystemRepository().getAllMembers().size() - 1, MEMBER_DOES_NOT_EXIST);
-        Team team = getTaskManagementSystemRepository().getTeamByUsername(teamToAdd);
+        Team team = getTaskManagementSystemRepository().getTeamByName(teamToAdd);
         //ToDo double check if the Team exist
 //        ValidationHelpers.validateIntRange(getTaskManagementSystemRepository().getMemberById(), 0,
 //                getTaskManagementSystemRepository().getAllMembers().size() - 1, MEMBER_DOES_NOT_EXIST);

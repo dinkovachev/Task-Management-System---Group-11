@@ -17,13 +17,15 @@ public class TeamImpl implements Team {
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
 
     private String name;
-    private List<Members> members;
+    private List<Members> teamMembers;
+
+
     //ToDo double check how to add a Board to a team
     private List<Board> boards;
 
     public TeamImpl(String name) {
         setName(name);
-        this.members = new ArrayList<>();
+        this.teamMembers = new ArrayList<>();
         this.boards = new ArrayList<>();
     }
 
@@ -36,9 +38,8 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public List<Members> getMembers() {
-
-        return new ArrayList<>(members);
+    public List<Members> getTeamMembers() {
+        return new ArrayList<>(teamMembers);
     }
 
     public List<Board> getBoards() {
@@ -53,13 +54,12 @@ public class TeamImpl implements Team {
 
      @Override
     public void addMember(Members member) {
-
-        members.add(member);
+        teamMembers.add(member);
     }
 
-    private void setMembers(List<Members> members) {
+    private void setTeamMembers(List<Members> teamMembers) {
 
-        this.members = members;
+        this.teamMembers = teamMembers;
     }
 
     private void setBoards(List<Board> boards) {
@@ -69,7 +69,9 @@ public class TeamImpl implements Team {
 
     @Override
     public String getAsString() {
-        return "team";//todo print;
+        return """
+                Team name: %s;
+                """.formatted(name);
     }
 }
 

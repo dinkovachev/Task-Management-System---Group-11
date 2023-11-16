@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-
+    private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
-    private static final String NO_SUCH_TEAM = "There is no team with name %s";
     private static final String NO_SUCH_BOARD = "There is no such board with name";
 
     private int nextId;
@@ -49,15 +48,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(boards);
     }
 
-    @Override
-    public List<Members> getAllTeamMembers() {
-        return new ArrayList<>(members);
+    public List<ActivityLog> getAllActivities() {
+        return new ArrayList<>(activityLogList);
     }
-
-    @Override
-    public Team getTeamByUsername(String username) {
-        return null;
-    }
+//    @Override
+//    public List<Members> getAllTeamMembers() {
+//        return new ArrayList<>(members);
+//    }
 
 
     @Override
@@ -119,8 +116,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Team getTeamByName(String name) {
-        Team team = teams.stream().filter(m -> m.getName().equalsIgnoreCase(name)).findFirst().
-                orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_TEAM, name)));
+        Team team = teams.stream()
+                .filter(t -> t.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_TEAM, name)));
         return team;
     }
 
@@ -160,6 +159,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
         return bug;
     }
+    // find team by name - teamMembers
+
+
+
 
     @Override
     public Story findStoryByIndex(int storyIndex) {
