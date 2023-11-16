@@ -23,12 +23,12 @@ public class MembersImpl implements Members {
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
-        //this.activityHistory = new ArrayList<>();
         setPersonId(personId);
-        setUsername(generateUsername(personId, firstName, lastName));
+
         setFirstName(firstName);
         setLastName(lastName);
-
+        setUsername(generateUsername(personId, firstName, lastName));
+  //      this.activityHistory = new ArrayList<>();
     }
 
     public List<String> getActivityHistory() {
@@ -85,7 +85,7 @@ public class MembersImpl implements Members {
         return lastName;
     }
 
-      @Override
+    @Override
     public List<Members> getAllTeamMembers() {
         return new ArrayList<>(members);
     }
@@ -112,6 +112,7 @@ public class MembersImpl implements Members {
         this.personId = personId;
         activityHistory.add(String.format("New member with id %d was created", personId));
     }
+
     private String generateUsername(int personId, String firstName, String lastName) {
         return firstName + lastName + personId;
     }
@@ -119,8 +120,8 @@ public class MembersImpl implements Members {
     @Override
     public String getAsString() {
         return """
-                Name: %s %s.
-                Username: %s.
+                Name: %s %s
+                Username: %s
                 """.formatted(firstName, lastName, username);
     }
 

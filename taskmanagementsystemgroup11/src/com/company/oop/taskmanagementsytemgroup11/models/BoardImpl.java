@@ -69,7 +69,7 @@ public class BoardImpl implements Board {
     @Override
     public String getAsString() {
         return """
-                Name: %s;
+                Name: %s
                 """.formatted(name);
     }
 
