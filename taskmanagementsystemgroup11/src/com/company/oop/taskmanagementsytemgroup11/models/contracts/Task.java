@@ -8,8 +8,11 @@ public interface Task extends Commentable, Identifiable, Printable {
     List<Task> getAllTasks();
 
     void addComment(Comment comment);
+
     void assignTask(Members member);
+
     void unassignTask(Members member);
+
     String getTitle();
 
     String getDescription();

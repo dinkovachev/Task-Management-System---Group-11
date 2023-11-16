@@ -47,6 +47,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(boards);
     }
 
+    public List<ActivityLog> getAllActivities() {
+        return new ArrayList<>(activityLogList);
+    }
+//private final List<ActivityLog> activityLogList = new ArrayList<>();
     @Override
     public List<Team> getAllTeamMembers() {
         return null;

@@ -11,4 +11,6 @@ public interface Board extends Printable {
     void addBoard(Board board);
 
     List<Board> getBoards();
+
+    List<String> getActivityHistory()
 }
