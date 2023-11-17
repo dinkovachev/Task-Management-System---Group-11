@@ -1,8 +1,10 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
@@ -49,6 +51,8 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Priority priorityStory = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
+                Members usernameStory = getTaskManagementSystemRepository().getMemberByUsername(assigneeStory);
+                int taskIndex = getTaskManagementSystemRepository().getNextId();
 
                 return createNewStory(
                         typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory);
@@ -62,6 +66,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Priority priorityBug = ParsingHelpers.tryParseEnum(parameters.get(4), Priority.class);
                 Severity severityBug = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
                 String assigneeBug = parameters.get(6);
+                Members usernameBug = getTaskManagementSystemRepository().getMemberByUsername(assigneeBug);
 
                 return createNewBug(
                         typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug);
@@ -92,4 +97,5 @@ public class CreateNewTaskCommand extends BaseCommand {
                 typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug);
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
+
 }

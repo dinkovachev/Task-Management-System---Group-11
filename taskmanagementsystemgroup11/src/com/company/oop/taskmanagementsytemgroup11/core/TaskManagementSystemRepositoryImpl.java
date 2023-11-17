@@ -167,33 +167,32 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
     }
 
+
+//    @Override
+//    public Bug findBugByIndex(int bugIndex) {
+//        Bug bug = bugs
+//                .stream()
+//                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
+//        return bug;
+//    }
+
     @Override
     public Bug findBugByIndex(int bugIndex) {
-        Bug bug = bugs
-                .stream()
-                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
-        return bug;
+        if (bugIndex < 0 || bugIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid bug index.", bugIndex));
+        }
+        return bugs.get(tasks.size() - bugIndex - 1);
     }
     // find team by name - teamMembers
 
-
-    @Override
-    public Story findStoryByIndex(int storyIndex) {
-        if (storyIndex < 0 || storyIndex >= stories.size()) {
-            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
-        } else {
-            int tasksSize = tasks.size();
-            return stories.get(storyIndex - tasksSize);
-        }
-    }
 
 //    @Override
 //    public Story findStoryByIndex(int storyIndex) {
 //        Story story = stories
 //                .stream()
-//                .filter(s -> s.getAllTasks().get(storyIndex).equals(storyIndex))
+//                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
 //                .findFirst()
 //                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
 //        return story;
@@ -234,6 +233,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return exists;
     }
 
+    @Override
     public boolean boardExist(String name) {
         boolean exists = false;
         for (Board boards : getAllTeamsBoards()) {
@@ -243,5 +243,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             }
         }
         return exists;
+    }
+
+    @Override
+    public int getNextId() {
+        return this.nextId;
     }
 }

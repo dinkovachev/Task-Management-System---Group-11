@@ -5,5 +5,5 @@ public class CommandConstants {
     public static final String STORY_CREATED_MESSAGE = "Story with name %s was created.";
     public static final String BOARD_CREATED_MESSAGE = "Board with name %s was created.";
 
-    public static final String JOIN_DELIMITER = "-----------------";
+    public static final String JOIN_DELIMITER = "----------------";
 }
