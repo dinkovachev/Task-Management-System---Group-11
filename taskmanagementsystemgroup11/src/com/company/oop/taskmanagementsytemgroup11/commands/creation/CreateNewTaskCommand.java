@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
@@ -51,6 +52,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
                 Members usernameStory = getTaskManagementSystemRepository().getMemberByUsername(assigneeStory);
+                int taskIndex = getTaskManagementSystemRepository().getNextId();
 
                 return createNewStory(
                         typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory);

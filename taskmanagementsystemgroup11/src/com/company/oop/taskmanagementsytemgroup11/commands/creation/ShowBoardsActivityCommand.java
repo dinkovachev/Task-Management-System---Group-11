@@ -44,6 +44,8 @@ public class ShowBoardsActivityCommand extends BaseCommand {
         }
 
         return "---END-BOARDS---";
+
+        // TODO PROBABLY THE COMMAND SHOULD PRINT TEAM NAMES, TOO ???
     }
 }
 

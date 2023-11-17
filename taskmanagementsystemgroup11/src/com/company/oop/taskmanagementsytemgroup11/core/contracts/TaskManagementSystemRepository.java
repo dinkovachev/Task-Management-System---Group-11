@@ -61,4 +61,6 @@ public interface TaskManagementSystemRepository {
     boolean boardExist(String name);  //todo
 
     List<ActivityLog> getAllActivities();
+
+    public int getNextId();
 }

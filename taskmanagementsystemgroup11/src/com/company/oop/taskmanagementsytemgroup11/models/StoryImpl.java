@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -47,10 +48,10 @@ public class StoryImpl extends TaskImpl implements Story {
         return priority;
     }
 
-    @Override
-    public Size getSize() {
-        return size;
-    }
+//    @Override
+//    public Object getSize() {
+//        return size;
+//    }
 
     @Override
     public Status getStatus() {
@@ -103,14 +104,17 @@ public class StoryImpl extends TaskImpl implements Story {
     public void addComment(Comment comment) {
 
     }
+
     @Override
     public void addTask(Task task) {
 
     }
+
     @Override
     public void assignTask(Members member) {
 
     }
+
     @Override
     public void unassignTask(Members member) {
 

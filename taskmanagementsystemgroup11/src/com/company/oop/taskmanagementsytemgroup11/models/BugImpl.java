@@ -47,6 +47,11 @@ public class BugImpl extends TaskImpl implements Bug {
         return priority;
     }
 
+//    @Override
+//    public Object getSize() {
+//        return null;
+//    }
+
     @Override
     public Severity getSeverity() {
         return severity;
@@ -130,13 +135,14 @@ public class BugImpl extends TaskImpl implements Bug {
         return null;
     }
 
-    @Override
-    public void changePriority(Priority newPriority) {
-        setPriority(newPriority);
-    }
+//    @Override
+//    public void changePriority(Priority newPriority) {
+//        setPriority(newPriority);
+//    }
+//
+//    @Override
+//    public void changeSeverity(Severity newSeverity) {
+//        setSeverity(newSeverity);
+//    }
 
-    @Override
-    public void changeSeverity(Severity newSeverity) {
-        setSeverity(newSeverity);
-    }
 }

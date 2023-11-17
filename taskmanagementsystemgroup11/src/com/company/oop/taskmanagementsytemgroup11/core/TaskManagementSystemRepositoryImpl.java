@@ -149,24 +149,25 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return member;
     }
 
+//    @Override
+//    public Task findTaskByID(int id) {
+//        Task task = tasks
+//                .stream()
+//                .filter(b -> b.getAllTasks().get(id).equals(id))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
+//        return task;
+//    }
+
     @Override
-    public Task findTaskByID(int id) {
-        Task task = tasks
-                .stream()
-                .filter(b -> b.getAllTasks().get(id).equals(id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
-        return task;
+    public Task findTaskByID(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex));
+        } else {
+            return tasks.get(taskIndex);
+        }
     }
 
-//    @Override
-//    public Task findTaskByID(int taskIndex) {
-//        if (taskIndex < 0 || taskIndex >= stories.size()) {
-//            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex));
-//        } else {
-//            return stories.get(taskIndex);
-//        }
-//    }
 
 //    @Override
 //    public Bug findBugByIndex(int bugIndex) {
@@ -242,6 +243,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return exists;
     }
 
+    @Override
     public boolean boardExist(String name) {
         boolean exists = false;
         for (Board boards : getAllTeamsBoards()) {
@@ -251,5 +253,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             }
         }
         return exists;
+    }
+
+    @Override
+    public int getNextId() {
+        return this.nextId;
     }
 }

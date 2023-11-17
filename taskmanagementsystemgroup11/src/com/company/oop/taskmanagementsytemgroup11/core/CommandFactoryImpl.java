@@ -45,12 +45,12 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new UnassignTaskCommand(taskManagementSystemRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskManagementSystemRepository);
-            case CHANGESEVERITY:
-                return new ChangeSeverityCommand(taskManagementSystemRepository);
-            case CHANGESIZE:
-                return new ChangeSizeCommand(taskManagementSystemRepository);
-            case CHANGEPRIORITY:
-                return new ChangePriorityCommand(taskManagementSystemRepository);
+//            case CHANGESEVERITY:
+//                return new ChangeSeverityCommand(taskManagementSystemRepository);
+//            case CHANGESIZE:
+//                return new ChangeSizeCommand(taskManagementSystemRepository);
+//            case CHANGEPRIORITY:
+//                return new ChangePriorityCommand(taskManagementSystemRepository);
             case CREATE:
                 return new CreateNewTaskCommand(taskManagementSystemRepository);
             case CHANGERATING:
