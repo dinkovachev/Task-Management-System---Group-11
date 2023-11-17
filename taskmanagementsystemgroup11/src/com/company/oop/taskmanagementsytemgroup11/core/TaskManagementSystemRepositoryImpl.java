@@ -6,6 +6,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +101,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return story;
     }
     @Override
-    public Feedback createFeedback(int id, String title, String description, int rating) {
+    public Feedback createFeedback(TaskType type, String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);

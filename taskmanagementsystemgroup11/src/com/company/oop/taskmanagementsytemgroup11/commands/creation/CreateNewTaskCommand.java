@@ -7,6 +7,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 
 import java.util.List;
@@ -26,13 +27,13 @@ public class CreateNewTaskCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         switch (parameters.size()) {
             case 4:
-                int indexFeedback = ParsingHelpers.tryParseInteger(parameters.get(0), INVALID_INPUT_MSG) - 1;
+                TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG) - 1;
 
                 return createNewFeedback(
-                        indexFeedback, titleFeedback, descriptionFeedback, rating);
+                        type, titleFeedback, descriptionFeedback, rating);
 
             case 6:
                 int indexStory = ParsingHelpers.tryParseInteger(parameters.get(0), INVALID_INPUT_MSG) - 1;
@@ -62,9 +63,9 @@ public class CreateNewTaskCommand extends BaseCommand {
         }
     }
 
-    private String createNewFeedback(int indexFeedback, String titleFeedback, String descriptionFeedback, int rating) {
+    private String createNewFeedback(TaskType type , String titleFeedback, String descriptionFeedback, int rating) {
         Feedback feedback = getTaskManagementSystemRepository().createFeedback(
-                indexFeedback, titleFeedback, descriptionFeedback, rating);
+                type, titleFeedback, descriptionFeedback, rating);
         return format("New feedback created %s.", feedback.getId());
     }
 
