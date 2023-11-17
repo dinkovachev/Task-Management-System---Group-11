@@ -168,24 +168,32 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 //        }
 //    }
 
+//    @Override
+//    public Bug findBugByIndex(int bugIndex) {
+//        Bug bug = bugs
+//                .stream()
+//                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
+//        return bug;
+//    }
+
     @Override
     public Bug findBugByIndex(int bugIndex) {
-        Bug bug = bugs
-                .stream()
-                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
-        return bug;
+        if (bugIndex < 0 || bugIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid bug index.", bugIndex));
+        }
+        return bugs.get(tasks.size() - bugIndex - 1);
     }
-    // find team by name - teamMembers
 
+    // find team by name - teamMembers
 
     @Override
     public Story findStoryByIndex(int storyIndex) {
-        if (storyIndex < 0 || storyIndex >= tasks.size()) {
+        if (storyIndex < 0 || storyIndex >= stories.size()) {
             throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
         } else {
-            return stories.get(tasks.size() - storyIndex - 1);
+            return stories.get(storyIndex);
         }
     }
 
