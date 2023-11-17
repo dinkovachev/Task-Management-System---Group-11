@@ -30,6 +30,7 @@ public class CreateBoardCommand extends BaseCommand {
     private String createBoard(String name, String teamName) {
             Board board = getTaskManagementSystemRepository().createBoard(name);
             Team team = getTaskManagementSystemRepository().createTeam(teamName);
+
             return String.format("New board with name %s  created in team %s.", board.getName(), team.getName());
     }
 }

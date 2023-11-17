@@ -13,7 +13,7 @@ public class ShowTeamActivityCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String INVALID_INPUT_MESSAGE = "Invalid input. Expected a number.";
-    private static final String SHOW_TEAM_ACTIVITY_MESSAGE = "%s team activity ";
+    private static final String SHOW_TEAM_ACTIVITY_MESSAGE = "%s team activity %s ";
 
 
     public ShowTeamActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -26,12 +26,11 @@ public class ShowTeamActivityCommand extends BaseCommand {
         String teamName = parameters.get(0);
  //       int id = ParsingHelpers.tryParseInteger(parameters.get(1), INVALID_INPUT_MESSAGE);
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
-        List<Board> boards = team.getBoards();
-        if (boards.isEmpty()) {
-            return String.format("There are no boards in team %s.", teamName);
+        if (teamName.length()==1) {
+            return String.format("There are no team activity in team %s.", teamName);
         }
 
-        return String.format(SHOW_TEAM_ACTIVITY_MESSAGE,/*id,*/ team.getBoards().toString());
+        return String.format(SHOW_TEAM_ACTIVITY_MESSAGE,/*id,*/ teamName, team.getTeamActivityHistory().toString());
  //       return showTeamActivity(team, id);
     }
 //    private String showTeamActivity(String team, int id){
