@@ -68,11 +68,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return null;
-    }
-
-    @Override
     public void addComment(Comment comment) {
 
     }

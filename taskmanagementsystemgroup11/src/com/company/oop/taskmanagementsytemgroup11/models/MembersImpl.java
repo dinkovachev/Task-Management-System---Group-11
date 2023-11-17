@@ -13,7 +13,7 @@ public class MembersImpl implements Members {
     private static final int MINIMUM_SYMBOLS = 5;
     private static final int MAXIMUM_SYMBOLS = 15;
     public static final String MEMBER_NAME_ERR_MSG = String.format(
-            "The Team name's length cannot be less than %d or more than %d symbols long.",
+            "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private String username;
     private String firstName;
@@ -124,6 +124,7 @@ public class MembersImpl implements Members {
                 Username: %s
                 """.formatted(firstName, lastName, username);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

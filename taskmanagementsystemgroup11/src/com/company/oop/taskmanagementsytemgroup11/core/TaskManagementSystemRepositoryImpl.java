@@ -17,7 +17,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
     private static final String NO_SUCH_BOARD = "There is no such board with name";
-
     private int nextId;
     private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
@@ -39,6 +38,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     //ToDo - Dinko
     // finish the remaining methods
+
     @Override
     public List<Members> getAllMembers() {
         return new ArrayList<>(members);
@@ -58,10 +58,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<ActivityLog> getAllActivities() {
         return new ArrayList<>(activityLogList);
     }
-//    @Override
-//    public List<Members> getAllTeamMembers() {
-//        return new ArrayList<>(members);
-//    }
 
 
     @Override
@@ -186,17 +182,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
         return bugs.get(tasks.size() - bugIndex - 1);
     }
-
     // find team by name - teamMembers
 
-    @Override
-    public Story findStoryByIndex(int storyIndex) {
-        if (storyIndex < 0 || storyIndex >= stories.size()) {
-            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
-        } else {
-            return stories.get(storyIndex);
-        }
-    }
 
 //    @Override
 //    public Story findStoryByIndex(int storyIndex) {
