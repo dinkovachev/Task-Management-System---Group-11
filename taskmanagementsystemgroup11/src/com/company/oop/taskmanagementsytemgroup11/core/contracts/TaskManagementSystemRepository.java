@@ -37,14 +37,14 @@ public interface TaskManagementSystemRepository {
     // ToDo stepsToReproduce maybe need to be a List if we need to invoke it
 
     // ToDo Status status double check if we need to give Status to the bugs
-    Bug createBug(int id, String title, String description, String stepsToReproduce,
+    Bug createBug(TaskType type, String title, String description, String stepsToReproduce,
                   Priority priority, Severity severity, String assignee); // TODO Georgi take a look!
 
     //3. ToDo Status status double check if we need to give Status to the Stories
     Bug findBugByIndex(int bugIndex);
 
 
-    Story createStory(int id, String title, String description, Priority priority, Size size, String assignee);
+    Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee);
     //4. ToDo Status status double check if we need to give Status to the Stories
 
     Story findStoryByIndex(int storyIndex);
