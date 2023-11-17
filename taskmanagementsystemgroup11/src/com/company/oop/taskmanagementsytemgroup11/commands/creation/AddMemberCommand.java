@@ -16,7 +16,8 @@ public class AddMemberCommand extends BaseCommand {
     private static final String INVALID_MEMBER_MESSAGE = "Invalid member. Expected an username";
     private static final String MEMBER_DOES_NOT_EXIST = "The member doesn't exist";
     private static final String INVALID_TEAM_MESSAGE = "Invalid team. Expected a team name";
-    private static final String TEAM_DOES_NOT_EXIST = "The team doesn't exist";
+    private static final String TEAM_DOES_NOT_EXIST = "The team %s doesn't exist";
+    private static final String MEMBER_ALREADY_EXISTS = "Member with username %s already exists in team %s";
 
     public AddMemberCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -25,9 +26,14 @@ public class AddMemberCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String memberToAdd = parameters.get(0);
-        String teamToAdd = parameters.get(1);
-        return addMember(memberToAdd, teamToAdd);
+        String usernameOfMemberToAdd = parameters.get(0);
+        String teamNameToAdd = parameters.get(1);
+        Team team = getTaskManagementSystemRepository().getTeamByName(teamNameToAdd);
+        Members member = getTaskManagementSystemRepository().getMemberByUsername(usernameOfMemberToAdd);
+        if (getTaskManagementSystemRepository().memberExistsInTeam(member, team)){   //todo all boards or team boards
+            throw new IllegalArgumentException(String.format(MEMBER_ALREADY_EXISTS, member.getUsername(), team.getName()));
+        }
+        return addMember(usernameOfMemberToAdd, teamNameToAdd);
     }
 
     //ToDo(Done) - Dinko
@@ -42,8 +48,8 @@ public class AddMemberCommand extends BaseCommand {
 
     //ToDo - Dinko
     // Double check if this is ok
-    private String addMember(String memberToAdd, String teamToAdd) {
-        Members member = getTaskManagementSystemRepository().getMemberByUsername(memberToAdd);
+    private String addMember(String usernameOfMemberToAdd, String teamToAdd) {
+        Members member = getTaskManagementSystemRepository().getMemberByUsername(usernameOfMemberToAdd);
         //ToDo double check if the Member exist
 //        ValidationHelpers.validateIntRange(getTaskManagementSystemRepository().getMemberById(), 0,
 //                getTaskManagementSystemRepository().getAllMembers().size() - 1, MEMBER_DOES_NOT_EXIST);
@@ -51,10 +57,8 @@ public class AddMemberCommand extends BaseCommand {
         //ToDo double check if the Team exist
 //        ValidationHelpers.validateIntRange(getTaskManagementSystemRepository().getMemberById(), 0,
 //                getTaskManagementSystemRepository().getAllMembers().size() - 1, MEMBER_DOES_NOT_EXIST);
-
-        getTaskManagementSystemRepository().getMemberByUsername(String.valueOf(member)).addMemberToTeam(member,team);
-
-        return String.format(MEMBER_ADDED_SUCCESSFULLY, member,team);
+        member.addToTeam(team);
+        return String.format(MEMBER_ADDED_SUCCESSFULLY, member.getUsername(),team.getName());
 
     }
 
