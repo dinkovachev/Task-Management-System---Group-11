@@ -18,9 +18,6 @@ public class TeamImpl implements Team {
 
     private String name;
     private List<Members> teamMembers;
-
-
-    //ToDo double check how to add a Board to a team
     private List<Board> boards;
 
     public TeamImpl(String name) {
@@ -33,17 +30,23 @@ public class TeamImpl implements Team {
         return name;
     }
 
-    @Override
-    public void addBoardToTeam(Board board) {
-    }
 
+//    @Override
+ //   public void addBoardToTeam(String boardName, String TeamName) {
+//        TeamName.addMember(boardName);
+//       boards.add(String.format("New board %s was added to team %s", Board.getName(),
+//               getName()));
+//    }
+    @Override
+    public void addBoard(Board board) {
+        boards.add(board);
+    }
     @Override
     public List<Members> getTeamMembers() {
         return new ArrayList<>(teamMembers);
     }
-
+    @Override
     public List<Board> getBoards() {
-
         return new ArrayList<>(boards);
     }
 

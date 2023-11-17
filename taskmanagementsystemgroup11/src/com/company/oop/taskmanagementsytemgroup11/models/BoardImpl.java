@@ -1,6 +1,4 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
-
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;

@@ -8,6 +8,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MembersImpl implements Members {
     private static final int MINIMUM_SYMBOLS = 5;
@@ -24,7 +25,6 @@ public class MembersImpl implements Members {
 
     public MembersImpl(int personId, String firstName, String lastName) {
         setPersonId(personId);
-
         setFirstName(firstName);
         setLastName(lastName);
         setUsername(generateUsername(personId, firstName, lastName));
@@ -37,7 +37,6 @@ public class MembersImpl implements Members {
 
     @Override
     public String getUsername() {
-
         return username;
     }
 
@@ -49,9 +48,9 @@ public class MembersImpl implements Members {
     }
 
     @Override
-    public void addMemberToTeam(Members memberToAdd, Team teamToAddMember) {
-        teamToAddMember.addMember(memberToAdd);
-        activityHistory.add(String.format("New member %s was added to team %s", memberToAdd.getUsername(),
+    public void addToTeam(Team teamToAddMember) {
+        teamToAddMember.addMember(this);
+        activityHistory.add(String.format("Member %s was added to team %s", this.getUsername(),
                 teamToAddMember.getName()));
     }
 
@@ -91,7 +90,6 @@ public class MembersImpl implements Members {
     }
 
     private void setUsername(String username) {
-        ValidationHelpers.validateIntRange(username.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, MEMBER_NAME_ERR_MSG);
         this.username = username;
         activityHistory.add(String.format("New member with username %s was created", username));
     }
@@ -99,22 +97,22 @@ public class MembersImpl implements Members {
     private void setFirstName(String firstName) {
         ValidationHelpers.validateIntRange(firstName.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, MEMBER_NAME_ERR_MSG);
         this.firstName = firstName;
-        activityHistory.add(String.format("New member with first name %s was created", firstName));
+ //       activityHistory.add(String.format("New member with first name %s was created", firstName));
     }
 
     private void setLastName(String lastName) {
         ValidationHelpers.validateIntRange(lastName.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, MEMBER_NAME_ERR_MSG);
         this.lastName = lastName;
-        activityHistory.add(String.format("New member with last name %s was created", lastName));
+  //      activityHistory.add(String.format("New member with last name %s was created", lastName));
     }
 
     private void setPersonId(int personId) {
         this.personId = personId;
-        activityHistory.add(String.format("New member with id %d was created", personId));
+ //       activityHistory.add(String.format("New member with id %d was created", personId));
     }
 
     private String generateUsername(int personId, String firstName, String lastName) {
-        return firstName + lastName + personId;
+        return firstName + "_" + lastName + personId;
     }
 
     @Override
@@ -129,8 +127,15 @@ public class MembersImpl implements Members {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MembersImpl member = (MembersImpl) o;
-        return username.equals(member.username) && firstName.equals(member.firstName)
-                && lastName.equals(member.lastName);
+        MembersImpl members = (MembersImpl) o;
+        return personId == members.personId
+                && Objects.equals(username, members.username)
+                && Objects.equals(firstName, members.firstName)
+                && Objects.equals(lastName, members.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, firstName, lastName, personId);
     }
 }

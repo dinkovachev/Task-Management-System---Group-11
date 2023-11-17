@@ -54,7 +54,7 @@ public interface TaskManagementSystemRepository {
     Feedback findFeedbackByIndex(int taskIndex);
     // 5. ToDo maybe need to add function to find user by Username
 
-    boolean memberExist(String memberName);
+    boolean memberExistsInTeam(Members member, Team team);
 
     boolean teamExist(String teamName);  //todo
 

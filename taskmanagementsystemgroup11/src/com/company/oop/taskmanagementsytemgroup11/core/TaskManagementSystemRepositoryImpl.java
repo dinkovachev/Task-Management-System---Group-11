@@ -63,6 +63,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Members createMember(String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
+        //     member = getMemberByUsername(member.getUsername());
         this.members.add(member);
         return member;
     }
@@ -114,8 +115,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Members getMemberByUsername(String username) {
-        Members member = members.stream().filter(m -> m.getUsername().equalsIgnoreCase(username)).findFirst().
-                orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_MEMBER, username)));
+        Members member = members.stream()
+                .filter(m -> m.getUsername().equalsIgnoreCase(username))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_MEMBER, username)));
         return member;
     }
 
@@ -208,10 +211,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public boolean memberExist(String memberName) {
+    public boolean memberExistsInTeam(Members member, Team team) {
         boolean exists = false;
-        for (Members members : getAllMembers()) {
-            if (members.getUsername().equalsIgnoreCase(memberName)) {
+        for (Members teamMember : team.getTeamMembers()) {
+            if (member.equals(teamMember)) {
                 exists = true;
                 break;
             }

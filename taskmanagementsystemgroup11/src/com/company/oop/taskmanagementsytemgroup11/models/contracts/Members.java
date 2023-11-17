@@ -1,6 +1,9 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
+import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
+
 import java.util.List;
+import java.util.Objects;
 
 public interface Members extends Printable {
 
@@ -8,7 +11,7 @@ public interface Members extends Printable {
 
     void addComment(Comment commentToAdd, Task taskToAddComment);
 
-    void addMemberToTeam(Members memberToAdd, Team teamToAddMember);
+    void addToTeam(Team teamToAddMember);
 
     void assignTask(Members memberToAssignTask, Task taskToBeAssigned);
 
@@ -23,5 +26,9 @@ public interface Members extends Printable {
     String getFirstName();
 
     String getLastName();
+
+    boolean equals(Object o);
+
+    int hashCode();
 
 }
