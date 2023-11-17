@@ -17,7 +17,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
     private static final String MAIN_SPLIT_SYMBOL = " ";
     private static final String COMMENT_OPEN_SYMBOL = "{{";
     private static final String COMMENT_CLOSE_SYMBOL = "}}";
-    private static final String REPORT_SEPARATOR = "---------------------";
+    private static final String REPORT_SEPARATOR = "----------------";
 
     private final CommandFactory commandFactory;
     private final TaskManagementSystemRepository taskManagementSystemRepository;

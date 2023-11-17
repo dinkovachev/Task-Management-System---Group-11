@@ -27,13 +27,14 @@ public class ShowBoardsActivityCommand extends BaseCommand {
 
     private String showAllBoardsActivity() {
 
-        for (Board allTeamsBoard : getTaskManagementSystemRepository().getAllTeamsBoards()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("--BOARDS--\n");
-            sb.append(allTeamsBoard.toString()).append("\n");
-//            return sb.toString().trim();
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----BOARDS-----").append(System.lineSeparator());
 
-            int counter = 0;
+        for (Board allTeamsBoard : getTaskManagementSystemRepository().getAllTeamsBoards()) {
+            sb.append("----------------").append(System.lineSeparator());
+            sb.append(allTeamsBoard.toString()).append("\n");
+
+//            int counter = 0;
 
             for (ActivityLog activities : getTaskManagementSystemRepository().getAllActivities()) {
                 sb.append(activities).append(System.lineSeparator());
@@ -42,7 +43,7 @@ public class ShowBoardsActivityCommand extends BaseCommand {
             System.out.println(sb.toString().trim());
         }
 
-        return "-------------------";
+        return "---END-BOARDS---";
     }
 }
 

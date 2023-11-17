@@ -180,24 +180,24 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // find team by name - teamMembers
 
 
-//    @Override
-//    public Story findStoryByIndex(int storyIndex) {
-//        if (storyIndex < 0 || storyIndex >= stories.size()) {
-//            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
-//        } else {
-//            return stories.get(storyIndex);
-//        }
-//    }
-
     @Override
     public Story findStoryByIndex(int storyIndex) {
-        Story story = stories
-                .stream()
-                .filter(s -> s.getTasks().get(storyIndex).equals(storyIndex))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
-        return story;
+        if (storyIndex < 0 || storyIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
+        } else {
+            return stories.get(tasks.size() - storyIndex - 1);
+        }
     }
+
+//    @Override
+//    public Story findStoryByIndex(int storyIndex) {
+//        Story story = stories
+//                .stream()
+//                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
+//        return story;
+//    }
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {
