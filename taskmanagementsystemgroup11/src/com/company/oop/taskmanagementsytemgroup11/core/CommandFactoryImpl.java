@@ -19,13 +19,13 @@ public class CommandFactoryImpl implements CommandFactory {
         switch (commandType) {
             case CREATEMEMBER:
                 return new CreateMemberCommand(taskManagementSystemRepository);
-            case SHOWPEOPLE:
+            case SHOWALLPEOPLE:
                 return new ShowAllPeopleCommand(taskManagementSystemRepository);
             case CREATETEAM:
                 return new CreateTeamCommand(taskManagementSystemRepository);
-            case SHOWTEAMS:
+            case SHOWALLTEAMS:
                 return new ShowAllTeamsCommand(taskManagementSystemRepository);
-            case SHOWPERSONACTIVITY:
+            case SHOWMEMBERACTIVITY:
                 return new ShowMemberActivityCommand(taskManagementSystemRepository);
             case SOHWTEAMACTIVITY:
                 return new ShowTeamActivityCommand(taskManagementSystemRepository);
@@ -35,9 +35,9 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllTeamMembersCommand(taskManagementSystemRepository);
             case CREATEBOARD:
                 return new CreateBoardCommand(taskManagementSystemRepository);
-            case SHOWALLBOARDS:
+            case SHOWALLTEAMSBOARDS:
                 return new ShowAllTeamsBoardsCommand(taskManagementSystemRepository);
-            case SHOWBOARD:
+            case SHOWBOARDSACTIVITY:
                 return new ShowBoardsActivityCommand(taskManagementSystemRepository);
             case ASSIGNTASK:
                 return new AssignTaskCommand(taskManagementSystemRepository);
@@ -55,8 +55,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreateNewTaskCommand(taskManagementSystemRepository);
             case CHANGERATING:
                 return new ChangeRatingCommand(taskManagementSystemRepository);
-            case CHANGESTATUS:
-                return new ChangeStatusCommand(taskManagementSystemRepository);
+//            case CHANGESTATUS:
+//                return new ChangeStatusCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }
