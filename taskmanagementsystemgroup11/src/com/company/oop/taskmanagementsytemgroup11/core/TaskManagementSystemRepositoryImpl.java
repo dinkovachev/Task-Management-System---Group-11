@@ -11,6 +11,8 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
@@ -97,13 +99,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.tasks.add(bug);
         return bug;
     }
-     @Override
+
+    @Override
     public Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee) {
         Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
         this.stories.add(story);
         this.tasks.add(story);
         return story;
     }
+
     @Override
     public Feedback createFeedback(TaskType type, String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
@@ -155,6 +159,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return task;
     }
 
+//    @Override
+//    public Task findTaskByID(int taskIndex) {
+//        if (taskIndex < 0 || taskIndex >= stories.size()) {
+//            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex));
+//        } else {
+//            return stories.get(taskIndex);
+//        }
+//    }
+
     @Override
     public Bug findBugByIndex(int bugIndex) {
         Bug bug = bugs
@@ -167,19 +180,24 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // find team by name - teamMembers
 
 
-
+//    @Override
+//    public Story findStoryByIndex(int storyIndex) {
+//        if (storyIndex < 0 || storyIndex >= stories.size()) {
+//            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
+//        } else {
+//            return stories.get(storyIndex);
+//        }
+//    }
 
     @Override
     public Story findStoryByIndex(int storyIndex) {
         Story story = stories
                 .stream()
-                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
+                .filter(s -> s.getTasks().get(storyIndex).equals(storyIndex))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
         return story;
     }
-
-
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {
