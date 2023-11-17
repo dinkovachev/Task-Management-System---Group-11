@@ -16,8 +16,8 @@ public class StoryImpl extends TaskImpl implements Story {
     private Size size;
     private Status status;
     private String assignee;
-    private final List<Story> stories;
-    private final List<Feedback> feedbacks;
+    private final List<Story> stories = new ArrayList<>();
+    private final List<Feedback> feedbacks = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee) {
         super(id, title, description);
@@ -25,8 +25,8 @@ public class StoryImpl extends TaskImpl implements Story {
         setSize(size);
         setAssignee(assignee);
         this.status = Status.NOT_DONE;
-        this.stories = new ArrayList<>();
-        this.feedbacks = new ArrayList<>();
+//        this.stories = new ArrayList<>();
+//        this.feedbacks = new ArrayList<>();
     }
 
     @Override
@@ -89,13 +89,8 @@ public class StoryImpl extends TaskImpl implements Story {
             System.out.println("Current story status is already Done.");
         }
     }
-
     //ToDo
     // Finish the override methods from the interfaces
-    @Override
-    public List<Task> getAllTasks() {
-        return null;
-    }
 
     //ToDo
     // Finish the override methods from the interfaces
