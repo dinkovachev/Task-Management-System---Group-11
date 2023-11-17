@@ -23,7 +23,7 @@ public class CreateNewTaskCommand extends BaseCommand {
     private static final int EXPECTED_ARGUMENTS_COUNT_FEEDBACK = 4;
     private static final int EXPECTED_ARGUMENTS_COUNT_STORY = 6;
     private static final int EXPECTED_ARGUMENTS_COUNT_BUG = 7;
-    private static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
+    private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     private static final String NEW_TASK_CREATED_MSG = "New %s with id %s created.";
     private static final String INVALID_ARGUMENT_COUNT_MSG = "Incorrect number of arguments.";
 
@@ -39,9 +39,11 @@ public class CreateNewTaskCommand extends BaseCommand {
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG) - 1;
+//                Members usernameFeedback = getTaskManagementSystemRepository().getMemberByUsername(assigneeFeedback);
+                int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
 
                 return createNewFeedback(
-                        typeFeedback, titleFeedback, descriptionFeedback, rating);
+                        typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback);
 
             case EXPECTED_ARGUMENTS_COUNT_STORY:
                 TaskType typeStory = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -51,11 +53,11 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Priority priorityStory = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
-                Members usernameStory = getTaskManagementSystemRepository().getMemberByUsername(assigneeStory);
-                int taskIndex = getTaskManagementSystemRepository().getNextId();
+//                Members usernameStory = getTaskManagementSystemRepository().getMemberByUsername(assigneeStory);
+                int taskIndexStory = getTaskManagementSystemRepository().getNextId();
 
                 return createNewStory(
-                        typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory);
+                        typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory, taskIndexStory);
 
             case EXPECTED_ARGUMENTS_COUNT_BUG:
                 TaskType typeBug = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -67,34 +69,36 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Severity severityBug = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
                 String assigneeBug = parameters.get(6);
                 Members usernameBug = getTaskManagementSystemRepository().getMemberByUsername(assigneeBug);
+                int taskIndexBug = getTaskManagementSystemRepository().getNextId();
 
                 return createNewBug(
-                        typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug);
+                        typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug, taskIndexBug);
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENT_COUNT_MSG);
         }
     }
 
-    private String createNewFeedback(TaskType typeFeedback, String titleFeedback, String descriptionFeedback, int rating) {
+    private String createNewFeedback(TaskType typeFeedback, String titleFeedback, String descriptionFeedback,
+                                     int rating, int taskIndexFeedback) {
         Feedback feedback = getTaskManagementSystemRepository().createFeedback(
-                typeFeedback, titleFeedback, descriptionFeedback, rating);
+                typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback);
         return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
     }
 
     private String createNewStory(
             TaskType typeStory, String titleStory, String descriptionStory, Priority priorityStory, Size size,
-            String assigneeStory) {
+            String assigneeStory, int taskIndexStory) {
         Story story = getTaskManagementSystemRepository().createStory
-                (typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory);
+                (typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory, taskIndexStory);
         return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
     }
 
     private String createNewBug(TaskType typeBug, String titleBug, String descriptionBug, String stepsToReproduce,
-                                Priority priorityBug, Severity severityBug, String assigneeBug) {
+                                Priority priorityBug, Severity severityBug, String assigneeBug, int taskIndexStory) {
 
         Bug bug = getTaskManagementSystemRepository().createBug(
-                typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug);
+                typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug, taskIndexStory);
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 

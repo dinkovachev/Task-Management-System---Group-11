@@ -17,10 +17,12 @@ public class StoryImpl extends TaskImpl implements Story {
     private Size size;
     private Status status;
     private String assignee;
+    private int taskIndex;
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
 
-    public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee) {
+    public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
+                     int taskIndex) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
@@ -28,6 +30,11 @@ public class StoryImpl extends TaskImpl implements Story {
         this.status = Status.NOT_DONE;
 //        this.stories = new ArrayList<>();
 //        this.feedbacks = new ArrayList<>();
+    }
+
+    @Override
+    public int getTaskIndex() {
+        return taskIndex;
     }
 
     @Override

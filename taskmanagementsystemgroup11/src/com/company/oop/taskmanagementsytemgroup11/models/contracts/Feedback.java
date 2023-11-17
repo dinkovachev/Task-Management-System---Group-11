@@ -8,6 +8,8 @@ public interface Feedback extends Task {
 
     public int getRating();
 
+    public int getTaskIndex();
+
     void changeRating(int rating);
 
     List<Feedback> getFeedbacks();

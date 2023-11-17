@@ -14,16 +14,18 @@ import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
+    private int taskIndex;
     private Status status;
     private final List<Feedback> feedbacks;
 
-    public FeedbackImpl(int id, String title, String description, int rating) {
+    public FeedbackImpl(int id, String title, String description, int rating, int taskIndex) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;
         this.feedbacks = new ArrayList<>();
     }
 
+    @Override
     public List<Feedback> getFeedbacks() {
         return new ArrayList<>(feedbacks);
     }
@@ -38,8 +40,12 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    public Status getStatus() {
+    public int getTaskIndex() {
+        return taskIndex;
+    }
 
+    @Override
+    public Status getStatus() {
         return status;
     }
 

@@ -46,16 +46,16 @@
 //        }
 //    }
 //
-////    private String changeSize(Size size, int taskIndex) {
-////        Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
-////
-////        if (size.equals(story.getSize())) {
-////            throw new IllegalArgumentException(format("Size is already set to %s", story.getSize()));
-////        } else {
-////            story.changeSize(size);
-////            return format("Size changed to %s", story.getSize().toString());
-////        }
-////    }
+//    private String changeSize(Size size, int taskIndex) {
+//        Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
+//
+//        if (size.equals(story.getSize())) {
+//            throw new IllegalArgumentException(format("Size is already set to %s", story.getSize()));
+//        } else {
+//            story.changeSize(size);
+//            return format("Size changed to %s", story.getSize().toString());
+//        }
+//    }
 //
 //    private void validateTaskType(TaskType type) {
 //        if (!type.equals(TaskType.STORY)) {

@@ -51,14 +51,14 @@
 ////        }
 ////    }
 //
-////    private String changeTaskPriority(Priority priority, int taskIndex) {
-////        Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
-////        if (priority.equals(task.getPriority())) {
-////            throw new IllegalArgumentException(format("Priority is already set to %s", task.getPriority()));
-////        } else {
-////            return format("Priority changed to %s", task.getPriority().toString());
-////        }
-////    }
+//    private String changeTaskPriority(Priority priority, int taskIndex) {
+//        Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
+//        if (priority.equals(task.getPriority())) {
+//            throw new IllegalArgumentException(format("Priority is already set to %s", task.getPriority()));
+//        } else {
+//            return format("Priority changed to %s", task.getPriority().toString());
+//        }
+//    }
 //}
 ////        private String changeBugPriority(Priority priority, int taskIndex) {
 ////        Bug bug = getTaskManagementSystemRepository().findBugByIndex(taskIndex);

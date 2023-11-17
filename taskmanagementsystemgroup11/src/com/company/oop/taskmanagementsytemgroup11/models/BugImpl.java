@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
@@ -19,11 +20,11 @@ public class BugImpl extends TaskImpl implements Bug {
     private Severity severity;
     String assignee;
     private Status status;
+    private int taskIndex;
     private final List<Bug> bugs;
 
-    // TODO Georgi Q: Assignee to be added.
     public BugImpl(int id, String title, String description,
-                   String stepsToReproduce, Priority priority, Severity severity, String assignee) {
+                   String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndex) {
         super(id, title, description);
         setStepsToReproduce(stepsToReproduce);
         setPriority(priority);
@@ -31,6 +32,11 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
+    }
+
+    @Override
+    public int getTaskIndex() {
+        return taskIndex;
     }
 
     public List<Bug> getBugs() {
@@ -46,11 +52,6 @@ public class BugImpl extends TaskImpl implements Bug {
     public Priority getPriority() {
         return priority;
     }
-
-//    @Override
-//    public Object getSize() {
-//        return null;
-//    }
 
     @Override
     public Severity getSeverity() {
@@ -102,14 +103,17 @@ public class BugImpl extends TaskImpl implements Bug {
     public void addComment(Comment comment) {
 
     }
+
     @Override
     public void addTask(Task task) {
 
     }
+
     @Override
     public void unassignTask(Members member) {
 
     }
+
     @Override
     public void assignTask(Members member) {
 

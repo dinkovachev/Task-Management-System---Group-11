@@ -17,6 +17,8 @@ public interface Bug extends Task {
 
     public List<Bug> getBugs();
 
+    public int getTaskIndex();
+
 //    void changePriority(Priority priority);
 //
 //    void changeSeverity(Severity severity);

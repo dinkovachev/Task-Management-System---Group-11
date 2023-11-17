@@ -63,7 +63,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Members createMember(String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
-        //     member = getMemberByUsername(member.getUsername());
         this.members.add(member);
         return member;
     }
@@ -90,24 +89,26 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
 
     @Override
-    public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
-        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee);
+    public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
+                         Severity severity, String assignee, int taskIndexBug) {
+        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug);
         this.bugs.add(bug);
         this.tasks.add(bug);
         return bug;
     }
 
     @Override
-    public Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee) {
-        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
+    public Story createStory(TaskType type, String title, String description,
+                             Priority priority, Size size, String assignee, int taskIndex) {
+        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex);
         this.stories.add(story);
         this.tasks.add(story);
         return story;
     }
 
     @Override
-    public Feedback createFeedback(TaskType type, String title, String description, int rating) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+    public Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback);
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
         return feedback;
@@ -115,10 +116,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Members getMemberByUsername(String username) {
-        Members member = members.stream()
-                .filter(m -> m.getUsername().equalsIgnoreCase(username))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_MEMBER, username)));
+        Members member = members.stream().filter(m -> m.getUsername().equalsIgnoreCase(username)).findFirst().
+                orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_MEMBER, username)));
         return member;
     }
 
@@ -188,15 +187,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // find team by name - teamMembers
 
 
-//    @Override
-//    public Story findStoryByIndex(int storyIndex) {
-//        Story story = stories
-//                .stream()
-//                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
-//        return story;
-//    }
+    @Override
+    public Story findStoryByIndex(int storyIndex) {
+        Story story = stories
+                .stream()
+                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
+        return story;
+    }
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {
@@ -211,9 +210,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public boolean memberExistsInTeam(Members member, Team team) {
+        return false;
+    }
+
+    @Override
+    public boolean memberExist(String memberName) {
         boolean exists = false;
-        for (Members teamMember : team.getTeamMembers()) {
-            if (member.equals(teamMember)) {
+        for (Members members : getAllMembers()) {
+            if (members.getUsername().equalsIgnoreCase(memberName)) {
                 exists = true;
                 break;
             }
