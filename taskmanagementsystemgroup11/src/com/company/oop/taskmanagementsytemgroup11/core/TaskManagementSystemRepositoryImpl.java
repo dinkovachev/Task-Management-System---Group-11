@@ -6,15 +6,17 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.String.format;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
     private static final String NO_SUCH_BOARD = "There is no such board with name";
-
     private int nextId;
     private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
@@ -36,6 +38,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     //ToDo - Dinko
     // finish the remaining methods
+
     @Override
     public List<Members> getAllMembers() {
         return new ArrayList<>(members);
@@ -55,10 +58,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<ActivityLog> getAllActivities() {
         return new ArrayList<>(activityLogList);
     }
-//    @Override
-//    public List<Members> getAllTeamMembers() {
-//        return new ArrayList<>(members);
-//    }
 
 
     @Override
@@ -90,21 +89,23 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
 
     @Override
-    public Bug createBug(int id, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
+    public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee);
         this.bugs.add(bug);
         this.tasks.add(bug);
         return bug;
     }
-     @Override
-    public Story createStory(int id, String title, String description, Priority priority, Size size, String assignee) {
+
+    @Override
+    public Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee) {
         Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
         this.stories.add(story);
         this.tasks.add(story);
         return story;
     }
+
     @Override
-    public Feedback createFeedback(int id, String title, String description, int rating) {
+    public Feedback createFeedback(TaskType type, String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
@@ -144,14 +145,23 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return member;
     }
 
+//    @Override
+//    public Task findTaskByID(int id) {
+//        Task task = tasks
+//                .stream()
+//                .filter(b -> b.getAllTasks().get(id).equals(id))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
+//        return task;
+//    }
+
     @Override
-    public Task findTaskByID(int id) {
-        Task task = tasks
-                .stream()
-                .filter(b -> b.getAllTasks().get(id).equals(id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
-        return task;
+    public Task findTaskByID(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex));
+        } else {
+            return tasks.get(taskIndex);
+        }
     }
 
     @Override
@@ -166,19 +176,25 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     // find team by name - teamMembers
 
 
-
-
     @Override
     public Story findStoryByIndex(int storyIndex) {
-        Story story = stories
-                .stream()
-                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
-        return story;
+        if (storyIndex < 0 || storyIndex >= stories.size()) {
+            throw new IllegalArgumentException(format("%d is invalid story index.", storyIndex + 1));
+        } else {
+            int tasksSize = tasks.size();
+            return stories.get(storyIndex - tasksSize);
+        }
     }
 
-
+//    @Override
+//    public Story findStoryByIndex(int storyIndex) {
+//        Story story = stories
+//                .stream()
+//                .filter(s -> s.getAllTasks().get(storyIndex).equals(storyIndex))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
+//        return story;
+//    }
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {

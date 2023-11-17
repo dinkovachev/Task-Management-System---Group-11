@@ -14,7 +14,8 @@ import static java.lang.String.format;
 public class ChangeSizeCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-    private static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
+    private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
+    private static final String INVALID_TASK_MSG = "You cannot change the size of %s task type.";
 
     public ChangeSizeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -26,6 +27,7 @@ public class ChangeSizeCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
+        validateTaskType(type);
         Size size = ParsingHelpers.tryParseEnum(parameters.get(1), Size.class);
         int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
 
@@ -40,6 +42,12 @@ public class ChangeSizeCommand extends BaseCommand {
         } else {
             story.changeSize(size);
             return format("Size changed to %s", story.getSize().toString());
+        }
+    }
+
+    private void validateTaskType(TaskType type) {
+        if (!type.equals(TaskType.STORY)) {
+            throw new IllegalArgumentException(format(INVALID_TASK_MSG, type));
         }
     }
 }
