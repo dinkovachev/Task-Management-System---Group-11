@@ -102,25 +102,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     //ToDo
     // Finish the override methods from the interfaces
-    @Override
-    public void addComment(Comment comment) {
 
-    }
-
-    @Override
-    public void addTask(Task task) {
-
-    }
-
-    @Override
-    public void assignTask(Members member) {
-
-    }
-
-    @Override
-    public void unassignTask(Members member) {
-
-    }
 
     public void revertStatus() {
         if (getStatus() == Status.DONE) {

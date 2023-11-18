@@ -73,26 +73,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
-    @Override
-    public void addComment(Comment comment) {
-
-    }
-
-    @Override
-    public void addTask(Task task) {
-
-    }
-
-    @Override
-    public void assignTask(Members member) {
-
-    }
-
-    @Override
-    public void unassignTask(Members member) {
-
-    }
-
     private void validateRating(int rating) {
         if (rating <= 1 || rating >= 10) {
             throw new IllegalArgumentException("Rating should be between 1 and 10.");

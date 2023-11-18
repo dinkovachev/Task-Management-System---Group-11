@@ -127,10 +127,12 @@ public abstract class TaskImpl implements Task {
 
     @Override
     public void assignTask(Members member) {
+        assignedMembersToTasks.add(String.valueOf(member));
     }
 
     @Override
     public void unassignTask(Members member) {
+        assignedMembersToTasks.add(String.valueOf(member));
     }
 
     @Override
