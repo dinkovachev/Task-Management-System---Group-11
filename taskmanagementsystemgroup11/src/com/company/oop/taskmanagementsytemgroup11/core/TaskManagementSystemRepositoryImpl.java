@@ -10,6 +10,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.String.format;
 
@@ -202,7 +203,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public TaskType validateTaskTypeStory(TaskType type, int taskIndex) {
+    public TaskType validateTaskTypeEqualsInputType(TaskType type, int taskIndex) {
         if (!type.equals(tasks.get(taskIndex).getType())) {
             throw new IllegalArgumentException(format("%s is invalid task type.", type));
         }
@@ -290,5 +291,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public int getNextId() {
         return this.nextId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskManagementSystemRepositoryImpl that = (TaskManagementSystemRepositoryImpl) o;
+        return nextId == that.nextId && nextPersonId == that.nextPersonId && Objects.equals(members, that.members) && Objects.equals(teams, that.teams) && Objects.equals(boards, that.boards) && Objects.equals(bugs, that.bugs) && Objects.equals(stories, that.stories) && Objects.equals(feedbacks, that.feedbacks) && Objects.equals(tasks, that.tasks) && Objects.equals(activityLogList, that.activityLogList);
     }
 }

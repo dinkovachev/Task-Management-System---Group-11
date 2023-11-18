@@ -69,5 +69,5 @@ public interface TaskManagementSystemRepository {
     Bug findBugByTaskIndex(int taskIndex);
 
     Feedback findFeedbackByTaskIndex(int taskIndex);
-    public TaskType validateTaskTypeStory(TaskType typeStory, int taskIndex);
+    public TaskType validateTaskTypeEqualsInputType(TaskType typeStory, int taskIndex);
 }

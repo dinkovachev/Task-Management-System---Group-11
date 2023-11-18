@@ -9,6 +9,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BugImpl extends TaskImpl implements Bug {
 
@@ -29,6 +30,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
+
     }
 
     @Override
@@ -156,4 +158,12 @@ public class BugImpl extends TaskImpl implements Bug {
 //        setSeverity(newSeverity);
 //    }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BugImpl bug = (BugImpl) o;
+        return taskIndex == bug.taskIndex && Objects.equals(stepsToReproduce, bug.stepsToReproduce) && priority == bug.priority && severity == bug.severity && Objects.equals(assignee, bug.assignee) && status == bug.status && Objects.equals(bugs, bug.bugs);
+    }
 }

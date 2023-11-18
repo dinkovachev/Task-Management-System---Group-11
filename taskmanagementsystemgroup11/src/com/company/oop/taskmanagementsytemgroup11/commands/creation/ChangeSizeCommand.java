@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -37,27 +36,15 @@ public class ChangeSizeCommand extends BaseCommand {
 
     private String changeStorySize(TaskType type, Size size, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeStory(type,taskIndex); // IMPORTANT!
+        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type,taskIndex); // IMPORTANT!
         if (size.equals(story.getSize())) {
             throw new IllegalArgumentException(format("Size is already set to %s", story.getSize()));
         } else {
             story.changeSize(size);
-            return format("Size changed to %s", story.getSize().toString());
+            return format("Size changed to %s", story.getSize());
         }
     }
 
-    //    private String changeSize(Size size, int taskIndex) {
-//    Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
-
-    //
-//        if (size.equals(story.getSize())) {
-//            throw new IllegalArgumentException(format("Size is already set to %s", story.getSize()));
-//        } else {
-//            story.changeSize(size);
-//            return format("Size changed to %s", story.getSize().toString());
-//        }
-//    }
-//
     private void validateTaskType(TaskType type) {
         if (!type.equals(TaskType.STORY)) {
             throw new IllegalArgumentException(format(INVALID_TASK_MSG, type));

@@ -3,7 +3,6 @@ package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
@@ -29,7 +28,7 @@ public class ChangePriorityCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(1), Priority.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
 
         return changePriority(type, priority, taskIndex);
     }
@@ -37,32 +36,35 @@ public class ChangePriorityCommand extends BaseCommand {
     private String changePriority(TaskType type, Priority priority, int taskIndex) {
         switch (type) {
             case BUG:
-                return changeBugPriority(priority, taskIndex);
+                return changeBugPriority(type, priority, taskIndex);
             case STORY:
-                return changeStoryPriority(priority, taskIndex);
+                return changeStoryPriority(type, priority, taskIndex);
             case FEEDBACK:
             default:
                 return format(INVALID_TASK_MSG, type);
         }
     }
 
-    private String changeBugPriority(Priority priority, int taskIndex) {
-        Task bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
-        if (priority.equals(((Bug) bug).getPriority())) {
-            throw new IllegalArgumentException(format("Size is already set to %s", ((Bug) bug).getPriority()));
-        } else{
-            ((Bug) bug).changePriority(priority);
-            return format("Size changed to %s", ((Bug) bug).getPriority());
+    private String changeBugPriority(TaskType type, Priority priority, int taskIndex) {
+        Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
+        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
+
+        if (priority.equals(bug.getPriority())) {
+            throw new IllegalArgumentException(format("Priority is already set to %s", bug.getPriority()));
+        } else {
+            bug.changePriority(priority);
+            return format("Priority changed to %s", bug.getPriority());
         }
     }
 
-    private String changeStoryPriority(Priority priority, int taskIndex) {
-        Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
+    private String changeStoryPriority(TaskType type, Priority priority, int taskIndex) {
+        Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
+        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex); // IMPORTANT!
         if (priority.equals(story.getPriority())) {
-            throw new IllegalArgumentException(format("Size is already set to %s", story.getPriority()));
+            throw new IllegalArgumentException(format("Priority is already set to %s", story.getPriority()));
         } else {
             story.changePriority(priority);
-            return format("Size changed to %s", story.getPriority());
+            return format("Priority changed to %s", story.getPriority());
         }
     }
 }
