@@ -17,6 +17,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
     private static final String NO_SUCH_BOARD = "There is no such board with name";
+    public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
     private int nextId;
     private int nextPersonId;
     private final List<Members> members = new ArrayList<>();
@@ -160,7 +161,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Task findTaskByID(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
+            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         } else {
             return tasks.get(taskIndex);
         }
@@ -180,7 +181,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Bug findBugByIndex(int bugIndex) {
         if (bugIndex < 0 || bugIndex >= tasks.size()) {
-            throw new IllegalArgumentException(format("%d is invalid bug index.", bugIndex));
+            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
         return bugs.get(tasks.size() - bugIndex - 1);
     }
@@ -189,9 +190,25 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Story findStoryByTaskIndex(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
+            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
         return stories.get(tasks.size() - taskIndex - 1);
+    }
+
+    @Override
+    public Bug findBugByTaskIndex(int taskIndex){
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
+        }
+        return bugs.get(tasks.size() - taskIndex - 1);
+    }
+
+    @Override
+    public Feedback findFeedbackByTaskIndex(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
+        }
+        return feedbacks.get(tasks.size() - taskIndex - 1);
     }
 
     @Override

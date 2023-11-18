@@ -44,6 +44,16 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void changePriority(Priority priority) {
+        setPriority(priority);
+    }
+
+    @Override
+    public void changeSeverity(Severity severity) {
+setSeverity(severity);
+    }
+
+    @Override
     public String getStepsToReproduce() {
         return stepsToReproduce;
     }

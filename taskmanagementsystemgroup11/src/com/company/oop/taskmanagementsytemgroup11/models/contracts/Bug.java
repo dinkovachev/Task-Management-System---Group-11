@@ -17,7 +17,7 @@ public interface Bug extends Task {
 
     List<Bug> getBugs();
 
-//    void changePriority(Priority priority);
-//
-//    void changeSeverity(Severity severity);
+    void changePriority(Priority priority);
+
+    void changeSeverity(Severity severity);
 }

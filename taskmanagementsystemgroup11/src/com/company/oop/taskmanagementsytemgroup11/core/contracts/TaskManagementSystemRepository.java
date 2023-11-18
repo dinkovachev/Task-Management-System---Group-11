@@ -67,4 +67,7 @@ public interface TaskManagementSystemRepository {
     public int getNextId();
 
     Story findStoryByTaskIndex(int taskIndex);
+
+    Bug findBugByTaskIndex (int taskIndex);
+    Feedback findFeedbackByTaskIndex (int taskIndex);
 }
