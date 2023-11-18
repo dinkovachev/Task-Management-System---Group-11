@@ -9,6 +9,7 @@ public interface Task extends Commentable, Identifiable, Printable {
     List<Task> getAllTasks();
 
     public Status getStatus();
+    void addEventToActivityLogHistory(String event);
 
     void addComment(Comment comment);
 
@@ -24,7 +25,7 @@ public interface Task extends Commentable, Identifiable, Printable {
 
     List<Comment> getCommentList();
 
-    List<ActivityLog> getActivityLogList();
+    String displayActivityLogHistory();
 
     void revertStatus();
 

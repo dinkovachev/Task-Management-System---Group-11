@@ -42,6 +42,6 @@ public class AssignTaskCommand extends BaseCommand {
         Task task = getTaskManagementSystemRepository().findTaskByID(id);
         Members member = getTaskManagementSystemRepository().getMemberByUsername(username);
         getTaskManagementSystemRepository().getMemberByUsername(username).assignTask(member, task);
-        return String.format(TASK_ASSIGNED_SUCCESSFULLY, title,member);
+        return String.format(TASK_ASSIGNED_SUCCESSFULLY, title, member);
     }
 }

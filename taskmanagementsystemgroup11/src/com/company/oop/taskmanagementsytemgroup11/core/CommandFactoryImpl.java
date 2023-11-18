@@ -27,18 +27,18 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllTeamsCommand(taskManagementSystemRepository);
             case SHOWMEMBERACTIVITY:
                 return new ShowMemberActivityCommand(taskManagementSystemRepository);
-            case SOHWTEAMACTIVITY:
+            case SHOWTEAMACTIVITY:
                 return new ShowTeamActivityCommand(taskManagementSystemRepository);
             case ADDMEMBER:
                 return new AddMemberCommand(taskManagementSystemRepository);
-            case SHOWTEAMEMBERS:
+            case SHOWTEAMMEMBERS:
                 return new ShowAllTeamMembersCommand(taskManagementSystemRepository);
             case CREATEBOARD:
                 return new CreateBoardCommand(taskManagementSystemRepository);
             case SHOWALLTEAMSBOARDS:
                 return new ShowAllTeamsBoardsCommand(taskManagementSystemRepository);
-            case SHOWBOARDSACTIVITY:
-                return new ShowBoardsActivityCommand(taskManagementSystemRepository);
+            case SHOWBOARDACTIVITY:
+                return new ShowBoardActivityCommand(taskManagementSystemRepository);
             case ASSIGNTASK:
                 return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:

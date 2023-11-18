@@ -2,32 +2,18 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ActivityLogImpl implements ActivityLog {
-
-    //ToDo(Done) - Dinko
-    // Added another interface History to keep track of the historyChanges in ActivityLogImpl
-
-    private final List<Comment> activityLogList;
-    private final List<Team> teamActivity;
-    private final List<Board> boardActivity;
-    private final List<Members> membersActivity;
+    public static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "Description cannot be empty";
     private String activityLog;
 
-    public ActivityLogImpl(List<Comment> activityLogList) {
-        this.activityLogList = new ArrayList<>();
-        this.teamActivity = new ArrayList<>();
-        this.boardActivity = new ArrayList<>();
-        this.membersActivity = new ArrayList<>();
-        // setActivityLog(activityLog);
+    public ActivityLogImpl(String activityLog) {
 
-    }
-
-    public List<Comment> getActivityLogList() {
-
-        return new ArrayList<>(activityLogList);
+        setActivityLog(activityLog);
     }
 
     public String getActivityLog() {
@@ -35,25 +21,15 @@ public class ActivityLogImpl implements ActivityLog {
     }
 
     private void setActivityLog(String activityLog) {
-        this.activityLog = activityLog;
+        if (activityLog.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_DESCRIPTION_ERROR_MESSAGE);
+        } else {
+            this.activityLog = activityLog;
+        }
     }
 
-    @Override
-    public String showTeamActivity(Team team) {
-
-        return null;
-    }
-
-    @Override
-    public String showMemberActivity(Team team) {
-
-        return null;
-    }
-
-    @Override
-    public String showBoardActivity(Team team) {
-
-        return null;
+    public String displayInfo() {
+        return String.format("Activity History - %s", activityLog);
     }
 
 
