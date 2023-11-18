@@ -112,10 +112,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return story;
     }
 //todo това ми го поиска да се имплемнтира ей така от нищото
-    @Override
-    public Story findStoryByIndex(int storyIndex) {
-        return null;
-    }
+
+    // @Override
+    // public Story findStoryByIndex(int storyIndex) {
+    //    return null;
+    //}
 
     @Override
     public Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback) {
@@ -231,15 +232,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return feedbacks.get(tasks.size() - taskIndex - 1);
     }
 
-    @Override
-    public Story findStoryByIndex(int storyIndex) {
-        Story story = stories
-                .stream()
-                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
-        return story;
-    }
+//    @Override
+//    public Story findStoryByIndex(int storyIndex) {
+//        Story story = stories
+//                .stream()
+//                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
+//        return story;
+//    }
 
     @Override
     public Feedback findFeedbackByIndex(int feedbackIndex) {

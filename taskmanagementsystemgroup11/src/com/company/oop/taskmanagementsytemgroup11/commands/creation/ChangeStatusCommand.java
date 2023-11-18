@@ -45,7 +45,7 @@ public class ChangeStatusCommand extends BaseCommand {
     }
 
     private String changeBugStatus(String direction, int taskIndex) {
-        Bug bug = getTaskManagementSystemRepository().findBugByIndex(taskIndex);
+        Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             bug.advanceStatus();
@@ -58,7 +58,7 @@ public class ChangeStatusCommand extends BaseCommand {
     }
 
     private String changeStoryStatus(String direction, int taskIndex) {
-        Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
+        Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             story.advanceStatus();
