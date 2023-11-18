@@ -104,6 +104,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.tasks.add(story);
         return story;
     }
+//todo това ми го поиска да се имплемнтира ей така от нищото
+    @Override
+    public Story findStoryByIndex(int storyIndex) {
+        return null;
+    }
 
     @Override
     public Feedback createFeedback(TaskType type, String title, String description, int rating) {
