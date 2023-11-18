@@ -97,13 +97,13 @@ public class BugImpl extends TaskImpl implements Bug {
         this.status = status;
     }
 
-    public void advanceStatus() {
+    public String advanceStatus() {
         // TODO Georgi Q: Should be added in a ActivityLog.
         if (getStatus() != Status.DONE) {
             setStatus(Status.DONE);
-            System.out.println("Bug status set to Done.");
+            return "Bug status set to Done.";
         } else {
-            System.out.println("Current bug status is already Done.");
+            return "Current bug status is already Done.";
         }
     }
 
@@ -129,12 +129,12 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
 
-    public void revertStatus() {
+    public String revertStatus() {
         if (getStatus() != Status.ACTIVE) {
             setStatus(Status.ACTIVE);
-            System.out.println("Bug status set to Active.");
+            return "Bug status set to Active.";
         } else {
-            System.out.println("Current bug status is already Active.");
+            return  "Current bug status is already Active.";
         }
     }
 

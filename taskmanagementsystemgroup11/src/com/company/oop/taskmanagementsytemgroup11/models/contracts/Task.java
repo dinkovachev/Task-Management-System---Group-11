@@ -28,9 +28,9 @@ public interface Task extends Commentable, Identifiable, Printable {
 
     String displayActivityLogHistory();
 
-    void revertStatus();
+    String revertStatus();
 
-    void advanceStatus();
+    String advanceStatus();
 
     TaskType getType();
 

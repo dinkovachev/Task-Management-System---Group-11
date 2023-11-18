@@ -86,15 +86,15 @@ public class StoryImpl extends TaskImpl implements Story {
         this.assignee = assignee;
     }
 
-    public void advanceStatus() {
+    public String advanceStatus() {
         if (getStatus() == Status.NOT_DONE) {
             setStatus(Status.IN_PROGRESS);
-            System.out.println("Story status set to InProgress.");
+            return "Story status set to InProgress.";
         } else if (getStatus() == Status.IN_PROGRESS) {
             setStatus(Status.DONE);
-            System.out.println("Story status set to Done.");
+            return "Story status set to Done.";
         } else {
-            System.out.println("Current story status is already Done.");
+            return "Current story status is already Done.";
         }
     }
     //ToDo
@@ -122,15 +122,15 @@ public class StoryImpl extends TaskImpl implements Story {
 
     }
 
-    public void revertStatus() {
+    public String revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.IN_PROGRESS);
-            System.out.println("Story status set to InProgress.");
+            return "Story status set to InProgress.";
         } else if (getStatus() == Status.IN_PROGRESS) {
             setStatus(Status.NOT_DONE);
-            System.out.println("Story status set to Not Done.");
+            return "Story status set to Not Done.";
         } else {
-            System.out.println("Current story status is already Not Done.");
+            return "Current story status is already Not Done.";
         }
     }
 

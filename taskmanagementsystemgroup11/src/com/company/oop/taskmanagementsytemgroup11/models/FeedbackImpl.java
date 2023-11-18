@@ -58,18 +58,18 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         this.status = status;
     }
 
-    public void advanceStatus() {
+    public String advanceStatus() {
         if (getStatus() == Status.NEW) {
             setStatus(Status.UNSCHEDULED);
-            System.out.println("Feedback status set to Unscheduled.");
+            return "Feedback status set to Unscheduled.";
         } else if (getStatus() == Status.UNSCHEDULED) {
             setStatus(Status.SCHEDULED);
-            System.out.println("Feedback status set to Scheduled.");
+            return "Feedback status set to Scheduled.";
         } else if (getStatus() == Status.SCHEDULED) {
             setStatus(Status.DONE);
-            System.out.println("Feedback status set to Done.");
+            return "Feedback status set to Done.";
         } else {
-            System.out.println("Current feedback status is already Done.");
+            return "Current feedback status is already Done.";
         }
     }
 
@@ -100,18 +100,18 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     // TODO Georgi Q: set to private
-    public void revertStatus() {
+    public String revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.SCHEDULED);
-            System.out.println("Feedback  status set to Scheduled.");
+            return "Feedback  status set to Scheduled.";
         } else if (getStatus() == Status.SCHEDULED) {
             setStatus(Status.UNSCHEDULED);
-            System.out.println("Feedback status set to Unscheduled.");
+            return "Feedback status set to Unscheduled.";
         } else if (getStatus() == Status.UNSCHEDULED) {
             setStatus(Status.NEW);
-            System.out.println("Feedback status set to New.");
+            return "Feedback status set to New.";
         } else {
-            System.out.println("Current feedback status is already New.");
+            return "Current feedback status is already New.";
         }
     }
 

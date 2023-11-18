@@ -55,8 +55,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreateNewTaskCommand(taskManagementSystemRepository);
             case CHANGERATING:
                 return new ChangeRatingCommand(taskManagementSystemRepository);
-//            case CHANGESTATUS:
-//                return new ChangeStatusCommand(taskManagementSystemRepository);
+            case CHANGESTATUS:
+                return new ChangeStatusCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

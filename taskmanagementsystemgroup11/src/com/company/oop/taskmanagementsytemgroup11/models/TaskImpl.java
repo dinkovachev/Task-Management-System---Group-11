@@ -134,10 +134,10 @@ public abstract class TaskImpl implements Task {
     }
 
     @Override
-    public abstract void revertStatus();
+    public abstract String revertStatus();
 
     @Override
-    public abstract void advanceStatus();
+    public abstract String advanceStatus();
 
     @Override
     public abstract TaskType getType();
