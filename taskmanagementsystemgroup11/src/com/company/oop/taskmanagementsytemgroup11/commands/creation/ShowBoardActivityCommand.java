@@ -10,18 +10,19 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class ShowBoardsActivityCommand extends BaseCommand {
+public class ShowBoardActivityCommand extends BaseCommand {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
 
-    public ShowBoardsActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ShowBoardActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        //ToDo create arguments to search board in a team and display the board activity
         return showAllBoardsActivity();
     }
 

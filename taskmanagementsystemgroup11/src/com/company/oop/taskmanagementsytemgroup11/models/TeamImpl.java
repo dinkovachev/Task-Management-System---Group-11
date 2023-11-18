@@ -15,24 +15,32 @@ public class TeamImpl implements Team {
     public static final String TEAM_NAME_ERR_MSG = String.format(
             "The Team name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
-
+    private List<String> TeamActivityHistory = new ArrayList<>();
     private String name;
     private List<Members> teamMembers;
     private List<Board> boards;
+
 
     public TeamImpl(String name) {
         setName(name);
         this.teamMembers = new ArrayList<>();
         this.boards = new ArrayList<>();
+        TeamActivityHistory.add(String.format("New team %s was added", this.getName()));
+
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
+    public List<String> getTeamActivityHistory() {
+        return new ArrayList<>(TeamActivityHistory);
+    }
 
-//    @Override
- //   public void addBoardToTeam(String boardName, String TeamName) {
+    //    @Override
+    //   public void addBoardToTeam(String boardName, String TeamName) {
 //        TeamName.addMember(boardName);
 //       boards.add(String.format("New board %s was added to team %s", Board.getName(),
 //               getName()));
@@ -40,11 +48,15 @@ public class TeamImpl implements Team {
     @Override
     public void addBoard(Board board) {
         boards.add(board);
+        TeamActivityHistory.add(String.format("New board %s was added to team %s", board.getName(), this.getName()));
+
     }
+
     @Override
     public List<Members> getTeamMembers() {
         return new ArrayList<>(teamMembers);
     }
+
     @Override
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
@@ -55,18 +67,18 @@ public class TeamImpl implements Team {
         this.name = name;
     }
 
-     @Override
+    @Override
     public void addMember(Members member) {
         teamMembers.add(member);
+        TeamActivityHistory.add(String.format("New member %s was added to team %s", member.getUsername(), this.getName()));
+
     }
 
     private void setTeamMembers(List<Members> teamMembers) {
-
         this.teamMembers = teamMembers;
     }
 
     private void setBoards(List<Board> boards) {
-
         this.boards = boards;
     }
 

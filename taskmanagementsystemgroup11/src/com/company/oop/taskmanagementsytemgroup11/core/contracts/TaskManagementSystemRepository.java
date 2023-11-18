@@ -45,7 +45,7 @@ public interface TaskManagementSystemRepository {
     Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee, int taskIndexStory);
     //4. ToDo Status status double check if we need to give Status to the Stories
 
-    Story findStoryByIndex(int storyIndex);
+    // Story findStoryByIndex(int storyIndex);
 
     Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback);
 

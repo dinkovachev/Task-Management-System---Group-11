@@ -1,9 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
-
 import java.util.List;
-import java.util.Objects;
 
 public interface Members extends Printable {
 
@@ -19,7 +16,9 @@ public interface Members extends Printable {
 
     public List<Members> getAllTeamMembers();
 
-    List<String> getActivityHistory();
+    void addEventToActivityLogHistory(String event);
+
+    String displayActivityLogHistory();
 
     int getPersonId();
 

@@ -14,8 +14,7 @@ import static java.lang.String.format;
 
 public class ChangeStatusCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-    private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
-    public static final String INVALID_DIRECTION_MSG = "Invalid direction";
+    private static final String INVALID_INPUT_MSG = format("Invalid input. Expected a number.");
 
     public ChangeStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -27,7 +26,7 @@ public class ChangeStatusCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         String direction = parameters.get(1);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changeStatus(type, direction, taskIndex);
     }
@@ -35,49 +34,52 @@ public class ChangeStatusCommand extends BaseCommand {
     private String changeStatus(TaskType type, String direction, int taskIndex) {
         switch (type) {
             case BUG:
-                return changeBugStatus(type, direction, taskIndex);
+                return changeBugStatus(direction, taskIndex);
             case STORY:
-                return changeStoryStatus(type, direction, taskIndex);
+                return changeStoryStatus(direction, taskIndex);
             case FEEDBACK:
-                return changeFeedbackStatus(type, direction, taskIndex);
+                return changeFeedbackStatus(direction, taskIndex);
             default:
                 return format("%s is invalid task", type);
         }
     }
 
-    private String changeBugStatus(TaskType type, String direction, int taskIndex) {
-        Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
+    private String changeBugStatus(String direction, int taskIndex) {
+        Bug bug = getTaskManagementSystemRepository().findBugByIndex(taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             bug.advanceStatus();
         } else if (direction.equalsIgnoreCase("revert")) {
             bug.revertStatus();
+        } else {
+            throw new IllegalArgumentException("Invalid direction");
         }
-        throw new IllegalArgumentException(INVALID_DIRECTION_MSG);
+        return format("Bug status changed to %s", bug.getStatus());
     }
 
-    private String changeStoryStatus(TaskType type, String direction, int taskIndex) {
+    private String changeStoryStatus(String direction, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             story.advanceStatus();
         } else if (direction.equalsIgnoreCase("revert")) {
             story.revertStatus();
+        } else {
+            throw new IllegalArgumentException("Invalid direction");
         }
-        throw new IllegalArgumentException(INVALID_DIRECTION_MSG);
+        return format("Story status changed to %s", story.getStatus());
     }
 
-    private String changeFeedbackStatus(TaskType type, String direction, int taskIndex) {
+    private String changeFeedbackStatus(String direction, int taskIndex) {
         Feedback feedback = getTaskManagementSystemRepository().findFeedbackByIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             feedback.advanceStatus();
         } else if (direction.equalsIgnoreCase("revert")) {
             feedback.revertStatus();
+        } else {
+            throw new IllegalArgumentException("Invalid direction");
         }
-        throw new IllegalArgumentException(INVALID_DIRECTION_MSG);
+        return format("Feedback status changed to %s", feedback.getStatus());
     }
 }

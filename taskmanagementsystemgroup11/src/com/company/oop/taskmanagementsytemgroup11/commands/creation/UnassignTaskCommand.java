@@ -13,7 +13,7 @@ public class UnassignTaskCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
-    private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s assigned successfully to %s";
+    private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s unassigned successfully to %s";
 
     public UnassignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -28,6 +28,7 @@ public class UnassignTaskCommand extends BaseCommand {
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         String title = parameters.get(1);
         int id = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_ID);
+        //ToDo change the logic if we need to use a username to unnasign task from it
         String username = parameters.get(3);
         return assignTask(type, title, id, username);
     }

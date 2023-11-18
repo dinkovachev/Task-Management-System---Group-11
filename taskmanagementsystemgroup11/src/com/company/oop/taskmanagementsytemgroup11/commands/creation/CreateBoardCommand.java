@@ -29,7 +29,9 @@ public class CreateBoardCommand extends BaseCommand {
 
     private String createBoard(String name, String teamName) {
             Board board = getTaskManagementSystemRepository().createBoard(name);
+            //ToDo double check if new team is created
             Team team = getTaskManagementSystemRepository().createTeam(teamName);
-            return String.format("New board with name %s  created in team %s.", board.getName(), team.getName());
+            //ToDo add functionaly to add board to the team
+            return String.format("New board with name %s created in team %s.", board.getName(), team.getName());
     }
 }
