@@ -37,10 +37,10 @@ public class ChangeSeverityCommand extends BaseCommand {
         getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (severity.equals(bug.getSeverity())) {
-            throw new IllegalArgumentException(format("Severity is already set to %s", bug.getSeverity()));
+            throw new IllegalArgumentException(format("Severity is already set to %s.", bug.getSeverity()));
         } else {
             bug.changeSeverity(severity);
-            return format("Severity changed to %s", bug.getSeverity());
+            return format("Severity changed to %s.", bug.getSeverity());
         }
     }
 

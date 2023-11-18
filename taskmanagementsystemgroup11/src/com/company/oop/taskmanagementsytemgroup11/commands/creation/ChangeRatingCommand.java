@@ -36,10 +36,10 @@ public class ChangeRatingCommand extends BaseCommand {
         getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (rating == (feedback.getRating())) {
-            throw new IllegalArgumentException(format("Rating is already set to %d", feedback.getRating()));
+            throw new IllegalArgumentException(format("Rating is already set to %d.", feedback.getRating()));
         } else {
             feedback.changeRating(rating);
-            return format("Rating changed to %d", feedback.getRating());
+            return format("Rating changed to %d.", feedback.getRating());
         }
     }
 

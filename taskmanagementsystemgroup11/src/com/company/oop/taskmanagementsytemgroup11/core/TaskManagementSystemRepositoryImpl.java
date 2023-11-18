@@ -229,7 +229,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
-        return feedbacks.get(tasks.size() - taskIndex - 1);
+        return feedbacks.get(taskIndex);
     }
 
 //    @Override

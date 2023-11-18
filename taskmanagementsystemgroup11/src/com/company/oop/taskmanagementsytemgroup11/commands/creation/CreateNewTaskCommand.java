@@ -38,7 +38,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 ValidationHelpers.validateTaskType(typeFeedback, EXPECTED_ARGUMENTS_COUNT_FEEDBACK);
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
-                int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG) - 1;
+                int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG);
                 int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
 
                 return createNewFeedback(

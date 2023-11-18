@@ -50,10 +50,10 @@ public class ChangePriorityCommand extends BaseCommand {
         getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (priority.equals(bug.getPriority())) {
-            throw new IllegalArgumentException(format("Priority is already set to %s", bug.getPriority()));
+            throw new IllegalArgumentException(format("Priority is already set to %s.", bug.getPriority()));
         } else {
             bug.changePriority(priority);
-            return format("Priority changed to %s", bug.getPriority());
+            return format("Priority changed to %s.", bug.getPriority());
         }
     }
 
@@ -61,10 +61,10 @@ public class ChangePriorityCommand extends BaseCommand {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
         getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex); // IMPORTANT!
         if (priority.equals(story.getPriority())) {
-            throw new IllegalArgumentException(format("Priority is already set to %s", story.getPriority()));
+            throw new IllegalArgumentException(format("Priority is already set to %s.", story.getPriority()));
         } else {
             story.changePriority(priority);
-            return format("Priority changed to %s", story.getPriority());
+            return format("Priority changed to %s.", story.getPriority());
         }
     }
 }
