@@ -1,10 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;

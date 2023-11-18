@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -31,11 +32,12 @@ public class ChangeSizeCommand extends BaseCommand {
         Size size = ParsingHelpers.tryParseEnum(parameters.get(1), Size.class);
         int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
 
-        return changeStorySize(size, taskIndex);
+        return changeStorySize(type, size, taskIndex);
     }
 
-    private String changeStorySize(Size size, int taskIndex) {
+    private String changeStorySize(TaskType type, Size size, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
+        getTaskManagementSystemRepository().validateTaskTypeStory(type,taskIndex); // IMPORTANT!
         if (size.equals(story.getSize())) {
             throw new IllegalArgumentException(format("Size is already set to %s", story.getSize()));
         } else {

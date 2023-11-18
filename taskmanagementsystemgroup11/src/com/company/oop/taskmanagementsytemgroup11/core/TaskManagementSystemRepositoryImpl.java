@@ -94,6 +94,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                          Severity severity, String assignee, int taskIndexBug) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug);
         this.bugs.add(bug);
+        this.feedbacks.add(null);
+        this.stories.add(null);
         this.tasks.add(bug);
         return bug;
     }
@@ -103,6 +105,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                              Priority priority, Size size, String assignee, int taskIndex) {
         Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex);
         this.stories.add(story);
+        this.feedbacks.add(null);
+        this.bugs.add(null);
         this.tasks.add(story);
         return story;
     }
@@ -111,6 +115,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback);
         this.feedbacks.add(feedback);
+        this.stories.add(null);
+        this.bugs.add(null);
         this.tasks.add(feedback);
         return feedback;
     }
@@ -193,6 +199,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
         return stories.get(tasks.size() - taskIndex - 1);
+    }
+
+    @Override
+    public TaskType validateTaskTypeStory(TaskType type, int taskIndex) {
+        if (!type.equals(tasks.get(taskIndex).getType())) {
+            throw new IllegalArgumentException(format("%s is invalid task type.", type));
+        }
+        return type;
     }
 
     @Override
