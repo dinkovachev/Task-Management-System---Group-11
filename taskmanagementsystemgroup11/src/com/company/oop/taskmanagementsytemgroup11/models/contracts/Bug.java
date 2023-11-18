@@ -7,17 +7,15 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import java.util.List;
 
 public interface Bug extends Task {
-    public String getStepsToReproduce();
+    String getStepsToReproduce();
 
-    public Priority getPriority();
+    Priority getPriority();
 
-    public Severity getSeverity();
+    Severity getSeverity();
 
-    public String getAssignee();
+    String getAssignee();
 
-    public List<Bug> getBugs();
-
-    public int getTaskIndex();
+    List<Bug> getBugs();
 
 //    void changePriority(Priority priority);
 //

@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
@@ -31,4 +32,6 @@ public interface Task extends Commentable, Identifiable, Printable {
     void advanceStatus();
 
     TaskType getType();
+
+    int getTaskIndex();
 }

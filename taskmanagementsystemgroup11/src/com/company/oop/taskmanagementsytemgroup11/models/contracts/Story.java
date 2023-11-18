@@ -9,17 +9,17 @@ import java.util.Map;
 
 public interface Story extends Task {
 
-    public Priority getPriority();
+    Priority getPriority();
 
-    public String getMembers();
+    String getMembers();
 
-    public List<Story> getStories();
+    List<Story> getStories();
 
-    public List<Feedback> getFeedbacks();
+    List<Feedback> getFeedbacks();
 
     void changePriority(Priority priority);
 
-    public int getTaskIndex();
-
     void changeSize(Size size);
+
+    Size getSize();
 }

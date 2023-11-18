@@ -55,10 +55,10 @@ public class StoryImpl extends TaskImpl implements Story {
         return priority;
     }
 
-//    @Override
-//    public Object getSize() {
-//        return size;
-//    }
+    @Override
+    public Size getSize() {
+        return size;
+    }
 
     @Override
     public Status getStatus() {

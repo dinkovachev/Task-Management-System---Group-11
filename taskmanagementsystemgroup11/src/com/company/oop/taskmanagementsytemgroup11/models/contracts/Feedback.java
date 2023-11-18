@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface Feedback extends Task {
 
-    public int getRating();
-
-    public int getTaskIndex();
+    int getRating();
 
     void changeRating(int rating);
 

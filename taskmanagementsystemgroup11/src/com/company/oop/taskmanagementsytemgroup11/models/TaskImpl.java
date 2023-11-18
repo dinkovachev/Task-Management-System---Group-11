@@ -132,4 +132,7 @@ public abstract class TaskImpl implements Task {
 
     @Override
     public abstract TaskType getType();
+
+    @Override
+    public abstract int getTaskIndex();
 }

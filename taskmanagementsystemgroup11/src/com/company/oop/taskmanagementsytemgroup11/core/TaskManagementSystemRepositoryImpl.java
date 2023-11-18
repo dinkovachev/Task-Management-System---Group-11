@@ -160,7 +160,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Task findTaskByID(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex));
+            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
         } else {
             return tasks.get(taskIndex);
         }
@@ -186,6 +186,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
     // find team by name - teamMembers
 
+    @Override
+    public Story findStoryByTaskIndex(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
+        }
+        return stories.get(tasks.size() - taskIndex - 1);
+    }
 
     @Override
     public Story findStoryByIndex(int storyIndex) {
