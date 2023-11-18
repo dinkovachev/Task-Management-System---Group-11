@@ -41,8 +41,6 @@ public interface TaskManagementSystemRepository {
                   Priority priority, Severity severity, String assignee, int taskIndexBug); // TODO Georgi take a look!
 
     //3. ToDo Status status double check if we need to give Status to the Stories
-    Bug findBugByIndex(int bugIndex);
-
 
     Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee, int taskIndexStory);
     //4. ToDo Status status double check if we need to give Status to the Stories
@@ -68,6 +66,7 @@ public interface TaskManagementSystemRepository {
 
     Story findStoryByTaskIndex(int taskIndex);
 
-    Bug findBugByTaskIndex (int taskIndex);
-    Feedback findFeedbackByTaskIndex (int taskIndex);
+    Bug findBugByTaskIndex(int taskIndex);
+
+    Feedback findFeedbackByTaskIndex(int taskIndex);
 }

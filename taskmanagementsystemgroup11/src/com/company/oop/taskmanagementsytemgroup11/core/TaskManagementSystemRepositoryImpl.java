@@ -178,13 +178,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 //        return bug;
 //    }
 
-    @Override
-    public Bug findBugByIndex(int bugIndex) {
-        if (bugIndex < 0 || bugIndex >= tasks.size()) {
-            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
-        }
-        return bugs.get(tasks.size() - bugIndex - 1);
-    }
+//    @Override
+//    public Bug findBugByIndex(int bugIndex) {
+//        if (bugIndex < 0 || bugIndex >= tasks.size()) {
+//            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
+//        }
+//        return tasks.get(tasks.size() - bugIndex - 1);
+//    }
     // find team by name - teamMembers
 
     @Override
@@ -196,17 +196,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug findBugByTaskIndex(int taskIndex){
+    public Bug findBugByTaskIndex(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
-        return bugs.get(tasks.size() - taskIndex - 1);
+        return bugs.get(taskIndex);
     }
 
     @Override
     public Feedback findFeedbackByTaskIndex(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(format("%d is invalid task index.", taskIndex + 1));
+            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
         return feedbacks.get(tasks.size() - taskIndex - 1);
     }

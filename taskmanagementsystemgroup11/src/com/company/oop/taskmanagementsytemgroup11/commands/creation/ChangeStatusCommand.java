@@ -45,7 +45,7 @@ public class ChangeStatusCommand extends BaseCommand {
     }
 
     private String changeBugStatus(String direction, int taskIndex) {
-        Bug bug = getTaskManagementSystemRepository().findBugByIndex(taskIndex);
+        Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
 
         if (direction.equalsIgnoreCase("advance")) {
             bug.advanceStatus();

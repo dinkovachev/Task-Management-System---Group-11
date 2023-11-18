@@ -39,7 +39,6 @@ public class CreateNewTaskCommand extends BaseCommand {
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG) - 1;
-//                Members usernameFeedback = getTaskManagementSystemRepository().getMemberByUsername(assigneeFeedback);
                 int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
 
                 return createNewFeedback(
@@ -53,7 +52,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Priority priorityStory = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
-//                Members usernameStory = getTaskManagementSystemRepository().getMemberByUsername(assigneeStory);
+                validateMemberExists(assigneeStory);
                 int taskIndexStory = getTaskManagementSystemRepository().getNextId();
 
                 return createNewStory(
@@ -68,7 +67,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Priority priorityBug = ParsingHelpers.tryParseEnum(parameters.get(4), Priority.class);
                 Severity severityBug = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
                 String assigneeBug = parameters.get(6);
-                Members usernameBug = getTaskManagementSystemRepository().getMemberByUsername(assigneeBug);
+                validateMemberExists(assigneeBug);
                 int taskIndexBug = getTaskManagementSystemRepository().getNextId();
 
                 return createNewBug(
@@ -102,4 +101,9 @@ public class CreateNewTaskCommand extends BaseCommand {
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 
+    private void validateMemberExists(String assignee) {
+        if (!getTaskManagementSystemRepository().memberExist(assignee)) {
+            throw new IllegalArgumentException(format("Member with username %s does not exist.", assignee));
+        }
+    }
 }

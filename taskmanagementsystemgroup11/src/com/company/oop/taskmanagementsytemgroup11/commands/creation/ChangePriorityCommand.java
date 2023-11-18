@@ -3,6 +3,7 @@ package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
@@ -28,7 +29,7 @@ public class ChangePriorityCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(1), Priority.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changePriority(type, priority, taskIndex);
     }
@@ -46,12 +47,12 @@ public class ChangePriorityCommand extends BaseCommand {
     }
 
     private String changeBugPriority(Priority priority, int taskIndex) {
-        Bug bug = getTaskManagementSystemRepository().findBugByIndex(taskIndex);
-        if (priority.equals(bug.getPriority())) {
-            throw new IllegalArgumentException(format("Size is already set to %s", bug.getPriority()));
-        } else {
-            bug.changePriority(priority);
-            return format("Size changed to %s", bug.getPriority());
+        Task bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
+        if (priority.equals(((Bug) bug).getPriority())) {
+            throw new IllegalArgumentException(format("Size is already set to %s", ((Bug) bug).getPriority()));
+        } else{
+            ((Bug) bug).changePriority(priority);
+            return format("Size changed to %s", ((Bug) bug).getPriority());
         }
     }
 

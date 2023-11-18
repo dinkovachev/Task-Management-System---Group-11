@@ -1,10 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 

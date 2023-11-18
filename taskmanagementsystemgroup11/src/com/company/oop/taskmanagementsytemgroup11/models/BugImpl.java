@@ -50,7 +50,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public void changeSeverity(Severity severity) {
-setSeverity(severity);
+        setSeverity(severity);
     }
 
     @Override
