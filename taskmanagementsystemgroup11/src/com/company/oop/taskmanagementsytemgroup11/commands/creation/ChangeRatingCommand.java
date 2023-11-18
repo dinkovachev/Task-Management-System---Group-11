@@ -28,11 +28,12 @@ public class ChangeRatingCommand extends BaseCommand {
         int rating = ParsingHelpers.tryParseInteger(parameters.get(1), INVALID_INPUT_MSG);
         int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
 
-        return changeRating(rating, taskIndex);
+        return changeRating(type, rating, taskIndex);
     }
 
-    private String changeRating(int rating, int taskIndex) {
+    private String changeRating(TaskType type, int rating, int taskIndex) {
         Feedback feedback = getTaskManagementSystemRepository().findFeedbackByTaskIndex(taskIndex);
+        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (rating == (feedback.getRating())) {
             throw new IllegalArgumentException(format("Rating is already set to %d", feedback.getRating()));
