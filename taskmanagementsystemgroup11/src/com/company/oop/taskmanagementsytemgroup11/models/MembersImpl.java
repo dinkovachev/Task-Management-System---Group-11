@@ -14,7 +14,7 @@ public class MembersImpl implements Members {
             "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private static final String NEW_MEMBER_CREATED_MESSAGE = "New member created %s%n";
-    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was unassigned to team member %s";
+    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was unassigned from team member %s";
     private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String MEMBER_ADDED_TO_TEAM_MESSAGE = "Member %s was added to team %s";
     private static final String COMMENT_ADDED_TO_TASK_MESSAGE = "Comment %s added to task %s";
@@ -63,8 +63,8 @@ public class MembersImpl implements Members {
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
         taskToAddComment.addComment(commentToAdd);
-        addEventToActivityLogHistory(String.format(COMMENT_ADDED_TO_TASK_MESSAGE, taskToAddComment.getTitle(),
-                commentToAdd.getContent()));
+        addEventToActivityLogHistory(String.format(COMMENT_ADDED_TO_TASK_MESSAGE, commentToAdd.getContent(),
+                taskToAddComment.getTitle()));
     }
 
     @Override
