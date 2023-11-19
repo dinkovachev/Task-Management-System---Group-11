@@ -1,10 +1,8 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
@@ -20,9 +18,9 @@ import static java.lang.String.format;
 
 public class CreateNewTaskCommand extends BaseCommand {
 
-    public static final int EXPECTED_ARGUMENTS_COUNT_FEEDBACK = 5;
-    public static final int EXPECTED_ARGUMENTS_COUNT_STORY = 7;
-    public static final int EXPECTED_ARGUMENTS_COUNT_BUG = 8;
+    public static final int EXPECTED_ARGUMENTS_COUNT_FEEDBACK = 6;
+    public static final int EXPECTED_ARGUMENTS_COUNT_STORY = 8;
+    public static final int EXPECTED_ARGUMENTS_COUNT_BUG = 9;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     private static final String NEW_TASK_CREATED_MSG = "New %s with id %s created.";
     private static final String INVALID_ARGUMENT_COUNT_MSG = "Incorrect number of arguments.";
@@ -40,14 +38,15 @@ public class CreateNewTaskCommand extends BaseCommand {
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG);
                 // TODO String teamname
+                String teamnameFeedback = parameters.get(4);
                 // TODO Validation team
-                String boardFeedback = parameters.get(4);
+                String boardFeedback = parameters.get(5);
                 // TODO Validation team's board
                 int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
 
 
                 return createNewFeedback(
-                        typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback);
+                        typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback, boardFeedback);
 
             case EXPECTED_ARGUMENTS_COUNT_STORY:
                 TaskType typeStory = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -58,11 +57,14 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
                 validateMemberExists(assigneeStory);
-                String boardStory = parameters.get(6);
+                String teamnameStory = parameters.get(6);
+                validateTeamName(teamnameStory);
+                String boardStory = parameters.get(7);
+                validateBoardName(boardStory);
                 int taskIndexStory = getTaskManagementSystemRepository().getNextId();
 
                 return createNewStory(typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory,
-                        taskIndexStory, boardStory);
+                        taskIndexStory, boardStory, boardStory);
 
             case EXPECTED_ARGUMENTS_COUNT_BUG:
                 TaskType typeBug = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -74,11 +76,14 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Severity severityBug = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
                 String assigneeBug = parameters.get(6);
                 validateMemberExists(assigneeBug);
-                String boardBug = parameters.get(7);
+                String teamnameBug = parameters.get(7);
+                validateTeamName(teamnameBug);
+                String boardBug = parameters.get(8);
+                validateBoardName(boardBug);
                 int taskIndexBug = getTaskManagementSystemRepository().getNextId();
 
                 return createNewBug(typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug,
-                        assigneeBug, taskIndexBug, boardBug);
+                        assigneeBug, taskIndexBug, boardBug, boardBug);
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENT_COUNT_MSG);
@@ -86,28 +91,27 @@ public class CreateNewTaskCommand extends BaseCommand {
     }
 
     private String createNewFeedback(TaskType typeFeedback, String titleFeedback, String descriptionFeedback,
-                                     int rating, int taskIndexFeedback, String boardFeedback) {
-        Feedback feedback = getTaskManagementSystemRepository().createFeedback(
-                typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback);
+                                     int rating, int taskIndexFeedback, String teamnameFeedback, String boardFeedback) {
+        Feedback feedback = getTaskManagementSystemRepository().createFeedback(typeFeedback, titleFeedback,
+                descriptionFeedback, rating, taskIndexFeedback, teamnameFeedback, boardFeedback);
         return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
     }
 
     private String createNewStory(
             TaskType typeStory, String titleStory, String descriptionStory, Priority priorityStory, Size size,
-            String assigneeStory, int taskIndexStory, String boardStory) {
-        Story story = getTaskManagementSystemRepository().createStory
-                (typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory, taskIndexStory,
-                            boardStory);
+            String assigneeStory, int taskIndexStory, String teamnameStory, String boardStory) {
+        Story story = getTaskManagementSystemRepository().createStory(typeStory, titleStory, descriptionStory,
+                priorityStory, size, assigneeStory, taskIndexStory, teamnameStory, boardStory);
         return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
     }
 
     private String createNewBug(TaskType typeBug, String titleBug, String descriptionBug, String stepsToReproduce,
                                 Priority priorityBug, Severity severityBug, String assigneeBug, int taskIndexStory,
-                                String boardBug) {
+                                String teamnameBug, String boardBug) {
 
         Bug bug = getTaskManagementSystemRepository().createBug(
                 typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug,
-                taskIndexStory, boardBug);
+                taskIndexStory, teamnameBug, boardBug);
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 
@@ -117,5 +121,15 @@ public class CreateNewTaskCommand extends BaseCommand {
         }
     }
 
-    // TODO VALIDATE BOARD
+    private void validateTeamName(String teamname) {
+        if (!getTaskManagementSystemRepository().teamExist(teamname)) {
+            throw new IllegalArgumentException(format("Team with name %s does not exist.", teamname));
+        }
+    }
+
+    private void validateBoardName(String boardname) {
+        if (!getTaskManagementSystemRepository().boardExist(boardname)) {
+            throw new IllegalArgumentException(format("Board with name %s does not exist.", boardname));
+        }
+    }
 }

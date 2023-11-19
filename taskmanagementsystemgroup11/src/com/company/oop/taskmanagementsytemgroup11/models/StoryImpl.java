@@ -26,7 +26,7 @@ public class StoryImpl extends TaskImpl implements Story {
     //private final List<ActivityLog> storyActivityLog = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
-                     int taskIndex, String board) {
+                     int taskIndex, String teamname, String board) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
