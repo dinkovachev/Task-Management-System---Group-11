@@ -32,7 +32,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand {
         if (teamMembers.isEmpty()) {
             return "There are no registered  team members.";
         }
-
+        System.out.printf("Team: %s%n",teamName);
         return ListingHelpers.teamMembersToString(teamMembers);
     }
 }

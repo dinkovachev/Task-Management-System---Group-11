@@ -13,6 +13,9 @@ import java.util.Objects;
 
 public class BugImpl extends TaskImpl implements Bug {
 
+    private static final String BUG_STATUS_SET_TO_ACTIVE_MESSAGE = "Bug status set to Active.";
+    private static final String BUG_STATUS_ALREADY_ACTIVE_MESSAGE = "Current bug status is already Active.";
+    private static final String NEW_BUG_CREATED_MESSAGE = "New bug with title %s created";
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
@@ -20,6 +23,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private Status status;
     private int taskIndex;
     private final List<Bug> bugs;
+    private final List<ActivityLog> bugActivityLog = new ArrayList<>();
 
     public BugImpl(int id, String title, String description,
                    String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndex) {
@@ -30,6 +34,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
+        addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
 
     }
 
@@ -110,10 +115,24 @@ public class BugImpl extends TaskImpl implements Bug {
     public void revertStatus() {
         if (getStatus() != Status.ACTIVE) {
             setStatus(Status.ACTIVE);
-            System.out.println("Bug status set to Active.");
+            addEventToActivityLogHistory(BUG_STATUS_SET_TO_ACTIVE_MESSAGE);
+            System.out.println(BUG_STATUS_SET_TO_ACTIVE_MESSAGE);
         } else {
-            System.out.println("Current bug status is already Active.");
+            addEventToActivityLogHistory(BUG_STATUS_ALREADY_ACTIVE_MESSAGE);
+            System.out.println(BUG_STATUS_ALREADY_ACTIVE_MESSAGE);
         }
+    }
+
+    public void addEventToActivityLogHistory(String event) {
+        bugActivityLog.add(new ActivityLogImpl(event));
+    }
+
+    public String displayActivityLogHistory() {
+        StringBuilder result = new StringBuilder();
+        for (ActivityLog activityLog : bugActivityLog) {
+            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+        }
+        return result.toString();
     }
 
     @Override

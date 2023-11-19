@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -10,9 +9,13 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.String.format;
-
 public class StoryImpl extends TaskImpl implements Story {
+    private static final String STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE = "Story status set to InProgress.";
+    private static final String STORY_STATUS_SET_TO_NOT_DONE_MESSAGE = "Story status set to Not Done.";
+    private static final String CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE = "Current story status is already Not Done.";
+    private static final String STORY_STATUS_SET_TO_DONE_MESSAGE = "Story status set to Done.";
+    private static final String CURRENT_STORY_STATUS_IS_ALREADY_DONE_MESSAGE = "Current story status is already Done.";
+    private static final String NEW_STORY_WAS_CREATED_MESSAGE = "New story with title %s was created";
     private Priority priority;
     private Size size;
     private Status status;
@@ -20,6 +23,7 @@ public class StoryImpl extends TaskImpl implements Story {
     private int taskIndex;
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
+    private final List<ActivityLog> storyActivityLog = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
                      int taskIndex) {
@@ -30,6 +34,7 @@ public class StoryImpl extends TaskImpl implements Story {
         this.status = Status.NOT_DONE;
 //        this.stories = new ArrayList<>();
 //        this.feedbacks = new ArrayList<>();
+        addEventToActivityLogHistory(String.format(NEW_STORY_WAS_CREATED_MESSAGE, title));
     }
 
     @Override
@@ -89,31 +94,43 @@ public class StoryImpl extends TaskImpl implements Story {
     public void advanceStatus() {
         if (getStatus() == Status.NOT_DONE) {
             setStatus(Status.IN_PROGRESS);
-            System.out.println("Story status set to InProgress.");
+            addEventToActivityLogHistory(CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE);
+            System.out.println(STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE);
         } else if (getStatus() == Status.IN_PROGRESS) {
             setStatus(Status.DONE);
-            System.out.println("Story status set to Done.");
+            addEventToActivityLogHistory(STORY_STATUS_SET_TO_DONE_MESSAGE);
+            System.out.println(STORY_STATUS_SET_TO_DONE_MESSAGE);
         } else {
-            System.out.println("Current story status is already Done.");
+            addEventToActivityLogHistory(CURRENT_STORY_STATUS_IS_ALREADY_DONE_MESSAGE);
+            System.out.println(CURRENT_STORY_STATUS_IS_ALREADY_DONE_MESSAGE);
         }
     }
-    //ToDo
-    // Finish the override methods from the interfaces
-
-    //ToDo
-    // Finish the override methods from the interfaces
-
 
     public void revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.IN_PROGRESS);
-            System.out.println("Story status set to InProgress.");
+            addEventToActivityLogHistory(STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE);
+            System.out.println(STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE);
         } else if (getStatus() == Status.IN_PROGRESS) {
             setStatus(Status.NOT_DONE);
-            System.out.println("Story status set to Not Done.");
+            addEventToActivityLogHistory(STORY_STATUS_SET_TO_NOT_DONE_MESSAGE);
+            System.out.println(STORY_STATUS_SET_TO_NOT_DONE_MESSAGE);
         } else {
-            System.out.println("Current story status is already Not Done.");
+            addEventToActivityLogHistory(CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE);
+            System.out.println(CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE);
         }
+    }
+
+    public void addEventToActivityLogHistory(String event) {
+        storyActivityLog.add(new ActivityLogImpl(event));
+    }
+
+    public String displayActivityLogHistory() {
+        StringBuilder result = new StringBuilder();
+        for (ActivityLog activityLog : storyActivityLog) {
+            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+        }
+        return result.toString();
     }
 
     @Override

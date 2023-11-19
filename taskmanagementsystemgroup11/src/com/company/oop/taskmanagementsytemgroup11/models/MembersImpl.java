@@ -22,7 +22,7 @@ public class MembersImpl implements Members {
     private String firstName;
     private String lastName;
     private int personId;
-    private List<ActivityLog> activityHistory = new ArrayList<>();
+    private final List<ActivityLog> membersActivityHistory = new ArrayList<>();
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
@@ -97,13 +97,13 @@ public class MembersImpl implements Members {
     }
 
     public void addEventToActivityLogHistory(String event) {
-        activityHistory.add(new ActivityLogImpl(event));
+        membersActivityHistory.add(new ActivityLogImpl(event));
     }
 
 
     public String displayActivityLogHistory() {
         StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : activityHistory) {
+        for (ActivityLog activityLog : membersActivityHistory) {
             result.append(activityLog.displayInfo()).append(System.lineSeparator());
         }
         return result.toString();
@@ -146,11 +146,11 @@ public class MembersImpl implements Members {
         MembersImpl members1 = (MembersImpl) o;
         return personId == members1.personId && username.equals(members1.username) &&
                 firstName.equals(members1.firstName) && lastName.equals(members1.lastName) &&
-                activityHistory.equals(members1.activityHistory) && members.equals(members1.members);
+                membersActivityHistory.equals(members1.membersActivityHistory) && members.equals(members1.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, firstName, lastName, personId, activityHistory, members);
+        return Objects.hash(username, firstName, lastName, personId, membersActivityHistory, members);
     }
 }
