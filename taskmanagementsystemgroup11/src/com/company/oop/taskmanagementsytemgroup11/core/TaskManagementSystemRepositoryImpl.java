@@ -17,7 +17,7 @@ import static java.lang.String.format;
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
-    private static final String NO_SUCH_BOARD = "There is no such board with name";
+    private static final String NO_SUCH_BOARD = "There is no such board with name %s";
     public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
     private int nextId;
     private int nextPersonId;
@@ -66,6 +66,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Members createMember(String firstName, String lastName) {
         Members member = new MembersImpl(++nextPersonId, firstName, lastName);
         this.members.add(member);
+//        addEventToActivityLogHistory(format("New member with name %s %s created", firstName, lastName));
         return member;
     }
 
@@ -73,6 +74,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Team createTeam(String name) {
         Team team = new TeamImpl(name);
         this.teams.add(team);
+//        addEventToActivityLogHistory(format("New team with name %s created", name));
         return team;
     }
 
@@ -81,6 +83,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         this.boards.add(board);
+//        addEventToActivityLogHistory(format("New board with name %s created", name));
         return board;
     }
 
@@ -99,6 +102,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.feedbacks.add(null);
         this.stories.add(null);
         this.tasks.add(bug);
+//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
         return bug;
     }
 
@@ -110,6 +114,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.feedbacks.add(null);
         this.bugs.add(null);
         this.tasks.add(story);
+//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
         return story;
     }
 //todo това ми го поиска да се имплемнтира ей така от нищото
@@ -127,6 +132,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.stories.add(null);
         this.bugs.add(null);
         this.tasks.add(feedback);
+//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
         return feedback;
     }
 
@@ -300,6 +306,19 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public int getNextId() {
         return this.nextId;
     }
+
+//    public void addEventToActivityLogHistory(String event) {
+//        activityLogList.add(new ActivityLogImpl(event));
+//    }
+
+
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : activityLogList) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public boolean equals(Object o) {

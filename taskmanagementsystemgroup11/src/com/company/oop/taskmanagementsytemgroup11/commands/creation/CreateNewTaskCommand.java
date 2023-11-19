@@ -112,6 +112,7 @@ public class CreateNewTaskCommand extends BaseCommand {
         Bug bug = getTaskManagementSystemRepository().createBug(
                 typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug,
                 taskIndexStory, teamnameBug, boardBug);
+        // TODO add to activity history
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 
