@@ -18,13 +18,13 @@ public class TeamImpl implements Team {
     private List<String> TeamActivityHistory = new ArrayList<>();
     private String name;
     private List<Members> teamMembers;
-    private List<Board> boards;
+    private List<Board> TeamBoards;
 
 
     public TeamImpl(String name) {
         setName(name);
         this.teamMembers = new ArrayList<>();
-        this.boards = new ArrayList<>();
+        this.TeamBoards = new ArrayList<>();
         TeamActivityHistory.add(String.format("New team %s was added", this.getName()));
 
     }
@@ -47,7 +47,7 @@ public class TeamImpl implements Team {
 //    }
     @Override
     public void addBoard(Board board) {
-        boards.add(board);
+        TeamBoards.add(board);
         TeamActivityHistory.add(String.format("New board %s was added to team %s", board.getName(), this.getName()));
 
     }
@@ -58,8 +58,8 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
+    public List<Board> getTeamBoards() {
+        return new ArrayList<>(TeamBoards);
     }
 
     private void setName(String name) {
@@ -78,8 +78,8 @@ public class TeamImpl implements Team {
         this.teamMembers = teamMembers;
     }
 
-    private void setBoards(List<Board> boards) {
-        this.boards = boards;
+    private void setTeamBoards(List<Board> teamBoards) {
+        this.TeamBoards = teamBoards;
     }
 
     @Override
