@@ -13,6 +13,11 @@ import java.util.Objects;
 
 public class BugImpl extends TaskImpl implements Bug {
 
+    private static final String BUG_STATUS_SET_TO_ACTIVE_MESSAGE = "Bug status set to Active.";
+    private static final String BUG_STATUS_ALREADY_ACTIVE_MESSAGE = "Current bug status is already Active.";
+    private static final String NEW_BUG_CREATED_MESSAGE = "New bug with title %s created";
+    public static final String BUG_STATUS_SET_TO_DONE_MESSAGE = "Bug status set to Done.";
+    public static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
@@ -20,6 +25,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private Status status;
     private int taskIndex;
     private final List<Bug> bugs;
+    // private final List<ActivityLog> bugActivityLog = new ArrayList<>();
 
     public BugImpl(int id, String title, String description, String stepsToReproduce, Priority priority,
                    Severity severity, String assignee, int taskIndex, String board) {
@@ -30,6 +36,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
+        addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
 
     }
 
@@ -101,42 +108,37 @@ public class BugImpl extends TaskImpl implements Bug {
         // TODO Georgi Q: Should be added in a ActivityLog.
         if (getStatus() != Status.DONE) {
             setStatus(Status.DONE);
-            return "Bug status set to Done.";
+            addEventToActivityLogHistory(BUG_STATUS_SET_TO_DONE_MESSAGE);
+            return (BUG_STATUS_SET_TO_DONE_MESSAGE);
+
         } else {
-            return "Current bug status is already Done.";
+            addEventToActivityLogHistory(CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);
+            return (CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);
         }
     }
-
-
-    @Override
-    public void addComment(Comment comment) {
-
-    }
-
-    @Override
-    public void addTask(Task task) {
-
-    }
-
-    @Override
-    public void unassignTask(Members member) {
-
-    }
-
-    @Override
-    public void assignTask(Members member) {
-
-    }
-
 
     public String revertStatus() {
         if (getStatus() != Status.ACTIVE) {
             setStatus(Status.ACTIVE);
-            return "Bug status set to Active.";
+            addEventToActivityLogHistory(BUG_STATUS_SET_TO_ACTIVE_MESSAGE);
+            return (BUG_STATUS_SET_TO_ACTIVE_MESSAGE);
         } else {
-            return "Current bug status is already Active.";
+            addEventToActivityLogHistory(BUG_STATUS_ALREADY_ACTIVE_MESSAGE);
+            return (BUG_STATUS_ALREADY_ACTIVE_MESSAGE);
         }
     }
+
+//    public void addEventToActivityLogHistory(String event) {
+//        bugActivityLog.add(new ActivityLogImpl(event));
+//    }
+
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : bugActivityLog) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public TaskType getType() {

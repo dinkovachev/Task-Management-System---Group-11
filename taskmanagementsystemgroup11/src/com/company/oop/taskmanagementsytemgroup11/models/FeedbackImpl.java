@@ -13,16 +13,25 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
+    private static final String CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE = "Feedback status set to Scheduled.";
+    private static final String FEEDBACK_STATUS_SET_TO_UNSCHEDULED_MESSAGE = "Feedback status set to Unscheduled.";
+    private static final String FEEDBACK_STATUS_SET_TO_NEW = "Feedback status set to New.";
+    private static final String FEEDBACK_STATUS_IS_ALREADY_NEW_MESSAGE = "Current feedback status is already New.";
+    private static final String FEEDBACK_STATUS_SET_TO_DONE_MESSAGE = "Feedback status set to Done.";
+    private static final String FEEDBACK_STATUS_IS_ALREADY_DONE = "Current feedback status is already Done.";
+    private static final String NEW_FEEDBACK_CREATED_MESSAGE = "Feedback with title %s is created";
     private int rating;
     private int taskIndex;
     private Status status;
     private final List<Feedback> feedbacks;
+    //private final List<ActivityLog> feedbackActivityLog = new ArrayList<>();
 
     public FeedbackImpl(int id, String title, String description, int rating, int taskIndex, String board) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;
         this.feedbacks = new ArrayList<>();
+        addEventToActivityLogHistory(String.format(NEW_FEEDBACK_CREATED_MESSAGE,title));
     }
 
     @Override
@@ -61,36 +70,20 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public String advanceStatus() {
         if (getStatus() == Status.NEW) {
             setStatus(Status.UNSCHEDULED);
-            return "Feedback status set to Unscheduled.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_SET_TO_UNSCHEDULED_MESSAGE);
+            return (FEEDBACK_STATUS_SET_TO_UNSCHEDULED_MESSAGE);
         } else if (getStatus() == Status.UNSCHEDULED) {
             setStatus(Status.SCHEDULED);
-            return "Feedback status set to Scheduled.";
+            addEventToActivityLogHistory(CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE);
+            return (CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE);
         } else if (getStatus() == Status.SCHEDULED) {
             setStatus(Status.DONE);
-            return "Feedback status set to Done.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_SET_TO_DONE_MESSAGE);
+            return (FEEDBACK_STATUS_SET_TO_DONE_MESSAGE);
         } else {
-            return "Current feedback status is already Done.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_IS_ALREADY_DONE);
+            return (FEEDBACK_STATUS_IS_ALREADY_DONE);
         }
-    }
-
-    @Override
-    public void addComment(Comment comment) {
-
-    }
-
-    @Override
-    public void addTask(Task task) {
-
-    }
-
-    @Override
-    public void assignTask(Members member) {
-
-    }
-
-    @Override
-    public void unassignTask(Members member) {
-
     }
 
     private void validateRating(int rating) {
@@ -103,17 +96,33 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public String revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.SCHEDULED);
-            return "Feedback  status set to Scheduled.";
+            addEventToActivityLogHistory(CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE);
+            return (CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE);
         } else if (getStatus() == Status.SCHEDULED) {
             setStatus(Status.UNSCHEDULED);
-            return "Feedback status set to Unscheduled.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_SET_TO_UNSCHEDULED_MESSAGE);
+            return (FEEDBACK_STATUS_SET_TO_UNSCHEDULED_MESSAGE);
         } else if (getStatus() == Status.UNSCHEDULED) {
             setStatus(Status.NEW);
-            return "Feedback status set to New.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_SET_TO_NEW);
+            return (FEEDBACK_STATUS_SET_TO_NEW);
         } else {
-            return "Current feedback status is already New.";
+            addEventToActivityLogHistory(FEEDBACK_STATUS_IS_ALREADY_NEW_MESSAGE);
+            return (FEEDBACK_STATUS_IS_ALREADY_NEW_MESSAGE);
         }
     }
+
+//    public void addEventToActivityLogHistory(String event) {
+//        feedbackActivityLog.add(new ActivityLogImpl(event));
+//    }
+
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : feedbackActivityLog) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public void changeRating(int rating) {

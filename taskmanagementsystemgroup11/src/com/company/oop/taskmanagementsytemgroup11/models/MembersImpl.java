@@ -14,7 +14,7 @@ public class MembersImpl implements Members {
             "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private static final String NEW_MEMBER_CREATED_MESSAGE = "New member created %s%n";
-    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was unassigned to team member %s";
+    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was unassigned from team member %s";
     private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String MEMBER_ADDED_TO_TEAM_MESSAGE = "Member %s was added to team %s";
     private static final String COMMENT_ADDED_TO_TASK_MESSAGE = "Comment %s added to task %s";
@@ -22,7 +22,7 @@ public class MembersImpl implements Members {
     private String firstName;
     private String lastName;
     private int personId;
-    private List<ActivityLog> activityHistory = new ArrayList<>();
+    private final List<ActivityLog> membersActivityHistory = new ArrayList<>();
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
@@ -63,8 +63,8 @@ public class MembersImpl implements Members {
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
         taskToAddComment.addComment(commentToAdd);
-        addEventToActivityLogHistory(String.format(COMMENT_ADDED_TO_TASK_MESSAGE, taskToAddComment.getTitle(),
-                commentToAdd.getContent()));
+        addEventToActivityLogHistory(String.format(COMMENT_ADDED_TO_TASK_MESSAGE, commentToAdd.getContent(),
+                taskToAddComment.getTitle()));
     }
 
     @Override
@@ -97,13 +97,13 @@ public class MembersImpl implements Members {
     }
 
     public void addEventToActivityLogHistory(String event) {
-        activityHistory.add(new ActivityLogImpl(event));
+        membersActivityHistory.add(new ActivityLogImpl(event));
     }
 
 
     public String displayActivityLogHistory() {
         StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : activityHistory) {
+        for (ActivityLog activityLog : membersActivityHistory) {
             result.append(activityLog.displayInfo()).append(System.lineSeparator());
         }
         return result.toString();
@@ -146,11 +146,11 @@ public class MembersImpl implements Members {
         MembersImpl members1 = (MembersImpl) o;
         return personId == members1.personId && username.equals(members1.username) &&
                 firstName.equals(members1.firstName) && lastName.equals(members1.lastName) &&
-                activityHistory.equals(members1.activityHistory) && members.equals(members1.members);
+                membersActivityHistory.equals(members1.membersActivityHistory) && members.equals(members1.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, firstName, lastName, personId, activityHistory, members);
+        return Objects.hash(username, firstName, lastName, personId, membersActivityHistory, members);
     }
 }

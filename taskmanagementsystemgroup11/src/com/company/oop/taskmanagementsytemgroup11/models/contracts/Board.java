@@ -9,8 +9,8 @@ public interface Board extends Printable {
     String getName();
 
     void addBoard(Board board);
+    String displayActivityLogHistory();
+
 
     List<Board> getBoards();
-
-    List<String> getActivityHistory();
 }

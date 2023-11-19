@@ -12,7 +12,7 @@ public interface Team extends Printable {
 
     List<Members> getTeamMembers();
 
-    List<Board> getBoards();
+    List<Board> getTeamBoards();
 
     void addMember(Members member);
 }

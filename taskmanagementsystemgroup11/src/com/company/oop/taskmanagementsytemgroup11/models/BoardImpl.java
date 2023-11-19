@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
@@ -13,15 +14,18 @@ public class BoardImpl implements Board {
     private static final String BOARD_NAME_ERR_MSG = String.format(
             "The Board name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
-    private final List<Board> boards;
+    public static final String NEW_BOARD_ADDED_MESSAGE = "New board with name %s added";
+    public static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task with name %s added to the board";
+    public static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
+    private final List<Board> boards = new ArrayList<>();
     private final List<Task> tasksToAddToBoard = new ArrayList<>();
-    private final List<String> activityHistory = new ArrayList<>();
+    private final List<ActivityLog> boardsActivityHistory = new ArrayList<>();
     private String name;
 
 
     public BoardImpl(String name) {
         setName(name);
-        this.boards = new ArrayList<>();
+        addEventToActivityLogHistory(String.format(NEW_BOARD_CREATED_MESSAGE, name));
        // this.activityHistory = new ArrayList<>();
        // this.tasksToAddToBoard = new ArrayList<>();
     }
@@ -29,15 +33,7 @@ public class BoardImpl implements Board {
     @Override
     public void addTask(Task task) {
         tasksToAddToBoard.add(task);
-
-        activityHistory.add(String.format("Task with name %s added to board %s", task.getTitle(), name));
-
-        activityHistory.add(String.format("Task with %s added to board %s.", task.getTitle(), name));
-    }
-
-    @Override
-    public List<String> getActivityHistory() {
-        return new ArrayList<>(activityHistory);
+        addEventToActivityLogHistory(String.format(NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE, task.getTitle()));
     }
 
     @Override
@@ -53,16 +49,27 @@ public class BoardImpl implements Board {
     public void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
-        activityHistory.add(String.format("Board with name %s created", name));
+
     }
     //ToDo double check this issue
 
     @Override
     public void addBoard(Board boards) {
         this.boards.add(boards);
-        activityHistory.add(String.format("Board with name %s added", boards));
+        addEventToActivityLogHistory(String.format(NEW_BOARD_ADDED_MESSAGE, boards.getName()));
     }
 
+    public void addEventToActivityLogHistory(String event) {
+        boardsActivityHistory.add(new ActivityLogImpl(event));
+    }
+
+    public String displayActivityLogHistory() {
+        StringBuilder result = new StringBuilder();
+        for (ActivityLog activityLog : boardsActivityHistory) {
+            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+        }
+        return result.toString();
+    }
 
     @Override
     public String getAsString() {
