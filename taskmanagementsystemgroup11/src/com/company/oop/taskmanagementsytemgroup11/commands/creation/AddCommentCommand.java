@@ -43,7 +43,7 @@ public class AddCommentCommand extends BaseCommand {
 
         Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
 
-        //ValidationHelpers.validateIntRange(taskIndex, 0, task.getTaskIndex() - 1, TASK_DOES_NOT_EXIST);
+        //ValidationHelpers.validateIntRange(taskIndex, 0, task.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
         Comment comment = getTaskManagementSystemRepository().createComment(content, author);
 
         getTaskManagementSystemRepository().getMemberByUsername(author).addComment(comment, task);

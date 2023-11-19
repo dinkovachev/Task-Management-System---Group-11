@@ -23,7 +23,7 @@ public class StoryImpl extends TaskImpl implements Story {
     private int taskIndex;
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
-    private final List<ActivityLog> storyActivityLog = new ArrayList<>();
+    //private final List<ActivityLog> storyActivityLog = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
                      int taskIndex) {
@@ -121,17 +121,17 @@ public class StoryImpl extends TaskImpl implements Story {
         }
     }
 
-    public void addEventToActivityLogHistory(String event) {
-        storyActivityLog.add(new ActivityLogImpl(event));
-    }
-
-    public String displayActivityLogHistory() {
-        StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : storyActivityLog) {
-            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-        }
-        return result.toString();
-    }
+//    public void addEventToActivityLogHistory(String event) {
+//        storyActivityLog.add(new ActivityLogImpl(event));
+//    }
+//
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : storyActivityLog) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public void changePriority(Priority priority) {

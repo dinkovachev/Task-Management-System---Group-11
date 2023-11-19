@@ -24,7 +24,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private int taskIndex;
     private Status status;
     private final List<Feedback> feedbacks;
-    private final List<ActivityLog> feedbackActivityLog = new ArrayList<>();
+    //private final List<ActivityLog> feedbackActivityLog = new ArrayList<>();
 
     public FeedbackImpl(int id, String title, String description, int rating, int taskIndex) {
         super(id, title, description);
@@ -112,17 +112,17 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
-    public void addEventToActivityLogHistory(String event) {
-        feedbackActivityLog.add(new ActivityLogImpl(event));
-    }
+//    public void addEventToActivityLogHistory(String event) {
+//        feedbackActivityLog.add(new ActivityLogImpl(event));
+//    }
 
-    public String displayActivityLogHistory() {
-        StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : feedbackActivityLog) {
-            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-        }
-        return result.toString();
-    }
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : feedbackActivityLog) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public void changeRating(int rating) {

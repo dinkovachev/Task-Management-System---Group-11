@@ -16,6 +16,8 @@ public class BugImpl extends TaskImpl implements Bug {
     private static final String BUG_STATUS_SET_TO_ACTIVE_MESSAGE = "Bug status set to Active.";
     private static final String BUG_STATUS_ALREADY_ACTIVE_MESSAGE = "Current bug status is already Active.";
     private static final String NEW_BUG_CREATED_MESSAGE = "New bug with title %s created";
+    public static final String BUG_STATUS_SET_TO_DONE_MESSAGE = "Bug status set to Done.";
+    public static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
@@ -23,7 +25,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private Status status;
     private int taskIndex;
     private final List<Bug> bugs;
-    private final List<ActivityLog> bugActivityLog = new ArrayList<>();
+    // private final List<ActivityLog> bugActivityLog = new ArrayList<>();
 
     public BugImpl(int id, String title, String description,
                    String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndex) {
@@ -106,9 +108,12 @@ public class BugImpl extends TaskImpl implements Bug {
         // TODO Georgi Q: Should be added in a ActivityLog.
         if (getStatus() != Status.DONE) {
             setStatus(Status.DONE);
-            System.out.println("Bug status set to Done.");
+            addEventToActivityLogHistory(BUG_STATUS_SET_TO_DONE_MESSAGE);
+            System.out.println(BUG_STATUS_SET_TO_DONE_MESSAGE);
+
         } else {
-            System.out.println("Current bug status is already Done.");
+            addEventToActivityLogHistory(CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);
+            System.out.println(CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);
         }
     }
 
@@ -123,17 +128,17 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
-    public void addEventToActivityLogHistory(String event) {
-        bugActivityLog.add(new ActivityLogImpl(event));
-    }
+//    public void addEventToActivityLogHistory(String event) {
+//        bugActivityLog.add(new ActivityLogImpl(event));
+//    }
 
-    public String displayActivityLogHistory() {
-        StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : bugActivityLog) {
-            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-        }
-        return result.toString();
-    }
+//    public String displayActivityLogHistory() {
+//        StringBuilder result = new StringBuilder();
+//        for (ActivityLog activityLog : bugActivityLog) {
+//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+//        }
+//        return result.toString();
+//    }
 
     @Override
     public TaskType getType() {

@@ -58,7 +58,7 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public List<Board> getBoards() {
+    public List<Board> getTeamBoards() {
         return new ArrayList<>(boards);
     }
 
