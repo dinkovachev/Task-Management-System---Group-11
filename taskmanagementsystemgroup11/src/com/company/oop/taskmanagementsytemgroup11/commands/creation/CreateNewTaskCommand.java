@@ -39,7 +39,10 @@ public class CreateNewTaskCommand extends BaseCommand {
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG);
+                // TODO String teamname
+                // TODO Validation team
                 String boardFeedback = parameters.get(4);
+                // TODO Validation team's board
                 int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
 
 
@@ -113,4 +116,6 @@ public class CreateNewTaskCommand extends BaseCommand {
             throw new IllegalArgumentException(format("Member with username %s does not exist.", assignee));
         }
     }
+
+    // TODO VALIDATE BOARD
 }
