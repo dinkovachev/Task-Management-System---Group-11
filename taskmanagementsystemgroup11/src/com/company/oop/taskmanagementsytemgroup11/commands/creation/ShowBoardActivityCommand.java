@@ -15,7 +15,8 @@ public class ShowBoardActivityCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
-    private static final String SHOW_BOARD_ACTIVITY_MESSAGE = "Board %s activity in team %s";
+    private static final String SHOW_BOARD_ACTIVITY_MESSAGE = "Team name: " +
+            "%s%nBoardName: %s%n";
 
     public ShowBoardActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -35,7 +36,7 @@ public class ShowBoardActivityCommand extends BaseCommand {
 
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
         Board board = getTaskManagementSystemRepository().getBoardByName(boardName);
-        System.out.printf(SHOW_BOARD_ACTIVITY_MESSAGE, board.getName(), team.getName());
+        System.out.printf(SHOW_BOARD_ACTIVITY_MESSAGE, team.getName(), board.getName());
         return String.format(board.displayActivityLogHistory());
 
 //        StringBuilder sb = new StringBuilder();
