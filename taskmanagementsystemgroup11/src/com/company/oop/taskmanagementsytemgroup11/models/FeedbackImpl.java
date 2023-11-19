@@ -18,7 +18,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private Status status;
     private final List<Feedback> feedbacks;
 
-    public FeedbackImpl(int id, String title, String description, int rating, int taskIndex) {
+    public FeedbackImpl(int id, String title, String description, int rating, int taskIndex, String board) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;

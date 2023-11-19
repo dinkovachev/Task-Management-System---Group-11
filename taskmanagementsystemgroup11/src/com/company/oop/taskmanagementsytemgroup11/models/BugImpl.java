@@ -21,8 +21,8 @@ public class BugImpl extends TaskImpl implements Bug {
     private int taskIndex;
     private final List<Bug> bugs;
 
-    public BugImpl(int id, String title, String description,
-                   String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndex) {
+    public BugImpl(int id, String title, String description, String stepsToReproduce, Priority priority,
+                   Severity severity, String assignee, int taskIndex, String board) {
         super(id, title, description);
         setStepsToReproduce(stepsToReproduce);
         setPriority(priority);
@@ -134,7 +134,7 @@ public class BugImpl extends TaskImpl implements Bug {
             setStatus(Status.ACTIVE);
             return "Bug status set to Active.";
         } else {
-            return  "Current bug status is already Active.";
+            return "Current bug status is already Active.";
         }
     }
 

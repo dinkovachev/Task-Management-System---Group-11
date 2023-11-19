@@ -38,16 +38,16 @@ public interface TaskManagementSystemRepository {
 
     // ToDo Status status double check if we need to give Status to the bugs
     Bug createBug(TaskType type, String title, String description, String stepsToReproduce,
-                  Priority priority, Severity severity, String assignee, int taskIndexBug); // TODO Georgi take a look!
+                  Priority priority, Severity severity, String assignee, int taskIndexBug, String boardBug); // TODO Georgi take a look!
 
     //3. ToDo Status status double check if we need to give Status to the Stories
 
-    Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee, int taskIndexStory);
+    Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee, int taskIndexStory, String boardStory);
     //4. ToDo Status status double check if we need to give Status to the Stories
 
     // Story findStoryByIndex(int storyIndex);
 
-    Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback);
+    Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback, String boardFeedback);
 
     Feedback findFeedbackByIndex(int taskIndex);
     // 5. ToDo maybe need to add function to find user by Username

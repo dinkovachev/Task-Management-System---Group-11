@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -22,7 +21,7 @@ public class StoryImpl extends TaskImpl implements Story {
     private final List<Feedback> feedbacks = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
-                     int taskIndex) {
+                     int taskIndex, String board) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);

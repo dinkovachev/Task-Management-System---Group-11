@@ -92,8 +92,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
-                         Severity severity, String assignee, int taskIndexBug) {
-        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug);
+                         Severity severity, String assignee, int taskIndexBug, String board) {
+        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee,
+                taskIndexBug, board);
         this.bugs.add(bug);
         this.feedbacks.add(null);
         this.stories.add(null);
@@ -102,9 +103,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Story createStory(TaskType type, String title, String description,
-                             Priority priority, Size size, String assignee, int taskIndex) {
-        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex);
+    public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
+                             String assignee, int taskIndex, String board) {
+        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex, board);
         this.stories.add(story);
         this.feedbacks.add(null);
         this.bugs.add(null);
@@ -119,8 +120,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     //}
 
     @Override
-    public Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback);
+    public Feedback createFeedback(TaskType type, String title, String description, int rating,
+                                   int taskIndexFeedback, String board) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback, board);
         this.feedbacks.add(feedback);
         this.stories.add(null);
         this.bugs.add(null);
