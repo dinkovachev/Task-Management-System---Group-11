@@ -92,11 +92,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new CommentImpl(content, author);
     }
 
+    public int validateNextId(int nextId) {
+        if (nextId == this.nextId + 1) {
+            --this.nextId;
+        }
+        return ++this.nextId;
+    }
 
     @Override
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
                          Severity severity, String assignee, int taskIndexBug, String teamname, String board) {
-        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee,
+        Bug bug = new BugImpl(validateNextId(nextId), title, description, stepsToReproduce, priority, severity, assignee,
                 taskIndexBug, teamname, board);
         this.bugs.add(bug);
         this.feedbacks.add(null);
@@ -128,6 +134,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Feedback createFeedback(TaskType type, String title, String description, int rating,
                                    int taskIndexFeedback, String teamname, String board) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback, teamname, board);
+
         this.feedbacks.add(feedback);
         this.stories.add(null);
         this.bugs.add(null);
