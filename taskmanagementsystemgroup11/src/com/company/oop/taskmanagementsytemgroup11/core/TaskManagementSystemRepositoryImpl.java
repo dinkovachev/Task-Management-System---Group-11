@@ -98,7 +98,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
                          Severity severity, String assignee, int taskIndexBug, String teamname, String board) {
         int nextId = lastId + 1;
-        Bug bug = new BugImpl(nextId, title, description, stepsToReproduce, priority, severity, assignee,
+        Bug bug = new BugImpl(++lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 taskIndexBug, teamname, board);
         lastId = nextId;
         this.bugs.add(bug);
@@ -113,7 +113,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
                              String assignee, int taskIndex, String teamName, String board) {
         int nextId = lastId + 1;
-        Story story = new StoryImpl(nextId, title, description, priority, size, assignee, taskIndex, teamName, board);
+        Story story = new StoryImpl(++lastId, title, description, priority, size, assignee, taskIndex, teamName, board);
         lastId = nextId;
         this.stories.add(story);
         this.feedbacks.add(null);
