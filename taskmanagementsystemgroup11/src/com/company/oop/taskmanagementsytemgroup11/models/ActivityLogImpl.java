@@ -17,6 +17,7 @@ public class ActivityLogImpl implements ActivityLog {
     }
 
     public String getActivityLog() {
+
         return activityLog;
     }
 

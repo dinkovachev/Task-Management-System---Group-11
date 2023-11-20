@@ -7,8 +7,6 @@ public interface Board extends Printable {
     void addTask(Task task);
 
     String getName();
-
-    void addBoard(Board board);
     String displayActivityLogHistory();
 
 

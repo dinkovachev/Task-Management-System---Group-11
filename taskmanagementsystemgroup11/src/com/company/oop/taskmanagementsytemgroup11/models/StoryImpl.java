@@ -135,7 +135,9 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public void changePriority(Priority priority) {
+
         setPriority(priority);
+        addEventToActivityLogHistory();
     }
 
     @Override

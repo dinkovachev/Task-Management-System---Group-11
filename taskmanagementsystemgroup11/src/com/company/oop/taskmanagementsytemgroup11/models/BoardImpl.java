@@ -53,12 +53,6 @@ public class BoardImpl implements Board {
     }
     //ToDo double check this issue
 
-    @Override
-    public void addBoard(Board boards) {
-        this.boards.add(boards);
-        addEventToActivityLogHistory(String.format(NEW_BOARD_ADDED_MESSAGE, boards.getName()));
-    }
-
     public void addEventToActivityLogHistory(String event) {
         boardsActivityHistory.add(new ActivityLogImpl(event));
     }

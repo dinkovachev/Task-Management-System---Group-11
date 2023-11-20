@@ -71,7 +71,6 @@ public class TeamImpl implements Team {
     public void addMember(Members member) {
         teamMembers.add(member);
         teamActivityHistory.add(String.format("New member %s was added to team %s", member.getUsername(), this.getName()));
-
     }
 
 //    private void setTeamMembers(List<Members> teamMembers) {

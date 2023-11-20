@@ -102,7 +102,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.feedbacks.add(null);
         this.stories.add(null);
         this.tasks.add(bug);
-//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
+        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
         return bug;
     }
 
@@ -307,18 +307,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return this.nextId;
     }
 
-//    public void addEventToActivityLogHistory(String event) {
-//        activityLogList.add(new ActivityLogImpl(event));
-//    }
+    public void addEventToActivityLogHistory(String event) {
+        activityLogList.add(new ActivityLogImpl(event));
+    }
 
 
-//    public String displayActivityLogHistory() {
-//        StringBuilder result = new StringBuilder();
-//        for (ActivityLog activityLog : activityLogList) {
-//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-//        }
-//        return result.toString();
-//    }
+    public String displayActivityLogHistory() {
+        StringBuilder result = new StringBuilder();
+        for (ActivityLog activityLog : activityLogList) {
+            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+        }
+        return result.toString();
+    }
 
     @Override
     public boolean equals(Object o) {
