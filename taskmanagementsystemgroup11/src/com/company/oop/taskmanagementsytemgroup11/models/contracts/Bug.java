@@ -14,7 +14,7 @@ public interface Bug extends Task {
 
     String getAssignee();
 
-    void changePriority(Priority priority);
+    void changePriority(int taskIndex, Priority priority);
 
     void changeSeverity(int taskIndex, Severity severity);
 }
