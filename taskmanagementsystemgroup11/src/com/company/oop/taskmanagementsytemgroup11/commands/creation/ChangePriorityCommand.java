@@ -63,7 +63,7 @@ public class ChangePriorityCommand extends BaseCommand {
         if (priority.equals(story.getPriority())) {
             throw new IllegalArgumentException(format("Priority is already set to %s.", story.getPriority()));
         } else {
-            story.changePriority(priority);
+            story.changePriority(taskIndex, priority);
             return format("Priority changed to %s.", story.getPriority());
         }
     }

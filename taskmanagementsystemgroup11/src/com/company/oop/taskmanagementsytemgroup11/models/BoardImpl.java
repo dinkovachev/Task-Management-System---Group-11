@@ -15,7 +15,7 @@ public class BoardImpl implements Board {
             "The Board name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     public static final String NEW_BOARD_ADDED_MESSAGE = "New board with name %s added";
-    public static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task with name %s added to the board";
+    public static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task %s with name %s added to the board";
     public static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
 
     private final List<Task> tasksToAddToBoard = new ArrayList<>();
@@ -33,7 +33,10 @@ public class BoardImpl implements Board {
     @Override
     public void addTask(Task task) {
         tasksToAddToBoard.add(task);
-        addEventToActivityLogHistory(String.format(NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE, task.getTitle()));
+        addEventToActivityLogHistory(String.format(
+                NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE,
+                task.getId(),
+                task.getTitle()));
     }
 
     @Override
@@ -45,6 +48,7 @@ public class BoardImpl implements Board {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
     }
+
 
     public void addEventToActivityLogHistory(String event) {
         boardsActivityHistory.add(new ActivityLogImpl(event));

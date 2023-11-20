@@ -1,6 +1,8 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
@@ -94,6 +96,9 @@ public class CreateNewTaskCommand extends BaseCommand {
                                      int rating, int taskIndexFeedback, String teamnameFeedback, String boardFeedback) {
         Feedback feedback = getTaskManagementSystemRepository().createFeedback(typeFeedback, titleFeedback,
                 descriptionFeedback, rating, taskIndexFeedback, teamnameFeedback, boardFeedback);
+        // Add to board activity
+        Board board = getTaskManagementSystemRepository().getBoardByName(boardFeedback);
+        board.addTask(feedback);
         return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
     }
 
@@ -102,6 +107,9 @@ public class CreateNewTaskCommand extends BaseCommand {
             String assigneeStory, int taskIndexStory, String teamnameStory, String boardStory) {
         Story story = getTaskManagementSystemRepository().createStory(typeStory, titleStory, descriptionStory,
                 priorityStory, size, assigneeStory, taskIndexStory, teamnameStory, boardStory);
+        // Add to board activity
+        Board board = getTaskManagementSystemRepository().getBoardByName(boardStory);
+        board.addTask(story);
         return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
     }
 
@@ -112,7 +120,9 @@ public class CreateNewTaskCommand extends BaseCommand {
         Bug bug = getTaskManagementSystemRepository().createBug(
                 typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug,
                 taskIndexStory, teamnameBug, boardBug);
-        // TODO add to activity history
+        // Add to board activity
+        Board board = getTaskManagementSystemRepository().getBoardByName(boardBug);
+        board.addTask(bug);
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 

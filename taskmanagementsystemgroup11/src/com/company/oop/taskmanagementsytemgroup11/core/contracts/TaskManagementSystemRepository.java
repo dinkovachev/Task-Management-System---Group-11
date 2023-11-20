@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface TaskManagementSystemRepository {
 
+    List<Task> getAllTasks();
     List<Members> getAllMembers();
 
     List<Team> getAllTeams();

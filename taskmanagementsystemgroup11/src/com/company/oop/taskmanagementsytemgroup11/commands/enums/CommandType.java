@@ -20,5 +20,6 @@ public enum CommandType {
     CHANGESIZE,
     CHANGERATING,
     CREATE,
-    CHANGESTATUS
+    CHANGESTATUS,
+    SHOWTASKACTIVITY;
 }
