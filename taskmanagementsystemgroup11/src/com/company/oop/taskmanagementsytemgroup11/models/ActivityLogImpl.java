@@ -7,7 +7,6 @@ public class ActivityLogImpl implements ActivityLog {
     private String activityLog;
 
     public ActivityLogImpl(String activityLog) {
-
         setActivityLog(activityLog);
     }
 

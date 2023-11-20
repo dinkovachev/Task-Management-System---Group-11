@@ -46,9 +46,8 @@ public class BoardImpl implements Board {
     public void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
-
     }
-    //ToDo double check this issue
+
 
     public void addEventToActivityLogHistory(String event) {
         boardsActivityHistory.add(new ActivityLogImpl(event));
@@ -65,10 +64,9 @@ public class BoardImpl implements Board {
     @Override
     public String getAsString() {
         return """
-                Name: %s
+               Name: %s
                 """.formatted(name);
     }
-
 }
 
 

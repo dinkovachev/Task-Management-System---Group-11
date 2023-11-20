@@ -1,5 +1,4 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
-
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
@@ -26,9 +25,9 @@ public class MembersImpl implements Members {
     private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
-        setPersonId(personId);
         setFirstName(firstName);
         setLastName(lastName);
+        setPersonId(personId);
         setUsername(generateUsername(personId, firstName, lastName));
         addEventToActivityLogHistory(String.format(NEW_MEMBER_CREATED_MESSAGE, displayInfoForNewCreatedMember()));
 

@@ -9,4 +9,5 @@ public interface Board extends Printable {
     String getName();
 
     String displayActivityLogHistory();
+
 }
