@@ -169,7 +169,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return member;
     }
 
-//    @Override
+    @Override
+    public List<Task> getAllTasks() {
+        return new ArrayList<>(tasks);
+    }
+
+    //    @Override
 //    public Task findTaskByID(int id) {
 //        Task task = tasks
 //                .stream()

@@ -17,7 +17,7 @@ public interface Story extends Task {
 
     List<Feedback> getFeedbacks();
 
-    void changePriority(Priority priority);
+    void changePriority(int taskIndex, Priority priority);
 
     void changeSize(Size size);
 
