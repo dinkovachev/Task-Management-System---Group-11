@@ -1,16 +1,11 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
     private static final String CHANGED_FEEDBACK_STATUS_TO_SCHEDULED_MESSAGE = "Feedback status set to Scheduled.";
@@ -24,10 +19,9 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private int taskIndex;
     private Status status;
     private final List<Feedback> feedbacks;
-    //private final List<ActivityLog> feedbackActivityLog = new ArrayList<>();
 
     public FeedbackImpl(
-            int id, String title, String description, int rating, int taskIndex, String teamname, String board) {
+            int id, String title, String description, int rating, int taskIndex, String teamName, String board) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;
@@ -93,7 +87,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
-    // TODO Georgi Q: set to private
     public String revertStatus() {
         if (getStatus() == Status.DONE) {
             setStatus(Status.SCHEDULED);
@@ -113,21 +106,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
-//    public void addEventToActivityLogHistory(String event) {
-//        feedbackActivityLog.add(new ActivityLogImpl(event));
-//    }
-
-//    public String displayActivityLogHistory() {
-//        StringBuilder result = new StringBuilder();
-//        for (ActivityLog activityLog : feedbackActivityLog) {
-//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-//        }
-//        return result.toString();
-//    }
-
     @Override
-    public void changeRating(int rating) {
+    public void changeRating(int taskIndex, int rating) {
+
         setRating(rating);
+        addEventToActivityLogHistory(String.format("Rating of Feedback id %s changed to %s", taskIndex, rating));
     }
 
     @Override

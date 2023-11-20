@@ -15,7 +15,6 @@ public class ShowAllTeamBoardsCommand extends BaseCommand {
     private static final String SHOW_TEAM_BOARDS_MESSAGE = "Team: %s\nBoards:\n%s";
 
 
-
     public ShowAllTeamBoardsCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -32,9 +31,9 @@ public class ShowAllTeamBoardsCommand extends BaseCommand {
             return String.format(SHOW_ALL_TEAM_NO_BOARDS_MESSAGE, team.getName());
         }
         StringBuilder boardsHistory = new StringBuilder();
-        for (Board board: team.getTeamBoards()) {
+        for (Board board : team.getTeamBoards()) {
             boardsHistory.append(board.getAsString()).append(board.displayActivityLogHistory()).append("\n");
         }
-        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(),boardsHistory);
+        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(), boardsHistory);
     }
 }

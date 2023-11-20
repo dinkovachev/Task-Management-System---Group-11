@@ -6,8 +6,6 @@ public interface Team extends Printable {
 
     String getName();
 
-//    List<String> getTeamActivityHistory();
-
     void addBoard(Board board);
 
     List<Members> getTeamMembers();
@@ -19,5 +17,4 @@ public interface Team extends Printable {
     void addEventToActivityLogHistory(String event);
 
     String displayActivityLogHistory();
-
 }

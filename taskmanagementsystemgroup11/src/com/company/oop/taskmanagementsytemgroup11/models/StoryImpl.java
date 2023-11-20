@@ -12,10 +12,13 @@ import java.util.List;
 public class StoryImpl extends TaskImpl implements Story {
     private static final String STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE = "Story status set to InProgress.";
     private static final String STORY_STATUS_SET_TO_NOT_DONE_MESSAGE = "Story status set to Not Done.";
-    private static final String CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE = "Current story status is already Not Done.";
+    private static final String CURRENT_STORY_STATUS_IS_ALREADY_NOT_DONE_MESSAGE
+            = "Current story status is already Not Done.";
     private static final String STORY_STATUS_SET_TO_DONE_MESSAGE = "Story status set to Done.";
     private static final String CURRENT_STORY_STATUS_IS_ALREADY_DONE_MESSAGE = "Current story status is already Done.";
     private static final String NEW_STORY_WAS_CREATED_MESSAGE = "New story with title %s was created";
+    public static final String PRIORITY_FOR_STORY_ID_CHANGED_TO_MESSAGE = "Priority for Story id %s changed to %s";
+    public static final String SIZE_FOR_STORY_ID_CHANGED_TO_MESSAGE = "Size for Story id %s changed to %s";
     private Priority priority;
     private Size size;
     private Status status;
@@ -23,17 +26,14 @@ public class StoryImpl extends TaskImpl implements Story {
     private int taskIndex;
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
-    //private final List<ActivityLog> storyActivityLog = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
-                     int taskIndex, String teamname, String board) {
+                     int taskIndex, String teamName, String board) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
         setAssignee(assignee);
         this.status = Status.NOT_DONE;
-//        this.stories = new ArrayList<>();
-//        this.feedbacks = new ArrayList<>();
         addEventToActivityLogHistory(String.format(NEW_STORY_WAS_CREATED_MESSAGE, title));
     }
 
@@ -49,10 +49,6 @@ public class StoryImpl extends TaskImpl implements Story {
 
     public List<Story> getStories() {
         return new ArrayList<>(stories);
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return new ArrayList<>(feedbacks);
     }
 
     @Override
@@ -121,27 +117,17 @@ public class StoryImpl extends TaskImpl implements Story {
         }
     }
 
-//    public void addEventToActivityLogHistory(String event) {
-//        storyActivityLog.add(new ActivityLogImpl(event));
-//    }
-//
-//    public String displayActivityLogHistory() {
-//        StringBuilder result = new StringBuilder();
-//        for (ActivityLog activityLog : storyActivityLog) {
-//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-//        }
-//        return result.toString();
-//    }
-
     @Override
     public void changePriority(int taskIndex, Priority priority) {
         setPriority(priority);
-        addEventToActivityLogHistory(String.format("Priority for Story id %s changed to %s", taskIndex, priority));
+        addEventToActivityLogHistory(String.format(PRIORITY_FOR_STORY_ID_CHANGED_TO_MESSAGE, taskIndex, priority));
     }
 
     @Override
-    public void changeSize(Size size) {
+    public void changeSize(int taskIndex, Size size) {
         setSize(size);
+        addEventToActivityLogHistory(String.format(SIZE_FOR_STORY_ID_CHANGED_TO_MESSAGE, taskIndex, size));
+
     }
 
     @Override

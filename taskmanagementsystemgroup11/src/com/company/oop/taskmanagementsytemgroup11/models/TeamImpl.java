@@ -13,7 +13,7 @@ public class TeamImpl implements Team {
 
     private static final int MINIMUM_SYMBOLS = 5;
     private static final int MAXIMUM_SYMBOLS = 15;
-    public static final String TEAM_NAME_ERR_MSG = String.format(
+    private static final String TEAM_NAME_ERR_MSG = String.format(
             "The Team name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private static final String NEW_TEAM_ADDED = "Team %s was created";
@@ -24,12 +24,10 @@ public class TeamImpl implements Team {
     private final List<Members> teamMembers;
     private final List<Board> boards;
 
-
     public TeamImpl(String name) {
         setName(name);
         this.teamMembers = new ArrayList<>();
         this.boards = new ArrayList<>();
- //       teamActivityHistory.add(String.format("New team %s was added", this.getName()));
         addEventToActivityLogHistory(String.format(NEW_TEAM_ADDED, this.getName()));
     }
 
@@ -38,16 +36,10 @@ public class TeamImpl implements Team {
         return name;
     }
 
- //   @Override
-//    public List<String> getTeamActivityHistory() {
-//        return new ArrayList<>(teamActivityHistory);
-//    }
-
     @Override
     public void addBoard(Board board) {
         boards.add(board);
         addEventToActivityLogHistory(String.format(NEW_BOARD_ADDED_TO_TEAM, board.getName(), this.getName()));
-//      teamActivityHistory.add(String.format("New board %s was added to team %s", board.getName(), this.getName()));
     }
 
     @Override
@@ -69,7 +61,6 @@ public class TeamImpl implements Team {
     public void addMember(Members member) {
         teamMembers.add(member);
         addEventToActivityLogHistory(String.format(NEW_MEMBER_ADDED_TO_TEAM, member.getUsername(), this.getName()));
- //       teamActivityHistory.add(String.format("New member %s was added to team %s", member.getUsername(), this.getName()));
     }
 
     @Override
@@ -86,7 +77,6 @@ public class TeamImpl implements Team {
         return result.toString();
     }
 
-
     @Override
     public String getAsString() {
         return """
@@ -94,4 +84,3 @@ public class TeamImpl implements Team {
                 """.formatted(name);
     }
 }
-

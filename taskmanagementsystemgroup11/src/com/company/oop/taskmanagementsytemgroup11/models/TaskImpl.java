@@ -2,10 +2,10 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -27,7 +27,10 @@ public abstract class TaskImpl implements Task {
             "Description must be between %s and %s characters long!",
             DESCRIPTION_LEN_MIN,
             DESCRIPTION_LEN_MAX);
-    private static final String NEW_TASK_CREATED_MESSAGE = "Task created: %s";
+    private static final String NEW_TASK_CREATED_MESSAGE = "Task created: %s%n";
+    private static final String COMMENT_S_ADDED_TO_THE_TASK_MESSAGE = "Comment %s added to the task %s";
+    private static final String MEMBER_ASSIGNED_TO_TASK_MESSAGE = "Member %s assigned to task %s";
+    private static final String MEMBER_UNASSIGNED_FROM_TASK_MESSAGE = "Member %s unassigned from task %s";
 
     private int id;
     private String title;
@@ -36,7 +39,6 @@ public abstract class TaskImpl implements Task {
     private List<ActivityLog> activityHistory = new ArrayList<>();
     private List<Task> tasks = new ArrayList<>();
     private List<String> assignedMembersToTasks = new ArrayList<>();
-    private Status status;
 
     public TaskImpl(int id, String title, String description) {
         setId(id);
@@ -72,25 +74,6 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(commentList);
     }
 
-    public String displayInfoForNewCreatedTask(){
-        return String.format("Title: %s%n" +
-                "Description: %s" +
-                "Status: %s", title, description, status);
-    }
-
-    public void addEventToActivityLogHistory(String event){
-
-        activityHistory.add(new ActivityLogImpl(event));
-    }
-
-
-    public String displayActivityLogHistory() {
-        StringBuilder result = new StringBuilder();
-        for (ActivityLog activityLog : activityHistory) {
-            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-        }
-        return result.toString();
-    }
 
     private void setId(int id) {
 
@@ -118,21 +101,48 @@ public abstract class TaskImpl implements Task {
     @Override
     public void addComment(Comment comment) {
         commentList.add(comment);
+        addEventToActivityLogHistory(String.format(COMMENT_S_ADDED_TO_THE_TASK_MESSAGE, comment.getContent(),
+                this.getTitle()));
     }
 
     @Override
     public void addTask(Task task) {
         tasks.add(task);
+        addEventToActivityLogHistory(String.format("Task %s added", task));
     }
 
     @Override
     public void assignTask(Members member) {
         assignedMembersToTasks.add(String.valueOf(member));
+        addEventToActivityLogHistory(String.format(MEMBER_ASSIGNED_TO_TASK_MESSAGE, member.getUsername(),
+                this.getTitle()));
     }
 
     @Override
     public void unassignTask(Members member) {
+
         assignedMembersToTasks.add(String.valueOf(member));
+        addEventToActivityLogHistory(String.format(MEMBER_UNASSIGNED_FROM_TASK_MESSAGE, member.getUsername(),
+                this.getTitle()));
+    }
+
+    public void addEventToActivityLogHistory(String event) {
+
+        activityHistory.add(new ActivityLogImpl(event));
+    }
+
+    public String displayActivityLogHistory() {
+        StringBuilder result = new StringBuilder();
+        for (ActivityLog activityLog : activityHistory) {
+            result.append(activityLog.displayInfo()).append(System.lineSeparator());
+        }
+        return result.toString();
+    }
+
+    public String displayInfoForNewCreatedTask() {
+        return String.format("%nTitle: %s%n" +
+                        "Description: %s"
+                , title, description);
     }
 
     @Override
@@ -151,13 +161,12 @@ public abstract class TaskImpl implements Task {
         TaskImpl task = (TaskImpl) o;
         return id == task.id && title.equals(task.title) && description.equals(task.description) &&
                 commentList.equals(task.commentList) && activityHistory.equals(task.activityHistory) &&
-                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks) &&
-                status == task.status;
+                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks, status);
+        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks);
     }
 
     @Override

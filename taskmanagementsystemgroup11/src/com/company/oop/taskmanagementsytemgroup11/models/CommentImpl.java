@@ -3,7 +3,6 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 
 public class CommentImpl implements Comment {
-
     private String content;
     private String author;
 

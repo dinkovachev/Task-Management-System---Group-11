@@ -8,8 +8,6 @@ import java.util.List;
 
 public class CreateMemberCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private static final String NAME_ALREADY_EXISTS = "Name %s, already exists";
-
     private String firstName;
     private String lastName;
 
@@ -21,14 +19,12 @@ public class CreateMemberCommand extends BaseCommand {
     public String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         parseParameters(parameters);
-        //       if (getTaskManagementSystemRepository().memberExist(firstName+lastName personId)){   //firstname+lastname ?!?
-//            throw new IllegalArgumentException(String.format(NAME_ALREADY_EXISTS, firstName+lastName));
-        //       }
+
         return createMember(firstName, lastName);
     }
 
     private String createMember(String firstName, String lastName) {
-        Members member = getTaskManagementSystemRepository().createMember( firstName, lastName);
+        Members member = getTaskManagementSystemRepository().createMember(firstName, lastName);
 
         return String.format("New member with name %s %s and ID %d is created.",
                 member.getFirstName(), member.getLastName(), member.getPersonId());

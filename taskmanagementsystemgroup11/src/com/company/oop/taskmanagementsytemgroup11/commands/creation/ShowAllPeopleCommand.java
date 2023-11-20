@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ShowAllPeopleCommand extends BaseCommand {
 
-    //todo remove this list and get members from repository
     private final List<Members> members;
 
     public ShowAllPeopleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {

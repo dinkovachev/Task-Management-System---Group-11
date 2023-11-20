@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
+
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
@@ -9,7 +10,6 @@ import java.util.List;
 public class CreateBoardCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String BOARD_ALREADY_EXISTS = "Board %s, already exists";
-
 
     public CreateBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -30,6 +30,7 @@ public class CreateBoardCommand extends BaseCommand {
         Board board = getTaskManagementSystemRepository().createBoard(name);
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
         team.addBoard(board);
+
         return String.format("New board with name %s created in team %s.", board.getName(), team.getName());
     }
 }
