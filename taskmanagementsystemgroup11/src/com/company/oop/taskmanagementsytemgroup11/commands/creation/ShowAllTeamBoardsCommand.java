@@ -2,23 +2,22 @@ package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
 
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ShowAllTeamsBoardsCommand extends BaseCommand {
+public class ShowAllTeamBoardsCommand extends BaseCommand {
 //    private final List<Board> boards;
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String SHOW_ALL_TEAM_NO_BOARDS_MESSAGE = "There no boards in %s team.";
-    private static final String SHOW_TEAM_BOARDS_MESSAGE = "%s team boards: %s:";
+    private static final String SHOW_TEAM_BOARDS_MESSAGE = "Team: %s\nBoards:\n%s";
 
 
 
-    public ShowAllTeamsBoardsCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ShowAllTeamBoardsCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
- //       boards = taskManagementSystemRepository.getAllTeamsBoards();
-
     }
 
     @Override
@@ -27,15 +26,15 @@ public class ShowAllTeamsBoardsCommand extends BaseCommand {
         String teamName = parameters.get(0);
 
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
-        List boards = team.getTeamBoards();
-//        if (teamName.length()==1) {
-//            return String.format("There are no team activity in team %s.", teamName);
-//        }
+        List<Board> boards = team.getTeamBoards();
 
         if (boards.isEmpty()) {
             return String.format(SHOW_ALL_TEAM_NO_BOARDS_MESSAGE, team.getName());
         }
-        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(), team.getTeamBoards());
-//        return ListingHelpers.boardToString(boards);
+        StringBuilder boardsHistory = new StringBuilder();
+        for (Board board: team.getTeamBoards()) {
+            boardsHistory.append(board.getAsString()).append(board.displayActivityLogHistory()).append("\n");
+        }
+        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(),boardsHistory);
     }
 }

@@ -10,5 +10,4 @@ public interface Board extends Printable {
 
     String displayActivityLogHistory();
 
-    List<Board> getBoards();
 }

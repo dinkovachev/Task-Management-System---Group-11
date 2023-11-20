@@ -17,7 +17,7 @@ public class BoardImpl implements Board {
     public static final String NEW_BOARD_ADDED_MESSAGE = "New board with name %s added";
     public static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task %s with name %s added to the board";
     public static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
-    private final List<Board> boards = new ArrayList<>();
+
     private final List<Task> tasksToAddToBoard = new ArrayList<>();
     private final List<ActivityLog> boardsActivityHistory = new ArrayList<>();
     private String name;
@@ -44,17 +44,11 @@ public class BoardImpl implements Board {
         return name;
     }
 
-    @Override
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
-    }
-
     public void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(), MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS, BOARD_NAME_ERR_MSG);
         this.name = name;
-
     }
-    //ToDo double check this issue
+
 
     public void addEventToActivityLogHistory(String event) {
         boardsActivityHistory.add(new ActivityLogImpl(event));
@@ -71,10 +65,9 @@ public class BoardImpl implements Board {
     @Override
     public String getAsString() {
         return """
-                Name: %s
+               Name: %s
                 """.formatted(name);
     }
-
 }
 
 

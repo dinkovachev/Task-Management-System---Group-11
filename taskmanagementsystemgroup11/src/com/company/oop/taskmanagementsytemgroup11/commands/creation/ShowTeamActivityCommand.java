@@ -24,19 +24,10 @@ public class ShowTeamActivityCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String teamName = parameters.get(0);
- //       int id = ParsingHelpers.tryParseInteger(parameters.get(1), INVALID_INPUT_MESSAGE);
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
-        if (teamName.length()==1) {
+        if (teamName.length() == 1) {
             return String.format("There are no team activity in team %s.", teamName);
         }
-
-        return String.format(SHOW_TEAM_ACTIVITY_MESSAGE,/*id,*/ teamName, team.getTeamActivityHistory().toString());
- //       return showTeamActivity(team, id);
+        return String.format(SHOW_TEAM_ACTIVITY_MESSAGE, teamName, team.displayActivityLogHistory());
     }
-//    private String showTeamActivity(String team, int id){
-//        Team team = getTaskManagementSystemRepository().getTeamByUsername(team);
-//        ActivityLog activityLog = getTaskManagementSystemRepository().ge
-//
-//        return String.format(SHOW_TEAM_ACTIVITY_MESSAGE,team);
-//    }
 }
