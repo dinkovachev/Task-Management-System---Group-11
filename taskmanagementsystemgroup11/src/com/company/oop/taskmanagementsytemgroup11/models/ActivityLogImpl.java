@@ -1,11 +1,6 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
 
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 
 public class ActivityLogImpl implements ActivityLog {
     public static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "Description cannot be empty";
@@ -15,9 +10,6 @@ public class ActivityLogImpl implements ActivityLog {
         setActivityLog(activityLog);
     }
 
-    public String getActivityLog() {
-        return activityLog;
-    }
 
     private void setActivityLog(String activityLog) {
         if (activityLog.isEmpty()) {
@@ -30,10 +22,4 @@ public class ActivityLogImpl implements ActivityLog {
     public String displayInfo() {
         return String.format("Activity History - %s", activityLog);
     }
-
-
-    //ToDo - Dinko
-    // Finish the remaining methods from the interface
-
-
 }

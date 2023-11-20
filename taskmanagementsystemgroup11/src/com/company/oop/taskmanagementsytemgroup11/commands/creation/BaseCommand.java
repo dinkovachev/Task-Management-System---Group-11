@@ -7,9 +7,6 @@ import java.util.List;
 
 public abstract class BaseCommand implements Command {
 
-    //ToDo - Dinko
-    // Double check if it is ok
-
     private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     protected BaseCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -22,8 +19,8 @@ public abstract class BaseCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-
         return executeCommand(parameters);
     }
+
     protected abstract String executeCommand(List<String> parameters);
 }

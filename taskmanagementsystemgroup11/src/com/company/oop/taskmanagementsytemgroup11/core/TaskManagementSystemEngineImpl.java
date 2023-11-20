@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngine {
-
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
     private static final String MAIN_SPLIT_SYMBOL = " ";
@@ -50,6 +49,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
             }
         }
     }
+
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
         List<String> parameters = extractCommandParameters(inputLine);
@@ -57,6 +57,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         String executionResult = command.execute(parameters);
         print(executionResult);
     }
+
     /**
      * Receives a full line and extracts the command to be executed from it.
      * For example, if the input line is "FilterBy Assignee John", the method will return "FilterBy".

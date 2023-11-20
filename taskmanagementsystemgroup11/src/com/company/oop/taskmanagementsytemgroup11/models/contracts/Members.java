@@ -29,5 +29,4 @@ public interface Members extends Printable {
     boolean equals(Object o);
 
     int hashCode();
-
 }

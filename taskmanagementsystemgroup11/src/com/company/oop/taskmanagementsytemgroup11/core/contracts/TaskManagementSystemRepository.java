@@ -11,13 +11,12 @@ import java.util.List;
 public interface TaskManagementSystemRepository {
 
     List<Task> getAllTasks();
+
     List<Members> getAllMembers();
 
     List<Team> getAllTeams();
 
     List<Board> getAllTeamsBoards();
-
-    Members getMemberById(int id);
 
     Members getMemberByUsername(String username);
 
@@ -35,34 +34,23 @@ public interface TaskManagementSystemRepository {
 
     Comment createComment(String content, String author);
 
-    // ToDo stepsToReproduce maybe need to be a List if we need to invoke it
-
-    // ToDo Status status double check if we need to give Status to the bugs
-    Bug createBug(TaskType type, String title, String description, String stepsToReproduce,
-                  Priority priority, Severity severity, String assignee, int taskIndexBug, String teamnameBug, String boardBug); // TODO Georgi take a look!
-
-    //3. ToDo Status status double check if we need to give Status to the Stories
+    Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
+                  Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug);
 
     Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee,
-                      int taskIndexStory, String teamnameStory, String boardStory);
-    //4. ToDo Status status double check if we need to give Status to the Stories
+                      int taskIndexStory, String teamNameStory, String boardStory);
 
-    // Story findStoryByIndex(int storyIndex);
+    Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback,
+                            String boardFeedback, String feedback);
 
-    Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback, String boardFeedback, String feedback);
-
-    Feedback findFeedbackByIndex(int taskIndex);
-    // 5. ToDo maybe need to add function to find user by Username
 
     boolean memberExistsInTeam(Members member, Team team);
 
     boolean memberExist(String memberName);
 
-    boolean teamExist(String teamName);  //todo
+    boolean teamExist(String teamName);
 
-    boolean boardExist(String name);  //todo
-
-    List<ActivityLog> getAllActivities();
+    boolean boardExist(String name);
 
     public int getLastId();
 

@@ -16,7 +16,6 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-
 public class CreateNewTaskCommand extends BaseCommand {
 
     public static final int EXPECTED_ARGUMENTS_COUNT_FEEDBACK = 6;
@@ -38,13 +37,11 @@ public class CreateNewTaskCommand extends BaseCommand {
                 String titleFeedback = parameters.get(1);
                 String descriptionFeedback = parameters.get(2);
                 int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG);
-                // TODO String teamname
-                String teamnameFeedback = parameters.get(4);
-                // TODO Validation team
+                String teamNameFeedback = parameters.get(4);
+                validateTeamName(teamNameFeedback);
                 String boardFeedback = parameters.get(5);
-                // TODO Validation team's board
+                validateBoardName(boardFeedback);
                 int taskIndexFeedback = getTaskManagementSystemRepository().getLastId();
-
 
                 return createNewFeedback(
                         typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback, boardFeedback);
@@ -58,8 +55,8 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
                 String assigneeStory = parameters.get(5);
                 validateMemberExists(assigneeStory);
-                String teamnameStory = parameters.get(6);
-                validateTeamName(teamnameStory);
+                String teamNameStory = parameters.get(6);
+                validateTeamName(teamNameStory);
                 String boardStory = parameters.get(7);
                 validateBoardName(boardStory);
                 int taskIndexStory = getTaskManagementSystemRepository().getLastId();
@@ -77,8 +74,8 @@ public class CreateNewTaskCommand extends BaseCommand {
                 Severity severityBug = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
                 String assigneeBug = parameters.get(6);
                 validateMemberExists(assigneeBug);
-                String teamnameBug = parameters.get(7);
-                validateTeamName(teamnameBug);
+                String teamNameBug = parameters.get(7);
+                validateTeamName(teamNameBug);
                 String boardBug = parameters.get(8);
                 validateBoardName(boardBug);
                 int taskIndexBug = getTaskManagementSystemRepository().getLastId();
@@ -95,9 +92,9 @@ public class CreateNewTaskCommand extends BaseCommand {
                                      int rating, int taskIndexFeedback, String teamnameFeedback, String boardFeedback) {
         Feedback feedback = getTaskManagementSystemRepository().createFeedback(typeFeedback, titleFeedback,
                 descriptionFeedback, rating, taskIndexFeedback, teamnameFeedback, boardFeedback);
-        // Add to board activity
         Board board = getTaskManagementSystemRepository().getBoardByName(boardFeedback);
         board.addTask(feedback);
+
         return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
     }
 
@@ -106,8 +103,8 @@ public class CreateNewTaskCommand extends BaseCommand {
             String assigneeStory, int taskIndexStory, String teamnameStory, String boardStory) {
         Story story = getTaskManagementSystemRepository().createStory(typeStory, titleStory, descriptionStory,
                 priorityStory, size, assigneeStory, taskIndexStory, teamnameStory, boardStory);
-        // Add to board activity
         Board board = getTaskManagementSystemRepository().getBoardByName(boardStory);
+
         board.addTask(story);
         return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
     }
@@ -119,9 +116,9 @@ public class CreateNewTaskCommand extends BaseCommand {
         Bug bug = getTaskManagementSystemRepository().createBug(
                 typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug, assigneeBug,
                 taskIndexStory, teamnameBug, boardBug);
-        // Add to board activity
         Board board = getTaskManagementSystemRepository().getBoardByName(boardBug);
         board.addTask(bug);
+
         return format(NEW_TASK_CREATED_MSG, typeBug, bug.getId());
     }
 

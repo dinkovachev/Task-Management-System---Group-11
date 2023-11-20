@@ -28,18 +28,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
-    private final List<ActivityLog> activityLogList = new ArrayList<>();
-
 
     public TaskManagementSystemRepositoryImpl() {
-
         lastId = 0;
         lastMemberId = 0;
     }
-
-
-    //ToDo - Dinko
-    // finish the remaining methods
 
     @Override
     public List<Members> getAllMembers() {
@@ -51,24 +44,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(teams);
     }
 
-    //ToDo double check how to display the teamBoards only not all boards
     @Override
     public List<Board> getAllTeamsBoards() {
         return new ArrayList<>(boards);
     }
 
-    public List<ActivityLog> getAllActivities() {
-        return new ArrayList<>(activityLogList);
-    }
-
-
     @Override
     public Members createMember(String firstName, String lastName) {
-        int nextMemberId = lastMemberId +1;
+        int nextMemberId = lastMemberId + 1;
         Members member = new MembersImpl(nextMemberId, firstName, lastName);
         this.members.add(member);
         lastMemberId = nextMemberId;
-//        addEventToActivityLogHistory(format("New member with name %s %s created", firstName, lastName));
+
         return member;
     }
 
@@ -76,16 +63,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Team createTeam(String name) {
         Team team = new TeamImpl(name);
         this.teams.add(team);
-//        addEventToActivityLogHistory(format("New team with name %s created", name));
+
         return team;
     }
-
 
     @Override
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         this.boards.add(board);
-//        addEventToActivityLogHistory(format("New board with name %s created", name));
+
         return board;
     }
 
@@ -96,38 +82,33 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
-                         Severity severity, String assignee, int taskIndexBug, String teamname, String board) {
+                         Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board) {
         int nextId = lastId + 1;
         Bug bug = new BugImpl(++lastId, title, description, stepsToReproduce, priority, severity, assignee,
-                taskIndexBug, teamname, board);
+                taskIndexBug, teamNameBug, board);
         lastId = nextId;
         this.bugs.add(bug);
         this.feedbacks.add(null);
         this.stories.add(null);
         this.tasks.add(bug);
-//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
+
         return bug;
     }
 
     @Override
     public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
-                             String assignee, int taskIndex, String teamName, String board) {
+                             String assignee, int taskIndex, String teamNameStory, String board) {
         int nextId = lastId + 1;
-        Story story = new StoryImpl(++lastId, title, description, priority, size, assignee, taskIndex, teamName, board);
+        Story story = new StoryImpl(++lastId, title, description, priority, size, assignee, taskIndex, teamNameStory,
+                board);
         lastId = nextId;
         this.stories.add(story);
         this.feedbacks.add(null);
         this.bugs.add(null);
         this.tasks.add(story);
-//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
+
         return story;
     }
-//todo това ми го поиска да се имплемнтира ей така от нищото
-
-    // @Override
-    // public Story findStoryByIndex(int storyIndex) {
-    //    return null;
-    //}
 
     @Override
     public Feedback createFeedback(TaskType type, String title, String description, int rating,
@@ -139,7 +120,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.stories.add(null);
         this.bugs.add(null);
         this.tasks.add(feedback);
-//        addEventToActivityLogHistory(format("New %s with title %s created",type, title));
+
         return feedback;
     }
 
@@ -166,30 +147,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return board;
     }
 
-
-    @Override
-    public Members getMemberById(int id) {
-        Members member = members.stream()
-                .filter(b -> b.getAllTeamMembers().get(id).equals(id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
-        return member;
-    }
-
     @Override
     public List<Task> getAllTasks() {
         return new ArrayList<>(tasks);
     }
-
-    //    @Override
-//    public Task findTaskByID(int id) {
-//        Task task = tasks
-//                .stream()
-//                .filter(b -> b.getAllTasks().get(id).equals(id))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", id)));
-//        return task;
-//    }
 
     @Override
     public Task findTaskByID(int taskIndex) {
@@ -199,26 +160,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             return tasks.get(taskIndex);
         }
     }
-
-
-//    @Override
-//    public Bug findBugByIndex(int bugIndex) {
-//        Bug bug = bugs
-//                .stream()
-//                .filter(b -> b.getBugs().get(bugIndex).equals(bugIndex))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such bug with index %d", bugIndex)));
-//        return bug;
-//    }
-
-//    @Override
-//    public Bug findBugByIndex(int bugIndex) {
-//        if (bugIndex < 0 || bugIndex >= tasks.size()) {
-//            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
-//        }
-//        return tasks.get(tasks.size() - bugIndex - 1);
-//    }
-    // find team by name - teamMembers
 
     @Override
     public Story findStoryByTaskIndex(int taskIndex) {
@@ -250,27 +191,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
         }
         return feedbacks.get(taskIndex);
-    }
-
-//    @Override
-//    public Story findStoryByIndex(int storyIndex) {
-//        Story story = stories
-//                .stream()
-//                .filter(s -> s.getStories().get(storyIndex).equals(storyIndex))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException(String.format("No such story with index %d", storyIndex)));
-//        return story;
-//    }
-
-    @Override
-    public Feedback findFeedbackByIndex(int feedbackIndex) {
-        Feedback feedback = feedbacks
-                .stream()
-                .filter((f -> f.getFeedbacks().get(feedbackIndex).equals(feedbackIndex)))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("No such feedback with index %d", feedbackIndex)));
-
-        return feedback;
     }
 
     @Override
@@ -319,24 +239,19 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return this.lastId;
     }
 
-//    public void addEventToActivityLogHistory(String event) {
-//        activityLogList.add(new ActivityLogImpl(event));
-//    }
-
-
-//    public String displayActivityLogHistory() {
-//        StringBuilder result = new StringBuilder();
-//        for (ActivityLog activityLog : activityLogList) {
-//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-//        }
-//        return result.toString();
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskManagementSystemRepositoryImpl that = (TaskManagementSystemRepositoryImpl) o;
-        return lastId == that.lastId && lastMemberId == that.lastMemberId && Objects.equals(members, that.members) && Objects.equals(teams, that.teams) && Objects.equals(boards, that.boards) && Objects.equals(bugs, that.bugs) && Objects.equals(stories, that.stories) && Objects.equals(feedbacks, that.feedbacks) && Objects.equals(tasks, that.tasks) && Objects.equals(activityLogList, that.activityLogList);
+        return lastId == that.lastId
+                && lastMemberId == that.lastMemberId
+                && Objects.equals(members, that.members)
+                && Objects.equals(teams, that.teams)
+                && Objects.equals(boards, that.boards)
+                && Objects.equals(bugs, that.bugs)
+                && Objects.equals(stories, that.stories)
+                && Objects.equals(feedbacks, that.feedbacks)
+                && Objects.equals(tasks, that.tasks);
     }
 }

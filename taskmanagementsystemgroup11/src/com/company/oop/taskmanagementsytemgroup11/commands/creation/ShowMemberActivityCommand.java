@@ -22,11 +22,4 @@ public class ShowMemberActivityCommand extends BaseCommand {
         System.out.printf(SHOW_MEMBER_ACTIVITY_MESSAGE, username);
         return String.format(member.displayActivityLogHistory());
     }
-
-    //ToDo double check to make the list not show []
-//    private String showUserActivity(String username) {
-//        String.format()
-//        StringBuilder result = new StringBuilder();
-//        List<String>
-//    }
 }

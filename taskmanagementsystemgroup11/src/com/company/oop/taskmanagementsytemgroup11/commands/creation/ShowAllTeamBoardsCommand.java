@@ -9,11 +9,10 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowAllTeamBoardsCommand extends BaseCommand {
-//    private final List<Board> boards;
+
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String SHOW_ALL_TEAM_NO_BOARDS_MESSAGE = "There no boards in %s team.";
     private static final String SHOW_TEAM_BOARDS_MESSAGE = "Team: %s\nBoards:\n%s";
-
 
 
     public ShowAllTeamBoardsCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -32,9 +31,9 @@ public class ShowAllTeamBoardsCommand extends BaseCommand {
             return String.format(SHOW_ALL_TEAM_NO_BOARDS_MESSAGE, team.getName());
         }
         StringBuilder boardsHistory = new StringBuilder();
-        for (Board board: team.getTeamBoards()) {
+        for (Board board : team.getTeamBoards()) {
             boardsHistory.append(board.getAsString()).append(board.displayActivityLogHistory()).append("\n");
         }
-        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(),boardsHistory);
+        return String.format(SHOW_TEAM_BOARDS_MESSAGE, team.getName(), boardsHistory);
     }
 }

@@ -1,18 +1,13 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
-import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
 public class ShowTeamActivityCommand extends BaseCommand {
-
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    private static final String INVALID_INPUT_MESSAGE = "Invalid input. Expected a number.";
     private static final String SHOW_TEAM_ACTIVITY_MESSAGE = "%s team activity %s ";
 
 

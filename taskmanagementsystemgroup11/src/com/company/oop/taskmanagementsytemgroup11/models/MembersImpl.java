@@ -1,4 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.models;
+
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
@@ -13,7 +14,8 @@ public class MembersImpl implements Members {
             "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private static final String NEW_MEMBER_CREATED_MESSAGE = "New member created %s%n";
-    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was unassigned from team member %s";
+    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE
+            = "New task %s was unassigned from team member %s";
     private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String MEMBER_ADDED_TO_TEAM_MESSAGE = "Member %s was added to team %s";
     private static final String COMMENT_ADDED_TO_TASK_MESSAGE = "Comment %s added to task %s";
@@ -30,13 +32,13 @@ public class MembersImpl implements Members {
         setPersonId(personId);
         setUsername(generateUsername(personId, firstName, lastName));
         addEventToActivityLogHistory(String.format(NEW_MEMBER_CREATED_MESSAGE, displayInfoForNewCreatedMember()));
-
     }
 
     @Override
     public String getUsername() {
         return username;
     }
+
     private void setUsername(String username) {
         this.username = username;
     }
@@ -76,16 +78,15 @@ public class MembersImpl implements Members {
     @Override
     public void assignTask(Members memberToAssignTask, Task taskToBeAssigned) {
         taskToBeAssigned.assignTask(memberToAssignTask);
-        addEventToActivityLogHistory(String.format(NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE, taskToBeAssigned.getTitle(),
-                memberToAssignTask.getUsername()));
-
+        addEventToActivityLogHistory(String.format(NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE,
+                taskToBeAssigned.getTitle(), memberToAssignTask.getUsername()));
     }
 
     @Override
     public void unassignTask(Members memberToUnassignTask, Task taskToBeUnassigned) {
         taskToBeUnassigned.unassignTask(memberToUnassignTask);
-        addEventToActivityLogHistory(String.format(NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE, taskToBeUnassigned.getTitle(),
-                memberToUnassignTask.getUsername()));
+        addEventToActivityLogHistory(String.format(NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE,
+                taskToBeUnassigned.getTitle(), memberToUnassignTask.getUsername()));
     }
 
     public String displayInfoForNewCreatedMember() {
@@ -98,7 +99,6 @@ public class MembersImpl implements Members {
     public void addEventToActivityLogHistory(String event) {
         membersActivityHistory.add(new ActivityLogImpl(event));
     }
-
 
     public String displayActivityLogHistory() {
         StringBuilder result = new StringBuilder();
@@ -127,8 +127,6 @@ public class MembersImpl implements Members {
     public List<Members> getAllTeamMembers() {
         return new ArrayList<>(members);
     }
-
-
 
     @Override
     public String getAsString() {

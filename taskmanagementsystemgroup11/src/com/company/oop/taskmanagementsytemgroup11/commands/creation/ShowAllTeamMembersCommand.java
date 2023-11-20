@@ -11,10 +11,6 @@ import java.util.List;
 public class ShowAllTeamMembersCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
 
-    //ToDo ShowAllTeam members must display the name of each member
-
-//    private final List<Members> teamMembers;  //todo ???
-
     public ShowAllTeamMembersCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -22,7 +18,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_PARAMETERS);
-          String teamName = parameters.get(0);
+        String teamName = parameters.get(0);
         return showAllTeamMembers(teamName);
     }
 
@@ -32,7 +28,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand {
         if (teamMembers.isEmpty()) {
             return "There are no registered  team members.";
         }
-        System.out.printf("Team: %s%n",teamName);
+        System.out.printf("Team: %s%n", teamName);
         return ListingHelpers.teamMembersToString(teamMembers);
     }
 }

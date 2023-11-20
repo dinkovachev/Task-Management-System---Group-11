@@ -2,10 +2,10 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Printable;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -32,10 +32,10 @@ public abstract class TaskImpl implements Task {
     private int id;
     private String title;
     private String description;
-    private List<Comment> commentList = new ArrayList<>();
-    private List<ActivityLog> activityHistory = new ArrayList<>();
-    private List<Task> tasks = new ArrayList<>();
-    private List<String> assignedMembersToTasks = new ArrayList<>();
+    private final List<Comment> commentList = new ArrayList<>();
+    private final List<ActivityLog> activityHistory = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
+    private final List<String> assignedMembersToTasks = new ArrayList<>();
     private Status status;
 
     public TaskImpl(int id, String title, String description) {
@@ -72,17 +72,15 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(commentList);
     }
 
-    public String displayInfoForNewCreatedTask(){
+    public String displayInfoForNewCreatedTask() {
         return String.format("Title: %s%n" +
                 "Description: %s" +
                 "Status: %s", title, description, status);
     }
 
-    public void addEventToActivityLogHistory(String event){
-
+    public void addEventToActivityLogHistory(String event) {
         activityHistory.add(new ActivityLogImpl(event));
     }
-
 
     public String displayActivityLogHistory() {
         StringBuilder result = new StringBuilder();
@@ -93,7 +91,6 @@ public abstract class TaskImpl implements Task {
     }
 
     private void setId(int id) {
-
         this.id = id;
     }
 

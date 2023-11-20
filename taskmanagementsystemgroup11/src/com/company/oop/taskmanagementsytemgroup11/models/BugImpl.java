@@ -16,8 +16,8 @@ public class BugImpl extends TaskImpl implements Bug {
     private static final String BUG_STATUS_SET_TO_ACTIVE_MESSAGE = "Bug status set to Active.";
     private static final String BUG_STATUS_ALREADY_ACTIVE_MESSAGE = "Current bug status is already Active.";
     private static final String NEW_BUG_CREATED_MESSAGE = "New bug with title %s created";
-    public static final String BUG_STATUS_SET_TO_DONE_MESSAGE = "Bug status set to Done.";
-    public static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
+    private static final String BUG_STATUS_SET_TO_DONE_MESSAGE = "Bug status set to Done.";
+    private static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
@@ -25,10 +25,9 @@ public class BugImpl extends TaskImpl implements Bug {
     private Status status;
     private int taskIndex;
     private final List<Bug> bugs;
-    // private final List<ActivityLog> bugActivityLog = new ArrayList<>();
 
     public BugImpl(int id, String title, String description, String stepsToReproduce, Priority priority,
-                   Severity severity, String assignee, int taskIndex, String teamname, String board) {
+                   Severity severity, String assignee, int taskIndex, String teamName, String board) {
         super(id, title, description);
         setStepsToReproduce(stepsToReproduce);
         setPriority(priority);
@@ -37,7 +36,6 @@ public class BugImpl extends TaskImpl implements Bug {
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
         addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
-
     }
 
     @Override
@@ -105,7 +103,6 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     public String advanceStatus() {
-        // TODO Georgi Q: Should be added in a ActivityLog.
         if (getStatus() != Status.DONE) {
             setStatus(Status.DONE);
             addEventToActivityLogHistory(BUG_STATUS_SET_TO_DONE_MESSAGE);
@@ -128,18 +125,6 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
-//    public void addEventToActivityLogHistory(String event) {
-//        bugActivityLog.add(new ActivityLogImpl(event));
-//    }
-
-//    public String displayActivityLogHistory() {
-//        StringBuilder result = new StringBuilder();
-//        for (ActivityLog activityLog : bugActivityLog) {
-//            result.append(activityLog.displayInfo()).append(System.lineSeparator());
-//        }
-//        return result.toString();
-//    }
-
     @Override
     public TaskType getType() {
         return TaskType.BUG;
@@ -149,17 +134,6 @@ public class BugImpl extends TaskImpl implements Bug {
     public String getAsString() {
         return null;
     }
-
-//    @Override
-//    public void changePriority(Priority newPriority) {
-//        setPriority(newPriority);
-//    }
-//
-//    @Override
-//    public void changeSeverity(Severity newSeverity) {
-//        setSeverity(newSeverity);
-//    }
-
 
     @Override
     public boolean equals(Object o) {

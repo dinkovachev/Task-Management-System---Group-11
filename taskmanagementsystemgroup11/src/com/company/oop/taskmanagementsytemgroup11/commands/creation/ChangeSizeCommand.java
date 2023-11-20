@@ -36,7 +36,7 @@ public class ChangeSizeCommand extends BaseCommand {
 
     private String changeStorySize(TaskType type, Size size, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type,taskIndex); // IMPORTANT!
+        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
         if (size.equals(story.getSize())) {
             throw new IllegalArgumentException(format("Size is already set to %s.", story.getSize()));
         } else {
