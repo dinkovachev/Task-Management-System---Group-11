@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
@@ -44,7 +43,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 // TODO Validation team
                 String boardFeedback = parameters.get(5);
                 // TODO Validation team's board
-                int taskIndexFeedback = getTaskManagementSystemRepository().getNextId();
+                int taskIndexFeedback = getTaskManagementSystemRepository().getLastId();
 
 
                 return createNewFeedback(
@@ -63,7 +62,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 validateTeamName(teamnameStory);
                 String boardStory = parameters.get(7);
                 validateBoardName(boardStory);
-                int taskIndexStory = getTaskManagementSystemRepository().getNextId();
+                int taskIndexStory = getTaskManagementSystemRepository().getLastId();
 
                 return createNewStory(typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory,
                         taskIndexStory, boardStory, boardStory);
@@ -82,7 +81,7 @@ public class CreateNewTaskCommand extends BaseCommand {
                 validateTeamName(teamnameBug);
                 String boardBug = parameters.get(8);
                 validateBoardName(boardBug);
-                int taskIndexBug = getTaskManagementSystemRepository().getNextId();
+                int taskIndexBug = getTaskManagementSystemRepository().getLastId();
 
                 return createNewBug(typeBug, titleBug, descriptionBug, stepsToReproduce, priorityBug, severityBug,
                         assigneeBug, taskIndexBug, boardBug, boardBug);

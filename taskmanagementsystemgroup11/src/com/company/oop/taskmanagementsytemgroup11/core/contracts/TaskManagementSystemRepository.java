@@ -64,7 +64,7 @@ public interface TaskManagementSystemRepository {
 
     List<ActivityLog> getAllActivities();
 
-    public int getNextId();
+    public int getLastId();
 
     Story findStoryByTaskIndex(int taskIndex);
 
