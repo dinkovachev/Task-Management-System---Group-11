@@ -20,7 +20,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String NO_SUCH_BOARD = "There is no such board with name %s";
     public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
     private int nextId;
-    private int nextPersonId;
+    private int lastMemberId;
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
@@ -34,7 +34,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public TaskManagementSystemRepositoryImpl() {
 
         nextId = 0;
-        nextPersonId = 0;
+        lastMemberId = 0;
     }
 
 
@@ -64,8 +64,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Members createMember(String firstName, String lastName) {
-        Members member = new MembersImpl(++nextPersonId, firstName, lastName);
+        int nextMemberId = lastMemberId +1;
+        Members member = new MembersImpl(nextMemberId, firstName, lastName);
         this.members.add(member);
+        lastMemberId = nextMemberId;
 //        addEventToActivityLogHistory(format("New member with name %s %s created", firstName, lastName));
         return member;
     }
@@ -95,9 +97,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
-                         Severity severity, String assignee, int taskIndexBug, String teamname, String board) {
+                         Severity severity, String assignee, int taskIndexBug, String teamName, String board) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity, assignee,
-                taskIndexBug, teamname, board);
+                taskIndexBug, teamName, board);
         this.bugs.add(bug);
         this.feedbacks.add(null);
         this.stories.add(null);
@@ -108,8 +110,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
-                             String assignee, int taskIndex, String teamname, String board) {
-        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex, teamname, board);
+                             String assignee, int taskIndex, String teamName, String board) {
+        Story story = new StoryImpl(++nextId, title, description, priority, size, assignee, taskIndex, teamName, board);
         this.stories.add(story);
         this.feedbacks.add(null);
         this.bugs.add(null);
@@ -126,8 +128,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback createFeedback(TaskType type, String title, String description, int rating,
-                                   int taskIndexFeedback, String teamname, String board) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback, teamname, board);
+                                   int taskIndexFeedback, String teamName, String board) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback, teamName, board);
         this.feedbacks.add(feedback);
         this.stories.add(null);
         this.bugs.add(null);
@@ -325,6 +327,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskManagementSystemRepositoryImpl that = (TaskManagementSystemRepositoryImpl) o;
-        return nextId == that.nextId && nextPersonId == that.nextPersonId && Objects.equals(members, that.members) && Objects.equals(teams, that.teams) && Objects.equals(boards, that.boards) && Objects.equals(bugs, that.bugs) && Objects.equals(stories, that.stories) && Objects.equals(feedbacks, that.feedbacks) && Objects.equals(tasks, that.tasks) && Objects.equals(activityLogList, that.activityLogList);
+        return nextId == that.nextId && lastMemberId == that.lastMemberId && Objects.equals(members, that.members) && Objects.equals(teams, that.teams) && Objects.equals(boards, that.boards) && Objects.equals(bugs, that.bugs) && Objects.equals(stories, that.stories) && Objects.equals(feedbacks, that.feedbacks) && Objects.equals(tasks, that.tasks) && Objects.equals(activityLogList, that.activityLogList);
     }
 }
