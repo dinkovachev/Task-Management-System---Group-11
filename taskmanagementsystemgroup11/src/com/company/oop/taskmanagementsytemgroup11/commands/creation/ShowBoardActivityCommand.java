@@ -4,6 +4,7 @@ package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
@@ -55,7 +56,7 @@ public class ShowBoardActivityCommand extends BaseCommand {
 //            System.out.println(sb.toString().trim());
 //        }
 
-       // return "---END-BOARDS---";
+        // return "---END-BOARDS---";
 
         // TODO PROBABLY THE COMMAND SHOULD PRINT TEAM NAMES, TOO ???
     }
