@@ -38,7 +38,7 @@ public class ChangeRatingCommand extends BaseCommand {
         if (rating == (feedback.getRating())) {
             throw new IllegalArgumentException(format("Rating is already set to %d.", feedback.getRating()));
         } else {
-            feedback.changeRating(rating);
+            feedback.changeRating(taskIndex, rating);
             return format("Rating changed to %d.", feedback.getRating());
         }
     }

@@ -52,7 +52,7 @@ public class ChangePriorityCommand extends BaseCommand {
         if (priority.equals(bug.getPriority())) {
             throw new IllegalArgumentException(format("Priority is already set to %s.", bug.getPriority()));
         } else {
-            bug.changePriority(priority);
+            bug.changePriority(taskIndex, priority);
             return format("Priority changed to %s.", bug.getPriority());
         }
     }

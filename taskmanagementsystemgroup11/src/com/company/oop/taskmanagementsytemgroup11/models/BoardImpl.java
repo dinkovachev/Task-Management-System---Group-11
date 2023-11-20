@@ -14,9 +14,8 @@ public class BoardImpl implements Board {
     private static final String BOARD_NAME_ERR_MSG = String.format(
             "The Board name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
-    public static final String NEW_BOARD_ADDED_MESSAGE = "New board with name %s added";
-    public static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task %s with name %s added to the board";
-    public static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
+    private static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE = "New task %s with name %s added to the board";
+    private static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
     private final List<Board> boards = new ArrayList<>();
     private final List<Task> tasksToAddToBoard = new ArrayList<>();
     private final List<ActivityLog> boardsActivityHistory = new ArrayList<>();

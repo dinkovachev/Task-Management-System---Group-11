@@ -19,7 +19,7 @@ public interface Story extends Task {
 
     void changePriority(int taskIndex, Priority priority);
 
-    void changeSize(Size size);
+    void changeSize(int taskIndex, Size size);
 
     Size getSize();
 }

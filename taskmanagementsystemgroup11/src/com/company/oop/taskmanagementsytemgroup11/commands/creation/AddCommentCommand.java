@@ -23,8 +23,6 @@ public class AddCommentCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String content = parameters.get(0);
         String author = parameters.get(1);
-        //ToDo - Dinko
-        // think how to implement the index to recognize if it is added for a bug, story or feedback
         int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MESSAGE);
         return addComment(content, author, taskIndex);
     }
@@ -42,8 +40,6 @@ public class AddCommentCommand extends BaseCommand {
         //
 
         Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
-
-        //ValidationHelpers.validateIntRange(taskIndex, 0, task.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
         Comment comment = getTaskManagementSystemRepository().createComment(content, author);
 
         getTaskManagementSystemRepository().getMemberByUsername(author).addComment(comment, task);

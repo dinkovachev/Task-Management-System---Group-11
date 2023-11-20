@@ -126,8 +126,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 //    }
 
     @Override
-    public void changeRating(int rating) {
+    public void changeRating(int taskIndex, int rating) {
+
         setRating(rating);
+        addEventToActivityLogHistory(String.format("Rating of Feedback id %s changed to %s", taskIndex, rating));
     }
 
     @Override

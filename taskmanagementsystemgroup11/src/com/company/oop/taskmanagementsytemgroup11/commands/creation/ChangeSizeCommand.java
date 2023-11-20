@@ -40,7 +40,7 @@ public class ChangeSizeCommand extends BaseCommand {
         if (size.equals(story.getSize())) {
             throw new IllegalArgumentException(format("Size is already set to %s.", story.getSize()));
         } else {
-            story.changeSize(size);
+            story.changeSize(taskIndex, size);
             return format("Size changed to %s.", story.getSize());
         }
     }
