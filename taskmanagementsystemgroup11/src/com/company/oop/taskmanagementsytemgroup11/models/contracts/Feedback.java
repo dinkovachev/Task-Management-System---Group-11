@@ -6,7 +6,7 @@ public interface Feedback extends Task {
 
     int getRating();
 
-    void changeRating(int rating);
+    void changeRating(int taskIndex, int rating);
 
     List<Feedback> getFeedbacks();
 }

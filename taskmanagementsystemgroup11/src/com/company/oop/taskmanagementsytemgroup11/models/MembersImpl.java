@@ -97,6 +97,7 @@ public class MembersImpl implements Members {
     }
 
     public void addEventToActivityLogHistory(String event) {
+
         membersActivityHistory.add(new ActivityLogImpl(event));
     }
 

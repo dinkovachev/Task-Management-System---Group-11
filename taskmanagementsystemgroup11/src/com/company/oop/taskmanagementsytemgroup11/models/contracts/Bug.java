@@ -16,5 +16,5 @@ public interface Bug extends Task {
 
     void changePriority(Priority priority);
 
-    void changeSeverity(Severity severity);
+    void changeSeverity(int taskIndex, Severity severity);
 }

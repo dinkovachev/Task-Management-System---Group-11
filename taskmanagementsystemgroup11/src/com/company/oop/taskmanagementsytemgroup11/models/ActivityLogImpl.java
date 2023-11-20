@@ -10,7 +10,6 @@ public class ActivityLogImpl implements ActivityLog {
         setActivityLog(activityLog);
     }
 
-
     private void setActivityLog(String activityLog) {
         if (activityLog.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_DESCRIPTION_ERROR_MESSAGE);

@@ -18,10 +18,12 @@ public class BugImpl extends TaskImpl implements Bug {
     private static final String NEW_BUG_CREATED_MESSAGE = "New bug with title %s created";
     private static final String BUG_STATUS_SET_TO_DONE_MESSAGE = "Bug status set to Done.";
     private static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
+    private static final String PRIORITY_OF_BUG_ID_CHANGED_TO_MESSAGE = "Priority of Bug id %s changed to %s";
+    private static final String SEVERITY_OF_BUG_ID_CHANGED_TO_MESSAGE = "Severity of Bug id %s changed to %s";
     private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
-    String assignee;
+    private String assignee;
     private Status status;
     private int taskIndex;
     private final List<Bug> bugs;
@@ -48,13 +50,15 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public void changePriority(Priority priority) {
+    public void changePriority(int taskIndex, Priority priority) {
         setPriority(priority);
+        addEventToActivityLogHistory(String.format(PRIORITY_OF_BUG_ID_CHANGED_TO_MESSAGE, taskIndex, priority));
     }
 
     @Override
-    public void changeSeverity(Severity severity) {
+    public void changeSeverity(int taskIndex, Severity severity) {
         setSeverity(severity);
+        addEventToActivityLogHistory(String.format(SEVERITY_OF_BUG_ID_CHANGED_TO_MESSAGE, taskIndex, severity));
     }
 
     @Override
@@ -107,7 +111,6 @@ public class BugImpl extends TaskImpl implements Bug {
             setStatus(Status.DONE);
             addEventToActivityLogHistory(BUG_STATUS_SET_TO_DONE_MESSAGE);
             return (BUG_STATUS_SET_TO_DONE_MESSAGE);
-
         } else {
             addEventToActivityLogHistory(CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);
             return (CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE);

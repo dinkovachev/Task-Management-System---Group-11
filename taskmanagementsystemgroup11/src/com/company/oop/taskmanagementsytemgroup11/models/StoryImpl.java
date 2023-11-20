@@ -17,6 +17,8 @@ public class StoryImpl extends TaskImpl implements Story {
     private static final String STORY_STATUS_SET_TO_DONE_MESSAGE = "Story status set to Done.";
     private static final String CURRENT_STORY_STATUS_IS_ALREADY_DONE_MESSAGE = "Current story status is already Done.";
     private static final String NEW_STORY_WAS_CREATED_MESSAGE = "New story with title %s was created";
+    public static final String PRIORITY_FOR_STORY_ID_CHANGED_TO_MESSAGE = "Priority for Story id %s changed to %s";
+    public static final String SIZE_FOR_STORY_ID_CHANGED_TO_MESSAGE = "Size for Story id %s changed to %s";
     private Priority priority;
     private Size size;
     private Status status;
@@ -118,12 +120,14 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override
     public void changePriority(int taskIndex, Priority priority) {
         setPriority(priority);
-        addEventToActivityLogHistory(String.format("Priority for Story id %s changed to %s", taskIndex, priority));
+        addEventToActivityLogHistory(String.format(PRIORITY_FOR_STORY_ID_CHANGED_TO_MESSAGE, taskIndex, priority));
     }
 
     @Override
-    public void changeSize(Size size) {
+    public void changeSize(int taskIndex, Size size) {
         setSize(size);
+        addEventToActivityLogHistory(String.format(SIZE_FOR_STORY_ID_CHANGED_TO_MESSAGE, taskIndex, size));
+
     }
 
     @Override

@@ -39,7 +39,7 @@ public class ChangeSeverityCommand extends BaseCommand {
         if (severity.equals(bug.getSeverity())) {
             throw new IllegalArgumentException(format("Severity is already set to %s.", bug.getSeverity()));
         } else {
-            bug.changeSeverity(severity);
+            bug.changeSeverity(taskIndex, severity);
             return format("Severity changed to %s.", bug.getSeverity());
         }
     }
