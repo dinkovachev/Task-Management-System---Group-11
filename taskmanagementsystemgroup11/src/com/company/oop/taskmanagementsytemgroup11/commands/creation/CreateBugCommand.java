@@ -5,10 +5,8 @@ import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementS
 import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
@@ -35,20 +33,20 @@ public class CreateBugCommand extends BaseCommand {
         String description = parameters.get(1);
         String stepsToReproduce = parameters.get(2);
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
-        String assignee = parameters.get(4);
+        Severity severity = ParsingHelpers.tryParseEnum(parameters.get(4), Severity.class);
+        String assignee = parameters.get(5);
         validateAssignee(assignee);
-        Severity severity = ParsingHelpers.tryParseEnum(parameters.get(5), Severity.class);
         String teamName = parameters.get(6);
         validateTeamName(teamName);
         String boardName = parameters.get(7);
         validateBoardName(boardName);
         int taskIndexBug = getTaskManagementSystemRepository().getLastId();
-        return createBugCommand(title, description, stepsToReproduce, priority, assignee, severity, taskIndexBug, teamName, boardName);
+        return createBugCommand(title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug, teamName, boardName);
 
     }
 
     private String createBugCommand(String title, String description, String stepsToReproduce,
-                                    Priority priority, String assignee, Severity severity,int taskIndexBug,
+                                    Priority priority, Severity severity, String assignee, int taskIndexBug,
                                     String teamName, String boardName) {
         Bug bug = getTaskManagementSystemRepository().createBug(title, description, stepsToReproduce, priority, severity,assignee,
                taskIndexBug, teamName, boardName);
