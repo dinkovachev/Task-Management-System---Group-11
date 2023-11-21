@@ -28,14 +28,14 @@ public class ChangeSeverityCommand extends BaseCommand {
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         validateTaskType(type);
         Severity severity = ParsingHelpers.tryParseEnum(parameters.get(1), Severity.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changeSeverity(type, severity, taskIndex);
     }
 
     private String changeSeverity(TaskType type, Severity severity, int taskIndex) {
         Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
+//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (severity.equals(bug.getSeverity())) {
             throw new IllegalArgumentException(format("Severity is already set to %s.", bug.getSeverity()));

@@ -152,34 +152,41 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Story findStoryByTaskIndex(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
+        for (Story story : stories) {
+            if (story.getId() == taskIndex) {
+                return story;
+            }
         }
-        return stories.get(taskIndex);
+        throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
 
-    @Override
-    public TaskType validateTaskTypeEqualsInputType(TaskType type, int taskIndex) {
-        if (!type.equals(tasks.get(taskIndex).getType())) {
-            throw new IllegalArgumentException(format("%s is invalid task type.", type));
-        }
-        return type;
-    }
+//    @Override
+//    public TaskType validateTaskTypeEqualsInputType(TaskType type, int taskIndex) {
+//        if (!type.equals(tasks.get(taskIndex).getType())) {
+//            throw new IllegalArgumentException(format("%s is invalid task type.", type));
+//        }
+//        return type;
+//    }
 
     @Override
     public Bug findBugByTaskIndex(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
+
+        for (Bug bug : bugs) {
+            if (bug.getId() == taskIndex) {
+                return bug;
+            }
         }
-        return bugs.get(taskIndex);
+        throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
 
     @Override
     public Feedback findFeedbackByTaskIndex(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
+        for (Feedback feedback : feedbacks) {
+            if (feedback.getId() == taskIndex) {
+                return feedback;
+            }
         }
-        return feedbacks.get(taskIndex);
+        throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
 
     @Override
@@ -226,6 +233,19 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public int getLastId() {
         return this.lastId;
+    }
+
+    public void validateType(TaskType type, int index) {
+        if (!tasks.get(index).getType().equals(type)) {
+            throw new IllegalArgumentException("No such task type.");
+        }
+//        for (Task task : tasks) {
+//            if (task.getId() == index) {
+//                if (!task.getType().equals(type)) {
+//        throw new IllegalArgumentException("No such task type.");
+//                }
+//            }
+//        }
     }
 
     @Override

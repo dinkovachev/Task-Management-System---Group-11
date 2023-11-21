@@ -22,6 +22,7 @@ public class ShowTaskActivityCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(1), INVALID_INPUT_MSG) - 1;
+        getTaskManagementSystemRepository().validateType(type, taskIndex);
         return showTaskActivity(type, taskIndex);
     }
 

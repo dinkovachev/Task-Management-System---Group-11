@@ -61,5 +61,5 @@ public interface TaskManagementSystemRepository {
 
     Feedback findFeedbackByTaskIndex(int taskIndex);
 
-    public TaskType validateTaskTypeEqualsInputType(TaskType typeStory, int taskIndex);
+    void validateType(TaskType type, int index);
 }

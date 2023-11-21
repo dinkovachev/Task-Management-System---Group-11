@@ -28,7 +28,7 @@ public class ChangeStatusCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         String direction = parameters.get(1);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changeStatus(type, direction, taskIndex);
     }

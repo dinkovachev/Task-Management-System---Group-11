@@ -37,6 +37,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
+        this.taskIndex = taskIndex;
         addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
     }
 

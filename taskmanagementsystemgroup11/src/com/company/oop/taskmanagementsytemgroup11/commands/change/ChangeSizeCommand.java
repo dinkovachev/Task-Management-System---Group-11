@@ -30,14 +30,14 @@ public class ChangeSizeCommand extends BaseCommand {
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         validateTaskType(type);
         Size size = ParsingHelpers.tryParseEnum(parameters.get(1), Size.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changeStorySize(type, size, taskIndex);
     }
 
     private String changeStorySize(TaskType type, Size size, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
+//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
         if (size.equals(story.getSize())) {
             throw new IllegalArgumentException(format("Size is already set to %s.", story.getSize()));
         } else {

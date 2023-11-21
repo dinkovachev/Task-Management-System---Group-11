@@ -41,18 +41,18 @@ public class CreateBugCommand extends BaseCommand {
         String boardName = parameters.get(7);
         validateBoardName(boardName);
         int taskIndexBug = getTaskManagementSystemRepository().getLastId();
-        return createBugCommand(title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug, teamName, boardName);
+        return createBugCommand(/* id */title, description, stepsToReproduce, priority, severity, assignee, taskIndexBug, teamName, boardName);
 
     }
 
     private String createBugCommand(String title, String description, String stepsToReproduce,
                                     Priority priority, Severity severity, String assignee, int taskIndexBug,
                                     String teamName, String boardName) {
-        Bug bug = getTaskManagementSystemRepository().createBug(title, description, stepsToReproduce, priority, severity,assignee,
-               taskIndexBug, teamName, boardName);
+        Bug bug = getTaskManagementSystemRepository().createBug(title, description, stepsToReproduce, priority, severity, assignee,
+                taskIndexBug, teamName, boardName);
         Board board = getTaskManagementSystemRepository().getBoardByName(boardName);
         board.addTask(bug);
-        return String.format(NEW_BUG_CREATED_MSG, title,taskIndexBug);
+        return String.format(NEW_BUG_CREATED_MSG, title, taskIndexBug);
     }
 
     private void validateAssignee(String assignee) {

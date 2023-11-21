@@ -4,6 +4,7 @@ import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
@@ -29,7 +30,7 @@ public class ChangePriorityCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(1), Priority.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG) - 1;
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
 
         return changePriority(type, priority, taskIndex);
     }
@@ -45,10 +46,10 @@ public class ChangePriorityCommand extends BaseCommand {
                 return format(INVALID_TASK_MSG, type);
         }
     }
-
+// ChangePriority Bug Low 6
     private String changeBugPriority(TaskType type, Priority priority, int taskIndex) {
         Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
+//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (priority.equals(bug.getPriority())) {
             throw new IllegalArgumentException(format("Priority is already set to %s.", bug.getPriority()));
@@ -60,7 +61,7 @@ public class ChangePriorityCommand extends BaseCommand {
 
     private String changeStoryPriority(TaskType type, Priority priority, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
-        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex); // IMPORTANT!
+//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex); // IMPORTANT!
         if (priority.equals(story.getPriority())) {
             throw new IllegalArgumentException(format("Priority is already set to %s.", story.getPriority()));
         } else {
