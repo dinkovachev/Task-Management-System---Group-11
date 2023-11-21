@@ -59,8 +59,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ChangeSizeCommand(taskManagementSystemRepository);
             case CHANGEPRIORITY:
                 return new ChangePriorityCommand(taskManagementSystemRepository);
-            case CREATE:
-                return new CreateNewTaskCommand(taskManagementSystemRepository);
+            case CREATEBUG:
+                return new CreateBugCommand(taskManagementSystemRepository);
             case CHANGERATING:
                 return new ChangeRatingCommand(taskManagementSystemRepository);
             case CHANGESTATUS:

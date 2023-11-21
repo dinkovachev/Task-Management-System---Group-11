@@ -81,19 +81,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
-                         Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board) {
-        int nextId = lastId + 1;
-        Bug bug = new BugImpl(++lastId, title, description, stepsToReproduce, priority, severity, assignee,
-                taskIndexBug, teamNameBug, board);
-        lastId = nextId;
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
+        Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
+                taskIndexBug, teamNameBug, boardBug);
+        ++lastId;
         this.bugs.add(bug);
-        this.feedbacks.add(null);
-        this.stories.add(null);
         this.tasks.add(bug);
-
         return bug;
     }
+
 
     @Override
     public Story createStory(String title, String description, Priority priority, Size size,

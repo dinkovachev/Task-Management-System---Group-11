@@ -5,7 +5,6 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.List;
 
-import static com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateNewTaskCommand.*;
 import static java.lang.String.format;
 
 public class ValidationHelpers {
@@ -32,11 +31,11 @@ public class ValidationHelpers {
         }
     }
 
-    public static void validateTaskType(TaskType type, int argumentsCount) {
-        if ((type != TaskType.FEEDBACK && argumentsCount == EXPECTED_ARGUMENTS_COUNT_FEEDBACK)
-                || (type != TaskType.STORY && argumentsCount == EXPECTED_ARGUMENTS_COUNT_STORY)
-                || (type != TaskType.BUG && argumentsCount == EXPECTED_ARGUMENTS_COUNT_BUG))
-            throw new IllegalArgumentException(format(UNSUPPORTED_OPERATION_MSG, type, argumentsCount));
-    }
+//    public static void validateTaskType(TaskType type, int argumentsCount) {
+//        if ((type != TaskType.FEEDBACK && argumentsCount == EXPECTED_ARGUMENTS_COUNT_FEEDBACK)
+//                || (type != TaskType.STORY && argumentsCount == EXPECTED_ARGUMENTS_COUNT_STORY)
+//                || (type != TaskType.BUG && argumentsCount == EXPECTED_ARGUMENTS_COUNT_BUG))
+//            throw new IllegalArgumentException(format(UNSUPPORTED_OPERATION_MSG, type, argumentsCount));
+//    }
 }
 

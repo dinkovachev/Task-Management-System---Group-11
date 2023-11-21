@@ -34,8 +34,11 @@ public interface TaskManagementSystemRepository {
 
     Comment createComment(String content, String author);
 
-    Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
+    Bug createBug(String title, String description, String stepsToReproduce, Priority priority,
                   Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug);
+
+//    Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
+//                  Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board);
 
     Story createStory(String title, String description, Priority priority, Size size, String assignee,
                       int taskIndexStory, String teamNameStory, String boardStory);
