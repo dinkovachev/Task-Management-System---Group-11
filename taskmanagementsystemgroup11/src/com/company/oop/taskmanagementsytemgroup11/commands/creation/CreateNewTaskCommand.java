@@ -4,7 +4,6 @@ import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
@@ -40,10 +39,10 @@ public class CreateNewTaskCommand extends BaseCommand {
                 validateTeamName(teamNameFeedback);
                 String boardFeedback = parameters.get(5);
                 validateBoardName(boardFeedback);
-                int taskIndexFeedback = getTaskManagementSystemRepository().getLastId();
+//                int taskIndexFeedback = getTaskManagementSystemRepository().getLastId();
 
-                return createNewFeedback(
-                        typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback, boardFeedback);
+//                return createNewFeedback(
+//                        typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback, boardFeedback);
 
 //            case EXPECTED_ARGUMENTS_COUNT_STORY:
 //                TaskType typeStory = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -87,15 +86,15 @@ public class CreateNewTaskCommand extends BaseCommand {
         }
     }
 
-    private String createNewFeedback(TaskType typeFeedback, String titleFeedback, String descriptionFeedback,
-                                     int rating, int taskIndexFeedback, String teamnameFeedback, String boardFeedback) {
-        Feedback feedback = getTaskManagementSystemRepository().createFeedback(typeFeedback, titleFeedback,
-                descriptionFeedback, rating, taskIndexFeedback, teamnameFeedback, boardFeedback);
-        Board board = getTaskManagementSystemRepository().getBoardByName(boardFeedback);
-        board.addTask(feedback);
-
-        return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
-    }
+//    private String createNewFeedback(TaskType typeFeedback, String titleFeedback, String descriptionFeedback,
+//                                     int rating, int taskIndexFeedback, String teamnameFeedback, String boardFeedback) {
+//        Feedback feedback = getTaskManagementSystemRepository().createFeedback(typeFeedback, titleFeedback,
+//                descriptionFeedback, rating, taskIndexFeedback, teamnameFeedback, boardFeedback);
+//        Board board = getTaskManagementSystemRepository().getBoardByName(boardFeedback);
+//        board.addTask(feedback);
+//
+//        return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
+//    }
 
 //    private String createNewStory(
 //            TaskType typeStory, String titleStory, String descriptionStory, Priority priorityStory, Size size,

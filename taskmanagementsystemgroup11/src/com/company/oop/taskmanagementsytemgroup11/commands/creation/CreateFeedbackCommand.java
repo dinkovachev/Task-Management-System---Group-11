@@ -1,7 +1,8 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
+import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
@@ -9,52 +10,50 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
 public class CreateFeedbackCommand extends BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
+
+    public static final int EXPECTED_ARGUMENTS_COUNT = 4;
+    public static final String TEAM_WITH_NAME_DOES_NOT_EXIST_MESSAGE = "Team with name %s does not exist.";
+    private static final String NEW_TASK_CREATED_MSG = "New feedback with title %s and id %s created.";
+    public static final String BOARD_WITH_NAME_DOES_NOT_EXIST_MESSAGE = "Board with name %s does not exist";
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
-    private static final String NEW_TASK_CREATED_MSG = "New feedback with id %s created.";
 
     public CreateFeedbackCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
+    @Override
     protected String executeCommand(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        int index = ParsingHelpers.tryParseInteger(parameters.get(0), INVALID_INPUT_MSG)
-        String title = parameters.get(1);
-        String description = parameters.get(2);
-        int rating = ParsingHelpers.tryParseInteger(parameters.get(3), INVALID_INPUT_MSG);
-        String teamName = parameters.get(4);
-        String boardName = parameters.get(5);
-
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_ARGUMENTS_COUNT);
+        String title = parameters.get(0);
+        String description = parameters.get(1);
+        int rating = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
+        String teamName = parameters.get(2);
         validateTeamName(teamName);
+        String boardName = parameters.get(3);
         validateBoardName(boardName);
-
-        return createFeedback(index, title, description, rating, teamName, boardName);
+        int index = getTaskManagementSystemRepository().getLastId();
+        return createFeedbackCommand(title, description, rating, index, teamName, boardName);
     }
 
-    private String createFeedback(
-            int index, String title, String description, int rating, String teamName, String boardName) {
-        Feedback feedback = getTaskManagementSystemRepository().createFeedback(
-                index, title, description, rating, teamName, boardName);
-
+    private String createFeedbackCommand(String title, String description, int rating, int index, String teamName, String boardName) {
+        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating, index, teamName, boardName);
         Board board = getTaskManagementSystemRepository().getBoardByName(boardName);
         board.addTask(feedback);
-
-        return format(NEW_TASK_CREATED_MSG, feedback.getId());
+        return String.format(NEW_TASK_CREATED_MSG, title, index);
     }
 
     private void validateTeamName(String teamName) {
         if (!getTaskManagementSystemRepository().teamExist(teamName)) {
-            throw new IllegalArgumentException(format("Team with name %s does not exist.", teamName));
+            throw new InvalidUserInputException(String.format(TEAM_WITH_NAME_DOES_NOT_EXIST_MESSAGE, teamName));
+
         }
     }
 
     private void validateBoardName(String boardName) {
         if (!getTaskManagementSystemRepository().boardExist(boardName)) {
-            throw new IllegalArgumentException(format("Board with name %s does not exist.", boardName));
+            throw new InvalidUserInputException(String.format(BOARD_WITH_NAME_DOES_NOT_EXIST_MESSAGE, boardName));
+
         }
     }
 }

@@ -40,9 +40,7 @@ public interface TaskManagementSystemRepository {
     Story createStory(String title, String description, Priority priority, Size size, String assignee,
                       int taskIndexStory, String teamNameStory, String boardStory);
 
-    Feedback createFeedback(
-            int index, String title, String description, int rating, String boardFeedback, String feedback);
-
+    Feedback createFeedback(String title, String description, int rating, int index, String teamName, String boardName);
 
     boolean memberExistsInTeam(Members member, Team team);
 
@@ -52,7 +50,7 @@ public interface TaskManagementSystemRepository {
 
     boolean boardExist(String name);
 
-    public int getNextId();
+    public int getLastId();
 
     Story findStoryByTaskIndex(int taskIndex);
 
