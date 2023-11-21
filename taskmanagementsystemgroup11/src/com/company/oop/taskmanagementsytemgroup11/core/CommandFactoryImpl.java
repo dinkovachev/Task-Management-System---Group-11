@@ -1,8 +1,14 @@
 package com.company.oop.taskmanagementsytemgroup11.core;
 
+import com.company.oop.taskmanagementsytemgroup11.commands.add.AddCommentCommand;
+import com.company.oop.taskmanagementsytemgroup11.commands.add.AddMemberCommand;
+import com.company.oop.taskmanagementsytemgroup11.commands.assign.AssignTaskCommand;
+import com.company.oop.taskmanagementsytemgroup11.commands.change.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.enums.CommandType;
+import com.company.oop.taskmanagementsytemgroup11.commands.show.*;
+import com.company.oop.taskmanagementsytemgroup11.commands.unassign.UnassignTaskCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.CommandFactory;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
@@ -37,6 +43,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreateBoardCommand(taskManagementSystemRepository);
             case SHOWALLTEAMBOARDS:
                 return new ShowAllTeamBoardsCommand(taskManagementSystemRepository);
+            case CREATESTORY:
+                return new CreateStoryCommand(taskManagementSystemRepository);
             case SHOWBOARDACTIVITY:
                 return new ShowBoardActivityCommand(taskManagementSystemRepository);
             case ASSIGNTASK:

@@ -37,7 +37,7 @@ public interface TaskManagementSystemRepository {
     Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
                   Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug);
 
-    Story createStory(TaskType type, String title, String description, Priority priority, Size size, String assignee,
+    Story createStory(String title, String description, Priority priority, Size size, String assignee,
                       int taskIndexStory, String teamNameStory, String boardStory);
 
     Feedback createFeedback(TaskType type, String title, String description, int rating, int taskIndexFeedback,

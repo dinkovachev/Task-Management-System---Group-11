@@ -30,7 +30,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Task> tasks = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
-        lastId = 0;
+        lastId = 1;
         lastMemberId = 0;
     }
 
@@ -96,15 +96,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
+    public Story createStory(String title, String description, Priority priority, Size size,
                              String assignee, int taskIndex, String teamNameStory, String board) {
-        int nextId = lastId + 1;
-        Story story = new StoryImpl(++lastId, title, description, priority, size, assignee, taskIndex, teamNameStory,
+        Story story = new StoryImpl(lastId, title, description, priority, size, assignee, taskIndex, teamNameStory,
                 board);
-        lastId = nextId;
+        ++lastId;
         this.stories.add(story);
-        this.feedbacks.add(null);
-        this.bugs.add(null);
         this.tasks.add(story);
 
         return story;

@@ -1,13 +1,12 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.creation;
 
+import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
@@ -46,23 +45,23 @@ public class CreateNewTaskCommand extends BaseCommand {
                 return createNewFeedback(
                         typeFeedback, titleFeedback, descriptionFeedback, rating, taskIndexFeedback, boardFeedback, boardFeedback);
 
-            case EXPECTED_ARGUMENTS_COUNT_STORY:
-                TaskType typeStory = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
-                ValidationHelpers.validateTaskType(typeStory, EXPECTED_ARGUMENTS_COUNT_STORY);
-                String titleStory = parameters.get(1);
-                String descriptionStory = parameters.get(2);
-                Priority priorityStory = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
-                Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
-                String assigneeStory = parameters.get(5);
-                validateMemberExists(assigneeStory);
-                String teamNameStory = parameters.get(6);
-                validateTeamName(teamNameStory);
-                String boardStory = parameters.get(7);
-                validateBoardName(boardStory);
-                int taskIndexStory = getTaskManagementSystemRepository().getLastId();
-
-                return createNewStory(typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory,
-                        taskIndexStory, boardStory, boardStory);
+//            case EXPECTED_ARGUMENTS_COUNT_STORY:
+//                TaskType typeStory = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
+//                ValidationHelpers.validateTaskType(typeStory, EXPECTED_ARGUMENTS_COUNT_STORY);
+//                String titleStory = parameters.get(1);
+//                String descriptionStory = parameters.get(2);
+//                Priority priorityStory = ParsingHelpers.tryParseEnum(parameters.get(3), Priority.class);
+//                Size size = ParsingHelpers.tryParseEnum(parameters.get(4), Size.class);
+//                String assigneeStory = parameters.get(5);
+//                validateMemberExists(assigneeStory);
+//                String teamNameStory = parameters.get(6);
+//                validateTeamName(teamNameStory);
+//                String boardStory = parameters.get(7);
+//                validateBoardName(boardStory);
+//                int taskIndexStory = getTaskManagementSystemRepository().getLastId();
+//
+//                return createNewStory(typeStory, titleStory, descriptionStory, priorityStory, size, assigneeStory,
+//                        taskIndexStory, boardStory, boardStory);
 
             case EXPECTED_ARGUMENTS_COUNT_BUG:
                 TaskType typeBug = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
@@ -98,16 +97,16 @@ public class CreateNewTaskCommand extends BaseCommand {
         return format(NEW_TASK_CREATED_MSG, typeFeedback, feedback.getId());
     }
 
-    private String createNewStory(
-            TaskType typeStory, String titleStory, String descriptionStory, Priority priorityStory, Size size,
-            String assigneeStory, int taskIndexStory, String teamnameStory, String boardStory) {
-        Story story = getTaskManagementSystemRepository().createStory(typeStory, titleStory, descriptionStory,
-                priorityStory, size, assigneeStory, taskIndexStory, teamnameStory, boardStory);
-        Board board = getTaskManagementSystemRepository().getBoardByName(boardStory);
-
-        board.addTask(story);
-        return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
-    }
+//    private String createNewStory(
+//            TaskType typeStory, String titleStory, String descriptionStory, Priority priorityStory, Size size,
+//            String assigneeStory, int taskIndexStory, String teamnameStory, String boardStory) {
+//        Story story = getTaskManagementSystemRepository().createStory(typeStory, titleStory, descriptionStory,
+//                priorityStory, size, assigneeStory, taskIndexStory, teamnameStory, boardStory);
+//        Board board = getTaskManagementSystemRepository().getBoardByName(boardStory);
+//
+//        board.addTask(story);
+//        return format(NEW_TASK_CREATED_MSG, typeStory, story.getId());
+//    }
 
     private String createNewBug(TaskType typeBug, String titleBug, String descriptionBug, String stepsToReproduce,
                                 Priority priorityBug, Severity severityBug, String assigneeBug, int taskIndexStory,
