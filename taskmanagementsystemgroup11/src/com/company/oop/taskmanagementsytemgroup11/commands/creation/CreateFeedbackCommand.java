@@ -28,9 +28,9 @@ public class CreateFeedbackCommand extends BaseCommand {
         String title = parameters.get(0);
         String description = parameters.get(1);
         int rating = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_INPUT_MSG);
-        String teamName = parameters.get(2);
+        String teamName = parameters.get(3);
         validateTeamName(teamName);
-        String boardName = parameters.get(3);
+        String boardName = parameters.get(4);
         validateBoardName(boardName);
         int index = getTaskManagementSystemRepository().getLastId();
         return createFeedbackCommand(title, description, rating, index, teamName, boardName);
@@ -46,7 +46,6 @@ public class CreateFeedbackCommand extends BaseCommand {
     private void validateTeamName(String teamName) {
         if (!getTaskManagementSystemRepository().teamExist(teamName)) {
             throw new InvalidUserInputException(String.format(TEAM_WITH_NAME_DOES_NOT_EXIST_MESSAGE, teamName));
-
         }
     }
 
