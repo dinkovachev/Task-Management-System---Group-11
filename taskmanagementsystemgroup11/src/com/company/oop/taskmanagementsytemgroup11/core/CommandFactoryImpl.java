@@ -67,6 +67,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ChangeStatusCommand(taskManagementSystemRepository);
             case SHOWTASKACTIVITY:
                 return new ShowTaskActivityCommand(taskManagementSystemRepository);
+            case CREATEFEEDBACK:
+                return new CreateFeedbackCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }
