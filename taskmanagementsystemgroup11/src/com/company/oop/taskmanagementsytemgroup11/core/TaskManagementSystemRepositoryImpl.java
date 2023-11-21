@@ -19,7 +19,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
     private static final String NO_SUCH_BOARD = "There is no such board with name %s";
     public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
-    private int nextId;
+    private int lastId;
     private int lastMemberId;
     private final List<Members> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Task> tasks = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
-        nextId = 0;
+        lastId = 1;
         lastMemberId = 0;
     }
 
@@ -83,10 +83,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Bug createBug(TaskType type, String title, String description, String stepsToReproduce, Priority priority,
                          Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board) {
-        int nextId = this.nextId + 1;
-        Bug bug = new BugImpl(++this.nextId, title, description, stepsToReproduce, priority, severity, assignee,
+        int nextId = lastId + 1;
+        Bug bug = new BugImpl(++lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 taskIndexBug, teamNameBug, board);
-        this.nextId = nextId;
+        lastId = nextId;
         this.bugs.add(bug);
         this.feedbacks.add(null);
         this.stories.add(null);
@@ -96,25 +96,23 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Story createStory(TaskType type, String title, String description, Priority priority, Size size,
+    public Story createStory(String title, String description, Priority priority, Size size,
                              String assignee, int taskIndex, String teamNameStory, String board) {
-        int nextId = this.nextId + 1;
-        Story story = new StoryImpl(++this.nextId, title, description, priority, size, assignee, taskIndex, teamNameStory,
+        Story story = new StoryImpl(lastId, title, description, priority, size, assignee, taskIndex, teamNameStory,
                 board);
-        this.nextId = nextId;
+        ++lastId;
         this.stories.add(story);
-        this.feedbacks.add(null);
-        this.bugs.add(null);
         this.tasks.add(story);
 
         return story;
     }
 
     @Override
-    public Feedback createFeedback(int index, String title, String description, int rating, String teamName, String board) {
-        int index = ++nextId;
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating, taskIndexFeedback, teamName, board);
-        nextId = nextId;
+    public Feedback createFeedback(TaskType type, String title, String description, int rating,
+                                   int taskIndexFeedback, String teamName, String board) {
+        int nextId = lastId + 1;
+        Feedback feedback = new FeedbackImpl(++lastId, title, description, rating, taskIndexFeedback, teamName, board);
+        lastId = nextId;
         this.feedbacks.add(feedback);
         this.stories.add(null);
         this.bugs.add(null);
@@ -234,20 +232,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public int getNextId() {
-        return this.nextId;
-    }
-
-    public void validateTeamName(String teamName) {
-        if (!teamExist(teamName)) {
-            throw new IllegalArgumentException(format("Team with name %s does not exist.", teamName));
-        }
-    }
-
-    public void validateBoardName(String boardName) {
-        if (!boardExist(boardName)) {
-            throw new IllegalArgumentException(format("Board with name %s does not exist.", boardName));
-        }
+    public int getLastId() {
+        return this.lastId;
     }
 
     @Override
@@ -255,7 +241,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskManagementSystemRepositoryImpl that = (TaskManagementSystemRepositoryImpl) o;
-        return nextId == that.nextId
+        return lastId == that.lastId
                 && lastMemberId == that.lastMemberId
                 && Objects.equals(members, that.members)
                 && Objects.equals(teams, that.teams)
@@ -266,6 +252,3 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 && Objects.equals(tasks, that.tasks);
     }
 }
-
-
-
