@@ -97,7 +97,8 @@ public class CreateStoryTest {
         // Act,Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> createStoryCommand.execute(parameters));
     }
-
+    //ToDo
+    // Doesnt work
     @Test
     public void should_Return_InitializedStory() {
         //Arrange, Act
@@ -124,6 +125,8 @@ public class CreateStoryTest {
         );
     }
 
+     //ToDo
+    // Doesnt work
     @Test
     public void should_AddStory_ToStoryList() {
         //Arrange
@@ -143,6 +146,8 @@ public class CreateStoryTest {
         );
     }
 
+     //ToDo
+    // Doesnt work
     @Test
     public void should_AddStory_ToTaskList() {
         List<String> parameters = List.of(

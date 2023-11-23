@@ -32,7 +32,8 @@ public class AddCommentCommand extends BaseCommand {
         Comment comment = getTaskManagementSystemRepository().createComment(content, author);
         getTaskManagementSystemRepository().getMemberByUsername(author).addComment(comment, task);
 
-        return String.format(COMMENT_ADDED_SUCCESSFULLY, getTaskManagementSystemRepository().getMemberByUsername(author).getUsername());
+        return String.format(COMMENT_ADDED_SUCCESSFULLY, getTaskManagementSystemRepository().
+                getMemberByUsername(author).getUsername());
     }
 }
 
