@@ -28,10 +28,10 @@ public class UnassignTaskCommand extends BaseCommand {
         int id = ParsingHelpers.tryParseInteger(parameters.get(2), INVALID_ID);
         String username = parameters.get(3);
 
-        return assignTask(type, title, id, username);
+        return unassignTask(type, title, id, username);
     }
 
-    private String assignTask(TaskType type, String title, int id, String username) {
+    private String unassignTask(TaskType type, String title, int id, String username) {
         Task task = getTaskManagementSystemRepository().findTaskByID(id);
         Members member = getTaskManagementSystemRepository().getMemberByUsername(username);
         getTaskManagementSystemRepository().getMemberByUsername(username).unassignTask(member, task);

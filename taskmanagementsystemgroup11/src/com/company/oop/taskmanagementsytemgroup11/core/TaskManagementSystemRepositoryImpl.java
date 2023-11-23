@@ -81,7 +81,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity,
+                         String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 taskIndexBug, teamNameBug, boardBug);
         ++lastId;

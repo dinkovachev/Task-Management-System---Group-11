@@ -5,6 +5,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,8 @@ public class StoryImpl extends TaskImpl implements Story {
     private Status status;
     private String assignee;
     private int taskIndex;
-    private final List<Story> stories = new ArrayList<>();
-    private final List<Feedback> feedbacks = new ArrayList<>();
+    //private final List<Story> stories = new ArrayList<>();
+    //private final List<Feedback> feedbacks = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
                      int taskIndex, String teamName, String board) {
@@ -47,9 +48,9 @@ public class StoryImpl extends TaskImpl implements Story {
         return TaskType.STORY;
     }
 
-    public List<Story> getStories() {
-        return new ArrayList<>(stories);
-    }
+//    public List<Story> getStories() {
+//        return new ArrayList<>(stories);
+//    }
 
     @Override
     public Priority getPriority() {
