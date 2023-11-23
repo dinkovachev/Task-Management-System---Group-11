@@ -6,7 +6,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class BugImplTest {
