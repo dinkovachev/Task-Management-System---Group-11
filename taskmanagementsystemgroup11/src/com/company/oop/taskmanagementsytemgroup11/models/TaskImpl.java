@@ -154,15 +154,15 @@ public abstract class TaskImpl implements Task {
     @Override
     public abstract TaskType getType();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TaskImpl task = (TaskImpl) o;
-        return id == task.id && title.equals(task.title) && description.equals(task.description) &&
-                commentList.equals(task.commentList) && activityHistory.equals(task.activityHistory) &&
-                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        TaskImpl task = (TaskImpl) o;
+//        return id == task.id && title.equals(task.title) && description.equals(task.description) &&
+//                commentList.equals(task.commentList) && activityHistory.equals(task.activityHistory) &&
+//                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks);
+//    }
 
     @Override
     public int hashCode() {
