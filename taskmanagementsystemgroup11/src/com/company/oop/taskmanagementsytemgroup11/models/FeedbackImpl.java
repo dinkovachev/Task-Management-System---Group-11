@@ -81,7 +81,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     private void validateRating(int rating) {
-        if (rating <= 1 || rating >= 10) {
+        if (rating < 1 || rating > 10) {
             throw new IllegalArgumentException("Rating should be between 1 and 10.");
         }
     }

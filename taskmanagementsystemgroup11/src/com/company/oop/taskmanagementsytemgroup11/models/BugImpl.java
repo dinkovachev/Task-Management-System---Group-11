@@ -139,17 +139,17 @@ public class BugImpl extends TaskImpl implements Bug {
         return null;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BugImpl bug = (BugImpl) o;
-        return taskIndex == bug.taskIndex
-                && Objects.equals(stepsToReproduce, bug.stepsToReproduce)
-                && priority == bug.priority
-                && severity == bug.severity
-                && Objects.equals(assignee, bug.assignee)
-                && status == bug.status
-                && Objects.equals(bugs, bug.bugs);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        BugImpl bug = (BugImpl) o;
+//        return taskIndex == bug.taskIndex
+//                && Objects.equals(stepsToReproduce, bug.stepsToReproduce)
+//                && priority == bug.priority
+//                && severity == bug.severity
+//                && Objects.equals(assignee, bug.assignee)
+//                && status == bug.status
+//                && Objects.equals(bugs, bug.bugs);
+//    }
 }
