@@ -11,14 +11,16 @@ import org.junit.jupiter.api.Test;
 
 public class StoryImplTest {
 
-    private static final int VALID_ID = 1;
-    private static final String VALID_TITLE = TestUtilities.getString(10);
-    private static final String VALID_DESCRIPTION = TestUtilities.getString(10);
-    private static final Priority VALID_PRIORITY = Priority.HIGH;
-    private static final Size VALID_SIZE = Size.MEDIUM;
-    private static final String VALID_USERNAME = "Ilarion_Makariopolski1";
-    private static final String VALID_TEAM_NAME = "TeamCherry";
-    private static final String VALID_BOARD_NAME = "Whiteboard";
+    public static final int VALID_ID = 1;
+    public static final String VALID_TITLE = TestUtilities.getString(10);
+    public static final String VALID_DESCRIPTION = TestUtilities.getString(10);
+    public static final Priority VALID_PRIORITY = Priority.HIGH;
+    public static final Size VALID_SIZE = Size.MEDIUM;
+    public static final String VALID_USERNAME = "Ilarion_Makariopolski1";
+    public static final String VALID_TEAM_NAME = "TeamCherry";
+    public static final String VALID_BOARD_NAME = "Whiteboard";
+
+
 
     public static StoryImpl initializeStory() {
         return new StoryImpl(VALID_ID, VALID_TITLE, VALID_DESCRIPTION, VALID_PRIORITY, VALID_SIZE, VALID_USERNAME,

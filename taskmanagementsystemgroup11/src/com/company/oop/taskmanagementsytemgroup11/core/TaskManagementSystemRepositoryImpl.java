@@ -143,6 +143,21 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Story> getAllStories() {
+        return new ArrayList<>(stories);
+    }
+
+    @Override
+    public List<Bug> getAllBugs() {
+        return new ArrayList<>(bugs);
+    }
+
+    @Override
+    public List<Feedback> getAllFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
+
+    @Override
     public Task findTaskByID(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
