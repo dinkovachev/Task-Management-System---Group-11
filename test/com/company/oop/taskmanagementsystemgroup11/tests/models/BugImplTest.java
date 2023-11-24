@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystemgroup11.tests.models;
 
+import com.company.oop.taskmanagementsystemgroup11.tests.utils.TaskConstants;
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TestUtilities;
 import com.company.oop.taskmanagementsytemgroup11.models.BugImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
@@ -10,19 +11,22 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class BugImplTest {
-    private static final int VALID_ID = 1;
-    private static final String VALID_TITLE = TestUtilities.getString(10);
-    private static final String VALID_DESCRIPTION = TestUtilities.getString(10);
     private static final Priority VALID_PRIORITY = Priority.HIGH;
     private static final Severity VALID_SEVERITY = Severity.MAJOR;
     private static final String VALID_STEPS_TO_REPRODUCE = "1.TurnOnThePC;2.GetAHammer;3.SmackIt;";
-    private static final String VALID_USERNAME = "Ilarion_Makariopolski1";
-    private static final String VALID_TEAM_NAME = "TeamCherry";
-    private static final String VALID_BOARD_NAME = "Whiteboard";
 
     public static BugImpl initializeBug() {
-        return new BugImpl(VALID_ID, VALID_TITLE, VALID_DESCRIPTION, VALID_STEPS_TO_REPRODUCE,
-                VALID_PRIORITY, VALID_SEVERITY, VALID_USERNAME, VALID_ID, VALID_TEAM_NAME, VALID_BOARD_NAME);
+        return new BugImpl(
+                TaskConstants.VALID_ID,
+                TestUtilities.getString(TaskConstants.VALID_TITLE),
+                TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
+                VALID_STEPS_TO_REPRODUCE,
+                VALID_PRIORITY,
+                VALID_SEVERITY,
+                TestUtilities.getString(TaskConstants.VALID_USERNAME),
+                TaskConstants.VALID_ID,
+                TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
     }
 
     @Test
@@ -38,16 +42,16 @@ public class BugImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new BugImpl(
-                        VALID_ID,
-                        TestUtilities.getString(VALID_TITLE.length() - 1),
-                        VALID_DESCRIPTION,
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE - 1),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
                         VALID_STEPS_TO_REPRODUCE,
                         VALID_PRIORITY,
                         VALID_SEVERITY,
-                        VALID_USERNAME,
-                        VALID_ID,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TestUtilities.getString(TaskConstants.VALID_USERNAME),
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -55,16 +59,17 @@ public class BugImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new BugImpl(
-                        VALID_ID,
-                        VALID_TITLE,
-                        TestUtilities.getString(VALID_DESCRIPTION.length() - 1),
+
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION - 1),
                         VALID_STEPS_TO_REPRODUCE,
                         VALID_PRIORITY,
                         VALID_SEVERITY,
-                        VALID_USERNAME,
-                        VALID_ID,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TestUtilities.getString(TaskConstants.VALID_USERNAME),
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -72,7 +77,7 @@ public class BugImplTest {
         // Arrange
         BugImpl bug = initializeBug();
         // Act
-        bug.changePriority(VALID_ID, Priority.LOW);
+        bug.changePriority(TaskConstants.VALID_ID, Priority.LOW);
         // Assert
         Assertions.assertEquals(Priority.LOW, bug.getPriority());
     }
@@ -82,7 +87,7 @@ public class BugImplTest {
         // Arrange
         BugImpl bug = initializeBug();
         // Act
-        bug.changeSeverity(VALID_ID, Severity.MINOR);
+        bug.changeSeverity(TaskConstants.VALID_ID, Severity.MINOR);
         // Assert
         Assertions.assertEquals(Severity.MINOR, bug.getSeverity());
     }
