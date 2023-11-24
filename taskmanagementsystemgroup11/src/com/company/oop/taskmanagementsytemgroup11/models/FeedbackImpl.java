@@ -42,10 +42,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         return rating;
     }
 
-    @Override
-    public int getTaskIndex() {
-        return taskIndex;
-    }
+//    @Override
+//    public int getTaskIndex() {
+//        return taskIndex;
+//    }
 
     @Override
     public Status getStatus() {

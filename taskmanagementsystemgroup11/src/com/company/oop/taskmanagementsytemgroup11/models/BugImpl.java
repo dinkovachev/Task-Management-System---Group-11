@@ -41,10 +41,10 @@ public class BugImpl extends TaskImpl implements Bug {
         addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
     }
 
-    @Override
-    public int getTaskIndex() {
-        return taskIndex;
-    }
+//    @Override
+//    public int getTaskIndex() {
+//        return taskIndex;
+//    }
 
     public List<Bug> getBugs() {
         return new ArrayList<>(bugs);

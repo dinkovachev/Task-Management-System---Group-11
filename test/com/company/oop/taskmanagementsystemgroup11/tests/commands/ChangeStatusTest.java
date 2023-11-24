@@ -49,7 +49,6 @@ public class ChangeStatusTest {
                 VALID_PRIORITY,
                 Size.LARGE,
                 TestUtilities.getString(TaskConstants.VALID_USERNAME),
-                TaskConstants.VALID_ID,
                 TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
                 TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
 

@@ -10,6 +10,7 @@ import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepos
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.StoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
@@ -46,16 +47,17 @@ public class AddCommentTest {
     @Test
     public void should_AddComment_When_InputIsValid() {
         //Arrange
+        Members testMember = taskManagementSystemRepository.createMember("Dinko", "Kovachev");
         Comment testComment = taskManagementSystemRepository.createComment
                 ("validContent", "Dinko_Kovachev1");
         Story story = taskManagementSystemRepository.createStory(TestUtilities.getString(TaskConstants.VALID_TITLE),
                 TestUtilities.getString(TaskConstants.VALID_DESCRIPTION), Priority.HIGH, Size.LARGE,
-                TestUtilities.getString(TaskConstants.VALID_USERNAME), 1,
+                TestUtilities.getString(TaskConstants.VALID_USERNAME),
                 TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
                 TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
 
         List<String> parameters = List.of(testComment.getContent(), testComment.getAuthor(),
-                String.valueOf(taskManagementSystemRepository.findTaskByID(1).getId()));
+                String.valueOf(taskManagementSystemRepository.findTaskByID(story.getId()).getId()));
         //Act
         addCommentCommand.execute(parameters);
 
