@@ -7,8 +7,9 @@ import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
-import org.testng.annotations.Test;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class BugImplTest {
     private static final Priority VALID_PRIORITY = Priority.HIGH;
