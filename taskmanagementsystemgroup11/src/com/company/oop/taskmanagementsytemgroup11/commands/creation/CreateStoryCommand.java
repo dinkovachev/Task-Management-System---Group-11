@@ -44,7 +44,7 @@ public class CreateStoryCommand extends BaseCommand {
     private String createStoryCommand(String title, String description, Priority priority, Size size, String assignee,
                                       int taskIndexStory, String teamName, String boardName) {
         Story story = getTaskManagementSystemRepository().createStory(title, description, priority, size, assignee,
-                taskIndexStory, teamName, boardName);
+                teamName, boardName);
         Board board = getTaskManagementSystemRepository().getBoardByName(boardName);
         board.addTask(story);
         return String.format(NEW_TASK_CREATED_MSG, title,taskIndexStory);
