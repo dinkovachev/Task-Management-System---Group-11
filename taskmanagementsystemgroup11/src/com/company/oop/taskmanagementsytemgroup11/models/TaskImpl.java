@@ -64,13 +64,14 @@ public abstract class TaskImpl implements Task {
 
     public abstract Status getStatus();
 
-    @Override
-    public List<Task> getAllTasks() {
-        return new ArrayList<>(tasks);
-    }
+//    @Override
+//    public List<Task> getAllTasks() {
+//        return new ArrayList<>(tasks);
+//    }
 
     @Override
     public List<Comment> getCommentList() {
+
         return new ArrayList<>(commentList);
     }
 
@@ -81,7 +82,7 @@ public abstract class TaskImpl implements Task {
     }
 
     private void setTitle(String title) {
-        ValidationHelpers.validateDecimalRange(
+        ValidationHelpers.validateIntRange(
                 title.length(),
                 TITLE_LEN_MIN,
                 TITLE_LEN_MAX,
@@ -105,11 +106,11 @@ public abstract class TaskImpl implements Task {
                 this.getTitle()));
     }
 
-    @Override
-    public void addTask(Task task) {
-        tasks.add(task);
-        addEventToActivityLogHistory(String.format("Task %s added", task));
-    }
+//    @Override
+//    public void addTask(Task task) {
+//        tasks.add(task);
+//        addEventToActivityLogHistory(String.format("Task %s added", task));
+//    }
 
     @Override
     public void assignTask(Members member) {
@@ -163,11 +164,11 @@ public abstract class TaskImpl implements Task {
 //                commentList.equals(task.commentList) && activityHistory.equals(task.activityHistory) &&
 //                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks);
 //    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks);
-    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks);
+//    }
 
     @Override
     public abstract int getTaskIndex();

@@ -1,24 +1,26 @@
 package com.company.oop.taskmanagementsystemgroup11.tests.models;
 
+import com.company.oop.taskmanagementsystemgroup11.tests.utils.TaskConstants;
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TestUtilities;
 import com.company.oop.taskmanagementsytemgroup11.models.FeedbackImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
-import org.junit.Test;
+
+
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class FeedbackImplTest {
-    private static final int VALID_ID = 1;
-    private static final String VALID_TITLE = TestUtilities.getString(10);
-    private static final String VALID_DESCRIPTION = TestUtilities.getString(10);
-    private static final int VALID_RATING = 1;
-    private static final String VALID_USERNAME = "Ilarion_Makariopolski1";
-    private static final String VALID_TEAM_NAME = "TeamCherry";
-    private static final String VALID_BOARD_NAME = "Whiteboard";
 
     public static FeedbackImpl initializeFeedback() {
-        return new FeedbackImpl(VALID_ID, VALID_TITLE, VALID_DESCRIPTION, VALID_RATING, VALID_TEAM_NAME,
-                VALID_BOARD_NAME);
+        return new FeedbackImpl(
+                TaskConstants.VALID_ID,
+                TestUtilities.getString(TaskConstants.VALID_TITLE),
+                TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
+                TaskConstants.VALID_RATING,
+                TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
     }
 
     @Test
@@ -34,12 +36,12 @@ public class FeedbackImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new FeedbackImpl(
-                        VALID_ID,
-                        TestUtilities.getString(VALID_TITLE.length() - 1),
-                        VALID_DESCRIPTION,
-                        VALID_RATING,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE - 1),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
+                        TaskConstants.VALID_RATING,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -47,12 +49,12 @@ public class FeedbackImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new FeedbackImpl(
-                        VALID_ID,
-                        VALID_TITLE,
-                        TestUtilities.getString(VALID_DESCRIPTION.length() - 1),
-                        VALID_RATING,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION - 1),
+                        TaskConstants.VALID_RATING,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -60,12 +62,12 @@ public class FeedbackImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new FeedbackImpl(
-                        VALID_ID,
-                        VALID_TITLE,
-                        VALID_DESCRIPTION,
-                        0,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
+                        TaskConstants.VALID_RATING - 1,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -88,7 +90,7 @@ public class FeedbackImplTest {
         feedback.revertStatus();
         // Assert
         Assertions.assertEquals(Status.NEW, feedback.getStatus());
-            }
+    }
 
     @Test
     public void revertStatus_Should_revertStatusToNew_When_feedbackStatusIsDone() {
@@ -110,7 +112,7 @@ public class FeedbackImplTest {
         // Arrange
         FeedbackImpl feedback = initializeFeedback();
         // Act
-        feedback.changeRating(VALID_ID, 10);
+        feedback.changeRating(TaskConstants.VALID_ID, 10);
         // Assert
         Assertions.assertEquals(10, feedback.getRating());
     }
