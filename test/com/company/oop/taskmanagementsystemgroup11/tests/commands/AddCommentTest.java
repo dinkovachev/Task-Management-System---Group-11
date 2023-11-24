@@ -8,6 +8,7 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.StoryImpl;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import org.junit.jupiter.api.Assertions;
@@ -24,7 +25,7 @@ public class AddCommentTest {
     private Command addCommentCommand;
 
     @BeforeEach
-    public void before() {
+    public void initializeCommandAndRepository() {
         taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
         addCommentCommand = new AddCommentCommand(taskManagementSystemRepository);
     }
@@ -42,11 +43,13 @@ public class AddCommentTest {
     @Test
     public void should_Create_When_InputIsValid() {
         //Arrange
+        Comment testComment = taskManagementSystemRepository.createComment
+                ("validContent", "Dinko_Kovachev1");
         Story story = new StoryImpl(StoryImplTest.VALID_ID, StoryImplTest.VALID_TITLE, StoryImplTest.VALID_DESCRIPTION,
                 StoryImplTest.VALID_PRIORITY, StoryImplTest.VALID_SIZE, StoryImplTest.VALID_USERNAME,
-                StoryImplTest.VALID_ID, StoryImplTest.VALID_BOARD_NAME, StoryImplTest.VALID_TEAM_NAME);
+                StoryImplTest.VALID_TASK_INDEX, StoryImplTest.VALID_BOARD_NAME, StoryImplTest.VALID_TEAM_NAME);
         List<String> parameters = List.of(CommentImplTests.VALID_CONTENT, CommentImplTests.VALID_AUTHOR,
-                String.valueOf(taskManagementSystemRepository.findStoryByTaskIndex(StoryImplTest.VALID_ID)));
+                String.valueOf(taskManagementSystemRepository.findTaskByID(story.getTaskIndex())));
         //Act
         addCommentCommand.execute(parameters);
     }

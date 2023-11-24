@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 public class StoryImplTest {
 
     public static final int VALID_ID = 1;
+    public static final int VALID_TASK_INDEX = 1;
     public static final String VALID_TITLE = TestUtilities.getString(10);
     public static final String VALID_DESCRIPTION = TestUtilities.getString(10);
     public static final Priority VALID_PRIORITY = Priority.HIGH;

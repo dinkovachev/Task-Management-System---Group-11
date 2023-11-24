@@ -16,7 +16,9 @@ import static java.lang.String.format;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
+    private static final String TEAM_ALREADY_EXIST = "Team %s already exist";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
+    private final static String MEMBER_ALREADY_EXIST = "User %s already exist.";
     private static final String NO_SUCH_BOARD = "There is no such board with name %s";
     public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
     private int lastId;
@@ -48,6 +50,22 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Board> getAllTeamsBoards() {
         return new ArrayList<>(boards);
     }
+
+//    @Override
+//    public void addMember(Members memberToAdd) {
+//        if (members.contains(memberToAdd)){
+//            throw new IllegalArgumentException(String.format(MEMBER_ALREADY_EXIST, memberToAdd.getUsername()));
+//        }
+//        this.members.add(memberToAdd);
+//    }
+//
+//    @Override
+//    public void addTeam(Team teamToAdd) {
+//        if (teams.contains(teamToAdd)){
+//            throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXIST, teamToAdd.getName()));
+//        }
+//        this.teams.add(teamToAdd);
+//    }
 
     @Override
     public Members createMember(String firstName, String lastName) {

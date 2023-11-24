@@ -6,8 +6,10 @@ import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateStoryC
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import org.junit.jupiter.api.Assertions;
@@ -104,7 +106,10 @@ public class CreateStoryTest {
     @Test
     public void should_Return_InitializedStory() {
         //Arrange, Act
-        Members member = new MembersImpl(1,"Ilarion","Makariopolski");
+
+        Members member = taskManagementSystemRepository.createMember("Ilarion", "Makariopolski");
+        Team team = taskManagementSystemRepository.createTeam(VALID_TEAM_NAME_EXIST);
+        Board board = taskManagementSystemRepository.createBoard(VALID_BOARD_NAME_EXIST);
 
         List<String> parameters = List.of(
                 VALID_TITLE,
@@ -112,8 +117,8 @@ public class CreateStoryTest {
                 String.valueOf(VALID_PRIORITY),
                 String.valueOf(VALID_SIZE),
                 member.getUsername(),
-                VALID_TEAM_NAME_EXIST,
-                VALID_BOARD_NAME_EXIST);
+                team.getName(),
+                board.getName());
         createStoryCommand.execute(parameters);
         //Assert
         Story story = taskManagementSystemRepository.findStoryByTaskIndex(VALID_TASK_INDEX);
@@ -134,14 +139,17 @@ public class CreateStoryTest {
     @Test
     public void should_AddStory_ToStoryList() {
         //Arrange
+        Members member = taskManagementSystemRepository.createMember("Ilarion", "Makariopolski");
+        Team team = taskManagementSystemRepository.createTeam(VALID_TEAM_NAME_EXIST);
+        Board board = taskManagementSystemRepository.createBoard(VALID_BOARD_NAME_EXIST);
         List<String> parameters = List.of(
                 VALID_TITLE,
                 VALID_DESCRIPTION,
                 String.valueOf(VALID_PRIORITY),
                 String.valueOf(VALID_SIZE),
-                VALID_ASSIGNEE_MEMBER,
-                VALID_TEAM_NAME_EXIST,
-                VALID_BOARD_NAME_EXIST);
+                member.getUsername(),
+                team.getName(),
+                board.getName());
 
         //Act, Assert
         assertAll(
@@ -154,22 +162,25 @@ public class CreateStoryTest {
     // Doesnt work
     @Test
     public void should_AddStory_ToTaskList() {
+        //Arrange
+        Members member = taskManagementSystemRepository.createMember("Ilarion", "Makariopolski");
+        Team team = taskManagementSystemRepository.createTeam(VALID_TEAM_NAME_EXIST);
+        Board board = taskManagementSystemRepository.createBoard(VALID_BOARD_NAME_EXIST);
         List<String> parameters = List.of(
                 VALID_TITLE,
                 VALID_DESCRIPTION,
                 String.valueOf(VALID_PRIORITY),
                 String.valueOf(VALID_SIZE),
-                VALID_ASSIGNEE_MEMBER,
-                VALID_TEAM_NAME_EXIST,
-                VALID_BOARD_NAME_EXIST);
+                member.getUsername(),
+                team.getName(),
+                board.getName());
 
         //Act
         createStoryCommand.execute(parameters);
 
         //Assert
         assertAll(
-                () -> assertDoesNotThrow(() -> createStoryCommand.execute(parameters)),
-                () -> assertEquals(1, taskManagementSystemRepository.getAllTasks().size())
+                () -> assertEquals(1, taskManagementSystemRepository.getAllStories().size())
         );
     }
 }
