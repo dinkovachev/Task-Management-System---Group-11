@@ -1,6 +1,9 @@
 package com.company.oop.taskmanagementsystemgroup11.tests.models;
 
+import com.company.oop.taskmanagementsystemgroup11.tests.utils.TaskConstants;
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TestUtilities;
+import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
+import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.StoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
@@ -9,23 +12,29 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class StoryImplTest {
 
-    public static final int VALID_ID = 1;
-    public static final int VALID_TASK_INDEX = 1;
-    public static final String VALID_TITLE = TestUtilities.getString(10);
-    public static final String VALID_DESCRIPTION = TestUtilities.getString(10);
     public static final Priority VALID_PRIORITY = Priority.HIGH;
     public static final Size VALID_SIZE = Size.MEDIUM;
-    public static final String VALID_USERNAME = "Ilarion_Makariopolski1";
-    public static final String VALID_TEAM_NAME = "TeamCherry";
-    public static final String VALID_BOARD_NAME = "Whiteboard";
 
+    private TaskManagementSystemRepositoryImpl repository;
+    private Command changeSizeCommand;
+    private List<String> params;
 
 
     public static StoryImpl initializeStory() {
-        return new StoryImpl(VALID_ID, VALID_TITLE, VALID_DESCRIPTION, VALID_PRIORITY, VALID_SIZE, VALID_USERNAME,
-                VALID_ID, VALID_TEAM_NAME, VALID_BOARD_NAME);
+        return new StoryImpl(
+                TaskConstants.VALID_ID,
+                TestUtilities.getString(TaskConstants.VALID_TITLE),
+                TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
+                VALID_PRIORITY,
+                VALID_SIZE,
+                TestUtilities.getString(TaskConstants.VALID_USERNAME),
+                TaskConstants.VALID_ID,
+                TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
     }
 
     @Test
@@ -41,15 +50,15 @@ public class StoryImplTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new StoryImpl(
-                        VALID_ID,
-                        TestUtilities.getString(VALID_TITLE.length() - 1),
-                        VALID_DESCRIPTION,
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TITLE - 1),
+                        TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
                         VALID_PRIORITY,
                         VALID_SIZE,
-                        VALID_USERNAME,
-                        VALID_ID,
-                        VALID_TEAM_NAME,
-                        VALID_BOARD_NAME));
+                        TestUtilities.getString(TaskConstants.VALID_USERNAME),
+                        TaskConstants.VALID_ID,
+                        TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
+                        TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
 
     @Test
@@ -100,7 +109,7 @@ public class StoryImplTest {
         // Arrange
         StoryImpl story = initializeStory();
         // Act
-        story.changePriority(VALID_ID, Priority.LOW);
+        story.changePriority(TaskConstants.VALID_ID, Priority.LOW);
         // Assert
         Assertions.assertEquals(Priority.LOW, story.getPriority());
     }
@@ -110,7 +119,7 @@ public class StoryImplTest {
         // Arrange
         StoryImpl story = initializeStory();
         // Act
-        story.changeSize(VALID_ID, Size.SMALL);
+        story.changeSize(TaskConstants.VALID_ID, Size.SMALL);
         // Assert
         Assertions.assertEquals(Size.SMALL, story.getSize());
     }

@@ -7,6 +7,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TaskManagementSystemRepository {
 
