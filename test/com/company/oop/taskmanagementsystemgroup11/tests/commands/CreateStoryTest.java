@@ -5,6 +5,8 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateStoryCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
@@ -102,12 +104,14 @@ public class CreateStoryTest {
     @Test
     public void should_Return_InitializedStory() {
         //Arrange, Act
+        Members member = new MembersImpl(1,"Ilarion","Makariopolski");
+
         List<String> parameters = List.of(
                 VALID_TITLE,
                 VALID_DESCRIPTION,
                 String.valueOf(VALID_PRIORITY),
                 String.valueOf(VALID_SIZE),
-                VALID_ASSIGNEE_MEMBER,
+                member.getUsername(),
                 VALID_TEAM_NAME_EXIST,
                 VALID_BOARD_NAME_EXIST);
         createStoryCommand.execute(parameters);
