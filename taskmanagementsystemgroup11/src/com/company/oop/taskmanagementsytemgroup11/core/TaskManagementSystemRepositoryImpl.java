@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.String.format;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
@@ -81,7 +80,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority,
+                         Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 taskIndexBug, teamNameBug, boardBug);
         ++lastId;
