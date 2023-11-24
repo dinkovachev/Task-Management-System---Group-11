@@ -1,10 +1,12 @@
 package com.company.oop.taskmanagementsystemgroup11.tests.commands;
 
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TestUtilities;
+import com.company.oop.taskmanagementsytemgroup11.commands.add.AddMemberCommand;
 import com.company.oop.taskmanagementsytemgroup11.commands.change.ChangeSizeCommand;
 import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +29,7 @@ public class AddMemberTest {
     public void before() {
         params = new ArrayList<>();
         repository = new TaskManagementSystemRepositoryImpl();
-        addMemberCommand = new ChangeSizeCommand(repository);
+        addMemberCommand = new AddMemberCommand(repository);
     }
 
     @Test
@@ -42,16 +44,18 @@ public class AddMemberTest {
     @Test
     public void should_ChangeStatus_When_ArgumentsAreValid() {
         // Arrange
+        Team team = repository.createTeam("teamName");
+        Members member = repository.createMember("validFirstName", "validLastName");
+
         params = List.of(
-                "validUsername",
+                member.getUsername(),
                 team.getName());
 
         // Act
         addMemberCommand.execute(params);
 
         // Assert
-        Assertions.assertEquals(
-                "validUsername", repository.getMemberByUsername("validUsername").getUsername());
+        Assertions.assertEquals(1, team.getTeamMembers().size());
     }
 
 }
