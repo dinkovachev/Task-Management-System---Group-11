@@ -102,7 +102,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity,
                          String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
-                taskIndexBug, teamNameBug, boardBug);
+                teamNameBug, boardBug);
         ++lastId;
         this.bugs.add(bug);
         this.tasks.add(bug);
@@ -184,12 +184,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
         throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
-//        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-//            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
-//        } else {
-//            return tasks.get(taskIndex);
-//        }
-//    }
 
     @Override
     public Story findStoryByTaskIndex(int taskIndex) {

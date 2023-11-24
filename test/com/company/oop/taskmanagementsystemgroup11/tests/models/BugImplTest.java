@@ -25,7 +25,6 @@ public class BugImplTest {
                 VALID_PRIORITY,
                 VALID_SEVERITY,
                 TestUtilities.getString(TaskConstants.VALID_USERNAME),
-                TaskConstants.VALID_ID,
                 TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
                 TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
     }
@@ -50,7 +49,6 @@ public class BugImplTest {
                         VALID_PRIORITY,
                         VALID_SEVERITY,
                         TestUtilities.getString(TaskConstants.VALID_USERNAME),
-                        TaskConstants.VALID_ID,
                         TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
                         TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }
@@ -68,7 +66,6 @@ public class BugImplTest {
                         VALID_PRIORITY,
                         VALID_SEVERITY,
                         TestUtilities.getString(TaskConstants.VALID_USERNAME),
-                        TaskConstants.VALID_ID,
                         TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
                         TestUtilities.getString(TaskConstants.VALID_BOARD_NAME)));
     }

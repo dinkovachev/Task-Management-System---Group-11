@@ -10,7 +10,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowTaskActivityCommand extends BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
 
     public ShowTaskActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -20,13 +20,11 @@ public class ShowTaskActivityCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        TaskType type = ParsingHelpers.tryParseEnum(parameters.get(0), TaskType.class);
-        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(1), INVALID_INPUT_MSG) - 1;
-        getTaskManagementSystemRepository().validateType(type, taskIndex);
-        return showTaskActivity(type, taskIndex);
+        int taskIndex = ParsingHelpers.tryParseInteger(parameters.get(0), INVALID_INPUT_MSG);
+        return showTaskActivity(taskIndex);
     }
 
-    private String showTaskActivity(TaskType type, int taskIndex) {
+    private String showTaskActivity(int taskIndex) {
         Task task = getTaskManagementSystemRepository().findTaskByID(taskIndex);
         return String.format(task.displayActivityLogHistory());
     }

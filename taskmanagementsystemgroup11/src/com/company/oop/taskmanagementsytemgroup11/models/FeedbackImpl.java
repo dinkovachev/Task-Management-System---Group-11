@@ -16,7 +16,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private static final String FEEDBACK_STATUS_IS_ALREADY_DONE = "Current feedback status is already Done.";
     private static final String NEW_FEEDBACK_CREATED_MESSAGE = "Feedback with title %s is created";
     private int rating;
-    private int taskIndex;
     private Status status;
     private final List<Feedback> feedbacks;
 
