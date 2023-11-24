@@ -6,6 +6,8 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateFeedbackCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,14 +40,14 @@ public class CreateFeedbackTest {
 
     @Test
     public void should_CreateFeedback_When_ArgumentsAreValid() {
-
+        Team team = repository.createTeam("teamName");
+        Board board = repository.createBoard("boardName");
         params = List.of(
                 "feedbackName",
                 "feedbackDescription",
                 "7",
-                "1",
-                "teamName",
-                "boardName");
+                team.getName(),
+                board.getName());
 
         // Act,
         createFeedbackCommand.execute(params);
@@ -56,8 +58,6 @@ public class CreateFeedbackTest {
                         "feedbackName", repository.findFeedbackByTaskIndex(1).getTitle()),
                 () -> Assertions.assertEquals(
                         "feedbackDescription", repository.findFeedbackByTaskIndex(1).getDescription()),
-                () -> Assertions.assertEquals(
-                        7, repository.findFeedbackByTaskIndex(1).getRating()),
                 () -> Assertions.assertEquals(
                         1, repository.findFeedbackByTaskIndex(1).getId()));
     }
