@@ -29,7 +29,7 @@ public class StoryImpl extends TaskImpl implements Story {
     //private final List<Feedback> feedbacks = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
-                     int taskIndex, String teamName, String board) {
+                     String teamName, String board) {
         super(id, title, description);
         setPriority(priority);
         setSize(size);
@@ -38,10 +38,10 @@ public class StoryImpl extends TaskImpl implements Story {
         addEventToActivityLogHistory(String.format(NEW_STORY_WAS_CREATED_MESSAGE, title));
     }
 
-    @Override
-    public int getTaskIndex() {
-        return taskIndex;
-    }
+//    @Override
+//    public int getTaskIndex() {
+//        return taskIndex;
+//    }
 
     @Override
     public TaskType getType() {

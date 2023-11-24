@@ -7,11 +7,13 @@ import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepos
 import com.company.oop.taskmanagementsytemgroup11.models.BoardImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.TeamImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class CreateBoardTest {
     private TaskManagementSystemRepositoryImpl repository;
     private Command createBoardCommand;
     private Command createTeamCommand;
+    private Member member;
+    private Team team;
+    private Board board;
     private List<String> paramsTeam;
     private List<String> paramsBoard;
 
@@ -43,20 +48,19 @@ public class CreateBoardTest {
     @Test
     public void should_CreateBoard_When_ArgumentsAreValid() {
 
-        paramsTeam = List.of(
-                "teamName");
-
-        createTeamCommand.execute(paramsTeam);
+        Team team = repository.createTeam("teamName");
+//        Board board = repository.createBoard("boardName");
+//        Members member = repository.createMember("validFirstName", "validLastName");
 
         paramsBoard = List.of(
                 "boardName",
-                "teamName");
+                team.getName());
 
         // Act,
         createBoardCommand.execute(paramsBoard);
 
         // Assert
         Assertions.assertEquals(
-                "boardName", repository.getBoardByName("boardName").getName());
+                1, repository.getAllTeamsBoards().size());
     }
 }

@@ -48,7 +48,7 @@ public interface TaskManagementSystemRepository {
 //                  Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board);
 
     Story createStory(String title, String description, Priority priority, Size size, String assignee,
-                      int taskIndexStory, String teamNameStory, String boardStory);
+                String teamNameStory, String boardStory);
 
     Feedback createFeedback(String title, String description, int rating, int index, String teamName, String boardName);
 

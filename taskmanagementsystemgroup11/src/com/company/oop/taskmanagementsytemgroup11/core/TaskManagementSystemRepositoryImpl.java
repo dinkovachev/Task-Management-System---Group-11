@@ -83,7 +83,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
-                taskIndexBug, teamNameBug, boardBug);
+                teamNameBug, boardBug);
         ++lastId;
         this.bugs.add(bug);
         this.tasks.add(bug);
@@ -93,8 +93,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Story createStory(String title, String description, Priority priority, Size size,
-                             String assignee, int taskIndex, String teamNameStory, String board) {
-        Story story = new StoryImpl(lastId, title, description, priority, size, assignee, taskIndex, teamNameStory,
+                             String assignee, String teamNameStory, String board) {
+        Story story = new StoryImpl(lastId, title, description, priority, size, assignee, teamNameStory,
                 board);
         ++lastId;
         this.stories.add(story);
@@ -143,11 +143,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Task findTaskByID(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
-        } else {
-            return tasks.get(taskIndex);
+        for (Task task : tasks) {
+            if (task.getId() == taskIndex) {
+                return task;
+            }
         }
+        throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
 
     @Override

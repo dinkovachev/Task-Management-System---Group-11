@@ -170,6 +170,6 @@ public abstract class TaskImpl implements Task {
 //        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks);
 //    }
 
-    @Override
-    public abstract int getTaskIndex();
+//    @Override
+//    public abstract int getTaskIndex();
 }
