@@ -29,7 +29,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private final List<Bug> bugs;
 
     public BugImpl(int id, String title, String description, String stepsToReproduce, Priority priority,
-                   Severity severity, String assignee, int taskIndex, String teamName, String board) {
+                   Severity severity, String assignee, String teamName, String board) {
         super(id, title, description);
         setStepsToReproduce(stepsToReproduce);
         setPriority(priority);
@@ -37,7 +37,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         this.status = Status.ACTIVE;
         this.bugs = new ArrayList<>();
-        this.taskIndex = taskIndex;
+
         addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
     }
 
