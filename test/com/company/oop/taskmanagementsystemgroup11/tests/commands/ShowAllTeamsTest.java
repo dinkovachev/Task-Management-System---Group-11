@@ -21,9 +21,6 @@ public class ShowAllTeamsTest {
 
     private List<Team> teams = new ArrayList<>();
 
-    //ToDo
-    // Double check the part that is not covered
-
     @BeforeEach
     public void initializeCommandAndRepository(){
         taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
