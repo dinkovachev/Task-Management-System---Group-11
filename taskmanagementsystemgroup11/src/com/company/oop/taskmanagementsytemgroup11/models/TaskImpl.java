@@ -155,6 +155,13 @@ public abstract class TaskImpl implements Task {
     @Override
     public abstract TaskType getType();
 
+    @Override
+    public String getAsString() {
+        return """
+                Title: %s
+                Id:%d
+                """.formatted(getTitle(), getId());
+
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
@@ -172,4 +179,5 @@ public abstract class TaskImpl implements Task {
 
 //    @Override
 //    public abstract int getTaskIndex();
+    }
 }

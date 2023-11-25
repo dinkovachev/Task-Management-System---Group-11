@@ -1,5 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.commands.enums;
 
+import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
+
 public enum CommandType {
     CREATEMEMBER,
     SHOWALLPEOPLE,
@@ -23,5 +25,12 @@ public enum CommandType {
     CREATESTORY,
     CHANGESTATUS,
     SHOWTASKACTIVITY,
-    CREATEFEEDBACK;
+    CREATEFEEDBACK,
+    LISTTASKS,
+    LISTSTORIES,
+    LISTBUGS,
+    LISTTASKWITHASSIGNEE,
+
+    LISTFEEDBAKS;
+
 }

@@ -7,6 +7,8 @@ import com.company.oop.taskmanagementsytemgroup11.commands.change.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.enums.CommandType;
+import com.company.oop.taskmanagementsytemgroup11.commands.listing.*;
+import com.company.oop.taskmanagementsytemgroup11.commands.listing.ListTasksWithAssigneeCommand;
 import com.company.oop.taskmanagementsytemgroup11.commands.show.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.unassign.UnassignTaskCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.CommandFactory;
@@ -69,6 +71,16 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowTaskActivityCommand(taskManagementSystemRepository);
             case CREATEFEEDBACK:
                 return new CreateFeedbackCommand(taskManagementSystemRepository);
+            case LISTBUGS:
+                return new ListBugsCommand(taskManagementSystemRepository);
+            case LISTTASKS:
+                return new ListTasksCommand(taskManagementSystemRepository);
+            case LISTTASKWITHASSIGNEE:
+                return new ListTasksWithAssigneeCommand(taskManagementSystemRepository);
+            case LISTFEEDBAKS:
+                return new ListFeedbacksCommand(taskManagementSystemRepository);
+            case LISTSTORIES:
+                return new ListStoriesCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

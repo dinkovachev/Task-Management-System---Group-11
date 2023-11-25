@@ -5,7 +5,6 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateStoryCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
@@ -101,6 +100,7 @@ public class CreateStoryTest {
         // Act,Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> createStoryCommand.execute(parameters));
     }
+
     //ToDo
     // Doesnt work
     @Test
@@ -134,8 +134,7 @@ public class CreateStoryTest {
         );
     }
 
-     //ToDo
-    // Doesnt work
+
     @Test
     public void should_AddStory_ToStoryList() {
         //Arrange
@@ -158,8 +157,6 @@ public class CreateStoryTest {
         );
     }
 
-     //ToDo
-    // Doesnt work
     @Test
     public void should_AddStory_ToTaskList() {
         //Arrange
@@ -175,11 +172,10 @@ public class CreateStoryTest {
                 team.getName(),
                 board.getName());
 
-        //Act
-        createStoryCommand.execute(parameters);
 
-        //Assert
+        //Act, Assert
         assertAll(
+                () -> assertDoesNotThrow(() -> createStoryCommand.execute(parameters)),
                 () -> assertEquals(1, taskManagementSystemRepository.getAllStories().size())
         );
     }

@@ -9,6 +9,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -142,6 +143,21 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Story> getAllStories() {
+        return new ArrayList<>(stories);
+    }
+
+    @Override
+    public List<Bug> getAllBugs() {
+        return new ArrayList<>(bugs);
+    }
+
+    @Override
+    public List<Feedback> getAllFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
+
+    @Override
     public Task findTaskByID(int taskIndex) {
         for (Task task : tasks) {
             if (task.getId() == taskIndex) {
@@ -263,5 +279,27 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 && Objects.equals(stories, that.stories)
                 && Objects.equals(feedbacks, that.feedbacks)
                 && Objects.equals(tasks, that.tasks);
+
+    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsByTitle() {
+
+        return bugs.stream()
+                .sorted(Comparator.comparing(Bug::getTitle))
+                .toList();
+    }
+    @Override
+    public List<Task> getFilteredListOfTasksByTitle(String title) {
+
+        return tasks.stream()
+                .filter(task -> task.getTitle().contains(title))
+                .toList();
+    }
+    public List<Task> getSortedListOfTasksByTitle() {
+
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
     }
 }
