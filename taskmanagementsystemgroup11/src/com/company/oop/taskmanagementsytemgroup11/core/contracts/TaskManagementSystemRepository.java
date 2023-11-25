@@ -71,7 +71,29 @@ public interface TaskManagementSystemRepository {
 
     List<Bug> getSortedListOfBugsByTitle();
 
-    List<Task> getFilteredListOfTasksByTitle(String title);
+    List<Story> getSortedListOfStoriesByTitle();
+
+    List<Feedback> getSortedListOfFeedbackByTitle();
 
     List<Task> getSortedListOfTasksByTitle();
+
+    List<Task> getSortedListOfTasksWithAssigneeByTitle(String assignee);
+
+ //   List<Bug> getFilteredListOfBugsByAssignee(String assignee);
+
+ //   List<Bug> getFilteredListOfBugsByStatus();
+
+    List<Story> getSortedListOfStoriesBySize();
+
+    List<Bug> getSortedListOfBugsBySeverity();
+
+    List<Bug> getSortedListOfBugsByPriority();
+
+    List<Story> getSortedListOfStoriesByPriority();
+
+    List<Feedback> getSortedListOfFeedbacksByRating();
+
+
+    List<Task> getFilteredListOfTasksByTitle(String title);
+
 }

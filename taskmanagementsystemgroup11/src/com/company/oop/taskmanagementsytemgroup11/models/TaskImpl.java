@@ -159,8 +159,7 @@ public abstract class TaskImpl implements Task {
     public String getAsString() {
         return """
                 Title: %s
-                Id:%d
-                """.formatted(getTitle(), getId());
+                Id:%d""".formatted(getTitle(), getId());
 
 //    @Override
 //    public boolean equals(Object o) {

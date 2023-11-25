@@ -7,8 +7,9 @@ import com.company.oop.taskmanagementsytemgroup11.commands.change.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.enums.CommandType;
+import com.company.oop.taskmanagementsytemgroup11.commands.listing.ListStoriesSortBySizeCommand;
 import com.company.oop.taskmanagementsytemgroup11.commands.listing.*;
-import com.company.oop.taskmanagementsytemgroup11.commands.listing.ListTasksWithAssigneeCommand;
+import com.company.oop.taskmanagementsytemgroup11.commands.listing.ListTasksWithAssigneeSortCommand;
 import com.company.oop.taskmanagementsytemgroup11.commands.show.*;
 import com.company.oop.taskmanagementsytemgroup11.commands.unassign.UnassignTaskCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.CommandFactory;
@@ -71,16 +72,32 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowTaskActivityCommand(taskManagementSystemRepository);
             case CREATEFEEDBACK:
                 return new CreateFeedbackCommand(taskManagementSystemRepository);
-            case LISTBUGS:
-                return new ListBugsCommand(taskManagementSystemRepository);
-            case LISTTASKS:
-                return new ListTasksCommand(taskManagementSystemRepository);
+//            case LISTBUGSFILTER:
+//                return new ListBugsFilterCommand(taskManagementSystemRepository);
+//            case LISTBUGSSORT:
+ //               return new ListBugsSortCommand(taskManagementSystemRepository);
+            case LISTTASKSBYTITLEFILTER:
+                return new ListFilterTasksByTitleCommand(taskManagementSystemRepository);
             case LISTTASKWITHASSIGNEE:
-                return new ListTasksWithAssigneeCommand(taskManagementSystemRepository);
-            case LISTFEEDBAKS:
-                return new ListFeedbacksCommand(taskManagementSystemRepository);
-            case LISTSTORIES:
-                return new ListStoriesCommand(taskManagementSystemRepository);
+                return new ListTasksWithAssigneeSortCommand(taskManagementSystemRepository);
+//            case LISTFEEDBACKSSORT:
+//                return new ListFeedbacksSortCommand(taskManagementSystemRepository);
+//            case LISTFEEDBACKSFILTER:
+//                return new ListFeedbacksFilterCommand(taskManagementSystemRepository);
+//            case LISTSTORIES:
+//                return new ListSortByPriorityCommand(taskManagementSystemRepository);
+            case LISTSORTBYTITLE:
+                return new ListSortByTitleCommand(taskManagementSystemRepository);
+            case LISTBUGSSORTBYPRIORITY:
+                return new ListBugsSortByPriorityCommand(taskManagementSystemRepository);
+            case LISTBUGSSORTBYSEVERITY:
+                return new ListBugsSortBySeverityCommand(taskManagementSystemRepository);
+            case LISTSTORIESSORTBYPRIORITY:
+                return new ListStoriesSortByPriorityCommand(taskManagementSystemRepository);
+            case LISTSTORIESSORTBYSIZE:
+                return new ListStoriesSortBySizeCommand(taskManagementSystemRepository);
+            case LISTFEEDBACKSSORTBYRATING:
+                return new ListSortFeedbacksByRatingCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

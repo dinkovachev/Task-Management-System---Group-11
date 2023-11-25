@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -29,6 +30,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasksWithAssignee = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         lastId = 1;
@@ -88,6 +90,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.bugs.add(bug);
         this.tasks.add(bug);
+        this.tasksWithAssignee.add(bug);
         return bug;
     }
 
@@ -100,6 +103,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.stories.add(story);
         this.tasks.add(story);
+        this.tasksWithAssignee.add(story);
+
 
         return story;
     }
@@ -110,6 +115,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
+        this.tasksWithAssignee.add(feedback);
+
 
         return feedback;
     }
@@ -286,9 +293,38 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Bug> getSortedListOfBugsByTitle() {
 
         return bugs.stream()
-                .sorted(Comparator.comparing(Bug::getTitle))
+                .sorted(Comparator.comparing(Task::getTitle))
                 .toList();
     }
+
+    @Override
+    public List<Story> getSortedListOfStoriesByTitle() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getSortedListOfFeedbackByTitle() {
+        return feedbacks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Task> getSortedListOfTasksByTitle() {
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Task> getSortedListOfTasksWithAssigneeByTitle(String title) {
+        return tasks.stream()
+                .filter(task -> task.getTitle().contains(title))
+                .toList();
+    }
+
     @Override
     public List<Task> getFilteredListOfTasksByTitle(String title) {
 
@@ -296,10 +332,53 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .filter(task -> task.getTitle().contains(title))
                 .toList();
     }
-    public List<Task> getSortedListOfTasksByTitle() {
 
-        return tasks.stream()
-                .sorted(Comparator.comparing(Task::getTitle))
+//    @Override
+//    public List<Bug> getFilteredListOfBugsByAssignee(String assignee) {
+//        return bugs.stream()
+//                .filter(bug -> bug.getAssignee))
+//                .toList();
+//    }
+
+//    @Override
+//    public List<Bug> getFilteredListOfBugsByStatus(String status) {
+//        return bugs.stream()
+//                .filter(bug -> Boolean.parseBoolean(status))
+//                .collect(Collectors.toList());
+//                .toList();
+//    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsByPriority() {
+        return bugs.stream()
+                .sorted(Comparator.comparing(Bug::getPriority))
+                .toList();
+    }
+
+    @Override
+    public List<Story> getSortedListOfStoriesByPriority() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Story::getPriority))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getSortedListOfFeedbacksByRating() {
+        return feedbacks.stream()
+                .sorted(Comparator.comparing(Feedback::getRating))
+                .toList();    }
+
+    @Override
+    public List<Story> getSortedListOfStoriesBySize() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Story::getSize))
+                .toList();
+    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsBySeverity() {
+        return bugs.stream()
+                .sorted(Comparator.comparing(Bug::getPriority))
                 .toList();
     }
 }
