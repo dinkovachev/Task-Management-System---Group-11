@@ -8,7 +8,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 import java.util.List;
 
 public class ListTasksWithAssigneeSortCommand extends BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
     private static final String SORT_LIST_TASKS_WITH_ASSIGNEE_BY_TITLE = "Sorted tasks with assignee by title \n%s";
 
     public ListTasksWithAssigneeSortCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -18,16 +18,16 @@ public class ListTasksWithAssigneeSortCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String assignee = parameters.get(0);
-        return listing(assignee);
+//        String assignee = parameters.get(0);
+        return listing();
 
     }
 
-    public String listing(String title) {
+    public String listing() {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Task> listTasksByTitle = getTaskManagementSystemRepository().getFilteredListOfTasksByTitle(title);
+        List<Task> listTasksByTitle = getTaskManagementSystemRepository().getSortedListOfTasksWithAssigneeByTitle();
         for (Task task : listTasksByTitle) {
-            stringBuilder.append(task.getAsString());
+            stringBuilder.append(task.getAsString()).append("\n");
         }
         return String.format(SORT_LIST_TASKS_WITH_ASSIGNEE_BY_TITLE, stringBuilder);
     }

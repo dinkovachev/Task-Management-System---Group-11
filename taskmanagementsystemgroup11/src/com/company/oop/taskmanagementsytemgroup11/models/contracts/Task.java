@@ -35,6 +35,5 @@ public interface Task extends Commentable, Identifiable, Printable {
 
     TaskType getType();
 
-//    int getTaskIndex();
-
+    String getAsString();
 }

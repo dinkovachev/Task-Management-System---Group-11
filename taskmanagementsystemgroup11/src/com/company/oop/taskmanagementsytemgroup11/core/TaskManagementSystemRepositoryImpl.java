@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -319,9 +318,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public List<Task> getSortedListOfTasksWithAssigneeByTitle(String title) {
+    public List<Task> getSortedListOfTasksWithAssigneeByTitle() {
         return tasks.stream()
-                .filter(task -> task.getTitle().contains(title))
+                .sorted(Comparator.comparing(Task::getTitle))
                 .toList();
     }
 
@@ -367,6 +366,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return feedbacks.stream()
                 .sorted(Comparator.comparing(Feedback::getRating))
                 .toList();    }
+
 
     @Override
     public List<Story> getSortedListOfStoriesBySize() {
