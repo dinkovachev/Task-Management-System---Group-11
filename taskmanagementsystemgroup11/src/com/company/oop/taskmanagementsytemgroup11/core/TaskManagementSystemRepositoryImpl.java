@@ -9,6 +9,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,9 +17,7 @@ import static java.lang.String.format;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";
-    private static final String TEAM_ALREADY_EXIST = "Team %s already exist";
     private final static String NO_SUCH_MEMBER = "There is no user with username %s!";
-    private final static String MEMBER_ALREADY_EXIST = "User %s already exist.";
     private static final String NO_SUCH_BOARD = "There is no such board with name %s";
     public static final String INVALID_TASK_INDEX_MSG = "Invalid task index.";
     private int lastId;
@@ -30,6 +29,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasksWithAssignee = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         lastId = 1;
@@ -50,22 +50,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Board> getAllTeamsBoards() {
         return new ArrayList<>(boards);
     }
-
-//    @Override
-//    public void addMember(Members memberToAdd) {
-//        if (members.contains(memberToAdd)){
-//            throw new IllegalArgumentException(String.format(MEMBER_ALREADY_EXIST, memberToAdd.getUsername()));
-//        }
-//        this.members.add(memberToAdd);
-//    }
-//
-//    @Override
-//    public void addTeam(Team teamToAdd) {
-//        if (teams.contains(teamToAdd)){
-//            throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXIST, teamToAdd.getName()));
-//        }
-//        this.teams.add(teamToAdd);
-//    }
 
     @Override
     public Members createMember(String firstName, String lastName) {
@@ -99,13 +83,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity,
-                         String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 teamNameBug, boardBug);
         ++lastId;
         this.bugs.add(bug);
         this.tasks.add(bug);
+        this.tasksWithAssignee.add(bug);
         return bug;
     }
 
@@ -118,6 +102,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.stories.add(story);
         this.tasks.add(story);
+        this.tasksWithAssignee.add(story);
+
 
         return story;
     }
@@ -128,6 +114,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
+        this.tasksWithAssignee.add(feedback);
+
 
         return feedback;
     }
@@ -297,5 +285,100 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 && Objects.equals(stories, that.stories)
                 && Objects.equals(feedbacks, that.feedbacks)
                 && Objects.equals(tasks, that.tasks);
+
+    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsByTitle() {
+
+        return bugs.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Story> getSortedListOfStoriesByTitle() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getSortedListOfFeedbackByTitle() {
+        return feedbacks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Task> getSortedListOfTasksByTitle() {
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Task> getSortedListOfTasksWithAssigneeByTitle() {
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .toList();
+    }
+
+    @Override
+    public List<Task> getFilteredListOfTasksByTitle(String title) {
+
+        return tasks.stream()
+                .filter(task -> task.getTitle().contains(title))
+                .toList();
+    }
+
+//    @Override
+//    public List<Bug> getFilteredListOfBugsByAssignee(String assignee) {
+//        return bugs.stream()
+//                .filter(bug -> bug.getAssignee))
+//                .toList();
+//    }
+
+//    @Override
+//    public List<Bug> getFilteredListOfBugsByStatus(String status) {
+//        return bugs.stream()
+//                .filter(bug -> Boolean.parseBoolean(status))
+//                .collect(Collectors.toList());
+//                .toList();
+//    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsByPriority() {
+        return bugs.stream()
+                .sorted(Comparator.comparing(Bug::getPriority))
+                .toList();
+    }
+
+    @Override
+    public List<Story> getSortedListOfStoriesByPriority() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Story::getPriority))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getSortedListOfFeedbacksByRating() {
+        return feedbacks.stream()
+                .sorted(Comparator.comparing(Feedback::getRating))
+                .toList();    }
+
+
+    @Override
+    public List<Story> getSortedListOfStoriesBySize() {
+        return stories.stream()
+                .sorted(Comparator.comparing(Story::getSize))
+                .toList();
+    }
+
+    @Override
+    public List<Bug> getSortedListOfBugsBySeverity() {
+        return bugs.stream()
+                .sorted(Comparator.comparing(Bug::getPriority))
+                .toList();
     }
 }

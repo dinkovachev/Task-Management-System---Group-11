@@ -11,7 +11,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class FeedbackImplTest {
+public class ListFeedbacksCommandImplTest {
 
     public static FeedbackImpl initializeFeedback() {
         return new FeedbackImpl(

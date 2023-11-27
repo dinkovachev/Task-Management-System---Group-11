@@ -45,7 +45,7 @@ public class CreateBugCommand extends BaseCommand {
 
     }
 
-    private String createBugCommand(String title, String description, String stepsToReproduce,
+    public String createBugCommand(String title, String description, String stepsToReproduce,
                                     Priority priority, Severity severity, String assignee, int taskIndexBug,
                                     String teamName, String boardName) {
         Bug bug = getTaskManagementSystemRepository().createBug(title, description, stepsToReproduce, priority, severity, assignee,

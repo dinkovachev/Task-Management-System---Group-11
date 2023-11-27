@@ -133,6 +133,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public String getAsString() {
-        return null;
+        return """
+                Title: %s with Id: %d""".formatted(getTitle(), getId());
     }
 }

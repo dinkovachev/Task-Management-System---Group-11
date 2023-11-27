@@ -7,7 +7,6 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
 import java.util.List;
-import java.util.Map;
 
 public interface TaskManagementSystemRepository {
 
@@ -48,7 +47,7 @@ public interface TaskManagementSystemRepository {
 //                  Severity severity, String assignee, int taskIndexBug, String teamNameBug, String board);
 
     Story createStory(String title, String description, Priority priority, Size size, String assignee,
-                String teamNameStory, String boardStory);
+                      String teamNameStory, String boardStory);
 
     Feedback createFeedback(String title, String description, int rating, int index, String teamName, String boardName);
 
@@ -69,4 +68,34 @@ public interface TaskManagementSystemRepository {
     Feedback findFeedbackByTaskIndex(int taskIndex);
 
     void validateType(TaskType type, int index);
+
+    List<Bug> getSortedListOfBugsByTitle();
+
+    List<Story> getSortedListOfStoriesByTitle();
+
+    List<Feedback> getSortedListOfFeedbackByTitle();
+
+    List<Task> getSortedListOfTasksByTitle();
+
+    List<Task> getSortedListOfTasksWithAssigneeByTitle();
+
+ //   List<Bug> getFilteredListOfBugsByAssignee(String assignee);
+
+ //   List<Bug> getFilteredListOfBugsByStatus();
+
+    List<Story> getSortedListOfStoriesBySize();
+
+    List<Bug> getSortedListOfBugsBySeverity();
+
+  //  List<Task> getFilteredListOfTasksByTitle(String title);
+
+    List<Bug> getSortedListOfBugsByPriority();
+
+    List<Story> getSortedListOfStoriesByPriority();
+
+    List<Feedback> getSortedListOfFeedbacksByRating();
+
+
+    List<Task> getFilteredListOfTasksByTitle(String title);
+
 }

@@ -136,7 +136,8 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public String getAsString() {
-        return null;
+        return """
+                Title: %s with Id: %d""".formatted(getTitle(), getId());
     }
 
 //    @Override

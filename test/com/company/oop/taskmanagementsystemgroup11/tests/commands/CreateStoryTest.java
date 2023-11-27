@@ -101,7 +101,6 @@ public class CreateStoryTest {
         // Act,Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> createStoryCommand.execute(parameters));
     }
-
     //ToDo
     // Doesnt work
     @Test
@@ -134,6 +133,7 @@ public class CreateStoryTest {
                 () -> assertEquals(VALID_BOARD_NAME_EXIST, VALID_BOARD_NAME_EXIST)
         );
     }
+
 
     @Test
     public void should_AddStory_ToStoryList() {
