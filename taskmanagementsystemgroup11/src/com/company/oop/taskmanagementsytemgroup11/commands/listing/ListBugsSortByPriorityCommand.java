@@ -10,7 +10,7 @@ import java.util.List;
 public class ListBugsSortByPriorityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
 
-    private static final String SORT_LIST_BUGS_BY_PRIORITY = "Sorted bugs by priority \n%s";
+    private static final String SORT_LIST_BUGS_BY_PRIORITY = "Sorted bugs by priority \n\n%s";
 
     public ListBugsSortByPriorityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

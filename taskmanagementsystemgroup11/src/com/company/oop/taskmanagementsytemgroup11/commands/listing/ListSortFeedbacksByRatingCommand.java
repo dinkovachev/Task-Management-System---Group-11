@@ -11,7 +11,7 @@ public class ListSortFeedbacksByRatingCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
 
-    private static final String SORT_LIST_FEEDBACKS_BY_RATING = "Sorted feedbacks by rating \n%s";
+    private static final String SORT_LIST_FEEDBACKS_BY_RATING = "Sorted feedbacks by rating \n\n%s";
 
     public ListSortFeedbacksByRatingCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

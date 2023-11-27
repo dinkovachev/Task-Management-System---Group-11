@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ListTasksWithAssigneeSortCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
-    private static final String SORT_LIST_TASKS_WITH_ASSIGNEE_BY_TITLE = "Sorted tasks with assignee by title \n%s";
+    private static final String SORT_LIST_TASKS_WITH_ASSIGNEE_BY_TITLE = "Sorted tasks with assignee by title \n\n%s";
 
     public ListTasksWithAssigneeSortCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -27,7 +27,7 @@ public class ListTasksWithAssigneeSortCommand extends BaseCommand {
         StringBuilder stringBuilder = new StringBuilder();
         List<Task> listTasksByTitle = getTaskManagementSystemRepository().getSortedListOfTasksWithAssigneeByTitle();
         for (Task task : listTasksByTitle) {
-            stringBuilder.append(task.getAsString()).append("\n");
+            stringBuilder.append(task.getAsString()).append("\n\n");
         }
         return String.format(SORT_LIST_TASKS_WITH_ASSIGNEE_BY_TITLE, stringBuilder);
     }

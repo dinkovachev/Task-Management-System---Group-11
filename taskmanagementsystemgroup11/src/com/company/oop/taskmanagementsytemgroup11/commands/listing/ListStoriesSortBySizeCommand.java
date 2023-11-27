@@ -10,7 +10,7 @@ import java.util.List;
 public class ListStoriesSortBySizeCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
 
-    private static final String SORT_LIST_STORIES_BY_SIZE = "Sorted stories by size \n%s";
+    private static final String SORT_LIST_STORIES_BY_SIZE = "Sorted stories by size \n\n%s";
 
 
     public ListStoriesSortBySizeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {

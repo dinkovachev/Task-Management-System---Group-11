@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ListSortByTitleCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    private static final String SORT_LIST_TASK_BY_TITLE = "Sorted tasks by title \n%s";
-    private static final String SORT_LIST_BUGS_BY_TITLE = "Sorted bugs by title \n%s";
-    private static final String SORT_LIST_STORIES_BY_TITLE = "Sorted bugs by title \n%s";
-    private static final String SORT_LIST_FEEDBACKS_BY_TITLE = "Sorted bugs by title \n%s";
+    private static final String SORT_LIST_TASK_BY_TITLE = "Sorted tasks by title \n\n%s";
+    private static final String SORT_LIST_BUGS_BY_TITLE = "Sorted bugs by title \n\n%s";
+    private static final String SORT_LIST_STORIES_BY_TITLE = "Sorted bugs by title \n\n%s";
+    private static final String SORT_LIST_FEEDBACKS_BY_TITLE = "Sorted bugs by title \n\n%s";
 
 
     public ListSortByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {

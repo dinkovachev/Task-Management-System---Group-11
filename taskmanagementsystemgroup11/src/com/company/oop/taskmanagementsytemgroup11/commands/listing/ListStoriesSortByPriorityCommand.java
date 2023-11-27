@@ -10,7 +10,7 @@ import java.util.List;
 public class ListStoriesSortByPriorityCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
-    private static final String SORT_LIST_STORIES_BY_PRIORITY = "Sorted stories by priority \n%s";
+    private static final String SORT_LIST_STORIES_BY_PRIORITY = "Sorted stories by priority \n\n%s";
 
     public ListStoriesSortByPriorityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

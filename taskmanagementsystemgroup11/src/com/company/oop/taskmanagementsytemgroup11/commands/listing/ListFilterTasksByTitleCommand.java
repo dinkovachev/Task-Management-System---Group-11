@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ListFilterTasksByTitleCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    private static final String FILTER_LIST_TASK_BY_TITLE = "Filter task by title \n%s";
+    private static final String FILTER_LIST_TASK_BY_TITLE = "Filter task by title \n\n%s";
 
 
     public ListFilterTasksByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {

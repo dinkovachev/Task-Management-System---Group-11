@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ListBugsSortBySeverityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
-    private static final String SORT_LIST_BUGS_BY_SEVERITY = "Sorted bugs by assignee \n%s";
+    private static final String SORT_LIST_BUGS_BY_SEVERITY = "Sorted bugs by assignee \n\n%s";
 
     public ListBugsSortBySeverityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
