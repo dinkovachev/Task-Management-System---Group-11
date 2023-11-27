@@ -75,20 +75,6 @@ public class MembersImpl implements Members {
                 teamToAddMember.getName()));
     }
 
-    @Override
-    public void assignTask(Members memberToAssignTask, Task taskToBeAssigned) {
-        taskToBeAssigned.assignTask(memberToAssignTask);
-        addEventToActivityLogHistory(String.format(NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE,
-                taskToBeAssigned.getTitle(), memberToAssignTask.getUsername()));
-    }
-
-    @Override
-    public void unassignTask(Members memberToUnassignTask, Task taskToBeUnassigned) {
-        taskToBeUnassigned.unassignTask(memberToUnassignTask);
-        addEventToActivityLogHistory(String.format(NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE,
-                taskToBeUnassigned.getTitle(), memberToUnassignTask.getUsername()));
-    }
-
     public String displayInfoForNewCreatedMember() {
         return String.format("%nPersonId: %d%n" +
                 "FirstName: %s%n" +

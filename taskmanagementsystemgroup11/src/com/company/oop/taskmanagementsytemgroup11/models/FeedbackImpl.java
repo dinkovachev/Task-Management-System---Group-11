@@ -37,6 +37,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         return TaskType.FEEDBACK;
     }
 
+
     public int getRating() {
         return rating;
     }
@@ -49,6 +50,16 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     @Override
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public String getAssignee() {
+        throw new UnsupportedOperationException("Feedback doesn't have assignee");
+    }
+
+    @Override
+    public void changeAssignee(String assignee) {
+        throw new UnsupportedOperationException("Feedback doesn't have assignee");
     }
 
     private void setRating(int rating) {

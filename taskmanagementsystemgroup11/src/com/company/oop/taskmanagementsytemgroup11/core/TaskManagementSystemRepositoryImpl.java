@@ -109,7 +109,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback createFeedback(String title, String description, int rating, int taskIndex, String teamName, String boardName) {
-        Feedback feedback = new FeedbackImpl(lastId, title, description, taskIndex, teamName, boardName);
+        Feedback feedback = new FeedbackImpl(lastId, title, description, rating, teamName, boardName);
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
@@ -162,6 +162,24 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(feedbacks);
     }
 
+    public void unnasignAssigneeFromTask(int id, String assignee){
+        for (Task task : tasks) {
+            if (task.getId() == id && task.getAssignee().equals(assignee)){
+                task.changeAssignee("unassigned");
+                break;
+            }
+        }
+    }
+
+        @Override
+    public void assignAssigneToTask(int id, String assignee) {
+        for (Task task : tasks) {
+            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+                task.changeAssignee(assignee);
+                break;
+            }
+        }
+    }
     @Override
     public Task findTaskByID(int taskIndex) {
         for (Task task : tasks) {

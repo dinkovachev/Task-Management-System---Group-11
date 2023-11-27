@@ -14,6 +14,9 @@ public class UnassignTaskCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
+
+    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE
+            = "New task %s was unassigned from team member %s";
     private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s unassigned successfully from %s";
     public UnassignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -34,7 +37,10 @@ public class UnassignTaskCommand extends BaseCommand {
     private String unassignTask(TaskType type, String title, int id, String username) {
         Task task = getTaskManagementSystemRepository().findTaskByID(id);
         Members member = getTaskManagementSystemRepository().getMemberByUsername(username);
-        getTaskManagementSystemRepository().getMemberByUsername(username).unassignTask(member, task);
+        getTaskManagementSystemRepository().unnasignAssigneeFromTask(task.getId(), username);
+        getTaskManagementSystemRepository().getMemberByUsername(username).
+        addEventToActivityLogHistory(String.format(NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE,
+                        task.getTitle(),member.getUsername()));
         return String.format(TASK_ASSIGNED_SUCCESSFULLY, title, member.getUsername());
     }
 }

@@ -79,15 +79,15 @@ public interface TaskManagementSystemRepository {
 
     List<Task> getSortedListOfTasksWithAssigneeByTitle();
 
- //   List<Bug> getFilteredListOfBugsByAssignee(String assignee);
+    //   List<Bug> getFilteredListOfBugsByAssignee(String assignee);
 
- //   List<Bug> getFilteredListOfBugsByStatus();
+    //   List<Bug> getFilteredListOfBugsByStatus();
 
     List<Story> getSortedListOfStoriesBySize();
 
     List<Bug> getSortedListOfBugsBySeverity();
 
-  //  List<Task> getFilteredListOfTasksByTitle(String title);
+    //  List<Task> getFilteredListOfTasksByTitle(String title);
 
     List<Bug> getSortedListOfBugsByPriority();
 
@@ -95,7 +95,9 @@ public interface TaskManagementSystemRepository {
 
     List<Feedback> getSortedListOfFeedbacksByRating();
 
-
     List<Task> getFilteredListOfTasksByTitle(String title);
 
+    void unnasignAssigneeFromTask(int id, String assignee);
+
+    void assignAssigneToTask(int id, String assignee);
 }

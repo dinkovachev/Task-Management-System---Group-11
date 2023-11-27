@@ -102,6 +102,9 @@ public class BugImpl extends TaskImpl implements Bug {
     private void setAssignee(String assignee) {
         this.assignee = assignee;
     }
+    public void changeAssignee(String assignee){
+         setAssignee(assignee);
+    }
 
     private void setStatus(Status status) {
         this.status = status;

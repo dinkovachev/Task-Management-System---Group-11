@@ -5,6 +5,7 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateStoryCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
@@ -100,7 +101,6 @@ public class CreateStoryTest {
         // Act,Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> createStoryCommand.execute(parameters));
     }
-
     //ToDo
     // Doesnt work
     @Test
