@@ -11,6 +11,7 @@ import java.util.List;
 public interface TaskManagementSystemRepository {
 
     List<Task> getAllTasks();
+    List<Task> getAllTasksWithAssignee();
 
     List<Story> getAllStories();
 
