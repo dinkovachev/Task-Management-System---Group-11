@@ -148,6 +148,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Task> getAllTasksWithAssignee() {
+        return new ArrayList<>(tasksWithAssignee);
+    }
+
+    @Override
     public List<Story> getAllStories() {
         return new ArrayList<>(stories);
     }
@@ -169,6 +174,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 break;
             }
         }
+        for (Task task : tasksWithAssignee) {
+            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+                tasksWithAssignee.remove(task);
+                break;
+            }
+        }
     }
 
         @Override
@@ -176,9 +187,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         for (Task task : tasks) {
             if (task.getId() == id && task.getAssignee().equals("unassigned")){
                 task.changeAssignee(assignee);
+                tasksWithAssignee.add(task);
                 break;
             }
         }
+
     }
     @Override
     public Task findTaskByID(int taskIndex) {
