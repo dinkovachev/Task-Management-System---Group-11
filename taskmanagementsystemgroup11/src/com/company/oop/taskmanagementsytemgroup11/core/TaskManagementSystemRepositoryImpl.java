@@ -124,7 +124,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback createFeedback(String title, String description, int rating, int taskIndex, String teamName, String boardName) {
-        Feedback feedback = new FeedbackImpl(lastId, title, description, taskIndex, teamName, boardName);
+        Feedback feedback = new FeedbackImpl(lastId, title, description, rating, teamName, boardName);
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
