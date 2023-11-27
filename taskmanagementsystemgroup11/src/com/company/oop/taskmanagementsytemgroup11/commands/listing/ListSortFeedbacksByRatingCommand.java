@@ -28,7 +28,7 @@ public class ListSortFeedbacksByRatingCommand extends BaseCommand {
         StringBuilder stringBuilder = new StringBuilder();
         List<Feedback> sortedListOfFeedbacksByRating = getTaskManagementSystemRepository().getSortedListOfFeedbacksByRating();
         for (Feedback feedback : sortedListOfFeedbacksByRating) {
-            stringBuilder.append(feedback.getAsString()).append("\nSeverity: ").append(feedback.getRating()).append("\n\n");
+            stringBuilder.append(feedback.getAsString()).append("\nRating: ").append(feedback.getRating()).append("\n\n");
         }
         return String.format(SORT_LIST_FEEDBACKS_BY_RATING, stringBuilder);
     }

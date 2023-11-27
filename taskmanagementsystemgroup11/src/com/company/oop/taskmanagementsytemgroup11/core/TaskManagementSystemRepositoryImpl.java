@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.String.format;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String NO_SUCH_TEAM = "No such team with name %s.";

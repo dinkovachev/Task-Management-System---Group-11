@@ -114,6 +114,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     @Override
     public String getAsString() {
         return """
-                Title: %s with Id: %d""".formatted(getTitle(), getId());
+                Type: %s Title: %s with Id: %d""".formatted(getType().toString(), getTitle(), getId());
     }
 }
