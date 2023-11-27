@@ -10,11 +10,7 @@ public interface Members extends Printable {
 
     void addToTeam(Team teamToAddMember);
 
-    void assignTask(Members memberToAssignTask, Task taskToBeAssigned);
-
-    void unassignTask(Members memberToUnassignTask, Task taskToBeUnassigned);
-
-    public List<Members> getAllTeamMembers();
+    List<Members> getAllTeamMembers();
 
     void addEventToActivityLogHistory(String event);
 

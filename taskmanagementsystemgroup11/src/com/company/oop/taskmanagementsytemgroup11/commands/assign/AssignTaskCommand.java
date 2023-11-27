@@ -14,6 +14,7 @@ public class AssignTaskCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
+    private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s assigned successfully to %s";
 
     public AssignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -34,7 +35,10 @@ public class AssignTaskCommand extends BaseCommand {
     private String assignTask(TaskType type, String title, int id, String username) {
         Task task = getTaskManagementSystemRepository().findTaskByID(id);
         Members member = getTaskManagementSystemRepository().getMemberByUsername(username);
-        getTaskManagementSystemRepository().getMemberByUsername(username).assignTask(member, task);
+        getTaskManagementSystemRepository().assignAssigneToTask(task.getId(),username);
+        getTaskManagementSystemRepository().getMemberByUsername(username).
+                addEventToActivityLogHistory(String.format(NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE,
+                        task.getTitle(),member.getUsername()));
 
         return String.format(TASK_ASSIGNED_SUCCESSFULLY, title, member.getUsername());
     }

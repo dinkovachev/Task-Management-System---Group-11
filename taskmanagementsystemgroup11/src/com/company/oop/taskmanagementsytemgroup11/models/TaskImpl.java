@@ -31,13 +31,11 @@ public abstract class TaskImpl implements Task {
     private static final String COMMENT_S_ADDED_TO_THE_TASK_MESSAGE = "Comment %s added to the task %s";
     private static final String MEMBER_ASSIGNED_TO_TASK_MESSAGE = "Member %s assigned to task %s";
     private static final String MEMBER_UNASSIGNED_FROM_TASK_MESSAGE = "Member %s unassigned from task %s";
-
     private int id;
     private String title;
     private String description;
     private List<Comment> commentList = new ArrayList<>();
     private List<ActivityLog> activityHistory = new ArrayList<>();
-    private List<Task> tasks = new ArrayList<>();
     private List<String> assignedMembersToTasks = new ArrayList<>();
 
     public TaskImpl(int id, String title, String description) {
@@ -64,20 +62,7 @@ public abstract class TaskImpl implements Task {
 
     public abstract Status getStatus();
 
-//    @Override
-//    public List<Task> getAllTasks() {
-//        return new ArrayList<>(tasks);
-//    }
-
-    @Override
-    public List<Comment> getCommentList() {
-
-        return new ArrayList<>(commentList);
-    }
-
-
     private void setId(int id) {
-
         this.id = id;
     }
 
@@ -106,29 +91,7 @@ public abstract class TaskImpl implements Task {
                 this.getTitle()));
     }
 
-//    @Override
-//    public void addTask(Task task) {
-//        tasks.add(task);
-//        addEventToActivityLogHistory(String.format("Task %s added", task));
-//    }
-
-    @Override
-    public void assignTask(Members member) {
-        assignedMembersToTasks.add(String.valueOf(member));
-        addEventToActivityLogHistory(String.format(MEMBER_ASSIGNED_TO_TASK_MESSAGE, member.getUsername(),
-                this.getTitle()));
-    }
-
-    @Override
-    public void unassignTask(Members member) {
-
-        assignedMembersToTasks.add(String.valueOf(member));
-        addEventToActivityLogHistory(String.format(MEMBER_UNASSIGNED_FROM_TASK_MESSAGE, member.getUsername(),
-                this.getTitle()));
-    }
-
     public void addEventToActivityLogHistory(String event) {
-
         activityHistory.add(new ActivityLogImpl(event));
     }
 
@@ -160,23 +123,5 @@ public abstract class TaskImpl implements Task {
         return """
                 Title: %s with Id:%d
                 """.formatted(getTitle(), getId());
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        TaskImpl task = (TaskImpl) o;
-//        return id == task.id && title.equals(task.title) && description.equals(task.description) &&
-//                commentList.equals(task.commentList) && activityHistory.equals(task.activityHistory) &&
-//                tasks.equals(task.tasks) && assignedMembersToTasks.equals(task.assignedMembersToTasks);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, title, description, commentList, activityHistory, tasks, assignedMembersToTasks);
-//    }
-
-//    @Override
-//    public abstract int getTaskIndex();
     }
 }

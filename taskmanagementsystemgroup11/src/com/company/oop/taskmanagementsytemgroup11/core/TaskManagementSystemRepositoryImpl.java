@@ -163,6 +163,24 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(feedbacks);
     }
 
+    public void unnasignAssigneeFromTask(int id, String assignee){
+        for (Task task : tasks) {
+            if (task.getId() == id && task.getAssignee().equals(assignee)){
+                task.changeAssignee("unassigned");
+                break;
+            }
+        }
+    }
+
+        @Override
+    public void assignAssigneToTask(int id, String assignee) {
+        for (Task task : tasks) {
+            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+                task.changeAssignee(assignee);
+                break;
+            }
+        }
+    }
     @Override
     public Task findTaskByID(int taskIndex) {
         for (Task task : tasks) {

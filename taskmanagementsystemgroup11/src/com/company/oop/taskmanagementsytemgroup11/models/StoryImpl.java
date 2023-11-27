@@ -48,6 +48,11 @@ public class StoryImpl extends TaskImpl implements Story {
         return TaskType.STORY;
     }
 
+    @Override
+    public void changeAssignee(String assignee) {
+         setAssignee(assignee);
+    }
+
 //    public List<Story> getStories() {
 //        return new ArrayList<>(stories);
 //    }
@@ -69,6 +74,11 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public String getMembers() {
+        return assignee;
+    }
+
+    @Override
+    public String getAssignee() {
         return assignee;
     }
 

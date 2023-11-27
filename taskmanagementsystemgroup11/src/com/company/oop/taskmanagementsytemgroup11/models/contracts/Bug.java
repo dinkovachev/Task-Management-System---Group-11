@@ -5,14 +5,12 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 
 import java.util.List;
 
-public interface Bug extends Task {
+public interface Bug extends Task{
     String getStepsToReproduce();
 
     Priority getPriority();
 
     Severity getSeverity();
-
-    String getAssignee();
 
     void changePriority(int taskIndex, Priority priority);
 

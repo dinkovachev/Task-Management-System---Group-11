@@ -7,25 +7,19 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 import java.util.List;
 
 public interface Task extends Commentable, Identifiable, Printable {
-//    List<Task> getAllTasks();
-
-    public Status getStatus();
+    Status getStatus();
 
     void addEventToActivityLogHistory(String event);
 
     void addComment(Comment comment);
 
-//    void addTask(Task task);
+    String getAssignee();
 
-    void assignTask(Members member);
-
-    void unassignTask(Members member);
+    void changeAssignee(String assignee);
 
     String getTitle();
 
     String getDescription();
-
-    List<Comment> getCommentList();
 
     String displayActivityLogHistory();
 
