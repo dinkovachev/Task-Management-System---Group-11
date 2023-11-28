@@ -358,6 +358,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Bug> getFilteredBugListByAssignee(String assignee) {
+        return bugs.stream()
+                .filter(bug -> bug.getAssignee().equals(assignee))
+                .toList();
+    }
+
+    @Override
     public List<Task> getFilteredListOfTasksByTitle(String title) {
 
         return tasks.stream()
@@ -365,20 +372,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .toList();
     }
 
-//    @Override
-//    public List<Bug> getFilteredListOfBugsByAssignee(String assignee) {
-//        return bugs.stream()
-//                .filter(bug -> bug.getAssignee))
-//                .toList();
-//    }
-
-//    @Override
-//    public List<Bug> getFilteredListOfBugsByStatus(String status) {
-//        return bugs.stream()
-//                .filter(bug -> Boolean.parseBoolean(status))
-//                .collect(Collectors.toList());
-//                .toList();
-//    }
+    @Override
+    public List<Bug> getFilteredBugListByStatusAndAssignee(Status status, String assignee) {
+        return bugs.stream()
+                .filter(bug -> bug.getStatus().equals(status))
+                .toList().stream().filter(bug -> bug.getAssignee().equals(assignee)).toList();
+    }
 
     @Override
     public List<Bug> getSortedListOfBugsByPriority() {

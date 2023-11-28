@@ -11,10 +11,10 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class ListBugFilterByStatusCommand extends BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+public class ListBugsFilterByStatusAndAssigneeCommand extends BaseCommand {
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-    public ListBugFilterByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListBugsFilterByStatusAndAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
@@ -22,21 +22,28 @@ public class ListBugFilterByStatusCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         Status status = ParsingHelpers.tryParseEnum(parameters.get(0), Status.class);
+        String assignee = parameters.get(1);
 
-        return FilterBugByStatus(status);
+        return FilterBugByStatus(status, assignee);
     }
 
-    public String FilterBugByStatus(Status status) {
+    public String FilterBugByStatus(Status status, String assignee) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Bug> filteredBugListByStatus = getTaskManagementSystemRepository().getFilteredBugListByStatus(status);
+        List<Bug> filteredBugListByStatus =
+                getTaskManagementSystemRepository().getFilteredBugListByStatusAndAssignee(status, assignee);
 
         for (Bug bug : filteredBugListByStatus) {
-            stringBuilder.append(bug.getAsString()).append("\nStatus: ").append(bug.getStatus()).append("\n\n");
+            stringBuilder
+                    .append(bug.getAsString())
+                    .append("\nStatus: ")
+                    .append(bug.getStatus())
+                    .append(bug.getAssignee())
+                    .append("\n\n");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 1);
         stringBuilder.setLength(stringBuilder.length() - 1);
 
-        return format("Filtered bugs by status: \n\n%s", stringBuilder);
+        return format("Filtered bugs by status and assignee: \n\n%s", stringBuilder);
     }
 }

@@ -4,17 +4,16 @@ import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
-import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
 import static java.lang.String.format;
 
-public class ListBugFilterByAssigneeCommand extends BaseCommand {
+public class ListBugsFilterByAssigneeCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
-    public ListBugFilterByAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListBugsFilterByAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
@@ -26,17 +25,17 @@ public class ListBugFilterByAssigneeCommand extends BaseCommand {
         return FilterBugByStatus(assignee);
     }
 
-    public String FilterBugByStatus(Status status) {
+    public String FilterBugByStatus(String assignee) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Bug> filteredBugListByStatus = getTaskManagementSystemRepository().getFilteredBugListByStatus(status);
+        List<Bug> filteredBugListByStatus = getTaskManagementSystemRepository().getFilteredBugListByAssignee(assignee);
 
         for (Bug bug : filteredBugListByStatus) {
-            stringBuilder.append(bug.getAsString()).append("\nStatus: ").append(bug.getStatus()).append("\n\n");
+            stringBuilder.append(bug.getAsString()).append("\nAssignee: ").append(bug.getAssignee()).append("\n\n");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 1);
         stringBuilder.setLength(stringBuilder.length() - 1);
 
-        return format("Filtered bugs by status: \n\n%s", stringBuilder);
+        return format("Filtered bugs by assignee: \n\n%s", stringBuilder);
     }
 }

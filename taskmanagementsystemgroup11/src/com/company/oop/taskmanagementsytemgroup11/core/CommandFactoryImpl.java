@@ -75,7 +75,7 @@ public class CommandFactoryImpl implements CommandFactory {
 //            case LISTBUGSFILTER:
 //                return new ListBugsFilterCommand(taskManagementSystemRepository);
 //            case LISTBUGSSORT:
- //               return new ListBugsSortCommand(taskManagementSystemRepository);
+            //               return new ListBugsSortCommand(taskManagementSystemRepository);
             case LISTTASKSBYTITLEFILTER:
                 return new ListFilterTasksByTitleCommand(taskManagementSystemRepository);
             case LISTTASKWITHASSIGNEE:
@@ -105,7 +105,11 @@ public class CommandFactoryImpl implements CommandFactory {
             case LISTASSIGNEDTASKSFILTERBYSTATUSANDASSIGNEE:
                 return new ListTasksWithAssigneeFilterByStatusAndAssigneeCommand(taskManagementSystemRepository);
             case LISTBUGSFILTERBYSTATUS:
-                return new ListBugFilterByStatusCommand(taskManagementSystemRepository);
+                return new ListBugsFilterByStatusCommand(taskManagementSystemRepository);
+            case LISTBUGSFILTERBYASSIGNEE:
+                return new ListBugsFilterByAssigneeCommand(taskManagementSystemRepository);
+            case LISTBUGSFILTERBYSTATUSASSIGNE:
+                return new ListBugsFilterByStatusAndAssigneeCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

@@ -104,4 +104,6 @@ public interface TaskManagementSystemRepository {
     void assignAssigneToTask(int id, String assignee);
 
     List<Bug> getFilteredBugListByStatus(Status status);
+    List<Bug> getFilteredBugListByAssignee(String assignee);
+    List<Bug> getFilteredBugListByStatusAndAssignee(Status status, String assignee);
 }
