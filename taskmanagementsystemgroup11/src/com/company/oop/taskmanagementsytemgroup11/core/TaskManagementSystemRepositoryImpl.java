@@ -3,10 +3,7 @@ package com.company.oop.taskmanagementsytemgroup11.core;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.*;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -167,25 +164,25 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(feedbacks);
     }
 
-    public void unnasignAssigneeFromTask(int id, String assignee){
+    public void unnasignAssigneeFromTask(int id, String assignee) {
         for (Task task : tasks) {
-            if (task.getId() == id && task.getAssignee().equals(assignee)){
+            if (task.getId() == id && task.getAssignee().equals(assignee)) {
                 task.changeAssignee("unassigned");
                 break;
             }
         }
         for (Task task : tasksWithAssignee) {
-            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+            if (task.getId() == id && task.getAssignee().equals("unassigned")) {
                 tasksWithAssignee.remove(task);
                 break;
             }
         }
     }
 
-        @Override
+    @Override
     public void assignAssigneToTask(int id, String assignee) {
         for (Task task : tasks) {
-            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+            if (task.getId() == id && task.getAssignee().equals("unassigned")) {
                 task.changeAssignee(assignee);
                 tasksWithAssignee.add(task);
                 break;
@@ -193,6 +190,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
 
     }
+
     @Override
     public Task findTaskByID(int taskIndex) {
         for (Task task : tasks) {
@@ -354,6 +352,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .toList();
     }
 
+    public List<Bug> getFilteredBugListByStatus(Status status) {
+        return bugs.stream()
+                .filter(bug -> bug.getStatus().equals(status))
+                .toList();
+    }
+
     @Override
     public List<Task> getFilteredListOfTasksByTitle(String title) {
 
@@ -395,7 +399,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Feedback> getSortedListOfFeedbacksByRating() {
         return feedbacks.stream()
                 .sorted(Comparator.comparing(Feedback::getRating))
-                .toList();    }
+                .toList();
+    }
 
 
     @Override

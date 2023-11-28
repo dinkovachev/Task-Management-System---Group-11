@@ -2,7 +2,6 @@ package com.company.oop.taskmanagementsytemgroup11.utils;
 
 import java.util.List;
 
-
 public class ValidationHelpers {
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
     public static final String UNSUPPORTED_OPERATION_MSG = "Task type %s in combination with %d arguments is unsupported operation.";
@@ -27,4 +26,5 @@ public class ValidationHelpers {
         }
     }
 }
+
 

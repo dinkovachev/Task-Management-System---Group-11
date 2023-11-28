@@ -98,6 +98,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListStoriesSortBySizeCommand(taskManagementSystemRepository);
             case LISTFEEDBACKSSORTBYRATING:
                 return new ListSortFeedbacksByRatingCommand(taskManagementSystemRepository);
+            case LISTBUGSFILTERBYSTATUS:
+                return new ListBugFilterByStatusCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }

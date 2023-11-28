@@ -1,10 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.core.contracts;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
 
 import java.util.List;
 
@@ -101,4 +98,6 @@ public interface TaskManagementSystemRepository {
     void unnasignAssigneeFromTask(int id, String assignee);
 
     void assignAssigneToTask(int id, String assignee);
+
+    List<Bug> getFilteredBugListByStatus(Status status);
 }
