@@ -3,10 +3,7 @@ package com.company.oop.taskmanagementsytemgroup11.core;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.models.*;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -113,7 +110,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
-        this.tasksWithAssignee.add(feedback);
 
 
         return feedback;
@@ -167,25 +163,25 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(feedbacks);
     }
 
-    public void unnasignAssigneeFromTask(int id, String assignee){
+    public void unnasignAssigneeFromTask(int id, String assignee) {
         for (Task task : tasks) {
-            if (task.getId() == id && task.getAssignee().equals(assignee)){
+            if (task.getId() == id && task.getAssignee().equals(assignee)) {
                 task.changeAssignee("unassigned");
                 break;
             }
         }
         for (Task task : tasksWithAssignee) {
-            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+            if (task.getId() == id && task.getAssignee().equals("unassigned")) {
                 tasksWithAssignee.remove(task);
                 break;
             }
         }
     }
 
-        @Override
+    @Override
     public void assignAssigneToTask(int id, String assignee) {
         for (Task task : tasks) {
-            if (task.getId() == id && task.getAssignee().equals("unassigned")){
+            if (task.getId() == id && task.getAssignee().equals("unassigned")) {
                 task.changeAssignee(assignee);
                 tasksWithAssignee.add(task);
                 break;
@@ -193,6 +189,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
 
     }
+
     @Override
     public Task findTaskByID(int taskIndex) {
         for (Task task : tasks) {
@@ -395,7 +392,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Feedback> getSortedListOfFeedbacksByRating() {
         return feedbacks.stream()
                 .sorted(Comparator.comparing(Feedback::getRating))
-                .toList();    }
+                .toList();
+    }
 
 
     @Override
@@ -404,6 +402,23 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .sorted(Comparator.comparing(Story::getSize))
                 .toList();
     }
+
+    @Override
+    public List<Task> getFilteredListOfTasksWithAssigneeByStatus(Status status) {
+        return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status)).toList();
+    }
+
+    @Override
+    public List<Task> getFilteredListOfAssignedTasksByAssignee(String assignee) {
+        return tasksWithAssignee.stream().filter(task -> task.getAssignee().equals(assignee)).toList();
+    }
+
+    @Override
+    public List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee){
+        return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status))
+                .toList().stream().filter(task -> task.getAssignee().equals(assignee)).toList();
+    }
+
 
     @Override
     public List<Bug> getSortedListOfBugsBySeverity() {

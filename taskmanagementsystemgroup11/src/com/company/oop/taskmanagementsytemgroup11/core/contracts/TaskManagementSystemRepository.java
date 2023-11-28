@@ -1,10 +1,7 @@
 package com.company.oop.taskmanagementsytemgroup11.core.contracts;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.*;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
+import com.company.oop.taskmanagementsytemgroup11.models.enums.*;
 
 import java.util.List;
 
@@ -95,6 +92,10 @@ public interface TaskManagementSystemRepository {
     List<Story> getSortedListOfStoriesByPriority();
 
     List<Feedback> getSortedListOfFeedbacksByRating();
+
+    List<Task> getFilteredListOfTasksWithAssigneeByStatus(Status status);
+    List<Task> getFilteredListOfAssignedTasksByAssignee(String assignee);
+    List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee);
 
     List<Task> getFilteredListOfTasksByTitle(String title);
 
