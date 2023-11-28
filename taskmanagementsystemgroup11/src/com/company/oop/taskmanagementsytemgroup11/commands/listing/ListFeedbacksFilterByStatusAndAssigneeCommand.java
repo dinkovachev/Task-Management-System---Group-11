@@ -3,19 +3,20 @@ package com.company.oop.taskmanagementsytemgroup11.commands.listing;
 import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ListTasksWithAssigneeFilterByStatusAndAssigneeCommand extends BaseCommand {
+import static java.lang.String.format;
 
+public class ListFeedbacksFilterByStatusAndAssigneeCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String MEMBER_WITH_USERNAME_DOES_NOT_EXIST_MESSAGE = "Member with username %s does not exist.";
 
-    public ListTasksWithAssigneeFilterByStatusAndAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListFeedbacksFilterByStatusAndAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
@@ -26,21 +27,27 @@ public class ListTasksWithAssigneeFilterByStatusAndAssigneeCommand extends BaseC
         String assignee = parameters.get(1);
         validateAssignee(assignee);
 
-        return listAssignedTasksFilteredByStatusAndAssignee(status, assignee);
+        return FilterFeedbackByStatus(status, assignee);
     }
 
-    private String listAssignedTasksFilteredByStatusAndAssignee(Status status, String assignee) {
-        StringBuilder result = new StringBuilder();
-        List<Task> assignedTasks = getTaskManagementSystemRepository().
-                getFilteredListOfAssignedTasksByStatusAndAssignee(status, assignee);
-        result.append("Assigned Tasks Filtered by Status and Assignee:").append(System.lineSeparator());
-        for (Task assignedTask : assignedTasks) {
-            result.append("Task title: ").append(assignedTask.getTitle()).append(System.lineSeparator()).
-                    append("Task status: ").append(assignedTask.getStatus()).append(System.lineSeparator())
-                    .append("Task assignee: ").append(assignedTask.getAssignee()).append(System.lineSeparator())
-                    .append(System.lineSeparator());
+    public String FilterFeedbackByStatus(Status status, String assignee) {
+        StringBuilder stringBuilder = new StringBuilder();
+        List<Feedback> filteredFeedbackListByStatus =
+                getTaskManagementSystemRepository().getFilteredFeedbacksListByStatusAndAssignee(status, assignee);
+
+        for (Feedback feedback : filteredFeedbackListByStatus) {
+            stringBuilder
+                    .append(feedback.getAsString())
+                    .append("\nStatus: ")
+                    .append(feedback.getStatus())
+                    .append(feedback.getAssignee())
+                    .append("\n\n");
         }
-        return result.toString();
+
+        stringBuilder.setLength(stringBuilder.length() - 1);
+        stringBuilder.setLength(stringBuilder.length() - 1);
+
+        return format("Filtered feedbacks by status and assignee: \n\n%s", stringBuilder);
     }
 
     private void validateAssignee(String assignee) {

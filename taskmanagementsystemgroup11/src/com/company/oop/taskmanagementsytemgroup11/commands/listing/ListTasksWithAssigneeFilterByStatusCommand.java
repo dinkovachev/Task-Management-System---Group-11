@@ -12,6 +12,7 @@ import java.util.List;
 public class ListTasksWithAssigneeFilterByStatusCommand extends BaseCommand {
 
     private static final int EXPECTED_PARAMETERS_COUNT = 1;
+
     public ListTasksWithAssigneeFilterByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -22,7 +23,8 @@ public class ListTasksWithAssigneeFilterByStatusCommand extends BaseCommand {
         Status status = ParsingHelpers.tryParseEnum(parameters.get(0), Status.class);
         return listAssignedTasksFilteredByStatus(status);
     }
-    private String listAssignedTasksFilteredByStatus(Status status){
+
+    private String listAssignedTasksFilteredByStatus(Status status) {
         StringBuilder result = new StringBuilder();
         List<Task> assignedTasks = getTaskManagementSystemRepository().
                 getFilteredListOfTasksWithAssigneeByStatus(status);
@@ -31,7 +33,7 @@ public class ListTasksWithAssigneeFilterByStatusCommand extends BaseCommand {
             result.append("Task title: ").append(assignedTask.getTitle()).append(System.lineSeparator()).
                     append("Task status: ").append(assignedTask.getStatus()).append(System.lineSeparator())
                     .append("Task assignee: ").append(assignedTask.getAssignee()).append(System.lineSeparator())
-            .append(System.lineSeparator());
+                    .append(System.lineSeparator());
         }
         return result.toString();
     }

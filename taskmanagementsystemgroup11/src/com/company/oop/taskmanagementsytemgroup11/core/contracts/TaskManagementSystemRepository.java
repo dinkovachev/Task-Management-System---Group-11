@@ -106,4 +106,10 @@ public interface TaskManagementSystemRepository {
     List<Bug> getFilteredBugListByStatus(Status status);
     List<Bug> getFilteredBugListByAssignee(String assignee);
     List<Bug> getFilteredBugListByStatusAndAssignee(Status status, String assignee);
+    List<Feedback> getFilteredFeedbacksListByStatus(Status status);
+    List<Feedback> getFilteredFeedbacksListByAssignee(String assignee);
+    List<Feedback> getFilteredFeedbacksListByStatusAndAssignee(Status status, String assignee);
+    List<Story> getFilteredStoriesListByStatus(Status status);
+    List<Story> getFilteredStoriesListByAssignee(String assignee);
+    List<Story> getFilteredStoriesListByStatusAndAssignee(Status status, String assignee);
 }

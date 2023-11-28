@@ -3,51 +3,42 @@ package com.company.oop.taskmanagementsytemgroup11.commands.listing;
 import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
-import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.List;
 
 import static java.lang.String.format;
 
-public class ListBugsFilterByStatusAndAssigneeCommand extends BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+public class ListFeedbacksFilterByAssigneeCommand extends BaseCommand {
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String MEMBER_WITH_USERNAME_DOES_NOT_EXIST_MESSAGE = "Member with username %s does not exist.";
 
-    public ListBugsFilterByStatusAndAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListFeedbacksFilterByAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        Status status = ParsingHelpers.tryParseEnum(parameters.get(0), Status.class);
-        String assignee = parameters.get(1);
+        String assignee = parameters.get(0);
         validateAssignee(assignee);
 
-        return FilterBugByStatus(status, assignee);
+        return FilterFeedbackByStatus(assignee);
     }
 
-    public String FilterBugByStatus(Status status, String assignee) {
+    public String FilterFeedbackByStatus(String assignee) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Bug> filteredBugListByStatus =
-                getTaskManagementSystemRepository().getFilteredBugListByStatusAndAssignee(status, assignee);
+        List<Feedback> filteredFeedbackListByStatus = getTaskManagementSystemRepository().getFilteredFeedbacksListByAssignee(assignee);
 
-        for (Bug bug : filteredBugListByStatus) {
-            stringBuilder
-                    .append(bug.getAsString())
-                    .append("\nStatus: ")
-                    .append(bug.getStatus())
-                    .append(bug.getAssignee())
-                    .append("\n\n");
+        for (Feedback feedback : filteredFeedbackListByStatus) {
+            stringBuilder.append(feedback.getAsString()).append("\nAssignee: ").append(feedback.getAssignee()).append("\n\n");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 1);
         stringBuilder.setLength(stringBuilder.length() - 1);
 
-        return format("Filtered bugs by status and assignee: \n\n%s", stringBuilder);
+        return format("Filtered feedbacks by assignee: \n\n%s", stringBuilder);
     }
 
     private void validateAssignee(String assignee) {
@@ -55,4 +46,5 @@ public class ListBugsFilterByStatusAndAssigneeCommand extends BaseCommand {
             throw new InvalidUserInputException(String.format(MEMBER_WITH_USERNAME_DOES_NOT_EXIST_MESSAGE, assignee));
         }
     }
+
 }

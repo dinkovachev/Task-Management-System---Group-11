@@ -1,5 +1,9 @@
 package com.company.oop.taskmanagementsytemgroup11.utils;
 
+import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
+
 import java.util.List;
 
 public class ValidationHelpers {
@@ -19,12 +23,10 @@ public class ValidationHelpers {
     }
 
     public static void validateArgumentsCount(List<String> list, int expectedNumberOfParameters) {
-        if (list.size() < expectedNumberOfParameters) {
+        if (list.size() != expectedNumberOfParameters) {
             throw new IllegalArgumentException(
                     String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedNumberOfParameters, list.size())
             );
         }
     }
 }
-
-

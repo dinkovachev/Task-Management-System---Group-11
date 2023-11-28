@@ -59,7 +59,6 @@ public class CreateStoryCommand extends BaseCommand {
     private void validateTeamName(String teamName) {
         if (!getTaskManagementSystemRepository().teamExist(teamName)) {
             throw new InvalidUserInputException(String.format(TEAM_WITH_NAME_DOES_NOT_EXIST_MESSAGE, teamName));
-
         }
     }
 

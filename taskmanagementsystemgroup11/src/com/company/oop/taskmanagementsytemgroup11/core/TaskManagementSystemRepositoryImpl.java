@@ -365,18 +365,62 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public List<Bug> getFilteredBugListByStatusAndAssignee(Status status, String assignee) {
+        return bugs.stream()
+                .filter(bug -> bug.getStatus().equals(status))
+                .toList().stream().filter(bug -> bug.getAssignee().equals(assignee)).toList();
+    }
+
+    @Override
+    public List<Feedback> getFilteredFeedbacksListByStatus(Status status) {
+        return feedbacks.stream()
+                .filter(feedback -> feedback.getStatus().equals(status))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getFilteredFeedbacksListByAssignee(String assignee) {
+        return feedbacks.stream()
+                .filter(feedback -> feedback.getAssignee().equals(assignee))
+                .toList();
+    }
+
+    @Override
+    public List<Feedback> getFilteredFeedbacksListByStatusAndAssignee(Status status, String assignee) {
+        return feedbacks.stream()
+                .filter(feedback -> feedback.getStatus().equals(status))
+                .toList().stream().filter(feedback -> feedback.getAssignee().equals(assignee)).toList();
+    }
+
+    @Override
+    public List<Story> getFilteredStoriesListByStatus(Status status) {
+        return stories.stream()
+                .filter(story -> story.getStatus().equals(status))
+                .toList();
+
+    }
+
+    @Override
+    public List<Story> getFilteredStoriesListByAssignee(String assignee) {
+        return stories.stream()
+                .filter(story -> story.getAssignee().equals(assignee))
+                .toList();
+
+    }
+
+    @Override
+    public List<Story> getFilteredStoriesListByStatusAndAssignee(Status status, String assignee) {
+        return stories.stream()
+                .filter(story -> story.getStatus().equals(status))
+                .toList().stream().filter(story -> story.getAssignee().equals(assignee)).toList();
+    }
+
+    @Override
     public List<Task> getFilteredListOfTasksByTitle(String title) {
 
         return tasks.stream()
                 .filter(task -> task.getTitle().contains(title))
                 .toList();
-    }
-
-    @Override
-    public List<Bug> getFilteredBugListByStatusAndAssignee(Status status, String assignee) {
-        return bugs.stream()
-                .filter(bug -> bug.getStatus().equals(status))
-                .toList().stream().filter(bug -> bug.getAssignee().equals(assignee)).toList();
     }
 
     @Override
@@ -419,7 +463,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee){
+    public List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee) {
         return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status))
                 .toList().stream().filter(task -> task.getAssignee().equals(assignee)).toList();
     }

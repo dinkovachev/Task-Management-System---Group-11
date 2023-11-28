@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsytemgroup11.commands.listing;
 
 import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsytemgroup11.exceptions.InvalidUserInputException;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class ListTasksWithAssigneeFilterCommand extends BaseCommand {
 
     private static final int EXPECTED_ARGUMENTS_COUNT = 1;
-
+    public static final String MEMBER_WITH_USERNAME_DOES_NOT_EXIST_MESSAGE = "Member with username %s does not exist.";
 
     public ListTasksWithAssigneeFilterCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -20,6 +21,7 @@ public class ListTasksWithAssigneeFilterCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_ARGUMENTS_COUNT);
         String assignee = parameters.get(0);
+        validateAssignee(assignee);
         return listAssignedTasksFilterByAssignee(assignee);
     }
 
@@ -36,4 +38,9 @@ public class ListTasksWithAssigneeFilterCommand extends BaseCommand {
     return result.toString();
     }
 
+    private void validateAssignee(String assignee) {
+        if (!getTaskManagementSystemRepository().memberExist(assignee)) {
+            throw new InvalidUserInputException(String.format(MEMBER_WITH_USERNAME_DOES_NOT_EXIST_MESSAGE, assignee));
+        }
+    }
 }

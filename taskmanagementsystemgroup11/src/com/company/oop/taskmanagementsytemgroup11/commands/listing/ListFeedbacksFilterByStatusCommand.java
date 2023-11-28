@@ -2,7 +2,7 @@ package com.company.oop.taskmanagementsytemgroup11.commands.listing;
 
 import com.company.oop.taskmanagementsytemgroup11.commands.BaseCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Bug;
+import com.company.oop.taskmanagementsytemgroup11.models.contracts.Feedback;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
@@ -11,11 +11,11 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class ListBugsFilterByStatusCommand extends BaseCommand {
+public class ListFeedbacksFilterByStatusCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
 
-    public ListBugsFilterByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListFeedbacksFilterByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
@@ -24,20 +24,20 @@ public class ListBugsFilterByStatusCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         Status status = ParsingHelpers.tryParseEnum(parameters.get(0), Status.class);
 
-        return FilterBugByStatus(status);
+        return FilterFeedbackByStatus(status);
     }
 
-    public String FilterBugByStatus(Status status) {
+    public String FilterFeedbackByStatus(Status status) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Bug> filteredBugListByStatus = getTaskManagementSystemRepository().getFilteredBugListByStatus(status);
+        List<Feedback> filteredFeedbacksListByStatus = getTaskManagementSystemRepository().getFilteredFeedbacksListByStatus(status);
 
-        for (Bug bug : filteredBugListByStatus) {
-            stringBuilder.append(bug.getAsString()).append("\nStatus: ").append(bug.getStatus()).append("\n\n");
+        for (Feedback feedback : filteredFeedbacksListByStatus) {
+            stringBuilder.append(feedback.getAsString()).append("\nStatus: ").append(feedback.getStatus()).append("\n\n");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 1);
         stringBuilder.setLength(stringBuilder.length() - 1);
 
-        return format("Filtered bugs by status: \n\n%s", stringBuilder);
+        return format("Filtered feedbacks by status: \n\n%s", stringBuilder);
     }
 }
