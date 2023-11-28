@@ -93,6 +93,10 @@ public interface TaskManagementSystemRepository {
 
     List<Feedback> getSortedListOfFeedbacksByRating();
 
+    List<Task> getFilteredListOfTasksWithAssigneeByStatus(Status status);
+    List<Task> getFilteredListOfAssignedTasksByAssignee(String assignee);
+    List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee);
+
     List<Task> getFilteredListOfTasksByTitle(String title);
 
     void unnasignAssigneeFromTask(int id, String assignee);

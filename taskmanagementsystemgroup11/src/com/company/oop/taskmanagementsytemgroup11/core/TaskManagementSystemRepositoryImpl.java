@@ -110,7 +110,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
-        this.tasksWithAssignee.add(feedback);
 
 
         return feedback;
@@ -409,6 +408,23 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .sorted(Comparator.comparing(Story::getSize))
                 .toList();
     }
+
+    @Override
+    public List<Task> getFilteredListOfTasksWithAssigneeByStatus(Status status) {
+        return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status)).toList();
+    }
+
+    @Override
+    public List<Task> getFilteredListOfAssignedTasksByAssignee(String assignee) {
+        return tasksWithAssignee.stream().filter(task -> task.getAssignee().equals(assignee)).toList();
+    }
+
+    @Override
+    public List<Task> getFilteredListOfAssignedTasksByStatusAndAssignee(Status status, String assignee){
+        return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status))
+                .toList().stream().filter(task -> task.getAssignee().equals(assignee)).toList();
+    }
+
 
     @Override
     public List<Bug> getSortedListOfBugsBySeverity() {
