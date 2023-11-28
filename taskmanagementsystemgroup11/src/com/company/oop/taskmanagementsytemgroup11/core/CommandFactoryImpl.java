@@ -116,6 +116,12 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListFeedbacksFilterByAssigneeCommand(taskManagementSystemRepository);
             case LISTFEEDBACKSFILTERBYSTATUSASSIGNE:
                 return new ListFeedbacksFilterByStatusAndAssigneeCommand(taskManagementSystemRepository);
+            case LISTSTORIESFILTERBYSTATUS:
+                return new ListStoriesFilterByStatusCommand(taskManagementSystemRepository);
+            case LISTSTORIESFILTERBYASSIGNEE:
+                return new ListStoriesFilterByAssigneeCommand(taskManagementSystemRepository);
+            case LISTSTORIESFILTERBYSTATUSASSIGNE:
+                return new ListStoriesFilterByStatusAndAssigneeCommand(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandTypeAsString));
         }
