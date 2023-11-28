@@ -14,8 +14,6 @@ import java.util.List;
 public class CreateMemberTest {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private static final int VALID_FIRST_NAME = 5;
-    private static final int VALID_LAST_NAME = 5;
     private TaskManagementSystemRepositoryImpl repository;
     private Command createMemberCommand;
     private List<String> params;

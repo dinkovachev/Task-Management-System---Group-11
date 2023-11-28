@@ -72,20 +72,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowTaskActivityCommand(taskManagementSystemRepository);
             case CREATEFEEDBACK:
                 return new CreateFeedbackCommand(taskManagementSystemRepository);
-//            case LISTBUGSFILTER:
-//                return new ListBugsFilterCommand(taskManagementSystemRepository);
-//            case LISTBUGSSORT:
-            //               return new ListBugsSortCommand(taskManagementSystemRepository);
             case LISTTASKSBYTITLEFILTER:
                 return new ListFilterTasksByTitleCommand(taskManagementSystemRepository);
             case LISTTASKWITHASSIGNEE:
                 return new ListTasksWithAssigneeSortCommand(taskManagementSystemRepository);
-//            case LISTFEEDBACKSSORT:
-//                return new ListFeedbacksSortCommand(taskManagementSystemRepository);
-//            case LISTFEEDBACKSFILTER:
-//                return new ListFeedbacksFilterCommand(taskManagementSystemRepository);
-//            case LISTSTORIES:
-//                return new ListSortByPriorityCommand(taskManagementSystemRepository);
             case LISTSORTBYTITLE:
                 return new ListSortByTitleCommand(taskManagementSystemRepository);
             case LISTBUGSSORTBYPRIORITY:

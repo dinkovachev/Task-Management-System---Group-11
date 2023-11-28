@@ -17,12 +17,14 @@ public class ChangeStatusCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     public static final String INVALID_DIRECTION_MSG = "Invalid direction %s";
+    public static final String IS_INVALID_TASK_MESSAGE = "%s is invalid task";
+    public static final String ADVANCE_MESSAGE = "advance";
+    public static final String REVERT_MESSAGE = "revert";
 
     public ChangeStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
-    // Change STATUS -> advance/revert only
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -42,16 +44,16 @@ public class ChangeStatusCommand extends BaseCommand {
             case FEEDBACK:
                 return changeFeedbackStatus(direction, taskIndex);
             default:
-                return format("%s is invalid task", type);
+                return format(IS_INVALID_TASK_MESSAGE, type);
         }
     }
 
     private String changeBugStatus(String direction, int taskIndex) {
         Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
 
-        if (direction.equalsIgnoreCase("advance")) {
+        if (direction.equalsIgnoreCase(ADVANCE_MESSAGE)) {
             return bug.advanceStatus();
-        } else if (direction.equalsIgnoreCase("revert")) {
+        } else if (direction.equalsIgnoreCase(REVERT_MESSAGE)) {
             return bug.revertStatus();
         } else {
             return format(INVALID_DIRECTION_MSG, direction);
@@ -61,21 +63,21 @@ public class ChangeStatusCommand extends BaseCommand {
     private String changeStoryStatus(String direction, int taskIndex) {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
 
-        if (direction.equalsIgnoreCase("advance")) {
+        if (direction.equalsIgnoreCase(ADVANCE_MESSAGE)) {
             return story.advanceStatus();
-        } else if (direction.equalsIgnoreCase("revert")) {
+        } else if (direction.equalsIgnoreCase(REVERT_MESSAGE)) {
             return story.revertStatus();
         } else {
-            return format("INVALID_DIRECTION_MSG", direction);
+            return format(INVALID_DIRECTION_MSG, direction);
         }
     }
 
     private String changeFeedbackStatus(String direction, int taskIndex) {
         Feedback feedback = getTaskManagementSystemRepository().findFeedbackByTaskIndex(taskIndex);
 
-        if (direction.equalsIgnoreCase("advance")) {
+        if (direction.equalsIgnoreCase(ADVANCE_MESSAGE)) {
             return feedback.advanceStatus();
-        } else if (direction.equalsIgnoreCase("revert")) {
+        } else if (direction.equalsIgnoreCase(REVERT_MESSAGE)) {
             return feedback.revertStatus();
         } else {
             return format(INVALID_DIRECTION_MSG, direction);

@@ -5,7 +5,6 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MembersImpl implements Members {
     private static final int MINIMUM_SYMBOLS = 5;
@@ -14,9 +13,6 @@ public class MembersImpl implements Members {
             "The Member name's length cannot be less than %d or more than %d symbols long.",
             MINIMUM_SYMBOLS, MAXIMUM_SYMBOLS);
     private static final String NEW_MEMBER_CREATED_MESSAGE = "New member created %s%n";
-    private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE
-            = "New task %s was unassigned from team member %s";
-    private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String MEMBER_ADDED_TO_TEAM_MESSAGE = "Member %s was added to team %s";
     private static final String COMMENT_ADDED_TO_TASK_MESSAGE = "Comment %s added to task %s";
     private String username;
@@ -24,7 +20,6 @@ public class MembersImpl implements Members {
     private String lastName;
     private int personId;
     private final List<ActivityLog> membersActivityHistory = new ArrayList<>();
-    private List<Members> members;
 
     public MembersImpl(int personId, String firstName, String lastName) {
         setFirstName(firstName);
@@ -111,30 +106,10 @@ public class MembersImpl implements Members {
     }
 
     @Override
-    public List<Members> getAllTeamMembers() {
-        return new ArrayList<>(members);
-    }
-
-    @Override
     public String getAsString() {
         return """
                 Name: %s %s
                 Username: %s
                 """.formatted(firstName, lastName, username);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MembersImpl members1 = (MembersImpl) o;
-        return personId == members1.personId && username.equals(members1.username) &&
-                firstName.equals(members1.firstName) && lastName.equals(members1.lastName) &&
-                membersActivityHistory.equals(members1.membersActivityHistory) && members.equals(members1.members);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, firstName, lastName, personId, membersActivityHistory, members);
     }
 }

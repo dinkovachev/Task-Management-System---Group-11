@@ -12,6 +12,7 @@ public class CreateTeamCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String TEAM_ALREADY_EXISTS = "Team %s, already exists";
+    public static final String NEW_TEAM_WITH_NAME_CREATED_MESSAGE = "New team with name %s created.";
 
     private String name;
 
@@ -31,7 +32,7 @@ public class CreateTeamCommand extends BaseCommand {
 
     private String createTeam(String name) {
         Team team = getTaskManagementSystemRepository().createTeam(name);
-        return String.format("New team with name %s created.", team.getName());
+        return String.format(NEW_TEAM_WITH_NAME_CREATED_MESSAGE, team.getName());
     }
 
     public void parseParameters(List<String> parameters) {

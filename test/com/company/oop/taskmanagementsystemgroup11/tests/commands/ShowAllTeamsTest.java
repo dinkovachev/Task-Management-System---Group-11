@@ -3,8 +3,6 @@ package com.company.oop.taskmanagementsystemgroup11.tests.commands;
 import com.company.oop.taskmanagementsytemgroup11.commands.show.ShowAllTeamsCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

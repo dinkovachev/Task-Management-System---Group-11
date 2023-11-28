@@ -16,12 +16,13 @@ public class ChangeSeverityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     private static final String INVALID_TASK_MSG = "You cannot change the severity of %s task type.";
+    public static final String SEVERITY_IS_ALREADY_SET_TO_MESSAGE = "Severity is already set to %s.";
+    public static final String SEVERITY_CHANGED_TO_MESSAGE = "Severity changed to %s.";
 
     public ChangeSeverityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
-    // Changes SEVERITY, only BUG has SEVERITY
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -35,13 +36,12 @@ public class ChangeSeverityCommand extends BaseCommand {
 
     private String changeSeverity(TaskType type, Severity severity, int taskIndex) {
         Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
-//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (severity.equals(bug.getSeverity())) {
-            throw new IllegalArgumentException(format("Severity is already set to %s.", bug.getSeverity()));
+            throw new IllegalArgumentException(format(SEVERITY_IS_ALREADY_SET_TO_MESSAGE, bug.getSeverity()));
         } else {
             bug.changeSeverity(taskIndex, severity);
-            return format("Severity changed to %s.", bug.getSeverity());
+            return format(SEVERITY_CHANGED_TO_MESSAGE, bug.getSeverity());
         }
     }
 

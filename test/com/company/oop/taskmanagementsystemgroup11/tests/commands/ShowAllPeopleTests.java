@@ -4,7 +4,6 @@ package com.company.oop.taskmanagementsystemgroup11.tests.commands;
 import com.company.oop.taskmanagementsytemgroup11.commands.show.ShowAllPeopleCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +18,6 @@ public class ShowAllPeopleTests {
 
     List<Members> membersList = new ArrayList<>();
 
-    // ToDo
-    //Double check the part that is not covered
     @BeforeEach
     public void initializeCommandAndRepository() {
         taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();

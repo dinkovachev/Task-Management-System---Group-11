@@ -12,15 +12,16 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class ChangeRatingCommand extends BaseCommand {
+    public static final String RATING_IS_ALREADY_SET_TO_MESSAGE = "Rating is already set to %d.";
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     private static final String INVALID_TASK_MSG = "You cannot change the rating of %s task type.";
+    public static final String RATING_CHANGED_TO_MESSAGE = "Rating changed to %d.";
 
     public ChangeRatingCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
-    // Only FEEDBACK has RATING // [1, 10]
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -34,13 +35,13 @@ public class ChangeRatingCommand extends BaseCommand {
 
     private String changeRating(TaskType type, int rating, int taskIndex) {
         Feedback feedback = getTaskManagementSystemRepository().findFeedbackByTaskIndex(taskIndex);
-//        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (rating == (feedback.getRating())) {
-            throw new IllegalArgumentException(format("Rating is already set to %d.", feedback.getRating()));
+            throw new IllegalArgumentException(format(RATING_IS_ALREADY_SET_TO_MESSAGE, feedback.getRating()));
+
         } else {
             feedback.changeRating(taskIndex, rating);
-            return format("Rating changed to %d.", feedback.getRating());
+            return format(RATING_CHANGED_TO_MESSAGE, feedback.getRating());
         }
     }
 

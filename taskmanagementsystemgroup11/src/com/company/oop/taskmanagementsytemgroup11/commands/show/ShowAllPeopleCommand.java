@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ShowAllPeopleCommand extends BaseCommand {
 
+    public static final String THERE_ARE_NO_REGISTERED_MEMBERS_MESSAGE = "There are no registered members.";
     private final List<Members> members;
 
     public ShowAllPeopleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -20,7 +21,7 @@ public class ShowAllPeopleCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         if (members.isEmpty()) {
-            return "There are no registered members.";
+            return THERE_ARE_NO_REGISTERED_MEMBERS_MESSAGE;
         }
         return ListingHelpers.peopleToString(members);
     }

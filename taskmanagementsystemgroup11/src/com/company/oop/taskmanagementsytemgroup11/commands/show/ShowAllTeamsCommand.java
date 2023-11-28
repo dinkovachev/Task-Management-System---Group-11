@@ -8,6 +8,7 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ListingHelpers;
 import java.util.List;
 
 public class ShowAllTeamsCommand extends BaseCommand {
+    public static final String THERE_ARE_NO_REGISTERED_TEAMS_MESSAGE = "There are no registered teams.";
     private final List<Team> teams;
 
     public ShowAllTeamsCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -18,7 +19,7 @@ public class ShowAllTeamsCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         if (teams.isEmpty()) {
-            return "There are no registered teams.";
+            return THERE_ARE_NO_REGISTERED_TEAMS_MESSAGE;
         }
         return ListingHelpers.teamsToString(teams);
     }

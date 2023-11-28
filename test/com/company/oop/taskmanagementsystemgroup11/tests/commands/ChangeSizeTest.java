@@ -41,16 +41,7 @@ public class ChangeSizeTest {
     @Test
     public void should_ChangeStatus_When_ArgumentsAreValid() {
 //         Arrange
-//        StoryImpl story = new StoryImpl(
-//                TaskConstants.VALID_ID,
-//                TestUtilities.getString(TaskConstants.VALID_TITLE),
-//                TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
-//                VALID_PRIORITY,
-//                Size.MEDIUM,
-//                TestUtilities.getString(TaskConstants.VALID_USERNAME),
-//                TaskConstants.VALID_ID,
-//                TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
-//                TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
+
 
         repository.createStory(
                 TestUtilities.getString(TaskConstants.VALID_TITLE),

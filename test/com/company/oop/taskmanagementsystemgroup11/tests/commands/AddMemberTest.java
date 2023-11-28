@@ -20,9 +20,6 @@ public class AddMemberTest {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private TaskManagementSystemRepositoryImpl repository;
     private Command addMemberCommand;
-    private Member member;
-    private Team team;
-    private Board board;
     private List<String> params;
 
     @BeforeEach

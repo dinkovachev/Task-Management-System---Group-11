@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UnassignTaskCommand extends BaseCommand {
 
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
 
     private static final String NEW_TASK_UNASSIGNED_TO_TEAM_MEMBER_MESSAGE

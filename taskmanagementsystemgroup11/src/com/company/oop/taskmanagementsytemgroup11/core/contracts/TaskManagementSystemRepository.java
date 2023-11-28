@@ -7,14 +7,7 @@ import java.util.List;
 
 public interface TaskManagementSystemRepository {
 
-    List<Task> getAllTasks();
-    List<Task> getAllTasksWithAssignee();
-
     List<Story> getAllStories();
-
-    List<Bug> getAllBugs();
-
-    List<Feedback> getAllFeedbacks();
 
     List<Members> getAllMembers();
 
@@ -65,7 +58,7 @@ public interface TaskManagementSystemRepository {
 
     Feedback findFeedbackByTaskIndex(int taskIndex);
 
-    void validateType(TaskType type, int index);
+
 
     List<Bug> getSortedListOfBugsByTitle();
 

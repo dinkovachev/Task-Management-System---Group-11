@@ -36,8 +36,10 @@ public class CreateFeedbackCommand extends BaseCommand {
         return createFeedbackCommand(title, description, rating, index, teamName, boardName);
     }
 
-    private String createFeedbackCommand(String title, String description, int rating, int index, String teamName, String boardName) {
-        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating, index, teamName, boardName);
+    private String createFeedbackCommand(String title, String description, int rating, int index, String teamName,
+                                         String boardName) {
+        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating, index,
+                teamName, boardName);
         Board board = getTaskManagementSystemRepository().getBoardByName(boardName);
         board.addTask(feedback);
         return String.format(NEW_TASK_CREATED_MSG, title, index);

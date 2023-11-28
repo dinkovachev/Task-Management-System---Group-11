@@ -79,7 +79,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority, Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
+    public Bug createBug(String title, String description, String stepsToReproduce, Priority priority,
+                         Severity severity, String assignee, int taskIndexBug, String teamNameBug, String boardBug) {
         Bug bug = new BugImpl(lastId, title, description, stepsToReproduce, priority, severity, assignee,
                 teamNameBug, boardBug);
         ++lastId;
@@ -105,12 +106,12 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, int rating, int taskIndex, String teamName, String boardName) {
+    public Feedback createFeedback(String title, String description, int rating, int taskIndex, String teamName,
+                                   String boardName) {
         Feedback feedback = new FeedbackImpl(lastId, title, description, rating, teamName, boardName);
         ++lastId;
         this.feedbacks.add(feedback);
         this.tasks.add(feedback);
-
 
         return feedback;
     }
@@ -139,28 +140,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return new ArrayList<>(tasks);
-    }
-
-    @Override
-    public List<Task> getAllTasksWithAssignee() {
-        return new ArrayList<>(tasksWithAssignee);
-    }
-
-    @Override
     public List<Story> getAllStories() {
         return new ArrayList<>(stories);
-    }
-
-    @Override
-    public List<Bug> getAllBugs() {
-        return new ArrayList<>(bugs);
-    }
-
-    @Override
-    public List<Feedback> getAllFeedbacks() {
-        return new ArrayList<>(feedbacks);
     }
 
     public void unnasignAssigneeFromTask(int id, String assignee) {
@@ -210,17 +191,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         throw new IllegalArgumentException(INVALID_TASK_INDEX_MSG);
     }
 
-//    @Override
-//    public TaskType validateTaskTypeEqualsInputType(TaskType type, int taskIndex) {
-//        if (!type.equals(tasks.get(taskIndex).getType())) {
-//            throw new IllegalArgumentException(format("%s is invalid task type.", type));
-//        }
-//        return type;
-//    }
-
     @Override
     public Bug findBugByTaskIndex(int taskIndex) {
-
         for (Bug bug : bugs) {
             if (bug.getId() == taskIndex) {
                 return bug;
@@ -283,36 +255,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public int getLastId() {
         return this.lastId;
-    }
-
-    public void validateType(TaskType type, int index) {
-        if (!tasks.get(index).getType().equals(type)) {
-            throw new IllegalArgumentException("No such task type.");
-        }
-//        for (Task task : tasks) {
-//            if (task.getId() == index) {
-//                if (!task.getType().equals(type)) {
-//        throw new IllegalArgumentException("No such task type.");
-//                }
-//            }
-//        }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TaskManagementSystemRepositoryImpl that = (TaskManagementSystemRepositoryImpl) o;
-        return lastId == that.lastId
-                && lastMemberId == that.lastMemberId
-                && Objects.equals(members, that.members)
-                && Objects.equals(teams, that.teams)
-                && Objects.equals(boards, that.boards)
-                && Objects.equals(bugs, that.bugs)
-                && Objects.equals(stories, that.stories)
-                && Objects.equals(feedbacks, that.feedbacks)
-                && Objects.equals(tasks, that.tasks);
-
     }
 
     @Override
@@ -467,7 +409,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return tasksWithAssignee.stream().filter(task -> task.getStatus().equals(status))
                 .toList().stream().filter(task -> task.getAssignee().equals(assignee)).toList();
     }
-
 
     @Override
     public List<Bug> getSortedListOfBugsBySeverity() {

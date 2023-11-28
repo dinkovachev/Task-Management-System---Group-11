@@ -4,14 +4,5 @@ public enum ListingEnums {
     TASKS,
     FEEDBACKS,
     BUGS,
-    STORIES,
-    SIZE,
-    PRIORITY,
-    SEVERITY,
-    RATING,
-    STATUS,
-    SORT,
-    FILTER,
-    ASSIGNEE,
-    TITLE;
+    STORIES;
 }

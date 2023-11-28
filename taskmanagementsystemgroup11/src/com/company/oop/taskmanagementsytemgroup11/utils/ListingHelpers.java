@@ -36,9 +36,9 @@ public class ListingHelpers {
         }
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
-    public static String teamMembersToString(List<Members> teamMembers)  {//todo
+    public static String teamMembersToString(List<Members> teamMembers)  {
         List<String> result = new ArrayList<>();
-        for (Members member : teamMembers) {   //todo
+        for (Members member : teamMembers) {
             result.add(member.getAsString());
         }
 

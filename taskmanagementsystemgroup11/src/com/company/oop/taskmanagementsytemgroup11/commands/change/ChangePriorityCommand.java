@@ -18,12 +18,12 @@ public class ChangePriorityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_INPUT_MSG = "Invalid input. Expected a number.";
     private static final String INVALID_TASK_MSG = "You cannot change the priority of %s task type.";
+    public static final String PRIORITY_IS_ALREADY_SET_TO_MESSAGE = "Priority is already set to %s.";
+    public static final String PRIORITY_CHANGED_TO_MESSAGE = "Priority changed to %s.";
 
     public ChangePriorityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
-
-    // Changes PRIORITY, only BUG and STORY have PRIORITY // High, Medium, Low
 
     @Override
     protected String executeCommand(List<String> parameters) {
@@ -46,16 +46,17 @@ public class ChangePriorityCommand extends BaseCommand {
                 return format(INVALID_TASK_MSG, type);
         }
     }
-// ChangePriority Bug Low 6
+
+    // ChangePriority Bug Low 6
     private String changeBugPriority(TaskType type, Priority priority, int taskIndex) {
         Bug bug = getTaskManagementSystemRepository().findBugByTaskIndex(taskIndex);
 //        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex);
 
         if (priority.equals(bug.getPriority())) {
-            throw new IllegalArgumentException(format("Priority is already set to %s.", bug.getPriority()));
+            throw new IllegalArgumentException(format(PRIORITY_IS_ALREADY_SET_TO_MESSAGE, bug.getPriority()));
         } else {
             bug.changePriority(taskIndex, priority);
-            return format("Priority changed to %s.", bug.getPriority());
+            return format(PRIORITY_CHANGED_TO_MESSAGE, bug.getPriority());
         }
     }
 
@@ -63,10 +64,10 @@ public class ChangePriorityCommand extends BaseCommand {
         Story story = getTaskManagementSystemRepository().findStoryByTaskIndex(taskIndex);
 //        getTaskManagementSystemRepository().validateTaskTypeEqualsInputType(type, taskIndex); // IMPORTANT!
         if (priority.equals(story.getPriority())) {
-            throw new IllegalArgumentException(format("Priority is already set to %s.", story.getPriority()));
+            throw new IllegalArgumentException(format(PRIORITY_IS_ALREADY_SET_TO_MESSAGE, story.getPriority()));
         } else {
             story.changePriority(taskIndex, priority);
-            return format("Priority changed to %s.", story.getPriority());
+            return format(PRIORITY_CHANGED_TO_MESSAGE, story.getPriority());
         }
     }
 }

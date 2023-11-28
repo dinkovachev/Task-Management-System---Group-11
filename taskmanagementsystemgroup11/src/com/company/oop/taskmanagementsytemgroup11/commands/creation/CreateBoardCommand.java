@@ -11,6 +11,7 @@ import java.util.List;
 public class CreateBoardCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String BOARD_ALREADY_EXISTS = "Board %s, already exists";
+    public static final String NEW_BOARD_WITH_NAME_S_CREATED_IN_TEAM_MESSAGE = "New board with name %s created in team %s.";
 
     public CreateBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -32,6 +33,6 @@ public class CreateBoardCommand extends BaseCommand {
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
         team.addBoard(board);
 
-        return String.format("New board with name %s created in team %s.", board.getName(), team.getName());
+        return String.format(NEW_BOARD_WITH_NAME_S_CREATED_IN_TEAM_MESSAGE, board.getName(), team.getName());
     }
 }

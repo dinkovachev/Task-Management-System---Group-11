@@ -2,7 +2,6 @@ package com.company.oop.taskmanagementsytemgroup11.models;
 
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.ActivityLog;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Comment;
-import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Task;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
@@ -10,7 +9,6 @@ import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static java.lang.String.format;
 
@@ -29,15 +27,12 @@ public abstract class TaskImpl implements Task {
             DESCRIPTION_LEN_MAX);
     private static final String NEW_TASK_CREATED_MESSAGE = "Task created: %s%n";
     private static final String COMMENT_S_ADDED_TO_THE_TASK_MESSAGE = "Comment %s added to the task %s";
-    private static final String MEMBER_ASSIGNED_TO_TASK_MESSAGE = "Member %s assigned to task %s";
-    private static final String MEMBER_UNASSIGNED_FROM_TASK_MESSAGE = "Member %s unassigned from task %s";
 
     private int id;
     private String title;
     private String description;
-    private List<Comment> commentList = new ArrayList<>();
-    private List<ActivityLog> activityHistory = new ArrayList<>();
-    private List<String> assignedMembersToTasks = new ArrayList<>();
+    private final List<Comment> commentList = new ArrayList<>();
+    private final List<ActivityLog> activityHistory = new ArrayList<>();
 
     public TaskImpl(int id, String title, String description) {
         setId(id);

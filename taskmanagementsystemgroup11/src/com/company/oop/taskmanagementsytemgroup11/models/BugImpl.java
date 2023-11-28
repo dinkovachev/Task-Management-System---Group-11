@@ -20,13 +20,10 @@ public class BugImpl extends TaskImpl implements Bug {
     private static final String CURRENT_BUG_STATUS_IS_ALREADY_DONE_MESSAGE = "Current bug status is already Done.";
     private static final String PRIORITY_OF_BUG_ID_CHANGED_TO_MESSAGE = "Priority of Bug id %s changed to %s";
     private static final String SEVERITY_OF_BUG_ID_CHANGED_TO_MESSAGE = "Severity of Bug id %s changed to %s";
-    private String stepsToReproduce;
     private Priority priority;
     private Severity severity;
     private String assignee;
     private Status status;
-    private int taskIndex;
-    private final List<Bug> bugs;
 
     public BugImpl(int id, String title, String description, String stepsToReproduce, Priority priority,
                    Severity severity, String assignee, String teamName, String board) {
@@ -36,18 +33,8 @@ public class BugImpl extends TaskImpl implements Bug {
         setSeverity(severity);
         setAssignee(assignee);
         this.status = Status.ACTIVE;
-        this.bugs = new ArrayList<>();
 
         addEventToActivityLogHistory(String.format(NEW_BUG_CREATED_MESSAGE, title));
-    }
-
-//    @Override
-//    public int getTaskIndex() {
-//        return taskIndex;
-//    }
-
-    public List<Bug> getBugs() {
-        return new ArrayList<>(bugs);
     }
 
     @Override
@@ -60,11 +47,6 @@ public class BugImpl extends TaskImpl implements Bug {
     public void changeSeverity(int taskIndex, Severity severity) {
         setSeverity(severity);
         addEventToActivityLogHistory(String.format(SEVERITY_OF_BUG_ID_CHANGED_TO_MESSAGE, taskIndex, severity));
-    }
-
-    @Override
-    public String getStepsToReproduce() {
-        return stepsToReproduce;
     }
 
     @Override
@@ -88,7 +70,6 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     private void setStepsToReproduce(String stepsToReproduce) {
-        this.stepsToReproduce = stepsToReproduce;
     }
 
     private void setPriority(Priority priority) {
@@ -142,18 +123,4 @@ public class BugImpl extends TaskImpl implements Bug {
         return """
                 Type: %s Title: %s with Id: %d""".formatted(getType(), getTitle(), getId());
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        BugImpl bug = (BugImpl) o;
-//        return taskIndex == bug.taskIndex
-//                && Objects.equals(stepsToReproduce, bug.stepsToReproduce)
-//                && priority == bug.priority
-//                && severity == bug.severity
-//                && Objects.equals(assignee, bug.assignee)
-//                && status == bug.status
-//                && Objects.equals(bugs, bug.bugs);
-//    }
 }

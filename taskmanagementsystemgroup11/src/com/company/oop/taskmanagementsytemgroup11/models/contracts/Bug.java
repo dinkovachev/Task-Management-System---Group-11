@@ -6,8 +6,6 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Severity;
 import java.util.List;
 
 public interface Bug extends Task{
-    String getStepsToReproduce();
-
     Priority getPriority();
 
     Severity getSeverity();

@@ -18,7 +18,6 @@ public class ListTasksWithAssigneeSortCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-//        String assignee = parameters.get(0);
         return listing();
 
     }

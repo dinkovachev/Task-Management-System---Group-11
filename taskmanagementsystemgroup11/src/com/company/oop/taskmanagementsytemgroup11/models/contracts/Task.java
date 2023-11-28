@@ -1,12 +1,9 @@
 package com.company.oop.taskmanagementsytemgroup11.models.contracts;
 
-import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
 
-import java.util.List;
-
-public interface Task extends Commentable, Identifiable, Printable {
+public interface Task extends Identifiable, Printable {
     Status getStatus();
 
     void addEventToActivityLogHistory(String event);

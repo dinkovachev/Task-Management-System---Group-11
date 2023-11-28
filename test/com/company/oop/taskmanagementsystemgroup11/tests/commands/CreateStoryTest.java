@@ -5,7 +5,6 @@ import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
 import com.company.oop.taskmanagementsytemgroup11.commands.creation.CreateStoryCommand;
 import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsytemgroup11.models.MembersImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Board;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Members;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
@@ -30,7 +29,6 @@ public class CreateStoryTest {
     private static final Size VALID_SIZE = Size.MEDIUM;
     private static final int VALID_TASK_INDEX = 1;
     private static final String VALID_ASSIGNEE_EXIST = "Ilarion_Makariopolski1";
-    private static final String INVALID_ASSIGNEE_DOESNT_EXIST = "not";
     private static final String VALID_TEAM_NAME_EXIST = "TeamCherry";
     private static final String INVALID_TEAM_NAME_DOESNT_EXIST = "not";
     private static final String VALID_BOARD_NAME_EXIST = "Whiteboard";
@@ -101,8 +99,6 @@ public class CreateStoryTest {
         // Act,Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> createStoryCommand.execute(parameters));
     }
-    //ToDo
-    // Doesnt work
     @Test
     public void should_Return_InitializedStory() {
         //Arrange, Act

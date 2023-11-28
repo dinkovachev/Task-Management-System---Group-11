@@ -41,9 +41,6 @@ public class AddCommentTest {
         // Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> addCommentCommand.execute(parameters));
     }
-
-    //ToDo
-    // Doesn't find the index of the story
     @Test
     public void should_AddComment_When_InputIsValid() {
         //Arrange

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CreateMemberCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final String NEW_MEMBER_WITH_NAME_AND_ID_IS_CREATED_MESSAGE = "New member with name %s %s and ID %d is created.";
     private String firstName;
     private String lastName;
 
@@ -27,7 +28,7 @@ public class CreateMemberCommand extends BaseCommand {
     private String createMember(String firstName, String lastName) {
         Members member = getTaskManagementSystemRepository().createMember(firstName, lastName);
 
-        return String.format("New member with name %s %s and ID %d is created.",
+        return String.format(NEW_MEMBER_WITH_NAME_AND_ID_IS_CREATED_MESSAGE,
                 member.getFirstName(), member.getLastName(), member.getPersonId());
     }
 

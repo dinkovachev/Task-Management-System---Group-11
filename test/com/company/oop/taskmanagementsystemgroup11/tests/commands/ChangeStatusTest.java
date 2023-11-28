@@ -32,16 +32,7 @@ public class ChangeStatusTest {
 
     @BeforeEach
     public void beforeTasks() {
-//        StoryImpl story = new StoryImpl(
-//                TaskConstants.VALID_ID,
-//                TestUtilities.getString(TaskConstants.VALID_TITLE),
-//                TestUtilities.getString(TaskConstants.VALID_DESCRIPTION),
-//                VALID_PRIORITY,
-//                Size.MEDIUM,
-//                TestUtilities.getString(TaskConstants.VALID_USERNAME),
-//                TaskConstants.VALID_ID,
-//                TestUtilities.getString(TaskConstants.VALID_TEAM_NAME),
-//                TestUtilities.getString(TaskConstants.VALID_BOARD_NAME));
+
 
         repository.createStory(
                 TestUtilities.getString(TaskConstants.VALID_TITLE),
@@ -111,19 +102,6 @@ public class ChangeStatusTest {
         Assertions.assertEquals(Status.NOT_DONE, repository.findStoryByTaskIndex(1).getStatus());
     }
 
-    //    public void shouldRevertStoryStatus_WhenArgumentsAreValid() {
-//        // Arrange
-//        params = List.of(
-//                TaskType.STORY.toString(),
-//                "revert",
-//                "1");
-//
-//        // Act
-//        changeStatusCommand.execute(params);
-//
-//        // Assert
-//        Assertions.assertEquals(Status.NOT_DONE, repository.findStoryByTaskIndex(1).getStatus());
-//}
     @Test
     public void should_AdvanceBugStatus_When_ArgumentsAreValid() {
         // Arrange

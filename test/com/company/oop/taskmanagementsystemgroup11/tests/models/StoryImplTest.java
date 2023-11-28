@@ -2,8 +2,6 @@ package com.company.oop.taskmanagementsystemgroup11.tests.models;
 
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TaskConstants;
 import com.company.oop.taskmanagementsystemgroup11.tests.utils.TestUtilities;
-import com.company.oop.taskmanagementsytemgroup11.commands.contracts.Command;
-import com.company.oop.taskmanagementsytemgroup11.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.StoryImpl;
 import com.company.oop.taskmanagementsytemgroup11.models.contracts.Story;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
@@ -12,16 +10,10 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 public class StoryImplTest {
 
     public static final Priority VALID_PRIORITY = Priority.HIGH;
     public static final Size VALID_SIZE = Size.MEDIUM;
-
-    private TaskManagementSystemRepositoryImpl repository;
-    private Command changeSizeCommand;
-    private List<String> params;
 
 
     public static StoryImpl initializeStory() {

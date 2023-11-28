@@ -5,10 +5,7 @@ import com.company.oop.taskmanagementsytemgroup11.models.enums.Priority;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Size;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.Status;
 import com.company.oop.taskmanagementsytemgroup11.models.enums.TaskType;
-import com.company.oop.taskmanagementsytemgroup11.utils.ValidationHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class StoryImpl extends TaskImpl implements Story {
     private static final String STORY_STATUS_SET_TO_IN_PROGRESS_MESSAGE = "Story status set to InProgress.";
@@ -24,9 +21,6 @@ public class StoryImpl extends TaskImpl implements Story {
     private Size size;
     private Status status;
     private String assignee;
-    private int taskIndex;
-    //private final List<Story> stories = new ArrayList<>();
-    //private final List<Feedback> feedbacks = new ArrayList<>();
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size, String assignee,
                      String teamName, String board) {
@@ -38,11 +32,6 @@ public class StoryImpl extends TaskImpl implements Story {
         addEventToActivityLogHistory(String.format(NEW_STORY_WAS_CREATED_MESSAGE, title));
     }
 
-//    @Override
-//    public int getTaskIndex() {
-//        return taskIndex;
-//    }
-
     @Override
     public TaskType getType() {
         return TaskType.STORY;
@@ -52,10 +41,6 @@ public class StoryImpl extends TaskImpl implements Story {
     public void changeAssignee(String assignee) {
          setAssignee(assignee);
     }
-
-//    public List<Story> getStories() {
-//        return new ArrayList<>(stories);
-//    }
 
     @Override
     public Priority getPriority() {

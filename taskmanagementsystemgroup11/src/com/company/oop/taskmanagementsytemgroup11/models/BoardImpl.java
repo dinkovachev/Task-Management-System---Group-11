@@ -17,7 +17,6 @@ public class BoardImpl implements Board {
     private static final String NEW_TASK_WITH_NAME_ADDED_TO_BOARD_MESSAGE
             = "New task %s with name %s added to the board";
     private static final String NEW_BOARD_CREATED_MESSAGE = "New board with name %s created";
-
     private final List<Task> tasksToAddToBoard = new ArrayList<>();
     private final List<ActivityLog> boardsActivityHistory = new ArrayList<>();
     private String name;

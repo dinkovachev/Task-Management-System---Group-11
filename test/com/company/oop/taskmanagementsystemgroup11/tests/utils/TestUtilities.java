@@ -30,5 +30,4 @@ public class TestUtilities {
     public static List<String> getList(int size) {
         return Arrays.asList(new String[size]);
     }
-    //
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public class ShowTeamActivityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String SHOW_TEAM_ACTIVITY_MESSAGE = "%s team activity %s ";
+    public static final String THERE_ARE_NO_TEAM_ACTIVITY_IN_TEAM_MESSAGE = "There are no team activity in team %s.";
 
 
     public ShowTeamActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -22,7 +23,7 @@ public class ShowTeamActivityCommand extends BaseCommand {
         String teamName = parameters.get(0);
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
         if (teamName.length() == 1) {
-            return String.format("There are no team activity in team %s.", teamName);
+            return String.format(THERE_ARE_NO_TEAM_ACTIVITY_IN_TEAM_MESSAGE, teamName);
         }
         return String.format(SHOW_TEAM_ACTIVITY_MESSAGE, teamName, team.displayActivityLogHistory());
     }

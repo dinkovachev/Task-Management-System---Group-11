@@ -17,35 +17,22 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private static final String NEW_FEEDBACK_CREATED_MESSAGE = "Feedback with title %s is created";
     private int rating;
     private Status status;
-    private final List<Feedback> feedbacks;
 
     public FeedbackImpl(int id, String title, String description, int rating, String teamName, String board) {
         super(id, title, description);
         setRating(rating);
         this.status = Status.NEW;
-        this.feedbacks = new ArrayList<>();
+
         addEventToActivityLogHistory(String.format(NEW_FEEDBACK_CREATED_MESSAGE, title));
     }
-
-    @Override
-    public List<Feedback> getFeedbacks() {
-        return new ArrayList<>(feedbacks);
-    }
-
     @Override
     public TaskType getType() {
         return TaskType.FEEDBACK;
     }
 
-
     public int getRating() {
         return rating;
     }
-
-//    @Override
-//    public int getTaskIndex() {
-//        return taskIndex;
-//    }
 
     @Override
     public Status getStatus() {

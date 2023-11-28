@@ -11,8 +11,6 @@ public interface Story extends Task {
 
     String getMembers();
 
-    //List<Story> getStories();
-
     void changePriority(int taskIndex, Priority priority);
 
     void changeSize(int taskIndex, Size size);

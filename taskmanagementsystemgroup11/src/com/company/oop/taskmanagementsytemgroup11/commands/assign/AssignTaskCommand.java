@@ -35,10 +35,10 @@ public class AssignTaskCommand extends BaseCommand {
     private String assignTask(TaskType type, String title, int id, String username) {
         Task task = getTaskManagementSystemRepository().findTaskByID(id);
         Members member = getTaskManagementSystemRepository().getMemberByUsername(username);
-        getTaskManagementSystemRepository().assignAssigneToTask(task.getId(),username);
+        getTaskManagementSystemRepository().assignAssigneToTask(task.getId(), username);
         getTaskManagementSystemRepository().getMemberByUsername(username).
                 addEventToActivityLogHistory(String.format(NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE,
-                        task.getTitle(),member.getUsername()));
+                        task.getTitle(), member.getUsername()));
 
         return String.format(TASK_ASSIGNED_SUCCESSFULLY, title, member.getUsername());
     }

@@ -17,6 +17,7 @@ public class ListSortByTitleCommand extends BaseCommand {
     private static final String SORT_LIST_BUGS_BY_TITLE = "Sorted bugs by title \n\n%s";
     private static final String SORT_LIST_STORIES_BY_TITLE = "Sorted bugs by title \n\n%s";
     private static final String SORT_LIST_FEEDBACKS_BY_TITLE = "Sorted bugs by title \n\n%s";
+    public static final String COMMAND_MUST_BE_TASKS_STORIES_BUGS_OR_FEEDBACKS_MESSAGE = "Command must be tasks, stories, bugs or feedbacks";
 
 
     public ListSortByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -61,7 +62,7 @@ public class ListSortByTitleCommand extends BaseCommand {
                 }
                 return String.format(SORT_LIST_BUGS_BY_TITLE, stringBuilder);
             default:
-                throw new IllegalArgumentException("Command must be tasks, stories, bugs or feedbacks");
+                throw new IllegalArgumentException(COMMAND_MUST_BE_TASKS_STORIES_BUGS_OR_FEEDBACKS_MESSAGE);
         }
     }
 }

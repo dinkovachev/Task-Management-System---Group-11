@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ShowAllTeamMembersCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_PARAMETERS = 1;
+    public static final String THERE_ARE_NO_REGISTERED_TEAM_MEMBERS_MESSAGE = "There are no registered  team members.";
 
     public ShowAllTeamMembersCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -27,7 +28,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand {
         Team team = getTaskManagementSystemRepository().getTeamByName(teamName);
         List<Members> teamMembers = team.getTeamMembers();
         if (teamMembers.isEmpty()) {
-            return "There are no registered  team members.";
+            return THERE_ARE_NO_REGISTERED_TEAM_MEMBERS_MESSAGE;
         }
         System.out.printf("Team: %s%n", teamName);
         return ListingHelpers.teamMembersToString(teamMembers);

@@ -8,5 +8,4 @@ public interface Feedback extends Task {
 
     void changeRating(int taskIndex, int rating);
 
-    List<Feedback> getFeedbacks();
 }
