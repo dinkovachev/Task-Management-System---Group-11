@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AssignTaskCommand extends BaseCommand {
 
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
     private static final String INVALID_ID = "Invalid value for id. Should be a number.";
     private static final String NEW_TASK_ASSIGNED_TO_TEAM_MEMBER_MESSAGE = "New task %s was assigned to team member %s";
     private static final String TASK_ASSIGNED_SUCCESSFULLY = "%s assigned successfully to %s";

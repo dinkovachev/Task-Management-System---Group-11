@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateFeedbackTest {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
 
     private List<String> params;
     private TaskManagementSystemRepository repository;

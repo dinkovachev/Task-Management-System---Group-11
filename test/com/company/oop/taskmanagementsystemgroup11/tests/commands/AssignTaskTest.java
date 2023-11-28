@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class AssignTaskTest {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
 
     private AssignTaskCommand assignTaskCommand;
     private TaskManagementSystemRepository taskManagementSystemRepository;

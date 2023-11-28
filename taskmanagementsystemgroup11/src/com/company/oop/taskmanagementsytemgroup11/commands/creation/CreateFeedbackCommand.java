@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateFeedbackCommand extends BaseCommand {
 
-    public static final int EXPECTED_ARGUMENTS_COUNT = 4;
+    public static final int EXPECTED_ARGUMENTS_COUNT = 5;
     public static final String TEAM_WITH_NAME_DOES_NOT_EXIST_MESSAGE = "Team with name %s does not exist.";
     private static final String NEW_TASK_CREATED_MSG = "New feedback with title %s and id %s created.";
     public static final String BOARD_WITH_NAME_DOES_NOT_EXIST_MESSAGE = "Board with name %s does not exist";
